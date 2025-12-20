@@ -1,0 +1,122 @@
+---
+// BannerContact.astro
+---
+
+<section class="banner-contact">
+  <div class="banner-contact__container">
+    <div class="banner-contact__grid">
+      <!-- Fondo izquierdo: imagen con blur -->
+      <div
+        class="banner-contact__left"
+        style="background-image: url('/endodoncia.jpg');"
+      >
+      </div>
+      <!-- Fondo derecho: recuadro azul -->
+      <div class="banner-contact__right"></div>
+    </div>
+    <!-- Caja de contacto centrada (superpuesta) -->
+    <div class="banner-contact__inner-box">
+      <div class="banner-contact__inner-grid">
+        <div class="banner-contact__title">Agenda tu cita</div>
+        <div class="banner-contact__text">
+          ¡Obtén un diagnóstico dental hoy mismo!
+        </div>
+        <a class="banner-contact__btn" href="/contacto"> Contáctanos ahora &#8594;</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  /* Contenedor general */
+  .banner-contact {
+    background-color: #fff;
+    padding: 3rem;
+  }
+  .banner-contact__container {
+    position: relative; /* Para posicionar absolutamente la caja de contacto */
+    height: 600px; /* Altura fija para el banner */
+  }
+  /* Grid de fondos en 2 columnas */
+  .banner-contact__grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    height: 100%;
+  }
+  @media (min-width: 768px) {
+    .banner-contact__grid {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+  /* Fondo izquierdo: imagen con blur */
+  .banner-contact__left {
+    background-size: cover;
+    background-position: center;
+    filter: blur(3px);
+  }
+  /* Fondo derecho: recuadro azul */
+  .banner-contact__right {
+    background-color: #03192c;
+    display: none;
+  }
+  @media (min-width: 768px) {
+    .banner-contact__right {
+      display: block;
+    }
+  }
+  /* Caja de contacto centrada que se superpone a los fondos */
+  .banner-contact__inner-box {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #02101d;
+    padding: 2rem;
+    width: 80%;
+    border-radius: 8px;
+    z-index: 2;
+    height: 300px;
+  }
+  /* Grid interno para distribuir el contenido en 3 columnas */
+  .banner-contact__inner-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1rem;
+    align-items: center;
+    justify-items: center;
+    text-align: center;
+    width: 100%;
+    height: 100%;
+  }
+  @media (min-width: 768px) {
+    .banner-contact__inner-grid {
+      grid-template-columns: 1fr 2fr 1fr;
+    }
+  }
+
+  .banner-contact__title {
+    font-size: 1.5rem;
+    color: #fff;
+  }
+  .banner-contact__text {
+    font-size: 1.1rem;
+    color: #27b9c6;
+  }
+  /* Botón circular (color café) con flecha */
+  .banner-contact__btn {
+    background-color: #27b9c6;
+    color: #fff;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    font-size: 12px;
+    transition: background-color 0.3s ease;
+    text-transform: uppercase;
+    padding: 20px 30px;
+    font-weight: bold;
+  }
+  .banner-contact__btn:hover {
+    background-color: #27b9c6;
+  }
+</style>

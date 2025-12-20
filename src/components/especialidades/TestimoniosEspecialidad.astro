@@ -1,0 +1,254 @@
+---
+import { Icon } from "astro-icon/components";
+---
+
+<section class="testimonios-especialidades">
+  <div class="container">
+    <h2 class="titulo-especialidades">Historias de éxito de pacientes</h2>
+
+    <div class="testimonio__container">
+      <div class="testimonio___imagen">
+        <!-- arrancamos con la primera foto -->
+        <img id="testimonial-img" src="/testimonio1.jpg" alt="Testimonio 1" />
+      </div>
+
+      <div class="testimonio__text-container">
+        <h3 id="testimonial-author"></h3>
+        <p id="testimonial-text"></p>
+
+        <div>
+          <Icon name="star" size="20" color="#fff" />
+          <Icon name="star" size="20" color="#fff" />
+          <Icon name="star" size="20" color="#fff" />
+          <Icon name="star" size="20" color="#fff" />
+          <Icon name="star" size="20" color="#fff" />
+        </div>
+        <div class="testimonial-navigation">
+          <button id="prev-btn" aria-label="Anterior">
+            <Icon name="left-arrow" size="20" color="#382e27" />
+          </button>
+          <button id="next-btn" aria-label="Siguiente">
+            <Icon name="right-arrow" size="20" color="#382e27" />
+          </button>
+        </div>
+
+        <div class="container__button">
+          <a class="boton__ver-testimonios" href="/testimonios">
+            Ver todos los testimonios
+            <Icon name="arrow" width="20" height="20" />
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  // 1️⃣ Incluye la imagen correspondiente a cada testimonio
+  const testimonials = [
+    {
+      text: "Hay muchos especialistas en la clínica y todos te tratan con mucha paciencia y con cuidado, realmente les importa que nosotros como pacientes estemos tranquilos en sus manos",
+      author: "Pablo Barquín",
+      image: "/testimonio3.jpg",
+    },
+    {
+      text: "Los doctores son profesionales y te tratan muy bien",
+      author: "Alison Trujillo",
+      image: "/testimonio2.jpg",
+    },
+    {
+      text: "Me explicaron todo a detalle sobre mi tratamiento y siempre fueron amables",
+      author: "María Elena Blanco",
+      image: "/testimonio1.jpg",
+    },
+    {
+      text: "Cuentan con equipos de alta tecnología para dar un gran servicio y te explican paso a paso cómo se hace",
+      author: "Romina Portugal",
+      image: "/testimonio4.jpg",
+    },
+    {
+      text: "Recomiendo ampliamente la clínica, gran calidad en los tratamientos",
+      author: "Diego Guzmán",
+      image: "/testimonio5.jpg",
+    },
+  ];
+
+  let currentIndex = 0;
+
+  // 2️⃣ Cachea los elementos del DOM
+  const testimonialText = document.getElementById("testimonial-text");
+  const testimonialAuthor = document.getElementById("testimonial-author");
+  const testimonialImg = document.getElementById("testimonial-img");
+  const prevBtn = document.getElementById("prev-btn");
+  const nextBtn = document.getElementById("next-btn");
+
+  function updateTestimonial() {
+    // fade-out
+    if (testimonialText) testimonialText.style.opacity = "0";
+    if (testimonialAuthor) testimonialAuthor.style.opacity = "0";
+    if (testimonialImg) testimonialImg.style.opacity = "0";
+
+    setTimeout(() => {
+      const { text, author, image } = testimonials[currentIndex];
+
+      if (testimonialText) testimonialText.textContent = text;
+      if (testimonialAuthor) testimonialAuthor.textContent = author;
+      if (testimonialImg) {
+        (testimonialImg as HTMLImageElement).src = image;
+        (testimonialImg as HTMLImageElement).alt = `Foto de ${author}`;
+      }
+
+      // fade-in
+      if (testimonialText) testimonialText.style.opacity = "1";
+      if (testimonialAuthor) testimonialAuthor.style.opacity = "1";
+      if (testimonialImg) testimonialImg.style.opacity = "1";
+    }, 400);
+  }
+
+  prevBtn?.addEventListener("click", () => {
+    currentIndex =
+      (currentIndex - 1 + testimonials.length) % testimonials.length;
+    updateTestimonial();
+  });
+
+  nextBtn?.addEventListener("click", () => {
+    currentIndex = (currentIndex + 1) % testimonials.length;
+    updateTestimonial();
+  });
+
+  // cambio automático cada 4 s
+  setInterval(() => {
+    currentIndex = (currentIndex + 1) % testimonials.length;
+    updateTestimonial();
+  }, 4000);
+
+  // primera carga
+  updateTestimonial();
+</script>
+
+<style>
+  .testimonios-especialidades {
+    background-color: #ebe3de;
+    padding: 15px;
+  }
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    width: 95%;
+  }
+  .testimonio__container {
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+    gap: 20px;
+    align-items: center;
+  }
+  @media (min-width: 768px) {
+    .testimonio__container {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+  .testimonio___imagen img {
+    width: 100%;
+    object-fit: cover;
+    transition: opacity 0.5s ease; 
+
+  }
+  @media (min-width: 768px) {
+    .testimonio___imagen img {
+      width: 468px;
+      height: 624px;
+      object-fit: cover;
+    }
+  }
+  .testimonio__text-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+  }
+  .testimonio__text-container h3 {
+    font-size: 16px;
+    color: #382e27;
+    text-transform: capitalize;
+    margin-bottom: 10px;
+    transition: opacity 0.5s ease;
+  }
+  .testimonio__text-container p {
+    color: #382e27;
+    margin-bottom: 20px;
+    transition: opacity 0.5s ease;
+  }
+  .testimonial-navigation {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+  }
+  .testimonial-navigation button {
+    background: transparent;
+    border: none;
+    cursor: pointer;
+  }
+  .titulo-especialidades {
+    font-size: 30px;
+    color: #382e27;
+    text-align: center;
+    margin-bottom: 20px;
+    text-align: center;
+  }
+  @media (min-width: 768px) {
+    .titulo-especialidades {
+      font-size: 40px;
+      text-align: left;
+    }
+  }
+  .testimonio__persona {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+  }
+  .profesion {
+    color: #123161;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    opacity: 0.6;
+  }
+  .testimonio__separador {
+    width: 4.1em;
+    height: 1px;
+    background-color: #0e46754d;
+    margin: 0 10px;
+  }
+  .nombre {
+    font-size: 13px;
+    color: #927e70;
+  }
+  /* Botón */
+  .boton__ver-testimonios {
+    padding: 1.5em 6.2em 1.5em 3em;
+    font-weight: bold;
+    border: none;
+    cursor: pointer;
+    border-radius: 4px;
+    background-color: #27b9c6;
+    color: #fff;
+    transition: background-color 0.3s ease;
+    margin-top: 20px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    font-size: 10.5px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    text-decoration: none;
+  }
+  .boton__ver-testimonios:hover {
+    background-color: #27b9c6;
+  }
+  .container__button {
+    display: flex;
+    justify-content: center;
+    margin-top: 40px;
+  }
+</style>

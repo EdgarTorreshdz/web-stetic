@@ -1,0 +1,243 @@
+---
+import { Icon } from "astro-icon/components";
+---
+
+<header class="header">
+  <div class="header__background">
+    <!-- Dos capas para el background -->
+    <div class="bg"></div>
+    <div class="bg"></div>
+    <div class="header__overlay"></div>
+    <div class="header__content container">
+      <h1 class="header__title">Excelente servicio dental</h1>
+      <div class="header__welcome">
+        <span class="header__line"></span>
+        <span class="header__welcome-text">Bienvenido</span>
+        <span class="header__line"></span>
+      </div>
+      <p class="header__description">
+        Tu sonrisa en manos de los mejores especialistas dentales en
+        <br>
+        <strong>Playa del Carmen</strong>
+        <strong> y Veracruz</strong>.
+      </p>
+      <div>
+        <a class="banner-contact__btn" href="#especialidades">
+          ¡Quiero mi sonrisa con Stetic Dental!
+          <Icon name="arrow-down" color="white" class="arrow-down" size={20} />
+        </a>
+      </div>
+    </div>
+  </div>
+</header>
+
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    /* ===== Código para el cambio dinámico del background ===== */
+    const backgrounds = ["/bg1.jpg", "/bg2.jpg"];
+    let currentBgIndex = 0;
+    // Convertir el NodeList a Array para poder intercambiar posiciones
+    const bgDivs = Array.from(
+      document.querySelectorAll(".header__background .bg"),
+    );
+
+    // Inicialización: la primera capa muestra bg1 y la segunda, bg2, posicionada arriba (fuera de la vista)
+    (bgDivs[0] as HTMLElement).style.backgroundImage =
+      `url('${backgrounds[currentBgIndex]}')`;
+    (bgDivs[0] as HTMLElement).style.transform = "translateY(0)";
+    (bgDivs[1] as HTMLElement).style.backgroundImage =
+      `url('${backgrounds[(currentBgIndex + 1) % backgrounds.length]}')`;
+    (bgDivs[1] as HTMLElement).style.transform = "translateY(-100%)";
+
+    /* ===== Código para el cambio de título ===== */
+    const headerTitle = document.querySelector(".header__title");
+    const titles = [
+      `Sonríe, <br/> estás en buenas manos`,
+      "Atención personalizada con resultados extraordinarios",
+    ];
+    let currentTitleIndex = 0;
+    if (headerTitle) {
+      headerTitle.innerHTML = titles[currentTitleIndex];
+    }
+
+    // Tiempos de animación
+    const cycleTime = 4000; // Tiempo total de ciclo
+    const swipeDownTime = 1000; // Duración del swipe down (imagen entrante)
+    const swipeUpTime = 1000; // Duración del swipe up (imagen saliente)
+    const fadeTime = 500; // Tiempo para el efecto de fade en el título
+
+    setInterval(() => {
+      // Animación del fondo:
+      // 1. Swipe down: la capa oculta (bgDivs[1]) se desliza de -100% a 0
+      (bgDivs[1] as HTMLElement).style.transition =
+        `transform ${swipeDownTime}ms ease`;
+      (bgDivs[1] as HTMLElement).style.transform = "translateY(0)";
+
+      // 2. Después de swipe down, animamos la capa saliente para que suba
+      setTimeout(() => {
+        (bgDivs[0] as HTMLElement).style.transition =
+          `transform ${swipeUpTime}ms ease`;
+        (bgDivs[0] as HTMLElement).style.transform = "translateY(-100%)";
+
+        // 3. Una vez terminada la animación, actualizamos el fondo de la capa que quedó oculta
+        setTimeout(() => {
+          currentBgIndex = (currentBgIndex + 1) % backgrounds.length;
+          (bgDivs[0] as HTMLElement).style.transition = "none";
+          (bgDivs[0] as HTMLElement).style.backgroundImage =
+            `url('${backgrounds[(currentBgIndex + 1) % backgrounds.length]}')`;
+          // Intercambiamos las referencias de las capas
+          const temp = bgDivs[0];
+          bgDivs[0] = bgDivs[1];
+          bgDivs[1] = temp;
+        }, swipeUpTime);
+      }, swipeDownTime);
+
+      // Animación del título:
+      // Iniciamos la transición de opacidad para fade out
+      if (headerTitle) (headerTitle as HTMLElement).style.opacity = "0";
+      // Después de 'fadeTime' ms, actualizamos el innerHTML y hacemos fade in
+      setTimeout(() => {
+        currentTitleIndex = (currentTitleIndex + 1) % titles.length;
+        if (headerTitle) {
+          headerTitle.innerHTML = titles[currentTitleIndex];
+          (headerTitle as HTMLElement).style.opacity = "1";
+        }
+      }, fadeTime);
+    }, cycleTime);
+  });
+</script>
+
+<style>
+  .header {
+    position: relative;
+    width: 100%;
+    height: 100dvh;
+    overflow: hidden;
+  }
+  .header__background {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+  }
+  /* Estilos para las capas del background */
+  .header__background .bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center center;
+    transition: transform 1s ease;
+    z-index: 0;
+  }
+  /* Capa de overlay para dar efecto */
+  .header__overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    background: linear-gradient(to bottom, #03192c -1%, #b9ba9c33);
+  }
+  @media (min-width: 768px) {
+    .header__overlay {
+      background: linear-gradient(to bottom, #03192c 5%, #b9ba9c33);
+    }
+  }
+  /* Contenido que queda por encima del overlay */
+  .header__content {
+    position: relative;
+    color: #fff;
+    text-align: center;
+    padding: 1rem;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 70%;
+  }
+  .header__title {
+    font-size: 35px;
+    text-align: center;
+    margin-top: 140px;
+
+    margin-bottom: 1rem;
+    /* Se ajusta la duración para que la transición del texto dure 1s (fade out) y 1s (fade in) */
+    transition: opacity 1s ease;
+  }
+  @media (min-width: 768px) {
+    .header__title {
+      font-size: 77px;
+      margin-top: 20px;
+      /* Se ajusta la duración para que la transición del texto dure 1s (fade out) y 1s (fade in) */
+    }
+  }
+  .header__welcome {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 1rem 0;
+  }
+  .header__line {
+    flex: 1;
+    height: 2px;
+    background-color: #27b9c6;
+    margin: 0 1rem;
+  }
+  .header__welcome-text {
+    font-size: 13px;
+    font-weight: bold;
+    color: #fff;
+    text-transform: uppercase;
+  }
+  .header__description {
+    font-size: 18px;
+  }
+  @media (min-width: 768px) {
+    .header__description {
+      font-size: 22px;
+    }
+  }
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    width: 95%;
+  }
+  .banner-contact__btn {
+    background-color: #27b9c6;
+    color: #fff;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    font-size: 10px;
+    transition: background-color 0.3s ease;
+    text-transform: uppercase;
+    padding: 20px 30px;
+    font-weight: bold;
+  }
+  @media (min-width: 768px) {
+    .banner-contact__btn {
+      font-size: 12px;
+    }
+  }
+  .banner-contact__btn:hover {
+    background-color: #27b9c6;
+  }
+  .arrow-down {
+    margin-left: 20px;
+    animation: bounce 1s ease-in-out infinite;
+  }
+  @keyframes bounce {
+    0%,
+    100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(10px);
+    }
+  }
+</style>

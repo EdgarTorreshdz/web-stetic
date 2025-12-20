@@ -1,0 +1,261 @@
+---
+import { Image as AstroImage } from "astro:assets";
+
+/* ▸ Veracruz */
+import Vzq01 from "../../assets/instalaciones/veracruz/1.jpg";
+import Vzq02 from "../../assets/instalaciones/veracruz/2.jpg";
+import Vzq03 from "../../assets/instalaciones/veracruz/3.jpg";
+
+/* ▸ Playa del Carmen */
+import Pdc01 from "../../assets/instalaciones/playa/1.jpg";
+import Pdc02 from "../../assets/instalaciones/playa/2.jpg";
+import Pdc03 from "../../assets/instalaciones/playa/3.jpg";
+
+const sucursales = {
+    veracruz: [
+        { image: Vzq01, alt: "Recepción – Veracruz" },
+        { image: Vzq02, alt: "Consultorio – Veracruz" },
+        { image: Vzq03, alt: "Sala de higiene – Veracruz" },
+    ],
+    playa: [
+        { image: Pdc01, alt: "Recepción – Playa del Carmen" },
+        { image: Pdc02, alt: "Consultorio – Playa del Carmen" },
+        { image: Pdc03, alt: "Sala de rayos X – Playa del Carmen" },
+    ],
+};
+---
+
+<section class="carousel-wrapper">
+    <h2>Conoce nuestras instalaciones</h2>
+
+    <!-- Tabs -->
+    <div class="branch-tabs">
+        <button class="tab active" data-branch="veracruz">Veracruz</button>
+        <button class="tab" data-branch="playa">Playa del Carmen</button>
+    </div>
+
+    <!-- Carruseles -->
+    {
+        Object.entries(sucursales).map(([key, slides]) => (
+            <div
+                class="branch-carousel"
+                data-branch={key}
+                hidden={key !== "veracruz"}
+            >
+                <div class="carousel">
+                    {slides.map((slide) => (
+                        <figure class="slide">
+                            <AstroImage
+                                src={slide.image}
+                                alt={slide.alt}
+                                width={slide.image.width}
+                                height={800}
+                                loading="lazy"
+                                class="slide-img"
+                            />
+                            <figcaption class="sr-only">{slide.alt}</figcaption>
+                        </figure>
+                    ))}
+                </div>
+
+                <button class="ctrl prev" aria-label="Anterior">
+                    ‹
+                </button>
+                <button class="ctrl next" aria-label="Siguiente">
+                    ›
+                </button>
+
+                <div class="dots">
+                    {slides.map((_, i) => (
+                        <button
+                            class="dot"
+                            data-index={i}
+                            aria-label={`Ir a la ${i + 1}`}
+                        />
+                    ))}
+                </div>
+            </div>
+        ))
+    }
+
+    <script is:inline>
+        (() => {
+            const $$ = (sel, ctx = document) => [...ctx.querySelectorAll(sel)];
+
+            const tabs = $$(".tab");
+            const branchViews = $$(".branch-carousel");
+            tabs.forEach((tab) =>
+                tab.addEventListener("click", () => {
+                    const branch = tab.dataset.branch;
+                    tabs.forEach((t) =>
+                        t.classList.toggle("active", t === tab),
+                    );
+                    branchViews.forEach((view) => {
+                        view.hidden = view.dataset.branch !== branch;
+                    });
+                }),
+            );
+
+            branchViews.forEach((view) => {
+                const track = view.querySelector(".carousel");
+                const slides = $$(".slide", view);
+                const dots = $$(".dot", view);
+                const prevBtn = view.querySelector(".prev");
+                const nextBtn = view.querySelector(".next");
+
+                let idx = 0;
+                const total = slides.length;
+                const goTo = (i) => {
+                    idx = (i + total) % total;
+                    track.style.transform = `translateX(-${idx * 100}%)`;
+                    dots.forEach((d, k) =>
+                        d.classList.toggle("active", k === idx),
+                    );
+                };
+
+                prevBtn.onclick = () => goTo(idx - 1);
+                nextBtn.onclick = () => goTo(idx + 1);
+                dots.forEach((d) => (d.onclick = () => goTo(+d.dataset.index)));
+                goTo(0);
+            });
+        })();
+    </script>
+
+    <style is:global>
+        :root {
+            --c-base: #00a7a2;
+            --c-base-light: color-mix(in srgb, var(--c-base) 25%, white);
+            --c-light: #f9fafb;
+            --wrapper-max: 960px;
+        }
+
+        /* ─────────────────── Layout básico ─────────────────── */
+        .carousel-wrapper {
+            max-width: var(--wrapper-max);
+            margin: 0 auto; /* centra todo el bloque */
+            padding: 2.5rem 1rem;
+            text-align: center;
+            border-radius: 1rem;
+        }
+        h2 {
+            font-size: clamp(1.5rem, 1.2rem + 1vw, 2rem);
+            margin-bottom: 1.5rem;
+            font-weight: 600;
+            color: #111;
+        }
+
+        /* ─────────────────── Tabs ─────────────────── */
+        .branch-tabs {
+            display: flex;
+            justify-content: center;
+            gap: 0.25rem;
+            margin: 0 auto 1.75rem;
+            border: 1px solid var(--c-base-light);
+            border-radius: 9999px;
+            background: #fff;
+            padding: 4px;
+            max-width: fit-content;
+        }
+        .tab {
+            flex: 1 1 auto;
+            padding: 0.45rem 1.8rem;
+            border-radius: 9999px;
+            background: transparent;
+            border: none;
+            font-weight: 500;
+            color: var(--c-base);
+            cursor: pointer;
+            transition:
+                background 0.25s,
+                color 0.25s;
+        }
+        .tab.active {
+            background: var(--c-base);
+            color: #fff;
+        }
+        .tab:hover:not(.active) {
+            background: var(--c-base-light);
+        }
+
+        /* ─────────────────── Carrusel ─────────────────── */
+        .branch-carousel {
+            position: relative;
+            overflow: hidden;
+            margin: 0 auto;
+        }
+
+        .carousel {
+            display: flex;
+            transition: transform 0.45s ease;
+        }
+        .slide {
+            margin: 0;
+            flex: 0 0 100%; /* ancho fijo del 100 % y sin encogerse */
+        }
+        .slide-img {
+            display: block; /* elimina espacios fantasma */
+            width: 100%;
+            height: auto;
+            object-fit: contain; /* o 'cover' según prefieras */
+        }
+
+        /* ─────────────────── Controles ─────────────────── */
+        .ctrl {
+            position: absolute;
+            top: 50%;
+            translate: 0 -50%;
+            width: 2.6rem;
+            height: 2.6rem;
+            border-radius: 50%;
+            background: var(--c-base);
+            color: #fff;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+        .prev {
+            left: 0.75rem;
+        }
+        .next {
+            right: 0.75rem;
+        }
+        @media (hover: hover) {
+            .branch-carousel:hover .ctrl {
+                opacity: 0.9;
+            }
+        }
+
+        /* ─────────────────── Dots ─────────────────── */
+        .dots {
+            display: flex;
+            justify-content: center;
+            gap: 0.4rem;
+            margin-top: 0.8rem;
+        }
+        .dot {
+            width: 0.75rem;
+            aspect-ratio: 1;
+            border-radius: 50%;
+            border: 2px solid var(--c-base);
+            background: transparent;
+            cursor: pointer;
+            transition: background 0.25s;
+        }
+        .dot.active,
+        .dot:hover {
+            background: var(--c-base);
+        }
+
+        /* ─────────────────── Accesibilidad ─────────────────── */
+        .sr-only {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            overflow: hidden;
+            clip: rect(0 0 0 0);
+            white-space: nowrap;
+        }
+    </style>
+</section>

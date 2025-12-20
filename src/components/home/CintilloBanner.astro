@@ -1,0 +1,147 @@
+<section class="cintillo-banner">
+    <div class="cintillo-banner__background"></div>
+    <div class="cintillo-banner__content">
+      <h1 class="cintillo-banner__title">
+        <span id="counter">+0</span> SONRISAS TRANSFORMADAS
+      </h1>
+      <a class="cintillo-banner__btn" href="/contacto">¿Comenzamos?</a>
+    </div>
+  </section>
+  
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const counter = document.getElementById("counter");
+      const banner = document.querySelector('.cintillo-banner');
+      const endValue = 5643;
+      const duration = 5000;
+      let startTime: number | null = null;
+      let animationStarted = false;
+      let animationId: number | null = null;
+  
+      function easeOutCubic(t: number) {
+        return 1 - Math.pow(1 - t, 3);
+      }
+  
+      function animateCounter(timestamp: number | null) {
+        if (!startTime) startTime = timestamp;
+        if (timestamp === null) return;
+        const progress = timestamp - (startTime ?? timestamp);
+        const progressRatio = Math.min(progress / duration, 1);
+        const easedProgress = easeOutCubic(progressRatio);
+        const currentValue = Math.floor(easedProgress * endValue);
+        if (counter) {
+          counter.textContent = `+${currentValue}`;
+        }
+        if (progress < duration) {
+          animationId = requestAnimationFrame(animateCounter);
+        } else {
+          if (counter) {
+            counter.textContent = `+${endValue}`;
+          }
+          animationStarted = false;
+        }
+      }
+  
+      const observerOptions = {
+        root: null,     
+        threshold: 0.5   
+      };
+  
+      function observerCallback(entries: any[]) {
+        entries.forEach((entry: { isIntersecting: any; }) => {
+          if (entry.isIntersecting) {
+            // Si el elemento es visible y la animación no está en curso, se inicia o reinicia
+            if (!animationStarted) {
+              animationStarted = true;
+              startTime = null;
+              animationId = requestAnimationFrame(animateCounter);
+            }
+          } else {
+            // Si el elemento deja de ser visible, se cancela la animación y se reinicia el contador
+            if (animationId) {
+              cancelAnimationFrame(animationId);
+              animationId = null;
+            }
+            animationStarted = false;
+            startTime = null;
+            if (counter) {
+              counter.textContent = "+0";
+            }
+          }
+        });
+      }
+  
+      const observer = new IntersectionObserver(observerCallback, observerOptions);
+      if (banner) {
+        observer.observe(banner);
+      }
+    });
+  </script>
+  
+  <style>
+    .cintillo-banner {
+      position: relative;
+      width: 100%;
+      overflow: hidden;
+      height: 450px;
+    }
+    .cintillo-banner__background {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: url("/banner-bg.jpg") no-repeat center center/cover;
+      z-index: 1;
+    }
+    .cintillo-banner__background::after {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.5);
+      z-index: 2;
+    }
+    .cintillo-banner__content {
+      position: relative;
+      z-index: 3;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100%;
+      text-align: center;
+      color: #fff;
+      padding: 0 1rem;
+    }
+    .cintillo-banner__title {
+      font-size: 30px;
+      margin-bottom: 1.5rem;
+    }
+    /* Estilo para evitar que el número se redimensione */
+    #counter {
+      display: inline-block;
+      width: 6ch; /* Espacio para el signo + y 4 dígitos; ajusta según necesites */
+      text-align: right;
+      font-variant-numeric: tabular-nums;
+    }
+    .cintillo-banner__btn {
+      background-color: #27B9C6;
+      color: #fff;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      text-decoration: none;
+      font-size: 12px;
+      transition: background-color 0.3s ease;
+      text-transform: uppercase;
+      padding: 20px 30px;
+      font-weight: bold;
+    }
+    .cintillo-banner__btn:hover {
+      background-color: #27B9C6;
+    }
+  </style>
+  

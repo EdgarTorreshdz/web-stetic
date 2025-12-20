@@ -1,0 +1,65 @@
+---
+
+---
+
+<nav class="nav__especialidades">
+    <a href="/especialidades">Odontología General</a>
+    <a href="/odontologia-estetica">Odontología Estética</a>
+    <a href="/endodoncia">Endondoncia</a>
+    <a href="/ortodoncia">Ortodoncia</a>
+    <a href="/ortopedia">Ortopedia</a>
+    <a href="/cirugia">Cirugía</a>
+    <a href="/odontopediatria">Odontopediatría</a>
+    <a href="/rehabilitacion">Rehabilitación</a>
+</nav>
+
+
+
+<style>
+  /* ========== Base (mobile‑first) ========== */
+  .nav__especialidades {
+    display: flex;
+    flex-wrap: nowrap;               /* Una sola línea */
+    overflow-x: auto;                /* Scroll horizontal */
+    -webkit-overflow-scrolling: touch; /* Suaviza en iOS */
+    scrollbar-width: thin;           /* Firefox: barra delgada */
+    scrollbar-color: #ccc transparent;
+    padding: 30px;
+    border-bottom: 1px solid #e4d9d1;
+    background-color: #fff;
+  }
+
+  .nav__especialidades a {
+    flex-shrink: 0;                  /* No se encojan */
+    margin: 0 20px;
+    text-decoration: none;
+    font-size: 13px;
+    color: #927e70;
+    white-space: nowrap;
+  }
+
+  .nav__especialidades a:hover {
+    color: #927e70;
+  }
+
+  /* WebKit (Chrome, Safari) scrollbar styling */
+  .nav__especialidades::-webkit-scrollbar {
+    height: 4px;
+  }
+  .nav__especialidades::-webkit-scrollbar-thumb {
+    background: #ccc;
+    border-radius: 2px;
+  }
+  .nav__especialidades::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  /* ========== Desktop (desde 768px) ========== */
+  @media (min-width: 768px) {
+    .nav__especialidades {
+      overflow-x: hidden;            /* Sin scroll */
+      justify-content: center;       /* Centrado */
+      /* Firefox deja de mostrar scrollbar si no hay overflow */
+    }
+  }
+</style>

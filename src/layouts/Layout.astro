@@ -1,0 +1,200 @@
+---
+import Navbar from "../components/react/Navbar";
+import ContactHeader from "../components/home/ContactHeader.astro";
+import Footer from "../components/Footer.astro";
+import NavbarMobile from "../components/react/NavbarMobile";
+import { Icon } from "astro-icon/components";
+---
+
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="google-site-verification" content="o0TX1FCwyICZBEqI_gXrvCc70j9Tate1u-tyb0z9wO8" />
+
+    <!-- SEO BÁSICO -->
+    <title>Dentista en Veracruz &amp; Playa del Carmen | Stetic Dental Clinic – Estética Dental, Implantes y Ortodoncia</title>
+    <meta name="description" content="Stetic Dental Clinic ofrece servicios de estética dental, implantes, ortodoncia, blanqueamiento y diseño de sonrisa en Veracruz y Playa del Carmen. Agenda tu cita hoy mismo." />
+    <meta name="robots" content="index, follow" />
+    <link rel="canonical" href="https://www.steticdental.com.mx/" />
+
+    <!-- OPEN GRAPH -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://www.steticdental.com.mx/" />
+    <meta property="og:title" content="Dentista en Veracruz &amp; Playa del Carmen | Stetic Dental Clinic" />
+    <meta property="og:description" content="Especialistas en estética dental, implantes y ortodoncia. Atención personalizada y tecnología de punta." />
+    <meta property="og:image" content="https://steticdental.com.mx/logo.png" />
+
+    <!-- TWITTER CARD -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:site" content="@steticdental" />
+    <meta name="twitter:title" content="Dentista en Veracruz &amp; Playa del Carmen | Stetic Dental Clinic" />
+    <meta name="twitter:description" content="Tratamientos de estética dental, implantes y ortodoncia con especialistas certificados." />
+    <meta name="twitter:image" content="https://steticdental.com.mx/logo.png" />
+
+    <!-- ICONOS -->
+    <link rel="icon" type="image/png" href="/logo.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/logo.png" />
+
+    <!-- FUENTES -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100;300;400;500;600;700;800;900&family=Poppins:wght@200;300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+
+    <meta name="generator" content={Astro.generator} />
+
+    <!-- SCHEMA ORG 2 SUCURSALES -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@graph": [
+          {
+            "@type": "Dentist",
+            "@id": "https://www.steticdental.com.mx#veracruz",
+            "name": "Stetic Dental Clinic Veracruz",
+            "url": "https://www.steticdental.com.mx/",
+            "telephone": "+52 229 937 1084",
+            "address": {
+              "@type": "PostalAddress",
+              "streetAddress": "Heriberto Jara 373 entre Washington y Martí, Fracc. Reforma",
+              "addressLocality": "Veracruz",
+              "addressRegion": "Veracruz",
+              "postalCode": "91919",
+              "addressCountry": "MX"
+            },
+            "geo": {
+              "@type": "GeoCoordinates",
+              "latitude": 19.170919,
+              "longitude": -96.125274
+            },
+            "openingHoursSpecification": {
+              "@type": "OpeningHoursSpecification",
+              "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"],
+              "opens": "10:00",
+              "closes": "19:00"
+            }
+          },
+          {
+            "@type": "Dentist",
+            "@id": "https://www.steticdental.com.mx#playa",
+            "name": "Stetic Dental Clinic Playa del Carmen",
+            "url": "https://www.steticdental.com.mx/",
+            "telephone": "+52 984 147 8829",
+            "address": {
+              "@type": "PostalAddress",
+              "streetAddress": "MNZ. 149 Av. 10 LT7 Esq. 38 Av., Col. Centro",
+              "addressLocality": "Playa del Carmen",
+              "addressRegion": "Quintana Roo",
+              "postalCode": "77720",
+              "addressCountry": "MX"
+            },
+            "geo": {
+              "@type": "GeoCoordinates",
+              "latitude": 20.636424,
+              "longitude": -87.066932
+            },
+            "openingHoursSpecification": {
+              "@type": "OpeningHoursSpecification",
+              "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"],
+              "opens": "10:00",
+              "closes": "19:00"
+            }
+          }
+        ]
+      }
+    </script>
+
+    <!-- ESTILOS PRINCIPALES -->
+    <style>
+      html, body { margin:0; width:100%; height:100%; font-family:"Montserrat",sans-serif; scroll-behavior:smooth; }
+      .container { max-width:1200px; margin:0 auto; width:95%; }
+      .logo-container{display:none;width:100%;}
+      .logo-container img{width:150px;}
+      @media(min-width:768px){.logo-container{display:flex;}}
+      .navbar-mobile{display:flex;justify-content:space-between;align-items:center;background-color:#03192c;padding:10px 0;position:fixed;z-index:99;width:100%;}
+      .navbar-mobile img{width:120px;margin-left:20px;margin-top:10px;}
+      @media(min-width:768px){.navbar-mobile{display:none;}}
+      .whatsapp-desktop{display:none;position:fixed;bottom:1%;right:26px;flex-direction:column;gap:12px;z-index:100;}
+      @media(min-width:768px){.whatsapp-desktop{display:flex;}}
+      .whatsapp-icon{position:relative;cursor:pointer;}
+      .whatsapp-icon::after{content:attr(data-tooltip);position:absolute;right:calc(100% + 8px);top:50%;transform:translateY(-50%);background:#25d366;color:#fff;padding:4px 8px;border-radius:4px;font-size:12px;white-space:nowrap;opacity:0;pointer-events:none;transition:opacity 0.15s ease-in-out;}
+      .whatsapp-icon:hover::after{opacity:1;}
+      .whats-wrapper{position:relative;}
+      .whats-pop{position:absolute;right:0;top:42px;display:flex;flex-direction:column;gap:6px;background:#25d366;padding:8px 12px;border-radius:8px;box-shadow:0 2px 8px rgba(0,0,0,.2);opacity:0;visibility:hidden;transform:translateY(-6px);transition:all .16s ease-in-out;z-index:200;}
+      .whats-pop a{color:#fff;font-size:14px;text-decoration:none;white-space:nowrap;}
+      .whats-pop.open{opacity:1;visibility:visible;transform:translateY(0);}
+    </style>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-ZRE4X4HCPV"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-ZRE4X4HCPV');
+    </script>
+    <!-- Google Tag Manager -->
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-MRMX2GHT');</script>
+    <!-- End Google Tag Manager -->
+  </head>
+  <body>
+     
+    <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-MRMX2GHT"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+    <a class="skip-link" href="#contenido" style="position:absolute;left:-10000px;top:auto;width:1px;height:1px;overflow:hidden;">Saltar al contenido principal</a>
+
+    <!-- WhatsApp flotante escritorio -->
+    <div class="whatsapp-desktop" aria-hidden="true">
+      <a href="https://wa.link/38exw1" target="_blank" rel="noopener noreferrer" class="whatsapp-icon" aria-label="Sucursal Veracruz" data-tooltip="Sucursal Veracruz">
+        <Icon name="whats" size={50} color="white" style={{backgroundColor:"#25D366",borderRadius:"50%",padding:10}} />
+      </a>
+      <a href="https://wa.link/ejverv" target="_blank" rel="noopener noreferrer" class="whatsapp-icon" aria-label="Sucursal Playa del Carmen" data-tooltip="Sucursal Playa del Carmen">
+        <Icon name="whats" size={50} color="white" style={{backgroundColor:"#25D366",borderRadius:"50%",padding:10}} />
+      </a>
+    </div>
+
+    <!-- CABECERA -->
+    <header class="logo-container">
+      <img src="/logo.png" alt="Logo de Stetic Dental Clinic" class="original-image" />
+      <div style="width:100%">
+        <ContactHeader />
+        <Navbar client:load />
+      </div>
+    </header>
+
+    <!-- NAV MÓVIL -->
+    <nav class="navbar-mobile" role="navigation" aria-label="Menú principal móvil">
+      <img src="/blanco.png" alt="Logo Stetic Dental Clinic" />
+      <div style="display:flex;align-items:center;">
+        <div id="whats-wrapper" class="whats-wrapper">
+          <Icon name="whats" color="white" class="whats-trigger" size={30} aria-label="WhatsApp sucursales" />
+          <div id="whats-pop" class="whats-pop">
+            <a href="https://wa.link/38exw1" target="_blank" rel="noopener noreferrer">📍 Sucursal Veracruz</a>
+            <a href="https://wa.link/ejverv" target="_blank" rel="noopener noreferrer">📍 Sucursal Playa del Carmen</a>
+          </div>
+        </div>
+        <NavbarMobile client:load />
+      </div>
+    </nav>
+
+    <main id="contenido">
+      <slot />
+    </main>
+
+    <Footer />
+
+    <script is:inline>
+      const wrapper=document.getElementById('whats-wrapper');
+      const trigger=wrapper?.querySelector('.whats-trigger');
+      const pop=document.getElementById('whats-pop');
+      trigger?.addEventListener('click',e=>{e.stopPropagation();pop.classList.toggle('open');});
+      document.addEventListener('click',()=>pop.classList.remove('open'));
+    </script>
+  </body>
+</html>

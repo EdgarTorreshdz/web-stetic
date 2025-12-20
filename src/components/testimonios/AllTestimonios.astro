@@ -1,0 +1,301 @@
+---
+import { Icon } from "astro-icon/components"
+---
+
+<section class="all-testimonios__container" id="testimonios">
+    <div class="container">
+        <div class="featured-testimonios">
+            <!-- Imagen de fondo -->
+            <div class="featured__image__bg"></div>
+            <!-- Overlay con gradient y blur -->
+            <div class="overlay"></div>
+            <!-- Contenido del testimonio -->
+            <div class="testimonial-content">
+                <div class="testimonial-text">
+                    <!-- Se agregaron IDs para actualizar el contenido -->
+                    <h2 id="testimonial-name">Alex Rivera</h2>
+                    <p id="testimonial-paragraph">
+                        Estoy muy agradecido por la atención que recibí en esta
+                        clínica. Desde el primer momento, el ortodoncista me
+                        explicó cada detalle del proceso con paciencia y
+                        profesionalismo.
+                    </p>
+                    <div>
+                        <Icon name="star" size="20" color="#fff" />
+                        <Icon name="star" size="20" color="#fff" />
+                        <Icon name="star" size="20" color="#fff" />
+                        <Icon name="star" size="20" color="#fff" />
+                        <Icon name="star" size="20" color="#fff" />
+                    </div>
+                  
+                    <div class="testimonial-navigation">
+                        <button id="prev-btn" aria-label="Anterior">
+                            <Icon name="left-arrow" size="20" color="#fff" />
+                        </button>
+                        <button id="next-btn" aria-label="Siguiente">
+                            <Icon name="right-arrow" size="20" color="#fff" />
+                        </button>
+                    </div>
+                </div>
+                <div class="testimonial-photo">
+                    <img src="/bg-testimonio1.avif" alt="Foto de la persona" />
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<style>
+    .all-testimonios__container {
+        padding: 10px 0;
+        background-color: #faf7f5;
+    }
+    .container {
+        max-width: 1600px;
+        margin: 0 auto;
+        width: 95%;
+    }
+    .featured-testimonios {
+        position: relative;
+        padding: 15px;
+        border: 30px solid #27B9C6;
+        color: #fff;
+    }
+    @media (min-width: 768px) {
+        .featured-testimonios {
+        margin-bottom: 10em;
+    }
+  }
+    @media (min-width: 768px) {
+        .featured-testimonios {
+        padding: 5em;
+    }
+    }
+    /* Imagen de fondo */
+    .featured__image__bg {
+        background-image: url("/bg-testimonio1.avif");
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        top: 0;
+        left: 0;
+        z-index: 1;
+        /* Transición para el efecto fade */
+        transition: opacity 0.5s ease;
+    }
+    /* Overlay con filtro café, degradado y blur */
+    .overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-image: linear-gradient(to right, #382e27, #b69f8f00);
+        z-index: 2;
+    }
+    @media (min-width: 768px) {
+        .overlay {
+        backdrop-filter: blur(10px);
+    }
+    }
+    /* Contenido del testimonio (texto a la izquierda y foto a la derecha) */
+    .testimonial-content {
+        display: grid;
+        grid-template-columns: repeat(1, 1fr);
+        position: relative;
+        z-index: 3;
+        height: 100%;
+    }
+    @media (min-width: 768px) {
+        .testimonial-content {
+        grid-template-columns: repeat(2, 1fr);
+       
+    }
+    }
+    .testimonial-text {
+        flex: 1;
+        margin-right: 20px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+
+    @media (min-width: 768px) {
+        .testimonial-text {
+        font-size: 1.2em;
+    }
+    }
+    .testimonial-photo {
+        flex-shrink: 0;
+        overflow: hidden;
+        display: none;
+    }
+    @media (min-width: 768px) {
+        .testimonial-photo {
+        display: block;
+    }
+    }
+    .testimonial-photo img {
+        width: 100%;
+        height: 650px;
+        object-fit: cover;
+        /* Transición para el efecto fade */
+        transition: opacity 0.5s ease;
+    }
+    .testimonio__persona {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 20px;
+    }
+    .profesion {
+        color: #fff;
+        font-size: 11px;
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+        opacity: 0.6;
+    }
+    .testimonio__separador {
+        width: 4.1em;
+        height: 1px;
+        background-color: #c9b4a7;
+        margin: 0 10px;
+    }
+    .nombre {
+        font-size: 13px;
+        color: #fff;
+    }
+    .testimonial-navigation {
+        display: flex;
+        justify-content: center;
+        gap: 20px;
+    }
+    .testimonial-navigation button {
+        background: transparent;
+        border: none;
+        cursor: pointer;
+    }
+</style>
+
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+        // Array de testimonios (se actualiza el texto y nombres, y se usa el índice para la imagen)
+        const testimonialsData = [
+            {
+                name: "Alex Rivera",
+                text: "Estoy muy agradecido por la atención que recibí en esta clínica. Desde el primer momento, el ortodoncista me explicó cada detalle del proceso con paciencia y profesionalismo.",
+        
+            },
+            {
+                name: "Luis Torres",
+                text: "Después de varias sesiones, notaba los cambios y también mi confianza al sonreír, gracias al ortodoncista.",
+            },
+            {
+                name: "María Fernández",
+                text: "Todo el equipo fue amable y atento, lo que hizo que cada visita fuera muy agradable. Definitivamente recomendaría esta clínica a cualquier persona que busque un servicio dental de calidad.",
+            },
+            {
+                name: "Ana Gómez",
+                text: "Llegué a esta clínica con muchas dudas sobre mi tratamiento, pero el rehabilitador me dio la confianza que necesitaba para hacer mis coronas y puentes.",
+            },
+            {
+                name: "Josefina Perez",
+                text: "Me brindaron un plan personalizado y me explicaron cada paso, lo que me hizo sentir muy tranquila. Los resultados superaron mis expectativas: ahora puedo comer y sonreír sin molestias ni inseguridades.",
+            },
+            {
+                name: "Elena Martínez",
+                text: "La atención profesional y el ambiente cálido hicieron que mi experiencia fuera excelente. Sin duda, es una clínica que recomendaría a familiares y amigos.",
+            },
+            {
+                name: "Fernanda Ruiz",
+                text: "Cuando llegué a la clínica, tenía mucho dolor en un diente y estaba muy nervioso por el tratamiento, pero la especialista en endodoncia me explicó todo de manera clara y me tranquilizó.",
+            },
+            {
+                name: "Isabel Castro",
+                text: "Durante el procedimiento, fueron muy cuidadosos y atentos, asegurándose de que no sintiera molestias. Ahora estoy libre de dolor y con mi diente perfectamente restaurado.",
+            },
+            {
+                name: "Karla Vega",
+                text: "Fue una experiencia excelente, y sin duda recomendaría esta clínica a cualquiera que necesite un tratamiento de endodoncia.",
+            },
+        ]
+
+        let currentIndex = 0
+        const nameElement = document.getElementById("testimonial-name")
+        const paragraphElement = document.getElementById(
+            "testimonial-paragraph",
+        )
+        const lowerNameElement = document.getElementById(
+            "testimonial-lower-name",
+        )
+
+        // Elementos de imagen y fondo
+        const testimonialPhotoImg = document.querySelector(
+            ".testimonial-photo img",
+        )
+        const bgElement = document.querySelector(".featured__image__bg")
+
+        const updateTestimonial = (index: number) => {
+            const testimonial = testimonialsData[index]
+            if (nameElement) {
+                nameElement.textContent = testimonial.name
+            }
+            if (paragraphElement) {
+                paragraphElement.textContent = testimonial.text
+            }
+            // if (lowerNameElement) {
+            //     lowerNameElement.textContent = testimonial.lowerName
+            // }
+
+            // Fade out de la imagen y fondo
+            if (testimonialPhotoImg) {
+                (testimonialPhotoImg as HTMLElement).style.opacity = "0"
+            }
+            if (bgElement) {
+                (bgElement as HTMLElement).style.opacity = "0"
+            }
+
+            // Espera a que termine el fade out
+            setTimeout(() => {
+                // Crea un objeto de imagen temporal
+                const newSrc = `/bg-testimonio${index + 1}.avif`
+                const tempImg = new Image()
+                tempImg.src = newSrc
+
+                // Una vez cargada la nueva imagen, se actualiza el DOM y se aplica el fade in
+                tempImg.onload = () => {
+                    if (testimonialPhotoImg) {
+                        (testimonialPhotoImg as HTMLImageElement).src = newSrc;
+                        (testimonialPhotoImg as HTMLImageElement).style.opacity = "1"
+                    }
+                    if (bgElement) {
+                        (bgElement as HTMLElement).style.backgroundImage = `url('${newSrc}')`;
+                        (bgElement as HTMLElement).style.opacity = "1"
+                    }
+                }
+            }, 100)
+        }
+
+        const nextBtn = document.getElementById("next-btn")
+        if (nextBtn) {
+            nextBtn.addEventListener("click", () => {
+                currentIndex = (currentIndex + 1) % testimonialsData.length
+                updateTestimonial(currentIndex)
+            })
+        }
+
+        const prevBtn = document.getElementById("prev-btn")
+        if (prevBtn) {
+            prevBtn.addEventListener("click", () => {
+                currentIndex =
+                    (currentIndex - 1 + testimonialsData.length) %
+                    testimonialsData.length
+                updateTestimonial(currentIndex)
+            })
+        }
+    })
+</script>

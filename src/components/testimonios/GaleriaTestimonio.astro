@@ -1,0 +1,183 @@
+---
+const galleryItems = Array.from({ length: 5 }).map((_, index) => ({
+    id: index,
+    image: `/sonrisa${index + 1}.jpg`,
+}));
+---
+
+<section class="gallery-section">
+    <div class="container">
+        <h1>Galería de sonrisas</h1>
+        <div class="gallery-grid">
+            {
+                galleryItems.map((item) => (
+                    <div
+                        class="gallery-item"
+                        data-id={item.id}
+                        // onclick="openModal()"
+                    >
+                        <img src={item.image} alt="Sonrisa del paciente"  />
+                    </div>
+                ))
+            }
+        </div>
+        <!-- Modal -->
+        <div id="modal" class="modal">
+            <div class="modal-content">
+                <span id="modal-close" class="modal-close">&times;</span>
+                <p>
+                    Solicitar al equipo Stetic Dental Playa imágenes de pacientes Antes y
+                    Después
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<style>
+    .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        width: 95%;
+        padding: 10px;
+    }
+    @media (min-width: 768px) {
+        .container {
+        padding: 30px;
+        border: 10px solid #ebe3de;
+
+    }
+    }
+    .gallery-section {
+        padding: 10px;
+        text-align: center;
+        background-color: #faf7f5;
+    }
+    @media (min-width: 768px) {
+        .gallery-section {
+        padding: 20px;
+    }
+    }
+    .gallery-section h1 {
+        margin-bottom: 0.5rem;
+        font-size: 2rem;
+    }
+    .gallery-description {
+        margin-bottom: 2rem;
+        font-size: 1rem;
+        color: #555;
+    }
+    .gallery-grid {
+        display: grid;
+        grid-template-columns: repeat(1, 1fr);
+        gap: 1rem;
+    }
+    @media (min-width: 768px) {
+        .gallery-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+    }
+    @media (min-width: 1200px) {
+        .gallery-grid {
+        grid-template-columns: repeat(4, 1fr);
+    }
+    }
+
+    .gallery-item {
+        cursor: pointer;
+        overflow: hidden;
+    }
+    .gallery-item img {
+        width: 100%;
+        height: auto;
+        display: block;
+        transition: transform 0.3s ease;
+    }
+    .gallery-item:hover img {
+        transform: scale(1.05);
+    }
+    /* Modal */
+    .modal {
+        display: none;
+        position: fixed;
+        z-index: 100;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        overflow: auto;
+        background-color: rgba(0, 0, 0, 0.7);
+    }
+    .modal-content {
+        background-color: #fff;
+        margin: 10% auto;
+        padding: 2rem;
+        width: 90%;
+        max-width: 500px;
+        text-align: center;
+        border-radius: 8px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+        position: relative;
+    }
+    .modal-close {
+        position: absolute;
+        right: 1rem;
+        top: 1rem;
+        font-size: 1.5rem;
+        font-weight: bold;
+        color: #555;
+        cursor: pointer;
+    }
+    .gallery-item {
+    position: relative;
+    overflow: hidden;
+    /* fuerza proporción 1:1 para que sea cuadrado */
+    aspect-ratio: 1 / 1;
+    }
+
+    /* Haz que la imagen llene todo el contenedor, recortando si es necesario */
+    .gallery-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.3s ease;
+    }
+
+    /* Hover mantiene el efecto */
+    .gallery-item:hover img {
+    transform: scale(1.05);
+    }
+</style>
+
+<!-- <script>
+    function openModal() {
+        var modal = document.getElementById("modal");
+        if (modal) {
+            modal.style.display = "block";
+        }
+    }
+
+    function closeModal() {
+        var modal = document.getElementById("modal");
+        if (modal) {
+            modal.style.display = "none";
+        }
+    }
+
+    // Asigna la función a window para que esté en el ámbito global
+    (window as any).openModal = openModal;
+
+    document.addEventListener("DOMContentLoaded", function () {
+        var modalClose = document.getElementById("modal-close");
+        if (modalClose) {
+            modalClose.addEventListener("click", closeModal);
+        }
+        window.addEventListener("click", function (event) {
+            var modal = document.getElementById("modal");
+            if (event.target === modal) {
+                closeModal();
+            }
+        });
+    });
+</script> -->
