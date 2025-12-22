@@ -1,47 +1,57 @@
 ---
 import { Icon } from "astro-icon/components";
+
+interface Props {
+  lang?: 'en' | 'es';
+}
+
+const { lang = "en" } = Astro.props;
+
+const translations = {
+  en: {
+    veracruz: "Veracruz Clinic",
+    playa: "Playa del Carmen Clinic"
+  },
+  es: {
+    veracruz: "Sucursal Veracruz",
+    playa: "Sucursal Playa del Carmen"
+  }
+};
+
+const t = translations[lang];
 ---
 
 <div class="contact-header">
   <header class="container contact-header__container">
-    <!-- Sucursal Veracruz -->
     <div class="container_contact">
-      <!-- Dirección (opcional: puedes enlazar a Google Maps) -->
       <div class="contact-header__icon email">
         <Icon name="map-pin" class="email-icon" />
-        <p>Sucursal Veracruz</p>
+        <p>{t.veracruz}</p>
       </div>
-      <!-- Teléfono -->
+      
       <a href="tel:+522299371084" class="contact-header__icon phone">
         <Icon name="phone" class="phone-icon" />
         <p>+52 229 937 1084</p>
       </a>
 
-      <!-- Correo -->
-      <a
-        href="mailto:consultoriosteticdental@hotmail.com"
-        class="contact-header__icon email"
-      >
+      <a href="mailto:consultoriosteticdental@hotmail.com" class="contact-header__icon email">
         <Icon name="email" class="email-icon" />
         <p>consultoriosteticdental@hotmail.com</p>
       </a>
     </div>
 
-    <!-- Sucursal Playa del Carmen -->
     <div class="container_contact">
       <div class="contact-header__icon email">
         <Icon name="map-pin" class="email-icon" />
-        <p>Sucursal Playa del Carmen</p>
+        <p>{t.playa}</p>
       </div>
+      
       <a href="tel:+529841478829" class="contact-header__icon phone">
         <Icon name="phone" class="phone-icon" />
         <p>+52 984 147 8829</p>
       </a>
 
-      <a
-        href="mailto:steticdentalplaya@gmail.com"
-        class="contact-header__icon email"
-      >
+      <a href="mailto:steticdentalplaya@gmail.com" class="contact-header__icon email">
         <Icon name="email" class="email-icon" />
         <p>steticdentalplaya@gmail.com</p>
       </a>
@@ -79,12 +89,11 @@ import { Icon } from "astro-icon/components";
     padding: 15px;
   }
 
-  /* Cada link se comporta como bloque flex */
   .contact-header__icon {
     display: flex;
     align-items: center;
     margin-top: 10px;
-    text-decoration: none; /* quita subrayado */
+    text-decoration: none;
   }
 
   .contact-header__icon p {
@@ -100,12 +109,10 @@ import { Icon } from "astro-icon/components";
     margin: 0 10px;
   }
 
-  /* Por defecto (mobile) ocultamos email y dirección; solo mostramos teléfono */
   .contact-header__icon.email {
     display: none;
   }
 
-  /* A partir de 768 px mostramos todo */
   @media (min-width: 768px) {
     .contact-header__icon.email {
       display: flex;

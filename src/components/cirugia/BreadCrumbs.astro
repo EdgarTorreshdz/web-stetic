@@ -1,51 +1,102 @@
 ---
-import Image from "astro/components/Image.astro";
+import { Image } from "astro:assets";
 import flecha from "../../../public/flecha.svg";
+
+// 1. Tipado para TypeScript
+interface Props {
+  lang?: 'en' | 'es';
+}
+
+const { lang = "en" } = Astro.props;
+
+// 2. Traducciones y Rutas
+const translations = {
+  en: {
+    home: "Home",
+    current: "Surgery",
+    contact: "Contact",
+    homeUrl: "/",
+    contactUrl: "/contacto"
+  },
+  es: {
+    home: "Inicio",
+    current: "Cirugía",
+    contact: "Contacto",
+    homeUrl: "/es/",
+    contactUrl: "/es/contacto"
+  }
+};
+
+const t = translations[lang];
 ---
 
 <!-- <nav class="nav__bread-crumbs">
     <div class="nav__bread__crumbs__links">
-        <a href="/">Inicio</a>
-        <Image src={flecha} width={15} alt="Flecha" />
-        <a href="#">Cirugia</a>
+        <a href={t.homeUrl}>{t.home}</a>
+        
+        <Image src={flecha} width={15} height={15} alt="Flecha" />
+        
+        <a href="#">{t.current}</a>
     </div>
-    <a class="nav__bread-crumbs-book" href="#">Contacto</a>
+    
+    <a class="nav__bread-crumbs-book" href={t.contactUrl}>{t.contact}</a>
 </nav> -->
 
 <style>
     .nav__bread-crumbs {
         display: flex;
         justify-content: space-between;
+        align-items: center;
         border-bottom: 1px solid #e4d9d1;
-        background-color: #fff;
-        padding: 30px;
         background-color: #faf7f5;
-
-        a {
-            margin: 0 20px;
-            text-decoration: none;
-            font-size: 13px;
-            color: #927e70;
-            &:hover {
-                color: #927e70;
-            }
-        }
+        padding: 20px 30px; /* Ajustado ligeramente para centrar mejor */
     }
+
+    .nav__bread-crumbs a {
+        margin: 0 20px;
+        text-decoration: none;
+        font-size: 13px;
+        color: #927e70;
+        transition: color 0.3s ease;
+    }
+
+    .nav__bread-crumbs a:hover {
+        color: #27b9c6; /* Cambio a tu color corporativo en el hover */
+    }
+
     .nav__bread__crumbs__links {
         display: flex;
         align-items: center;
         margin-left: 30px;
     }
+
     .nav__bread-crumbs-book {
-        display: inline-block;
+        display: inline-flex;
         border: 1px solid #e4d9d1;
         margin-right: 40px !important;
         text-align: center;
-        padding-left: 2em;
-        padding-right: 2em;
-        height: 60px;
-        display: flex;
+        padding: 0 2em;
+        height: 50px;
         align-items: center;
         background-color: #faf7f5;
+        font-weight: bold;
+        text-transform: uppercase;
+    }
+
+    /* Soporte para navegadores que no leen anidación nativa (opcional) */
+    @media (max-width: 768px) {
+        .nav__bread-crumbs {
+            padding: 15px;
+            flex-direction: column;
+            gap: 15px;
+        }
+        .nav__bread__crumbs__links {
+            margin-left: 0;
+        }
+        .nav__bread-crumbs-book {
+            margin-right: 0 !important;
+            width: 100%;
+            justify-content: center;
+        }
     }
 </style>

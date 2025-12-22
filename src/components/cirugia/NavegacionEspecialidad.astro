@@ -1,12 +1,52 @@
+---
+// NavegacionEspecialidad.astro
+
+// 1. Tipado para TypeScript
+interface Props {
+  lang?: 'en' | 'es';
+}
+
+const { lang = "en" } = Astro.props;
+
+// 2. Prefijo dinámico
+const prefix = `/${lang}`;
+
+// 3. Diccionario de nombres de especialidades
+const labels = {
+  en: {
+    general: "General Dentistry",
+    esthetic: "Esthetic Dentistry",
+    endodontics: "Endodontics",
+    orthodontics: "Orthodontics",
+    orthopedics: "Orthopedics",
+    surgery: "Surgery",
+    pediatric: "Pediatric Dentistry",
+    rehabilitation: "Rehabilitation"
+  },
+  es: {
+    general: "Odontología General",
+    esthetic: "Odontología Estética",
+    endodontics: "Endodoncia",
+    orthodontics: "Ortodoncia",
+    orthopedics: "Ortopedia",
+    surgery: "Cirugía",
+    pediatric: "Odontopediatría",
+    rehabilitation: "Rehabilitación"
+  }
+};
+
+const t = labels[lang];
+---
+
 <nav class="nav__especialidades">
-  <a href="/especialidades">Odontología General</a>
-  <a href="/odontologia-estetica">Odontología Estética</a>
-  <a href="/endodoncia">Endodoncia</a>
-  <a href="/ortodoncia">Ortodoncia</a>
-  <a href="/ortopedia">Ortopedia</a>
-  <a href="/cirugia">Cirugía</a>
-  <a href="/odontopediatria">Odontopediatría</a>
-  <a href="/rehabilitacion">Rehabilitación</a>
+  <a href={`${prefix}/especialidades`}>{t.general}</a>
+  <a href={`${prefix}/odontologia-estetica`}>{t.esthetic}</a>
+  <a href={`${prefix}/endodoncia`}>{t.endodontics}</a>
+  <a href={`${prefix}/ortodoncia`}>{t.orthodontics}</a>
+  <a href={`${prefix}/ortopedia`}>{t.orthopedics}</a>
+  <a href={`${prefix}/cirugia`}>{t.surgery}</a>
+  <a href={`${prefix}/odontopediatria`}>{t.pediatric}</a>
+  <a href={`${prefix}/rehabilitacion`}>{t.rehabilitation}</a>
 </nav>
 
 <style>
@@ -30,10 +70,11 @@
     font-size: 13px;
     color: #927e70;
     white-space: nowrap;
+    transition: color 0.3s ease;
   }
 
   .nav__especialidades a:hover {
-    color: #927e70;
+    color: #27b9c6; /* Usamos tu azul corporativo para el hover */
   }
 
   /* WebKit (Chrome, Safari) scrollbar styling */
@@ -53,7 +94,6 @@
     .nav__especialidades {
       overflow-x: hidden;            /* Sin scroll */
       justify-content: center;       /* Centrado */
-      /* Firefox deja de mostrar scrollbar si no hay overflow */
     }
   }
 </style>

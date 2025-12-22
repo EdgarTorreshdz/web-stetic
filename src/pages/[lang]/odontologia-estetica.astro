@@ -1,0 +1,26 @@
+---
+export function getStaticPaths() {
+  return [
+    { params: { lang: 'en' } },
+    { params: { lang: 'es' } },
+  ];
+}
+
+const { lang } = Astro.params as { lang: 'en' | 'es' };
+import Layout from "../../layouts/Layout.astro"
+import HeaderEspecialidad from "../../components/odontologia-estetica/HeaderEspecialidad.astro"
+import NavegacionEspecialidad from "../../components/odontologia-estetica/NavegacionEspecialidad.astro"
+import BreadCrumbs from "../../components/odontologia-estetica/BreadCrumbs.astro"
+import AboutEspecialidad from "../../components/odontologia-estetica/AboutEspecialidad.astro"
+import AboutOtherEspecialidad from "../../components/odontologia-estetica/AboutOtherEspecialidad.astro"
+import TestimoniosEspecialidad from "../../components/odontologia-estetica/TestimoniosEspecialidad.astro"
+---
+
+<Layout>
+    <HeaderEspecialidad />
+    <BreadCrumbs />
+    <NavegacionEspecialidad />
+    <AboutEspecialidad />
+    <AboutOtherEspecialidad />
+    <TestimoniosEspecialidad />
+</Layout>

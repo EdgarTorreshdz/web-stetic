@@ -1,0 +1,29 @@
+---
+export function getStaticPaths() {
+  return [
+    { params: { lang: 'en' } },
+    { params: { lang: 'es' } },
+  ];
+}
+
+const { lang } = Astro.params as { lang: 'en' | 'es' };
+
+import Layout from "../../layouts/Layout.astro";
+import HeaderHome from "../../components/home/HeaderHome.astro";
+import EspecialidadesHome from "../../components/home/EspecialidadesHome.astro";
+import BannerContact from "../../components/home/BannerContact.astro";
+import CintilloBanner from "../../components/home/CintilloBanner.astro";
+
+// Definimos los títulos de la página según el idioma
+const titles = {
+  en: "Dentist in Veracruz & Playa del Carmen | Stetic Dental Clinic",
+  es: "Dentista en Veracruz & Playa del Carmen | Stetic Dental Clinic"
+};
+---
+
+<Layout title={titles[lang]} lang={lang}>
+    <HeaderHome lang={lang} />
+    <EspecialidadesHome lang={lang} />
+    <BannerContact lang={lang} />
+    <CintilloBanner lang={lang} />
+</Layout>

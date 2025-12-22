@@ -4,10 +4,17 @@ import ContactHeader from "../components/home/ContactHeader.astro";
 import Footer from "../components/Footer.astro";
 import NavbarMobile from "../components/react/NavbarMobile";
 import { Icon } from "astro-icon/components";
+import LanguagePicker from '../components/react/LanguagePicker.jsx';
+interface Props {
+  title?: string;
+  lang?: 'en' | 'es'; // Aquí restringimos los valores
+}
+
+const { title, lang = 'en' } = Astro.props;
 ---
 
 <!doctype html>
-<html lang="es">
+<html lang={lang}>
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -125,20 +132,26 @@ import { Icon } from "astro-icon/components";
       .whats-pop a{color:#fff;font-size:14px;text-decoration:none;white-space:nowrap;}
       .whats-pop.open{opacity:1;visibility:visible;transform:translateY(0);}
     </style>
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-ZRE4X4HCPV"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
+    <script is:inline src="https://www.googletagmanager.com/gtag/js?id=G-ZRE4X4HCPV"></script>
+<script is:inline>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){ dataLayer.push(arguments); }
+  gtag('js', new Date());
+  gtag('config', 'G-ZRE4X4HCPV');
+</script>
 
-      gtag('config', 'G-ZRE4X4HCPV');
-    </script>
-    <!-- Google Tag Manager -->
-    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-    })(window,document,'script','dataLayer','GTM-MRMX2GHT');</script>
+<script is:inline>
+  (function(w,d,s,l,i){
+    w[l]=w[l]||[];
+    w[l].push({'gtm.start': new Date().getTime(), event:'gtm.js'});
+    var f=d.getElementsByTagName(s)[0],
+        j=d.createElement(s),
+        dl=l!='dataLayer'?'&l='+l:'';
+    j.async=true;
+    j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;
+    f.parentNode.insertBefore(j,f);
+  })(window,document,'script','dataLayer','GTM-MRMX2GHT');
+</script>
     <!-- End Google Tag Manager -->
   </head>
   <body>
@@ -163,11 +176,13 @@ import { Icon } from "astro-icon/components";
     <header class="logo-container">
       <img src="/logo.png" alt="Logo de Stetic Dental Clinic" class="original-image" />
       <div style="width:100%">
-        <ContactHeader />
-        <Navbar client:load />
+        <div style="position: absolute; right: 20px; top: 10px; z-index: 100;">
+            <LanguagePicker client:load currentLang={lang} />
+        </div>
+        <ContactHeader  lang={lang}/>
+        <Navbar client:load lang={lang}/>
       </div>
     </header>
-
     <!-- NAV MÓVIL -->
     <nav class="navbar-mobile" role="navigation" aria-label="Menú principal móvil">
       <img src="/blanco.png" alt="Logo Stetic Dental Clinic" />
@@ -179,6 +194,11 @@ import { Icon } from "astro-icon/components";
             <a href="https://wa.link/ejverv" target="_blank" rel="noopener noreferrer">📍 Sucursal Playa del Carmen</a>
           </div>
         </div>
+        <div style="display:flex; align-items:center; gap: 15px;">
+        <LanguagePicker client:load currentLang={lang} />
+        
+        <div id="whats-wrapper" class="whats-wrapper">
+           </div>
         <NavbarMobile client:load />
       </div>
     </nav>

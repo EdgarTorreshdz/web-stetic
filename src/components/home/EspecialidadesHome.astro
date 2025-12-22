@@ -1,150 +1,70 @@
 ---
-// EspecialidadesHome.astro
+interface Props {
+  lang?: 'en' | 'es';
+}
+
+const { lang = "en" } = Astro.props;
+const prefix = `/${lang}`;
+
+const translations = {
+  en: {
+    title: "We attend any dental emergency with our specialties.",
+    cards: [
+      { title: "General Dentistry", desc: "We specialize in helping patients with general treatments to beautify their smiles.", img: "/odontologiageneral.webp", url: "/especialidades" },
+      { title: "Esthetic Dentistry", desc: "Helps recover your missing teeth by restoring them and improving functionality.", img: "/esteticadental.jpg", url: "/odontologia-estetica" },
+      { title: "Endodontics", desc: "Treatment that eliminates infection inside the tooth, relieving pain and preserving the piece.", img: "/endodoncia.jpg", url: "/endodoncia" },
+      { title: "Orthodontics", desc: "Corrects the position of the teeth and improves the bite, providing a healthier smile.", img: "/ortodoncia.png", url: "/ortodoncia" },
+      { title: "Orthopedics", desc: "Improves development problems in bones and teeth from an early age.", img: "/ortopedia.jpg", url: "/ortopedia" },
+      { title: "Surgery", desc: "We treat complex problems, such as wisdom teeth extraction and other health interventions.", img: "/cirugia.jpg", url: "/cirugia" },
+      { title: "Pediatric Dentistry", desc: "Specialized in caring for your little one from birth to 12 years old.", img: "/odontopediatria.png", url: "/odontopediatria" },
+      { title: "Rehabilitation", desc: "Restores oral health with prosthetics and implants for a complete treatment.", img: "/rehabilitacion.jpeg", url: "/rehabilitacion" }
+    ]
+  },
+  es: {
+    title: "Atendemos cualquier emergencia dental con nuestras especialidades.",
+    cards: [
+      { title: "Odontología general", desc: "Nos especializamos en ayudar a los pacientes con tratamientos generales para embellecer sus sonrisas.", img: "/odontologiageneral.webp", url: "/especialidades" },
+      { title: "Odontología Estética", desc: "Ayuda a recuperar tus dientes faltantes restaurándolos y mejorando su funcionalidad.", img: "/esteticadental.jpg", url: "/odontologia-estetica" },
+      { title: "Endodoncia", desc: "Tratamiento que elimina la infección dentro del diente, aliviando el dolor y preservando la pieza dental.", img: "/endodoncia.jpg", url: "/endodoncia" },
+      { title: "Ortodoncia", desc: "Corrige la posición de los dientes y mejora la mordida, brindando una sonrisa más saludable.", img: "/ortodoncia.png", url: "/ortodoncia" },
+      { title: "Ortopedia", desc: "Mejora problemas de desarrollo en huesos y dientes desde una edad temprana.", img: "/ortopedia.jpg", url: "/ortopedia" },
+      { title: "Cirugía", desc: "Tratamos problemas complejos, como la extracción de muelas del juicio e intervenciones necesarias.", img: "/cirugia.jpg", url: "/cirugia" },
+      { title: "Odontopediatría", desc: "Especializados en la atención de tu pequeño desde el nacimiento hasta los 12 años.", img: "/odontopediatria.png", url: "/odontopediatria" },
+      { title: "Rehabilitación", desc: "Restaura la salud bucal con prótesis e implantes para un tratamiento completo.", img: "/rehabilitacion.jpeg", url: "/rehabilitacion" }
+    ]
+  }
+};
+
+const t = translations[lang];
 ---
 
 <section class="especialidades" id="especialidades">
   <div class="especialidades__container">
-    <h2 class="especialidades__title">
-      Atendemos cualquier emergencia dental con nuestras especialidades.
-    </h2>
+    <h2 class="especialidades__title">{t.title}</h2>
     <div class="especialidades__grid">
-      <div
-        class="especialidades__card"
-        style="background-image: url('/odontologiageneral.webp');"
-      >
-        <div class="especialidades__info">
-          <h3>Odontología general</h3>
-          <p>
-            Nos especializamos en ayudar a los pacientes con tratamientos
-            generales para embellecer sus sonrisas.
-          </p>
-          <a class="especialidades__btn" href="/especialidades">&#8594;</a>
+      {t.cards.map((card) => (
+        <div
+          class="especialidades__card"
+          style={`background-image: url('${card.img}');`}
+        >
+          <div class="especialidades__info">
+            <h3>{card.title}</h3>
+            <p>{card.desc}</p>
+            <a class="especialidades__btn" href={`${prefix}${card.url}`}>&#8594;</a>
+          </div>
         </div>
-      </div>
-      <div
-        class="especialidades__card"
-        style="background-image: url('/esteticadental.jpg');"
-      >
-        <div class="especialidades__info">
-          <h3>Odontología Estética</h3>
-          <p>
-            Ayuda a recuperar tus dientes faltantes restaurándolos y mejorando
-            su funcionalidad.
-          </p>
-          <a class="especialidades__btn" href="/odontologia-estetica">&#8594;</a
-          >
-        </div>
-      </div>
-      <div
-        class="especialidades__card"
-        style="background-image: url('/endodoncia.jpg');"
-      >
-        <div class="especialidades__info">
-          <h3>Endodoncia</h3>
-          <p>
-            Tratamiento que elimina la infección dentro del diente, aliviando el
-            dolor y preservando la pieza dental.
-          </p>
-          <a class="especialidades__btn" href="/endodoncia">&#8594;</a>
-        </div>
-      </div>
-      <div
-        class="especialidades__card"
-        style="background-image: url('/ortodoncia.png');"
-      >
-        <div class="especialidades__info">
-          <h3>Ortodoncia</h3>
-          <p>
-            Corrige la posición de los dientes y mejora la mordida, brindando
-            una sonrisa más saludable y estética.
-          </p>
-          <a class="especialidades__btn" href="/ortodoncia">&#8594;</a>
-        </div>
-      </div>
-      <div
-        class="especialidades__card"
-        style="background-image: url('/ortopedia.jpg');"
-      >
-        <div class="especialidades__info">
-          <h3>Ortopedia</h3>
-          <p>
-            Mejora problemas en el desarrollo de los maxilares y sus piezas
-            dentales, arreglando la funcionalidad y armonía facial desde una
-            edad temprana.
-          </p>
-          <a class="especialidades__btn" href="/ortopedia">&#8594;</a>
-        </div>
-      </div>
-      <div
-        class="especialidades__card"
-        style="background-image: url('/cirugia.jpg');"
-      >
-        <div class="especialidades__info">
-          <h3>Cirugía</h3>
-          <p>
-            Tratamos problemas complejos, como la extracción de muelas del
-            juicio y otras intervenciones necesarias para la salud.
-          </p>
-          <a class="especialidades__btn" href="/cirugia">&#8594;</a>
-        </div>
-      </div>
-
-      <!-- Tarjeta 7: wrapper para ocupar ambas columnas en desktop -->
-      <div
-        class="especialidades__card"
-        style="background-image: url('/odontopediatria.png');"
-      >
-        <div class="especialidades__info">
-          <h3>Odontopediatría</h3>
-          <p>
-            Especializados en la atención de tu pequeño desde el nacimiento
-            hasta los 12 años.
-          </p>
-          <a class="especialidades__btn" href="/odontopediatria">&#8594;</a>
-        </div>
-      </div>
-
-      <!-- Tarjeta 8: wrapper para ocupar ambas columnas en desktop -->
-      <div
-        class="especialidades__card"
-        style="background-image: url('/rehabilitacion.jpeg');"
-      >
-        <div class="especialidades__info">
-          <h3>Rehabilitación</h3>
-          <p>
-            Restaura la salud bucal con prótesis e implantes, combinando
-            diversas especialidades para un tratamiento completo.
-          </p>
-          <a class="especialidades__btn" href="/rehabilitacion">&#8594;</a>
-        </div>
-      </div>
+      ))}
     </div>
   </div>
 </section>
 
 <style>
-  .especialidades {
-    background-color: #03192c;
-    padding: 2rem 0;
-    color: #fff;
-  }
-  .especialidades__container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 1rem;
-  }
-  .especialidades__title {
-    margin-bottom: 2rem;
-    font-size: 30px;
-    text-align: center;
-  }
+  .especialidades { background-color: #03192c; padding: 2rem 0; color: #fff; }
+  .especialidades__container { max-width: 1200px; margin: 0 auto; padding: 0 1rem; }
+  .especialidades__title { margin-bottom: 2rem; font-size: 30px; text-align: center; }
 
-  /* ===== Mobile-first ===== */
-  .especialidades__grid {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 20px;
-  }
+  .especialidades__grid { display: grid; grid-template-columns: 1fr; gap: 20px; }
+  
   .especialidades__card {
     position: relative;
     border-radius: 8px;
@@ -153,6 +73,7 @@
     background-size: cover;
     background-position: center;
   }
+  
   .especialidades__card::before {
     content: "";
     position: absolute;
@@ -160,6 +81,7 @@
     background: linear-gradient(to bottom, rgba(10, 3, 24, 0.3) 38%, #0e4675);
     z-index: 0;
   }
+  
   .especialidades__info {
     position: absolute;
     top: 50%;
@@ -173,16 +95,10 @@
     flex-direction: column;
     align-items: center;
   }
-  .especialidades__info h3 {
-    margin: 0;
-    font-size: 22px;
-  }
-  .especialidades__info p {
-    margin: 0.5rem 0 0;
-    font-size: 14px;
-    opacity: 1; /* siempre visible en móvil */
-    width: 80%;
-  }
+  
+  .especialidades__info h3 { margin: 0; font-size: 22px; }
+  .especialidades__info p { margin: 0.5rem 0 0; font-size: 14px; opacity: 1; width: 80%; }
+  
   .especialidades__btn {
     margin-top: 1rem;
     display: inline-flex;
@@ -195,52 +111,28 @@
     color: #03192c;
     font-size: 20px;
     text-decoration: none;
-    opacity: 1; /* siempre visible en móvil */
   }
 
-  /* ===== Desktop (hover behavior) ===== */
   @media (min-width: 768px) {
-    .especialidades__title {
-      font-size: 40px;
-    }
-    .especialidades__grid {
-      grid-template-columns: repeat(2, 1fr);
-    }
-    /* wrappers ocupan ambas columnas y centran */
-    .especialidades__card-wrapper {
-      grid-column: 1 / -1;
-      display: flex;
-      justify-content: center;
-    }
-    .especialidades__card-wrapper .especialidades__card {
-      width: 600px;
-    }
-
-    /* ocultar info secundaria hasta hover */
-    .especialidades__card {
-      transition: border 0.3s ease;
-    }
-    .especialidades__card:hover {
-      border: 1px solid #fff;
-    }
+    .especialidades__title { font-size: 40px; }
+    .especialidades__grid { grid-template-columns: repeat(2, 1fr); }
+    
+    .especialidades__card { transition: border 0.3s ease; }
+    .especialidades__card:hover { border: 1px solid #fff; }
+    
     .especialidades__info {
       top: 50%;
       transform: translateY(-10%);
       transition: transform 0.3s ease;
     }
-    .especialidades__info p,
-    .especialidades__btn {
+    
+    .especialidades__info p, .especialidades__btn {
       opacity: 0;
       transition: opacity 0.3s ease;
     }
-    .especialidades__card:hover .especialidades__info {
-      transform: translateY(-50%);
-    }
-    .especialidades__card:hover .especialidades__info p {
-      opacity: 1;
-    }
-    .especialidades__card:hover .especialidades__btn {
-      opacity: 1;
-    }
+    
+    .especialidades__card:hover .especialidades__info { transform: translateY(-50%); }
+    .especialidades__card:hover .especialidades__info p { opacity: 1; }
+    .especialidades__card:hover .especialidades__btn { opacity: 1; }
   }
 </style>

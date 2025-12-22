@@ -1,0 +1,26 @@
+---
+export function getStaticPaths() {
+  return [
+    { params: { lang: 'en' } },
+    { params: { lang: 'es' } },
+  ];
+}
+
+const { lang } = Astro.params as { lang: 'en' | 'es' };
+import Layout from "../../layouts/Layout.astro"
+import HeaderEspecialidad from "../../components/rehabilitacion/HeaderEspecialidad.astro"
+import NavegacionEspecialidad from "../../components/rehabilitacion/NavegacionEspecialidad.astro"
+import BreadCrumbs from "../../components/rehabilitacion/BreadCrumbs.astro"
+import AboutEspecialidad from "../../components/rehabilitacion/AboutEspecialidad.astro"
+import AboutOtherEspecialidad from "../../components/rehabilitacion/AboutOtherEspecialidad.astro"
+import TestimoniosEspecialidad from "../../components/rehabilitacion/TestimoniosEspecialidad.astro"
+---
+
+<Layout>
+    <HeaderEspecialidad />
+    <BreadCrumbs />
+    <NavegacionEspecialidad />
+    <AboutEspecialidad />
+    <AboutOtherEspecialidad />
+    <TestimoniosEspecialidad />
+</Layout>

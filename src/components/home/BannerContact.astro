@@ -1,27 +1,49 @@
 ---
 // BannerContact.astro
+interface Props {
+  lang?: 'en' | 'es';
+}
+
+const { lang = "en" } = Astro.props;
+const prefix = `/${lang}`;
+
+const translations = {
+  en: {
+    title: "Schedule your appointment",
+    text: "Get a dental diagnosis today!",
+    button: "Contact us now →",
+    contactUrl: "/contact"
+  },
+  es: {
+    title: "Agenda tu cita",
+    text: "¡Obtén un diagnóstico dental hoy mismo!",
+    button: "Contáctanos ahora →",
+    contactUrl: "/contacto"
+  }
+};
+
+const t = translations[lang];
 ---
 
 <section class="banner-contact">
   <div class="banner-contact__container">
     <div class="banner-contact__grid">
-      <!-- Fondo izquierdo: imagen con blur -->
       <div
         class="banner-contact__left"
         style="background-image: url('/endodoncia.jpg');"
       >
       </div>
-      <!-- Fondo derecho: recuadro azul -->
       <div class="banner-contact__right"></div>
     </div>
-    <!-- Caja de contacto centrada (superpuesta) -->
     <div class="banner-contact__inner-box">
       <div class="banner-contact__inner-grid">
-        <div class="banner-contact__title">Agenda tu cita</div>
+        <div class="banner-contact__title">{t.title}</div>
         <div class="banner-contact__text">
-          ¡Obtén un diagnóstico dental hoy mismo!
+          {t.text}
         </div>
-        <a class="banner-contact__btn" href="/contacto"> Contáctanos ahora &#8594;</a>
+        <a class="banner-contact__btn" href={`${prefix}${t.contactUrl}`}> 
+          {t.button}
+        </a>
       </div>
     </div>
   </div>
@@ -102,7 +124,7 @@
     font-size: 1.1rem;
     color: #27b9c6;
   }
-  /* Botón circular (color café) con flecha */
+  /* Botón con el color corporativo */
   .banner-contact__btn {
     background-color: #27b9c6;
     color: #fff;
@@ -115,8 +137,9 @@
     text-transform: uppercase;
     padding: 20px 30px;
     font-weight: bold;
+    text-align: center;
   }
   .banner-contact__btn:hover {
-    background-color: #27b9c6;
+    background-color: #1e8e99; /* Un tono un poco más oscuro para el hover */
   }
 </style>

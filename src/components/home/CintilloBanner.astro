@@ -1,37 +1,63 @@
+---
+// CintilloBanner.astro
+interface Props {
+  lang?: 'en' | 'es';
+}
+
+const { lang = "en" } = Astro.props;
+const prefix = `/${lang}`;
+
+const translations = {
+  en: {
+    smileText: " TRANSFORMED SMILES",
+    button: "Shall we start?",
+    contactUrl: "/contact"
+  },
+  es: {
+    smileText: " SONRISAS TRANSFORMADAS",
+    button: "¿Comenzamos?",
+    contactUrl: "/contacto"
+  }
+};
+
+const t = translations[lang];
+---
+
 <section class="cintillo-banner">
     <div class="cintillo-banner__background"></div>
     <div class="cintillo-banner__content">
       <h1 class="cintillo-banner__title">
-        <span id="counter">+0</span> SONRISAS TRANSFORMADAS
+        <span id="counter">+0</span>{t.smileText}
       </h1>
-      <a class="cintillo-banner__btn" href="/contacto">¿Comenzamos?</a>
+      <a class="cintillo-banner__btn" href={`${prefix}${t.contactUrl}`}>{t.button}</a>
     </div>
   </section>
   
-  <script>
+  <script is:inline>
     document.addEventListener("DOMContentLoaded", () => {
       const counter = document.getElementById("counter");
       const banner = document.querySelector('.cintillo-banner');
       const endValue = 5643;
       const duration = 5000;
-      let startTime: number | null = null;
+      let startTime = null;
       let animationStarted = false;
-      let animationId: number | null = null;
+      let animationId = null;
   
-      function easeOutCubic(t: number) {
+      function easeOutCubic(t) {
         return 1 - Math.pow(1 - t, 3);
       }
   
-      function animateCounter(timestamp: number | null) {
+      function animateCounter(timestamp) {
         if (!startTime) startTime = timestamp;
-        if (timestamp === null) return;
-        const progress = timestamp - (startTime ?? timestamp);
+        const progress = timestamp - startTime;
         const progressRatio = Math.min(progress / duration, 1);
         const easedProgress = easeOutCubic(progressRatio);
         const currentValue = Math.floor(easedProgress * endValue);
+        
         if (counter) {
           counter.textContent = `+${currentValue}`;
         }
+        
         if (progress < duration) {
           animationId = requestAnimationFrame(animateCounter);
         } else {
@@ -47,17 +73,15 @@
         threshold: 0.5   
       };
   
-      function observerCallback(entries: any[]) {
-        entries.forEach((entry: { isIntersecting: any; }) => {
+      function observerCallback(entries) {
+        entries.forEach((entry) => {
           if (entry.isIntersecting) {
-            // Si el elemento es visible y la animación no está en curso, se inicia o reinicia
             if (!animationStarted) {
               animationStarted = true;
               startTime = null;
               animationId = requestAnimationFrame(animateCounter);
             }
           } else {
-            // Si el elemento deja de ser visible, se cancela la animación y se reinicia el contador
             if (animationId) {
               cancelAnimationFrame(animationId);
               animationId = null;
@@ -120,10 +144,9 @@
       font-size: 30px;
       margin-bottom: 1.5rem;
     }
-    /* Estilo para evitar que el número se redimensione */
     #counter {
       display: inline-block;
-      width: 6ch; /* Espacio para el signo + y 4 dígitos; ajusta según necesites */
+      width: 6ch; 
       text-align: right;
       font-variant-numeric: tabular-nums;
     }
@@ -141,7 +164,6 @@
       font-weight: bold;
     }
     .cintillo-banner__btn:hover {
-      background-color: #27B9C6;
+      background-color: #1e8e99;
     }
   </style>
-  

@@ -1,5 +1,32 @@
 ---
 import { Icon } from "astro-icon/components";
+
+// 1. Definimos la interfaz para TypeScript
+interface Props {
+  lang?: 'en' | 'es';
+}
+
+// 2. Obtenemos el idioma de las props (si no viene, por defecto inglés)
+const { lang = "en" } = Astro.props;
+
+// 3. Diccionario de textos
+const translations = {
+  en: {
+    title: "Surgery",
+    category: "Specialties",
+    description: "We have the highest standards in comprehensive dental services to guarantee the dental well-being of your entire family.",
+    button: "I want my Stetic Dental smile!",
+  },
+  es: {
+    title: "Cirugía",
+    category: "Especialidades",
+    description: "Contamos con los más altos estándares en servicios dentales integrales para garantizar el bienestar odontológico de toda tu familia.",
+    button: "¡Quiero mi sonrisa con Stetic Dental!",
+  }
+};
+
+// Seleccionamos la traducción según el idioma
+const t = translations[lang];
 ---
 
 <header class="header">
@@ -9,26 +36,25 @@ import { Icon } from "astro-icon/components";
   >
     <div class="header__overlay"></div>
     <div class="header__content container">
-      <h1 class="header__title">Cirugía</h1>
+      <h1 class="header__title">{t.title}</h1>
       <div class="header__welcome">
         <span class="header__line"></span>
-        <span class="header__welcome-text">Especialidades</span>
+        <span class="header__welcome-text">{t.category}</span>
         <span class="header__line"></span>
       </div>
       <p class="header__description">
-        Contamos con los más altos estándares en servicios dentales integrales
-        para garantizar el bienestar odontológico de toda tu familia
+        {t.description}
       </p>
       <div>
         <a class="banner-contact__btn" href="#about">
-          ¡Quiero mi sonrisa con Stetic Dental!
+          {t.button}
           <Icon
             name="arrow-down"
             color="white"
             class="arrow-down"
             size={20}
-          /></a
-        >
+          />
+        </a>
       </div>
     </div>
   </div>
@@ -78,10 +104,10 @@ import { Icon } from "astro-icon/components";
   }
   @media (min-width: 768px) {
     .header__title {
-    font-size: 77px;
-    margin-top: 20px;
-  }
+      font-size: 77px;
+      margin-top: 20px;
     }
+  }
 
   .header__welcome {
     display: flex;
@@ -93,7 +119,7 @@ import { Icon } from "astro-icon/components";
   .header__line {
     flex: 1;
     height: 2px;
-    background-color: #27b9c6; /* Líneas de color café */
+    background-color: #27b9c6;
     margin: 0 1rem;
   }
 
@@ -105,14 +131,14 @@ import { Icon } from "astro-icon/components";
   }
 
   .header__description {
-    font-size:18px;
+    font-size: 18px;
   }
 
   @media (min-width: 768px) {
     .header__description {
-    font-size: 22px;
-  }
+      font-size: 22px;
     }
+  }
 
   .container {
     max-width: 1200px;
@@ -141,12 +167,7 @@ import { Icon } from "astro-icon/components";
   }
 
   @keyframes bounce {
-    0%,
-    100% {
-      transform: translateY(0);
-    }
-    50% {
-      transform: translateY(10px);
-    }
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(10px); }
   }
 </style>
