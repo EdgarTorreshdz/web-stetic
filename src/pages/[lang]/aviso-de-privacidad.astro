@@ -1,4 +1,11 @@
 ---
+export function getStaticPaths() {
+  return [
+    { params: { lang: 'en' } },
+    { params: { lang: 'es' } },
+  ];
+}
+const { lang } = Astro.params as { lang: 'en' | 'es' };
 // AvisoPrivacidad.astro
 import Layout from "../../layouts/Layout.astro";
 ---
