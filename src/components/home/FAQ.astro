@@ -1,0 +1,186 @@
+---
+import { Icon } from "astro-icon/components";
+
+interface Props {
+  lang?: 'en' | 'es';
+}
+
+const { lang = "en" } = Astro.props;
+
+const translations = {
+  en: {
+    title: "Frequently Asked Questions About Dental Care in Mexico",
+    faqs: [
+      {
+        question: "Is it safe to get dental work in Mexico?",
+        answer: "Yes. Many dental clinics in Playa del Carmen follow international standards and use modern technology comparable to clinics in the USA."
+      },
+      {
+        question: "Do you speak English?",
+        answer: "Yes. Our dental team speaks English and works daily with American patients to ensure clear communication."
+      },
+      {
+        question: "How much can I save compared to the USA?",
+        answer: "Patients often save between 50% and 70% on dental treatments compared to U.S. prices, without compromising quality."
+      },
+      {
+        question: "How long do treatments take?",
+        answer: "Treatment time depends on the procedure. We provide clear timelines before you travel so you can plan your stay accordingly."
+      }
+    ]
+  },
+  es: {
+    title: "Preguntas Frecuentes sobre el Cuidado Dental en México",
+    faqs: [
+      {
+        question: "¿Es seguro realizarse trabajos dentales en México?",
+        answer: "Sí. Muchas clínicas en Playa del Carmen siguen estándares internacionales y utilizan tecnología moderna comparable a la de EE. UU."
+      },
+      {
+        question: "¿Hablan inglés?",
+        answer: "Sí. Nuestro equipo dental habla inglés y trabaja diariamente con pacientes estadounidenses."
+      },
+      {
+        question: "¿Cuánto puedo ahorrar en comparación con EE. UU.?",
+        answer: "Los pacientes suelen ahorrar entre un 50% y un 70% en tratamientos dentales en comparación con los precios de EE. UU."
+      },
+      {
+        question: "¿Cuánto tiempo duran los tratamientos?",
+        answer: "El tiempo del tratamiento depende del procedimiento. Proporcionamos cronogramas claros antes de que viaje."
+      }
+    ]
+  }
+};
+
+const t = translations[lang];
+---
+
+<section class="faq">
+  <div class="container">
+    <div class="faq__header">
+      <h2 class="faq__title">{t.title}</h2>
+    </div>
+
+    <div class="faq__container">
+      {t.faqs.map((faq) => (
+        <details class="faq__item">
+          <summary class="faq__question">
+            <span>{faq.question}</span>
+            <Icon name="arrow-down" class="faq__icon" size={20} />
+          </summary>
+          <div class="faq__answer">
+            <p>{faq.answer}</p>
+          </div>
+        </details>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  :root {
+    --gold: #D4AF37;
+    --black: #000000;
+    --white: #ffffff;
+    --border-color: #eeeeee;
+  }
+
+  .faq {
+    background-color: var(--white);
+    padding: 8rem 0;
+  }
+
+  .faq__header {
+    text-align: center;
+    max-width: 800px;
+    margin: 0 auto 4rem;
+  }
+
+  .faq__subtitle {
+    color: var(--gold);
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    display: block;
+    margin-bottom: 1rem;
+  }
+
+  .faq__title {
+    font-size: 2.2rem;
+    font-weight: 800;
+    color: var(--black);
+    text-transform: uppercase;
+    line-height: 1.2;
+  }
+
+  .faq__container {
+    max-width: 900px;
+    margin: 0 auto;
+  }
+
+  .faq__item {
+    border-bottom: 1px solid var(--border-color);
+    background-color: #fafafa;
+    margin-bottom: 1rem;
+    transition: all 0.3s ease;
+  }
+
+  .faq__item[open] {
+    background-color: var(--white);
+    border-left: 4px solid var(--gold);
+  }
+
+  .faq__question {
+    list-style: none;
+    padding: 1.5rem 2rem;
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--black);
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  /* Quitar flecha por defecto en Safari */
+  .faq__question::-webkit-details-marker {
+    display: none;
+  }
+
+  .faq__icon {
+    color: var(--gold);
+    transition: transform 0.3s ease;
+  }
+
+  .faq__item[open] .faq__icon {
+    transform: rotate(180deg);
+  }
+
+  .faq__answer {
+    padding: 0 2rem 1.5rem;
+    color: #555;
+    line-height: 1.6;
+    font-size: 1.05rem;
+  }
+
+  .container {
+    margin: 0 auto;
+    width: 85%;
+  }
+
+  @media (max-width: 768px) {
+    .container {
+      width: 90%; 
+    }
+    .faq__title {
+      font-size: 1.8rem;
+    }
+    .faq__question {
+      font-size: 0.95rem;
+      padding: 1.2rem;
+    }
+  }
+</style>

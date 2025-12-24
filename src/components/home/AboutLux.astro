@@ -1,0 +1,210 @@
+---
+import { Icon } from "astro-icon/components";
+
+interface Props {
+  lang?: 'en' | 'es';
+}
+
+const { lang = "en" } = Astro.props;
+
+const translations = {
+  en: {
+    title: "High-quality dental care for international patients",
+    description: "For Americans looking for safe, affordable treatment in Mexico, we provide a seamless experience with professional standards.",
+    features: [
+      "English-speaking dentists",
+      "Certified specialists",
+      "Modern dental clinic in Playa del Carmen",
+      "Affordable dental care vs USA"
+    ],
+  },
+  es: {
+    title: "Cuidado dental de alta calidad para pacientes internacionales",
+    description: "Para pacientes que buscan un tratamiento seguro y accesible en México, ofrecemos una experiencia sin complicaciones con estándares profesionales.",
+    features: [
+      "Dentistas que hablan inglés",
+      "Especialistas certificados",
+      "Clínica moderna en Playa del Carmen",
+      "Precios accesibles vs USA/Canadá"
+    ],
+  }
+};
+
+const t = translations[lang];
+---
+
+<section class="about-lux">
+  <div class="container about-lux__grid">
+    <div class="about-lux__image-container">
+      <div class="about-lux__border-decorator"></div>
+      <img src="/nosotros.jpg" alt="Stetic Dental Clinic" class="about-lux__image" />
+    </div>
+
+    <div class="about-lux__content">
+      <h2 class="about-lux__title">{t.title}</h2>
+      <p class="about-lux__description">{t.description}</p>
+
+      <ul class="about-lux__features">
+        {t.features.map((feature) => (
+          <li>
+            <Icon name="star" class="feature-icon" size={18} />
+            <span>{feature}</span>
+          </li>
+        ))}
+      </ul>
+
+    </div>
+  </div>
+</section>
+
+<style>
+  :root {
+    --gold: #D4AF37;
+    --black: #000000;
+    --white: #ffffff;
+    --gray: #1a1a1a;
+  }
+
+  .about-lux {
+    background-color: var(--black);
+    color: var(--white);
+    padding: 5rem 0;
+    overflow: hidden;
+  }
+
+  .about-lux__grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 4rem;
+    align-items: center;
+  }
+
+  @media (min-width: 992px) {
+    .about-lux__grid {
+      grid-template-columns: 1.1fr 0.9fr;
+    }
+  }
+
+  /* Estilos de Imagen */
+  .about-lux__image-container {
+    position: relative;
+    padding: 1rem;
+  }
+
+  .about-lux__image {
+    width: 100%;
+    height: 500px;
+    object-fit: cover;
+    position: relative;
+    z-index: 2;
+    border: 1px solid rgba(212, 175, 55, 0.3);
+  }
+
+  .about-lux__border-decorator {
+    position: absolute;
+    top: -10px;
+    left: -10px;
+    width: 100px;
+    height: 100px;
+    border-top: 3px solid var(--gold);
+    border-left: 3px solid var(--gold);
+    z-index: 1;
+  }
+
+  /* Estilos de Contenido */
+  .about-lux__content {
+    text-align: left;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .about-lux__header {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .about-lux__subtitle {
+    color: var(--gold);
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 3px;
+  }
+
+  .about-lux__line {
+    width: 50px;
+    height: 1px;
+    background-color: var(--gold);
+  }
+
+  .about-lux__title {
+    font-size: 2.5rem;
+    line-height: 1.2;
+    margin-bottom: 1.5rem;
+    font-weight: 800;
+    text-transform: uppercase;
+  }
+
+  .about-lux__description {
+    font-size: 1.1rem;
+    color: #cccccc;
+    margin-bottom: 2rem;
+    line-height: 1.6;
+  }
+
+  /* Lista de Características */
+  .about-lux__features {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 3rem 0;
+  }
+
+  .about-lux__features li {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1rem;
+    font-size: 1rem;
+    font-weight: 500;
+  }
+
+  .feature-icon {
+    color: var(--gold);
+  }
+
+  /* Botón */
+  .about-lux__btn {
+    background-color: transparent;
+    color: var(--gold);
+    border: 1px solid var(--gold);
+    padding: 1rem 2.5rem;
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    transition: all 0.3s ease;
+  }
+
+  .about-lux__btn:hover {
+    background-color: var(--gold);
+    color: var(--white);
+    transform: translateX(10px);
+  }
+
+  .container {
+    margin: 0 auto;
+    width: 85%;
+  }
+
+  @media (max-width: 768px) {
+    .about-lux__title {
+      font-size: 1.8rem;
+    }
+    .about-lux__image {
+      height: 350px;
+    }
+  }
+</style>

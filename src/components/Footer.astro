@@ -1,238 +1,145 @@
 ---
-// Footer.astro
 import { Icon } from "astro-icon/components";
 ---
 
 <footer class="footer">
-  <div class="footer__container">
-    <div class="footer__top">
-      <!-- Columna del logo -->
-      <div class="footer__logo">
-        <a href="/">
-          <img src="/logo-blanco.png" alt="Stetic Dental Playa Logo" />
-        </a>
-      </div>
-      <!-- Mapa de sitio -->
-      
-      <!-- Redes sociales -->
+  <div class="container">
+    <div class="footer__content">
       <div class="footer__social">
-        <h3>Redes sociales Veracruz</h3>
-        <ul>
-          <li>
-            <a
-              href=" https://www.facebook.com/SteticDentalVer/"
-              target="_blank"
-            >
-              <Icon name="facebook" /> Facebook
-            </a>
-          </li>
-          <li>
-            <a
-              href="https://www.instagram.com/steticdentalclinic?igsh=NGF4bjVjNWd4NWNt"
-              target="_blank"
-            >
-              <Icon name="instagram" /> Instagram
-            </a>
-          </li>
-        </ul>
-        <h3>Redes sociales Playa del Carmen</h3>
-        <ul>
-          <li>
-            <a
-              href="https://www.facebook.com/steticdentalplaya "
-              target="_blank"
-            >
-              <Icon name="facebook" /> Facebook
-            </a>
-          </li>
-          <li>
-            <a
-              href="https://www.instagram.com/steticdentalplaya?igsh=YmtyYWF3ZGQ3YzRx "
-              target="_blank"
-            >
-              <Icon name="instagram" /> Instagram
-            </a>
-          </li>
-        </ul>
-      </div>
-      <!-- Información de contacto -->
-      <div class="footer__contact">
-  <h3>Contacto Veracruz</h3>
-
-  <p style="margin-bottom: 10px; color:white;">
-    <a href="tel:+522299371084" style="color:white;text-decoration:none;">
-      <Icon name="phone" /> 2299371084
-    </a>
-  </p>
-
-  <p style="margin-bottom: 10px; color:white;">
-    <a href="https://wa.me/522292062652" target="_blank" style="color:white;text-decoration:none;">
-      <Icon name="whatsapp" /> 2292062652
-    </a>
-  </p>
-
-  <p style="margin-bottom: 10px;">
-    <Icon name="map-pin" /> Heriberto jara 373 entre Washington y Marti, Fracc.
-    Reforma, Veracruz, Ver.
-  </p>
-</div>
-
-<div class="footer__contact">
-  <h3>Contacto Playa del Carmen</h3>
-
-  <p style="margin-bottom: 10px; color:white;">
-    <a href="tel:+529841478829" style="color:white;text-decoration:none;">
-      <Icon name="phone" /> 9841478829
-    </a>
-  </p>
-
-  <p style="margin-bottom: 10px; color:white;">
-    <a href="https://wa.me/529841802566" target="_blank" style="color:white;text-decoration:none;">
-      <Icon name="whatsapp" /> 9841802566
-    </a>
-  </p>
-
-  <p style="margin-bottom: 10px;">
-    <Icon name="map-pin" /> Avenida 10 Nte, Calle 38 Nte Con, Zazil-ha, Playa del Carmen, Q.R.
-  </p>
-</div>
-      
-      <!-- Avisos legales -->
-      <div class="footer__legal">
-        <h3>Legal</h3>
-        <ul>
-          <li><a href="/aviso-de-privacidad">Aviso de privacidad</a></li>
-          <li><a href="/terminos-condiciones">Términos y condiciones</a></li>
-          <li><a href="/politica-de-cookies">Política de cookies</a></li>
-        </ul>
-      </div>
-    </div>
-    <div class="footer__bottom">
-      <p>Todos los derechos reservados Stetic Dental ©2025</p>
-      <p>
-        <a
-          href="https://www.borealmarketing.mx/"
-          target="_blank"
-          style="color: #fff; text-decoration: none; font-size: 12px;"
-        >
-          Desarrollado por Boreal Marketing Digital
+        <a href="https://www.facebook.com/steticdentalplaya" target="_blank" aria-label="Facebook">
+          <Icon name="facebook" size={24} />
         </a>
-      </p>
+        <a href="https://www.instagram.com/steticdentalplaya" target="_blank" aria-label="Instagram">
+          <Icon name="instagram" size={24} />
+        </a>
+        <a href="https://wa.me/529841880338" target="_blank" aria-label="WhatsApp">
+          <Icon name="whatsapp" size={24} />
+        </a>
+      </div>
+
+      <nav class="footer__legal">
+        <a href="/aviso-de-privacidad">Privacy Policy</a>
+        <span class="separator">|</span>
+        <a href="/terminos-condiciones">Terms & Conditions</a>
+        <span class="separator">|</span>
+        <a href="/politica-de-cookies">Cookies</a>
+      </nav>
+
+      <div class="footer__bottom">
+        <p>Stetic Dental Clinic © 2025. All rights reserved.</p>
+        <p class="developer">
+          Developed by 
+          <a href="https://huella-digital.mx/" target="_blank" rel="noopener noreferrer">Huella Digital — Agencia de marketing digital en México</a>
+        </p>
+      </div>
     </div>
   </div>
 </footer>
 
 <style>
+  :root {
+    --gold: #D4AF37;
+    --black: #000000;
+    --white: #ffffff;
+  }
+
   .footer {
-    background-color: #02101d;
-    color: #fff;
-    padding: 2rem 1rem;
-    font-family: "Montserrat", sans-serif;
+    background-color: var(--black);
+    color: var(--white);
+    padding: 4rem 0 3rem 0; /* Padding ajustado por la falta de logo */
+    border-top: 1px solid #1a1a1a;
   }
-  .footer__container {
-    max-width: 1200px;
+
+  .container {
+    width: 85%;
     margin: 0 auto;
-    width: 95%;
   }
-  .footer__top {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+
+  .footer__content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
     gap: 2rem;
-    margin-bottom: 1rem;
-  }
-  .footer__top h3 {
-    margin-bottom: 1rem;
-    font-size: 1.2rem;
-  }
-  .footer__sitemap {
-    display: none;
   }
 
-  @media (min-width: 768px) {
-    .footer__sitemap {
-      display: block;
-    }
-  }
-  .footer__contact {
-    display: none;
+  /* Social Icons */
+  .footer__social {
+    display: flex;
+    gap: 2rem;
   }
 
-  @media (min-width: 768px) {
-    .footer__contact {
-      display: block;
-    }
+  .footer__social a {
+    color: var(--white);
+    transition: all 0.3s ease;
   }
+
+  .footer__social a:hover {
+    color: var(--gold);
+    transform: translateY(-3px);
+  }
+
+  /* Legal Links */
   .footer__legal {
-    display: none;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1rem;
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
   }
-  @media (min-width: 768px) {
-    .footer__legal {
-      display: block;
-    }
-  }
-  .footer__sitemap ul,
-  .footer__social ul,
-  .footer__legal ul {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-  }
-  .footer__sitemap li,
-  .footer__social li,
-  .footer__legal li {
-    margin-bottom: 0.5rem;
-  }
-  .footer__sitemap a,
-  .footer__social a,
+
   .footer__legal a {
-    color: #fff;
+    color: #999;
     text-decoration: none;
     transition: color 0.3s ease;
   }
-  .footer__sitemap a:hover,
-  .footer__social a:hover,
+
   .footer__legal a:hover {
-    color: #27b9c6;
-  }
-  .footer__contact p {
-    margin: 0.5rem 0;
-  }
-  .footer__contact p svg {
-    margin-right: 0.5rem;
-    vertical-align: middle;
-  }
-  /* Logo */
-  .footer__logo {
-    text-align: center;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-  .footer__logo img {
-    max-width: 100px;
-    margin-bottom: 0.5rem;
-  }
-  .footer__logo p {
-    margin: 0;
-    font-size: 1rem;
-    font-weight: bold;
-  }
-  .footer__bottom {
-    text-align: center;
-    border-top: 1px solid rgba(255, 255, 255, 0.2);
-    padding-top: 1rem;
-    font-size: 0.9rem;
+    color: var(--gold);
   }
 
-  /* Estilos Mobile-First: para pantallas pequeñas se centra el contenido */
+  .separator {
+    color: #333;
+  }
+
+  /* Bottom Copyright */
+  .footer__bottom {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    font-size: 0.8rem;
+    color: #666;
+    letter-spacing: 0.5px;
+  }
+
+  .developer a {
+    color: var(--gold);
+    text-decoration: none;
+    font-weight: 700;
+    transition: opacity 0.3s ease;
+  }
+
+  .developer a:hover {
+    opacity: 0.8;
+    text-decoration: underline;
+  }
+
+  /* Mobile Adjustment */
   @media (max-width: 768px) {
-    .footer__top,
-    .footer__sitemap,
-    .footer__social,
-    .footer__contact,
+    .container {
+      width: 90%;
+    }
     .footer__legal {
-      text-align: center;
-      justify-items: center;
+      flex-direction: column;
+      gap: 0.8rem;
+    }
+    .separator {
+      display: none;
+    }
+    .footer {
+      padding: 3rem 0 2rem 0;
     }
   }
 </style>

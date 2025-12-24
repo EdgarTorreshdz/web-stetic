@@ -13,6 +13,13 @@ import HeaderHome from "../../components/home/HeaderHome.astro";
 import EspecialidadesHome from "../../components/home/EspecialidadesHome.astro";
 import BannerContact from "../../components/home/BannerContact.astro";
 import CintilloBanner from "../../components/home/CintilloBanner.astro";
+import AboutLux from "../../components/home/AboutLux.astro";
+import ServicesLux from "../../components/home/ServicesLux.astro";
+import DentalTourism from "../../components/home/DentalTourism.astro";
+import WhyChooseUs from "../../components/home/WhyChooseUs.astro";
+import ReviewsLux from "../../components/home/ReviewsLux.astro";
+import LocationLux from "../../components/home/LocationLux.astro";
+import FAQ from "../../components/home/FAQ.astro";
 
 // SEO DATA OPTIMIZADA
 const seoData = {
@@ -35,7 +42,14 @@ const currentSeo = seoData[lang];
   lang={lang}
 >
     <HeaderHome lang={lang} />
-    <EspecialidadesHome lang={lang} />
+    <AboutLux lang={lang} />
+    <ServicesLux lang={lang} />
+    <DentalTourism lang={lang} />
+    <WhyChooseUs lang={lang} />
+    <ReviewsLux lang={lang} />
+    <LocationLux lang={lang} />
+    <FAQ lang={lang} />
+    <!-- <EspecialidadesHome lang={lang} />
     <BannerContact lang={lang} />
-    <CintilloBanner lang={lang} />
+    <CintilloBanner lang={lang} /> -->
 </Layout>

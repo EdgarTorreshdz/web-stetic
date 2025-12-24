@@ -1,0 +1,252 @@
+---
+import { Icon } from "astro-icon/components";
+
+interface Props {
+  lang?: 'en' | 'es';
+}
+
+const { lang = "en" } = Astro.props;
+
+const translations = {
+  en: {
+    title: "Dental Tourism in Mexico: Why Choose Playa del Carmen?",
+    text1: "Dental tourism in Mexico has become a trusted option for thousands of Americans every year. Playa del Carmen offers modern dental clinics, experienced professionals, and significantly lower costs compared to the United States.",
+    text2: "Patients choose Playa del Carmen not only for affordable dental care, but also for safety, accessibility, and a comfortable recovery environment. Our clinic supports international patients throughout the entire process, from the first consultation to post-treatment follow-up.",
+    linkText: "Learn more about dental tourism in Mexico and how it works.",
+    url: "/dental-tourism-mexico"
+  },
+  es: {
+    title: "Turismo Dental en México: ¿Por qué elegir Playa del Carmen?",
+    text1: "El turismo dental en México se ha convertido en una opción confiable para miles de estadounidenses cada año. Playa del Carmen ofrece clínicas dentales modernas, profesionales experimentados y costos significativamente más bajos en comparación con los Estados Unidos.",
+    text2: "Los pacientes eligen Playa del Carmen no solo por la atención dental asequible, sino también por la seguridad, la accesibilidad y un entorno de recuperación confortable. Nuestra clínica apoya a los pacientes internacionales durante todo el proceso.",
+    linkText: "Conoce más sobre el turismo dental en México y cómo funciona.",
+    url: "/es/turismo-dental-mexico"
+  }
+};
+
+const t = translations[lang];
+---
+
+<section class="tourism">
+  <div class="container tourism__grid">
+    <div class="tourism__content">
+      <h2 class="tourism__title">{t.title}</h2>
+      
+      <div class="tourism__description">
+        <p>{t.text1}</p>
+        <p>{t.text2}</p>
+      </div>
+
+      <a href={t.url} class="tourism__link">
+        <span class="emoji">👉</span> {t.linkText}
+      </a>
+    </div>
+
+    <div class="tourism__video-wrapper">
+      <div class="video-card">
+        <div class="video-card__inner">
+          <video 
+            autoplay 
+            muted 
+            loop 
+            playsinline 
+            poster="/odontologiageneral.webp"
+          >
+            <source src="/dental-tourism-video.mp4" type="video/mp4" />
+          </video>
+          
+          <div class="video-card__overlay">
+            <div class="video-card__badge">
+              <Icon name="star" size={14} />
+              <span>Playa del Carmen</span>
+            </div>
+            <div class="video-card__play">
+              <div class="play-icon"></div>
+            </div>
+          </div>
+        </div>
+        <div class="video-card__shadow"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  :root {
+    --gold: #D4AF37;
+    --black: #000000;
+    --white: #ffffff;
+    --text-gray: #444444;
+  }
+
+  .tourism {
+    background-color: var(--white);
+    padding: 8rem 0;
+    overflow: hidden;
+  }
+
+  .tourism__grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 4rem;
+    align-items: center;
+  }
+
+  @media (min-width: 992px) {
+    .tourism__grid {
+      grid-template-columns: 1.2fr 0.8fr;
+    }
+  }
+
+  /* Contenido */
+  .tourism__content {
+    text-align: left;
+  }
+
+  .tourism__subtitle {
+    color: var(--gold);
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    display: block;
+    margin-bottom: 1rem;
+  }
+
+  .tourism__title {
+    font-size: 2.5rem;
+    font-weight: 800;
+    color: var(--black);
+    line-height: 1.1;
+    margin-bottom: 2rem;
+    text-transform: uppercase;
+  }
+
+  .tourism__description p {
+    font-size: 1.1rem;
+    color: var(--text-gray);
+    line-height: 1.7;
+    margin-bottom: 1.5rem;
+  }
+
+  .tourism__link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--black);
+    text-decoration: none;
+    margin-top: 1rem;
+    transition: color 0.3s ease;
+  }
+
+  .tourism__link:hover {
+    color: var(--gold);
+  }
+
+  /* Video Card (Estilo Reels/TikTok) */
+  .tourism__video-wrapper {
+    display: flex;
+    justify-content: center;
+    position: relative;
+  }
+
+  .video-card {
+    position: relative;
+    width: 100%;
+    max-width: 320px; /* Ancho de un video vertical */
+    z-index: 2;
+  }
+
+  .video-card__inner {
+    position: relative;
+    aspect-ratio: 9 / 16; /* Formato vertical */
+    background-color: var(--black);
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+    border: 4px solid var(--black);
+  }
+
+  .video-card__inner video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .video-card__overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgba(0,0,0,0.6) 0%, transparent 40%);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 1.5rem;
+    pointer-events: none;
+  }
+
+  .video-card__badge {
+    align-self: flex-start;
+    background: rgba(214, 175, 55, 0.9);
+    color: white;
+    padding: 0.4rem 0.8rem;
+    border-radius: 50px;
+    font-size: 0.7rem;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    text-transform: uppercase;
+  }
+
+  .video-card__play {
+    align-self: center;
+    margin-bottom: 20%;
+  }
+
+  .play-icon {
+    width: 50px;
+    height: 50px;
+    background: rgba(255,255,255,0.2);
+    backdrop-filter: blur(5px);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid rgba(255,255,255,0.5);
+  }
+
+  .play-icon::after {
+    content: '';
+    width: 0;
+    height: 0;
+    border-top: 10px solid transparent;
+    border-bottom: 10px solid transparent;
+    border-left: 15px solid white;
+    margin-left: 5px;
+  }
+
+  /* Sombra decorativa trasera */
+  .video-card__shadow {
+    position: absolute;
+    top: 20px;
+    right: -20px;
+    width: 100%;
+    height: 100%;
+    border: 2px solid var(--gold);
+    border-radius: 20px;
+    z-index: -1;
+  }
+
+  .container {
+    margin: 0 auto;
+    width: 85%;
+  }
+
+  @media (max-width: 768px) {
+    .tourism { padding: 5rem 0; }
+    .tourism__title { font-size: 1.8rem; }
+    .video-card { max-width: 280px; }
+  }
+</style>

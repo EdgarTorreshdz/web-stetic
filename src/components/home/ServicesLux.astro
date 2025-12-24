@@ -1,0 +1,230 @@
+---
+import { Icon } from "astro-icon/components";
+
+interface Props {
+  lang?: 'en' | 'es';
+}
+
+const { lang = "en" } = Astro.props;
+
+const translations = {
+  en: {
+    title: "OUR DENTAL SERVICES IN PLAYA DEL CARMEN",
+    description: "Tailored dental care for international patients looking for reliable results in Mexico.",
+    viewMore: "View Details",
+    services: [
+      { title: "Dental Implants", desc: "Permanent solutions for missing teeth.", img: "/odontologiageneral.webp" },
+      { title: "Veneers", desc: "Porcelain veneers for a perfect smile.", img: "/odontologiageneral.webp" },
+      { title: "Smile Design", desc: "Personalized approach to natural aesthetics.", img: "/odontologiageneral.webp" },
+      { title: "Root Canal", desc: "Modern procedures to save your teeth.", img: "/odontologiageneral.webp" },
+      { title: "Teeth Whitening", desc: "Professional treatments for a bright smile.", img: "/odontologiageneral.webp" },
+      { title: "Clear Aligners", desc: "Discreet and modern orthodontics.", img: "/odontologiageneral.webp" }
+    ]
+  },
+  es: {
+    title: "NUESTROS SERVICIOS DENTALES EN PLAYA DEL CARMEN",
+    description: "Atención personalizada para pacientes internacionales que buscan resultados confiables en México.",
+    viewMore: "Ver detalles",
+    services: [
+      { title: "Implantes Dentales", desc: "Soluciones permanentes para dientes perdidos.", img: "/odontologiageneral.webp" },
+      { title: "Carillas", desc: "Carillas de porcelana para una sonrisa perfecta.", img: "/odontologiageneral.webp" },
+      { title: "Diseño de Sonrisa", desc: "Enfoque personalizado y estética natural.", img: "/odontologiageneral.webp" },
+      { title: "Endodoncia", desc: "Procedimientos modernos para salvar tus dientes.", img: "/odontologiageneral.webp" },
+      { title: "Blanqueamiento", desc: "Tratamientos profesionales de brillo.", img: "/odontologiageneral.webp" },
+      { title: "Alineadores", desc: "Ortodoncia discreta y moderna.", img: "/odontologiageneral.webp" }
+    ]
+  }
+};
+
+const t = translations[lang];
+---
+
+<section class="services-lux">
+  <div class="container">
+    <div class="services-lux__header">
+      <h2 class="services-lux__title">{t.title}</h2>
+      <p class="services-lux__intro">{t.description}</p>
+    </div>
+
+    <div class="services-lux__grid">
+      {t.services.map((service) => (
+        <div class="service-card">
+          <img src={service.img} alt={service.title} class="service-card__bg" />
+          <div class="service-card__overlay"></div>
+          
+          <div class="service-card__content">
+            <h3 class="service-card__title">{service.title}</h3>
+            <p class="service-card__description">{service.desc}</p>
+            <div class="service-card__action">
+              <span>{t.viewMore}</span>
+              <Icon name="right-arrow" size={18} />
+            </div>
+          </div>
+          
+          <div class="service-card__border"></div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  :root {
+    --gold: #D4AF37;
+    --black: #000000;
+    --white: #ffffff;
+    --text-dark: #1a1a1a;
+  }
+
+  .services-lux {
+    background-color: var(--white);
+    padding: 4rem 0; /* Un poco menos de padding en móviles por defecto */
+  }
+
+  .services-lux__header {
+    text-align: center;
+    margin-bottom: 3rem;
+    max-width: 900px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .services-lux__title {
+    font-size: 1.8rem; /* Tamaño base para móvil */
+    font-weight: 800;
+    text-transform: uppercase;
+    color: var(--black);
+    margin-bottom: 1rem;
+    line-height: 1.2;
+  }
+
+  .services-lux__intro {
+    font-size: 1rem;
+    color: #444;
+    line-height: 1.5;
+  }
+
+  .services-lux__grid {
+    display: grid;
+    /* CAMBIO CLAVE: minmax reducido a 280px para que quepa en cualquier celular */
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 1.5rem;
+  }
+
+  .service-card {
+    position: relative;
+    width: 100%;
+    height: 400px; /* Un poco más bajo para móviles */
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    overflow: hidden;
+    border-radius: 4px;
+    cursor: pointer;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+  }
+
+  .service-card__bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: 0;
+    transition: transform 0.6s ease;
+  }
+
+  .service-card__overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      to top, 
+      rgba(0,0,0,0.95) 0%, 
+      rgba(0,0,0,0.4) 60%, 
+      transparent 100%
+    );
+    z-index: 1;
+  }
+
+  .service-card__content {
+    position: relative;
+    z-index: 2;
+    padding: 1.5rem;
+    text-align: left;
+  }
+
+  .service-card__title {
+    font-size: 1.3rem;
+    font-weight: 800;
+    color: var(--white);
+    text-transform: uppercase;
+    margin-bottom: 0.5rem;
+  }
+
+  .service-card__description {
+    font-size: 0.9rem;
+    color: #eee;
+    margin-bottom: 1rem;
+  }
+
+  .service-card__action {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--gold);
+    font-weight: 700;
+    font-size: 0.8rem;
+    text-transform: uppercase;
+  }
+
+  /* Animaciones solo para dispositivos que tengan mouse (evita bugs en touch) */
+  @media (hover: hover) {
+    .service-card:hover .service-card__bg {
+      transform: scale(1.1);
+    }
+    .service-card:hover .service-card__border {
+      width: 100%;
+    }
+  }
+
+  .service-card__border {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 5px;
+    background-color: var(--gold);
+    z-index: 3;
+    transition: width 0.4s ease;
+  }
+
+  .container {
+    margin: 0 auto;
+    width: 90%; /* Más ancho en móviles */
+    max-width: 1200px;
+  }
+
+  /* MEDIA QUERIES PARA ESCRITORIO */
+  @media (min-width: 768px) {
+    .services-lux {
+      padding: 6rem 0;
+    }
+    .services-lux__title {
+      font-size: 2.2rem;
+    }
+    .services-lux__grid {
+      grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+      gap: 2rem;
+    }
+    .service-card {
+      height: 450px;
+    }
+    .service-card__content {
+      padding: 2rem;
+    }
+    .container {
+      width: 85%;
+    }
+  }
+</style>

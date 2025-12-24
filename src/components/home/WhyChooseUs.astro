@@ -1,0 +1,219 @@
+---
+import { Icon } from "astro-icon/components";
+
+interface Props {
+  lang?: 'en' | 'es';
+}
+
+const { lang = "en" } = Astro.props;
+
+const translations = {
+  en: {
+    subtitle: "STETIC DENTAL QUALITY",
+    title: "Why International Patients Choose Our Dental Clinic",
+    benefits: [
+      "Certified and experienced dental specialists",
+      "English-speaking team for clear communication",
+      "Advanced dental technology and materials",
+      "Transparent treatment plans and pricing",
+      "Personalized care for international patients"
+    ],
+    footerText: "We understand the concerns of patients traveling from abroad and focus on providing a professional, safe, and comfortable dental experience in Playa del Carmen."
+  },
+  es: {
+    subtitle: "CALIDAD STETIC DENTAL",
+    title: "¿Por qué los pacientes internacionales eligen nuestra clínica?",
+    benefits: [
+      "Especialistas dentales certificados y experimentados",
+      "Equipo de habla inglesa para una comunicación clara",
+      "Tecnología y materiales dentales avanzados",
+      "Planes de tratamiento y precios transparentes",
+      "Atención personalizada para pacientes internacionales"
+    ],
+    footerText: "Entendemos las preocupaciones de los pacientes que viajan desde el extranjero y nos enfocamos en brindar una experiencia dental profesional, segura y cómoda en Playa del Carmen."
+  }
+};
+
+const t = translations[lang];
+---
+
+<section class="why-choose">
+  <div class="container">
+    <div class="why-choose__header">
+      <span class="why-choose__subtitle">{t.subtitle}</span>
+      <h2 class="why-choose__title">{t.title}</h2>
+    </div>
+
+    <div class="why-choose__grid">
+      {t.benefits.map((benefit) => (
+        <div class="benefit-item">
+          <div class="benefit-item__icon-wrapper">
+            <Icon name="star" size={24} class="benefit-icon" />
+          </div>
+          <p class="benefit-item__text">{benefit}</p>
+          <div class="benefit-item__line"></div>
+        </div>
+      ))}
+    </div>
+
+    <div class="why-choose__footer">
+      <div class="why-choose__footer-content">
+        <Icon name="insignia" size={40} class="footer-icon" />
+        <p class="footer-text">{t.footerText}</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  :root {
+    --gold: #D4AF37;
+    --black: #000000;
+    --dark-accent: #0a0a0a;
+    --white: #ffffff;
+  }
+
+  .why-choose {
+    background-color: var(--black); /* Fondo Negro */
+    color: var(--white); /* Texto Blanco */
+    padding: 8rem 0;
+  }
+
+  .why-choose__header {
+    text-align: center;
+    margin-bottom: 5rem;
+    max-width: 850px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .why-choose__subtitle {
+    color: var(--gold); /* Dorado */
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    display: block;
+    margin-bottom: 1rem;
+  }
+
+  .why-choose__title {
+    font-size: 2.5rem;
+    font-weight: 800;
+    color: var(--white); /* Blanco */
+    line-height: 1.1;
+    text-transform: uppercase;
+  }
+
+  /* Grid de Beneficios */
+  .why-choose__grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2.5rem;
+    margin-bottom: 5rem;
+  }
+
+  .benefit-item {
+    padding: 3rem 2rem;
+    background-color: var(--dark-accent); /* Fondo gris muy oscuro */
+    border: 1px solid #1a1a1a;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    position: relative;
+    transition: all 0.4s ease;
+  }
+
+  .benefit-item:hover {
+    border-color: var(--gold);
+    transform: translateY(-10px);
+    background-color: #111;
+  }
+
+  .benefit-item__icon-wrapper {
+    width: 60px;
+    height: 60px;
+    background-color: var(--black);
+    border: 1px solid var(--gold);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 1.5rem;
+    color: var(--gold);
+    transition: all 0.3s ease;
+  }
+
+  .benefit-item:hover .benefit-item__icon-wrapper {
+    background-color: var(--gold);
+    color: var(--white);
+  }
+
+  .benefit-item__text {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--white);
+    line-height: 1.4;
+  }
+
+  .benefit-item__line {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0;
+    height: 3px;
+    background-color: var(--gold);
+    transition: width 0.4s ease;
+  }
+
+  .benefit-item:hover .benefit-item__line {
+    width: 50%;
+  }
+
+  /* Footer de la sección */
+  .why-choose__footer {
+    border-top: 1px solid #1a1a1a;
+    padding-top: 3rem;
+    max-width: 900px;
+    margin: 0 auto;
+  }
+
+  .why-choose__footer-content {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+    text-align: left;
+  }
+
+  .footer-icon {
+    color: var(--gold);
+    flex-shrink: 0;
+  }
+
+  .footer-text {
+    font-size: 1.1rem;
+    color: #bbbbbb; /* Gris claro para el párrafo largo */
+    line-height: 1.6;
+    font-style: italic;
+  }
+
+  .container {
+    margin: 0 auto;
+    width: 85%;
+  }
+
+  @media (max-width: 768px) {
+    .container {
+      width: 90%; 
+    }
+    .why-choose__title {
+      font-size: 1.8rem;
+    }
+    .why-choose__footer-content {
+      flex-direction: column;
+      text-align: center;
+    }
+  }
+</style>
