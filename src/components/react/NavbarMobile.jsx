@@ -1,73 +1,91 @@
 // src/components/react/NavbarMobile.jsx
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 const NavbarMobile = ({ lang = 'en' }) => {
   const [isOpen, setIsOpen] = useState(false);
+  const [currentPath, setCurrentPath] = useState('');
+  
   const prefix = `/${lang}`;
+  const goldColor = '#D4AF37';
+  const blackColor = '#000000';
 
-  // Diccionario de traducciones
-  const labels = {
-    en: {
-      home: 'Home',
-      specialties: 'Specialties',
-      about: 'About Us',
-      reviews: 'Reviews',
-      contact: 'Contact'
-    },
-    es: {
-      home: 'Inicio',
-      specialties: 'Especialidades',
-      about: 'Nosotros',
-      reviews: 'Testimonios',
-      contact: 'Contacto'
+  // Detectar la ruta actual al cargar y al cambiar de página
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      setCurrentPath(window.location.pathname);
     }
+  }, [isOpen]); // Re-validar cada vez que se abre el menú
+
+  const toggleMenu = () => setIsOpen(!isOpen);
+
+  // Lógica para saber si el link es el activo
+  const isActive = (path) => {
+    const linkPath = `${prefix}${path}`.replace(/\/$/, "");
+    const activePath = currentPath.replace(/\/$/, "");
+    if (path === '/' && (activePath === prefix || activePath === "")) return true;
+    return activePath === linkPath;
+  };
+
+  const labels = {
+    en: { home: 'Home', specialties: 'Specialties', about: 'About Us', reviews: 'Reviews', contact: 'Contact' },
+    es: { home: 'Inicio', specialties: 'Especialidades', about: 'Nosotros', reviews: 'Testimonios', contact: 'Contacto' }
   };
 
   const t = labels[lang] || labels.en;
-
-  const toggleMenu = () => setIsOpen(!isOpen);
 
   const styles = {
     menuBtn: {
       background: 'none',
       border: 'none',
-      color: 'white',
+      color: blackColor,
       cursor: 'pointer',
-      padding: '10px 20px',
+      padding: '10px',
+      display: 'flex',
+      alignItems: 'center',
     },
     drawer: {
       position: 'fixed',
       top: 0,
       right: isOpen ? 0 : '-100%',
-      width: '80%',
+      width: '100%',
       height: '100vh',
-      backgroundColor: '#03192c',
-      transition: 'right 0.3s ease-in-out',
-      zIndex: 1000,
+      backgroundColor: '#ffffff',
+      transition: 'right 0.4s cubic-bezier(0.4, 0, 0.2, 1)',
+      zIndex: 1001,
       display: 'flex',
       flexDirection: 'column',
-      padding: '40px 20px',
-      boxShadow: '-5px 0 15px rgba(0,0,0,0.5)',
+      padding: '20px',
+      boxSizing: 'border-box',
     },
-    link: {
-      color: 'white',
-      textDecoration: 'none',
-      fontSize: '18px',
-      fontWeight: 'bold',
-      textTransform: 'uppercase',
-      margin: '15px 0',
-      borderBottom: '1px solid rgba(255,255,255,0.1)',
-      paddingBottom: '10px'
+    headerDrawer: {
+      display: 'flex',
+      justifyContent: 'flex-end',
+      paddingBottom: '20px',
     },
     closeBtn: {
-      alignSelf: 'flex-end',
-      color: 'white',
-      fontSize: '24px',
+      color: goldColor,
+      fontSize: '32px',
       background: 'none',
       border: 'none',
       cursor: 'pointer',
-      marginBottom: '20px'
     },
+    navLinks: {
+      display: 'flex',
+      flexDirection: 'column',
+      alignItems: 'center',
+      justifyContent: 'center',
+      flexGrow: 1,
+    },
+    link: (active) => ({
+      color: active ? goldColor : blackColor, // CAMBIO: Dorado si está activo
+      textDecoration: 'none',
+      fontSize: '22px',
+      fontWeight: '700',
+      textTransform: 'uppercase',
+      margin: '20px 0',
+      letterSpacing: '2px',
+      transition: 'color 0.3s ease',
+    }),
     overlay: {
       position: 'fixed',
       top: 0,
@@ -76,36 +94,37 @@ const NavbarMobile = ({ lang = 'en' }) => {
       height: '100%',
       backgroundColor: 'rgba(0,0,0,0.5)',
       display: isOpen ? 'block' : 'none',
-      zIndex: 999
+      zIndex: 1000,
+      backdropFilter: 'blur(4px)',
     }
   };
 
   return (
     <>
-      {/* Botón Hamburguesa */}
       <button onClick={toggleMenu} style={styles.menuBtn} aria-label="Menu">
-        <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-          <line x1="3" y1="12" x2="21" y2="12"></line>
+        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round">
           <line x1="3" y1="6" x2="21" y2="6"></line>
+          <line x1="3" y1="12" x2="21" y2="12"></line>
           <line x1="3" y1="18" x2="21" y2="18"></line>
         </svg>
       </button>
 
-      {/* Fondo oscuro al abrir */}
       <div style={styles.overlay} onClick={toggleMenu}></div>
 
-      {/* Menú Lateral (Drawer) */}
       <div style={styles.drawer}>
-        <button onClick={toggleMenu} style={styles.closeBtn}>✕</button>
+        <div style={styles.headerDrawer}>
+          <button onClick={toggleMenu} style={styles.closeBtn}>✕</button>
+        </div>
         
-        <a href={`${prefix}/`} style={styles.link} onClick={toggleMenu}>{t.home}</a>
-        
-        {/* Aquí puedes poner un link simple a especialidades o un submenú */}
-        <a href={`${prefix}/especialidades`} style={styles.link} onClick={toggleMenu}>{t.specialties}</a>
-        
-        <a href={`${prefix}/nosotros`} style={styles.link} onClick={toggleMenu}>{t.about}</a>
-        <a href={`${prefix}/testimonios`} style={styles.link} onClick={toggleMenu}>{t.reviews}</a>
-        <a href={`${prefix}/contacto`} style={styles.link} onClick={toggleMenu}>{t.contact}</a>
+        <div style={styles.navLinks}>
+          <a href={`${prefix}/`} style={styles.link(isActive('/'))} onClick={toggleMenu}>{t.home}</a>
+          <a href={`${prefix}/especialidades`} style={styles.link(isActive('/especialidades'))} onClick={toggleMenu}>{t.specialties}</a>
+          <a href={`${prefix}/nosotros`} style={styles.link(isActive('/nosotros'))} onClick={toggleMenu}>{t.about}</a>
+          <a href={`${prefix}/testimonios`} style={styles.link(isActive('/testimonios'))} onClick={toggleMenu}>{t.reviews}</a>
+          <a href={`${prefix}/contacto`} style={styles.link(isActive('/contacto'))} onClick={toggleMenu}>{t.contact}</a>
+          
+          <div style={{ width: '40px', height: '3px', backgroundColor: goldColor, marginTop: '20px' }}></div>
+        </div>
       </div>
     </>
   );
