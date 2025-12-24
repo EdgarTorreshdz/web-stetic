@@ -16,7 +16,7 @@ import AboutOtherEspecialidad from "../../components/rehabilitacion/AboutOtherEs
 import TestimoniosEspecialidad from "../../components/rehabilitacion/TestimoniosEspecialidad.astro"
 ---
 
-<Layout>
+<Layout title={lang === 'es' ? "Rehabilitación Oral" : "Oral Rehabilitation"} lang={lang}>
     <HeaderEspecialidad />
     <BreadCrumbs />
     <NavegacionEspecialidad />

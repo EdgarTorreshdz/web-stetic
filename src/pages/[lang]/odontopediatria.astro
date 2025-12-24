@@ -16,7 +16,7 @@ import AboutOtherEspecialidad from "../../components/odontopediatria/AboutOtherE
 import TestimoniosEspecialidad from "../../components/odontopediatria/TestimoniosEspecialidad.astro"
 ---
 
-<Layout>
+<Layout title={lang === 'es' ? "Odontopediatría" : "Pediatric Dentistry"} lang={lang}>
     <HeaderEspecialidad />
     <BreadCrumbs />
     <NavegacionEspecialidad />

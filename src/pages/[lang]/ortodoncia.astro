@@ -16,7 +16,7 @@ import AboutOtherEspecialidad from "../../components/ortodoncia/AboutOtherEspeci
 import TestimoniosEspecialidad from "../../components/ortodoncia/TestimoniosEspecialidad.astro"
 ---
 
-<Layout>
+<Layout title={lang === 'es' ? "Ortodoncia" : "Orthodontics"} lang={lang}>
     <HeaderEspecialidad />
     <BreadCrumbs />
     <NavegacionEspecialidad />

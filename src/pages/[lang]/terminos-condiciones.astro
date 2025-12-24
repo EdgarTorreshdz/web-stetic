@@ -11,7 +11,7 @@ const { lang } = Astro.params as { lang: 'en' | 'es' };
 import Layout from "../../layouts/Layout.astro";
 ---
 
-<Layout>
+<Layout title={lang === 'es' ? "Términos y Condiciones" : "Terms and Conditions"} lang={lang}>
   <section class="terminos">
     <div class="terminos__container">
       <h1 class="terminos__title">TÉRMINOS Y CONDICIONES</h1>

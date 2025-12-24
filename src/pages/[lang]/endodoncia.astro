@@ -14,9 +14,10 @@ import BreadCrumbs from "../../components/endodoncia/BreadCrumbs.astro"
 import AboutEspecialidad from "../../components/endodoncia/AboutEspecialidad.astro"
 import AboutOtherEspecialidad from "../../components/endodoncia/AboutOtherEspecialidad.astro"
 import TestimoniosEspecialidad from "../../components/endodoncia/TestimoniosEspecialidad.astro"
+
 ---
 
-<Layout>
+<Layout title={lang === 'es' ? "Endodoncia" : "Endodontics"} lang={lang}>
     <HeaderEspecialidad />
     <BreadCrumbs />
     <NavegacionEspecialidad />

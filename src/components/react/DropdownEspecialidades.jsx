@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 
-// 1. Definimos las especialidades por idioma
 const content = {
   en: [
     { title: "General Dentistry", description: "General treatments to beautify your smile.", image: "/odontologiageneral.webp", url: "/especialidades" },
@@ -24,123 +23,88 @@ const content = {
   ]
 };
 
-const dropdownStyles = {
-  container: {
-    position: "absolute",
-    top: "100%",
-    left: "50%",
-    transform: "translateX(-50%)",
-    width: "max-content",
-    backgroundColor: "#fff",
-    padding: "10px",
-    boxSizing: "border-box",
-    zIndex: 100,
-    border: "1px solid #ccc",
-    boxShadow: "0px 4px 10px rgba(0,0,0,0.1)",
-  },
-  row: {
-    display: "flex",
-    justifyContent: "center",
-    gap: "10px",
-    marginBottom: "10px",
-    width: "100%",
-  },
-  itemBase: {
-    display: "flex",
-    flexDirection: "column",
-    width: "250px",
-    textDecoration: "none",
-    color: "#03192c",
-    borderRadius: "4px",
-    overflow: "hidden",
-    transition: "transform 0.2s ease",
-    backgroundColor: "#fff",
-  },
-  image: {
-    width: "100%",
-    height: "150px",
-    backgroundSize: "cover",
-    backgroundPosition: "center",
-    backgroundColor: "#f0f0f0",
-  },
-  info: {
-    padding: "10px",
-  },
-  title: {
-    margin: "0 0 5px 0",
-    fontSize: "14px",
-    fontWeight: "bold",
-  },
-  description: {
-    fontSize: "11px",
-    margin: 0,
-    color: "#666",
-  },
-};
-
 const DropdownEspecialidades = ({ lang = 'en' }) => {
   const [open, setOpen] = useState(false);
-
   const specialties = content[lang] || content.en;
-  
-  // CAMBIO CLAVE: El prefijo ahora siempre incluye el lang actual para rutas dinámicas
   const prefix = `/${lang}`; 
-  
+  const goldColor = '#D4AF37';
   const triggerLabel = lang === 'es' ? 'Especialidades' : 'Specialties';
 
+  const styles = {
+    wrapper: { position: "relative", display: "inline-block" },
+    trigger: {
+      color: "#000000",
+      textDecoration: "none",
+      padding: "5px 12px", // REDUCIDO: Sincronizado con el Navbar
+      textTransform: "uppercase",
+      fontSize: "16px",
+      fontWeight: "700",
+      letterSpacing: "0.8px",
+      cursor: "pointer",
+      display: "flex",
+      alignItems: "center",
+      transition: "all 0.3s ease",
+    },
+    dropdown: {
+      position: "absolute",
+      top: "100%",
+      right: "0",
+      width: "800px",
+      backgroundColor: "#ffffff",
+      padding: "20px",
+      zIndex: 1000,
+      borderRadius: "0 0 8px 8px",
+      boxShadow: "0px 10px 25px rgba(0,0,0,0.1)",
+      display: "grid",
+      gridTemplateColumns: "repeat(4, 1fr)",
+      gap: "12px",
+      borderTop: `3px solid ${goldColor}`,
+    },
+    card: {
+      display: "flex",
+      flexDirection: "column",
+      textDecoration: "none",
+      borderRadius: "6px",
+      overflow: "hidden",
+      transition: "all 0.3s ease",
+      border: "1px solid #f5f5f5",
+      backgroundColor: "#fff",
+    }
+  };
+
   return (
-    <div
-      style={{ position: "relative", display: "inline-block" }}
-      onMouseEnter={() => setOpen(true)}
-      onMouseLeave={() => setOpen(false)}
-    >
-      <a
-        style={{
-          color: "white",
-          textDecoration: "none",
-          margin: "0 20px",
-          textTransform: "uppercase",
-          fontSize: "11px",
-          fontWeight: "bold",
-          cursor: "pointer",
-          display: "flex",
-          alignItems: "center",
-        }}
-      >
+    <div style={styles.wrapper} onMouseEnter={() => setOpen(true)} onMouseLeave={() => setOpen(false)}>
+      <div style={{ ...styles.trigger, color: open ? goldColor : "#000000" }}>
         {triggerLabel}
-        <span style={{ marginLeft: "5px", fontSize: "10px", color: "white" }}>▼</span>
-      </a>
+        <span style={{ marginLeft: "4px", fontSize: "9px", transition: "transform 0.3s", transform: open ? "rotate(180deg)" : "rotate(0)" }}>▼</span>
+      </div>
 
       {open && (
-        <div style={dropdownStyles.container}>
-          {[
-            specialties.slice(0, 3),
-            specialties.slice(3, 6),
-            specialties.slice(6)
-          ].map((rowItems, rowIndex) => (
-            <div key={rowIndex} style={dropdownStyles.row}>
-              {rowItems.map((spec, index) => (
-                <a
-                  key={index}
-                  // Aquí aplicamos el prefijo dinámico
-                  href={`${prefix}${spec.url}`}
-                  style={dropdownStyles.itemBase}
-                  onMouseEnter={(e) => (e.currentTarget.style.transform = "scale(1.03)")}
-                  onMouseLeave={(e) => (e.currentTarget.style.transform = "scale(1)")}
-                >
-                  <div
-                    style={{
-                      ...dropdownStyles.image,
-                      backgroundImage: `url('${spec.image}')`,
-                    }}
-                  />
-                  <div style={dropdownStyles.info}>
-                    <h4 style={dropdownStyles.title}>{spec.title}</h4>
-                    <p style={dropdownStyles.description}>{spec.description}</p>
-                  </div>
-                </a>
-              ))}
-            </div>
+        <div style={styles.dropdown}>
+          {specialties.map((spec, index) => (
+            <a
+              key={index}
+              href={`${prefix}${spec.url}`}
+              style={styles.card}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.borderColor = goldColor;
+                e.currentTarget.style.transform = "translateY(-3px)";
+                const title = e.currentTarget.querySelector('h4');
+                if (title) title.style.color = goldColor;
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.borderColor = "#f5f5f5";
+                e.currentTarget.style.transform = "translateY(0)";
+                const title = e.currentTarget.querySelector('h4');
+                if (title) title.style.color = "#000";
+              }}
+            >
+              <div style={{ height: "80px", backgroundImage: `url('${spec.image}')`, backgroundSize: "cover", backgroundPosition: "center" }} />
+              <div style={{ padding: "8px" }}>
+                <h4 style={{ fontSize: "11px", fontWeight: "700", color: "#000", margin: "0 0 3px 0", textTransform: "uppercase" }}>{spec.title}</h4>
+                <p style={{ fontSize: "9px", color: "#777", margin: 0, lineHeight: "1.2" }}>{spec.description}</p>
+              </div>
+            </a>
           ))}
         </div>
       )}

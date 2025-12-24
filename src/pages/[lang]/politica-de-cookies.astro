@@ -11,7 +11,7 @@ const { lang } = Astro.params as { lang: 'en' | 'es' };
 import Layout from "../../layouts/Layout.astro";
 ---
 
-<Layout>
+<Layout title={lang === 'es' ? "Política de Cookies" : "Cookie Policy"} lang={lang}>
   <section class="cookies">
     <div class="cookies__container">
       <h1 class="cookies__title">Política de Cookies</h1>

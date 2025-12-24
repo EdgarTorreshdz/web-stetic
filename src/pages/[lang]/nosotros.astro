@@ -11,9 +11,13 @@ import Layout from "../../layouts/Layout.astro"
 import HeaderNosotros from "../../components/nosotros/HeaderNosotros.astro"
 import SectionNosotros from "../../components/nosotros/SectionNosotros.astro"
 import Instalaciones from "../../components/nosotros/Instalaciones.astro"
+const titles = {
+  en: "Dentist in Veracruz & Playa del Carmen | Stetic Dental Clinic",
+  es: "Dentista en Veracruz & Playa del Carmen | Stetic Dental Clinic"
+};
 ---
 
-<Layout>
+<Layout title={titles[lang]} lang={lang}>
 	<HeaderNosotros/>
 	<SectionNosotros/>
 	<Instalaciones/>

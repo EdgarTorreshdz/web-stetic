@@ -8,9 +8,13 @@ export function getStaticPaths() {
 const { lang } = Astro.params as { lang: 'en' | 'es' };
 // AvisoPrivacidad.astro
 import Layout from "../../layouts/Layout.astro";
+const titles = {
+  en: "Dentist in Veracruz & Playa del Carmen | Stetic Dental Clinic",
+  es: "Dentista en Veracruz & Playa del Carmen | Stetic Dental Clinic"
+};
 ---
 
-<Layout>
+<Layout title={titles[lang]} lang={lang}>
   <section class="aviso">
     <div class="aviso__container">
       <h1 class="aviso__title">Aviso de Privacidad Integral</h1>

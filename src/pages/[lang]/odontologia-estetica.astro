@@ -16,7 +16,7 @@ import AboutOtherEspecialidad from "../../components/odontologia-estetica/AboutO
 import TestimoniosEspecialidad from "../../components/odontologia-estetica/TestimoniosEspecialidad.astro"
 ---
 
-<Layout>
+<Layout title={lang === 'es' ? "Odontología Estética" : "Aesthetic Dentistry"} lang={lang}>
     <HeaderEspecialidad />
     <BreadCrumbs />
     <NavegacionEspecialidad />

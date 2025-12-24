@@ -9,8 +9,14 @@ export function getStaticPaths() {
 const { lang } = Astro.params as { lang: 'en' | 'es' };
 import Layout from "../../layouts/Layout.astro";
 import HeaderContacto from "../../components/contacto/HeaderContacto.astro";
+
+const titles = {
+  en: "Dentist in Veracruz & Playa del Carmen | Stetic Dental Clinic",
+  es: "Dentista en Veracruz & Playa del Carmen | Stetic Dental Clinic"
+};
+
 ---
 
-<Layout>
+<Layout title={titles[lang]} lang={lang}>
     <HeaderContacto/>
 </Layout>

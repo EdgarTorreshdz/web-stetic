@@ -16,7 +16,7 @@ import AboutOtherEspecialidad from "../../components/especialidades/AboutOtherEs
 import TestimoniosEspecialidad from "../../components/especialidades/TestimoniosEspecialidad.astro"
 ---
 
-<Layout>
+<Layout title={lang === 'es' ? "Especialidades Dentales" : "Dental Specialties"} lang={lang}>
     <HeaderEspecialidad />
     <BreadCrumbs />
     <NavegacionEspecialidad />

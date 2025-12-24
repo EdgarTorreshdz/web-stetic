@@ -16,7 +16,7 @@ import AboutOtherEspecialidad from "../../components/endodoncia/AboutOtherEspeci
 import TestimoniosEspecialidad from "../../components/endodoncia/TestimoniosEspecialidad.astro"
 ---
 
-<Layout>
+<Layout title={lang === 'es' ? "Endodoncia" : "Endodontics"} lang={lang}>
     <HeaderEspecialidad />
     <BreadCrumbs />
     <NavegacionEspecialidad />

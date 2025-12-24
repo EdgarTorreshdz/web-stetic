@@ -13,7 +13,7 @@ import HeaderTestimonios from "../../components/testimonios/HeaderTestimonios.as
 import AllTestimonios from "../../components/testimonios/AllTestimonios.astro"
 import GaleriaTestimonio from "../../components/testimonios/GaleriaTestimonio.astro"
 ---
-<Layout>
+<Layout title={lang === 'es' ? "Testimonios" : "Testimonials"} lang={lang}>
     <HeaderTestimonios/>
     <!-- <BreadCrumbsTestimonio/> -->
     <AllTestimonios/>
