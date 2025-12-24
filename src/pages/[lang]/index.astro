@@ -14,14 +14,26 @@ import EspecialidadesHome from "../../components/home/EspecialidadesHome.astro";
 import BannerContact from "../../components/home/BannerContact.astro";
 import CintilloBanner from "../../components/home/CintilloBanner.astro";
 
-// Definimos los títulos de la página según el idioma
-const titles = {
-  en: "Dentist in Veracruz & Playa del Carmen | Stetic Dental Clinic",
-  es: "Dentista en Veracruz & Playa del Carmen | Stetic Dental Clinic"
+// SEO DATA OPTIMIZADA
+const seoData = {
+  en: {
+    title: "Dentist in Playa del Carmen | Trusted Dental Clinic for Americans",
+    description: "Top rated dentist in Playa del Carmen. Stetic Dental Clinic offers English speaking dentists, affordable premium care, and specialized treatments for Americans and Canadians.",
+  },
+  es: {
+    title: "Dentista en Playa del Carmen | Clínica Dental de Confianza",
+    description: "La mejor clínica dental en Playa del Carmen y Veracruz. Especialistas bilingües en implantes, diseño de sonrisa y odontología estética con tecnología avanzada.",
+  }
 };
+
+const currentSeo = seoData[lang];
 ---
 
-<Layout title={titles[lang]} lang={lang}>
+<Layout 
+  title={currentSeo.title} 
+  description={currentSeo.description} 
+  lang={lang}
+>
     <HeaderHome lang={lang} />
     <EspecialidadesHome lang={lang} />
     <BannerContact lang={lang} />

@@ -7,10 +7,12 @@ import LanguagePicker from '../components/react/LanguagePicker.jsx';
 
 interface Props {
   title?: string;
+  description?: string; // Nueva prop para SEO
   lang?: 'en' | 'es';
 }
 
-const { title, lang = 'en' } = Astro.props;
+const { title, description, lang = 'en' } = Astro.props;
+const canonicalURL = new URL(Astro.url.pathname, Astro.site || "https://steticdental.com.mx");
 ---
 
 <!doctype html>
@@ -18,8 +20,18 @@ const { title, lang = 'en' } = Astro.props;
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>{title || "Stetic Dental Clinic"}</title>
     
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonicalURL} />
+    <meta name="robots" content="index, follow" />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonicalURL} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content="/logo.png" />
+
     <link rel="icon" type="image/png" href="/logo.png" />
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet" />
 
@@ -50,7 +62,7 @@ const { title, lang = 'en' } = Astro.props;
         display: flex;
         justify-content: space-between;
         align-items: center;
-        padding: 5px 0; /* REDUCIDO: De 10px a 5px para un alto mínimo */
+        padding: 5px 0;
       }
       
       @media(min-width:768px){
@@ -58,7 +70,7 @@ const { title, lang = 'en' } = Astro.props;
       }
 
       .logo-desktop {
-        width: 140px; /* REDUCIDO: De 160px a 140px para no estirar el header */
+        width: 140px;
         height: auto;
       }
 
@@ -84,15 +96,15 @@ const { title, lang = 'en' } = Astro.props;
         <a href={`/${lang}/`}>
           <img src="/logo.png" alt="Logo Stetic Dental" class="logo-desktop" />
         </a>
-        <Navbar client:load lang={lang} />
+        <Navbar client:load lang={lang} {...({key: lang} as any)} />
       </div>
     </header>
 
     <nav class="navbar-mobile-container">
-      <img src="/logo.png" alt="Logo" />
+      <img src="/logo.png" alt="Logo Stetic Dental" />
       <div style="display:flex; align-items:center; gap: 15px;">
         <LanguagePicker client:load currentLang={lang} />
-        <NavbarMobile client:load />
+        <NavbarMobile client:load lang={lang} {...({key: lang} as any)} />
       </div>
     </nav>
 

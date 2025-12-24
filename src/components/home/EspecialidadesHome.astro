@@ -5,10 +5,12 @@ interface Props {
 
 const { lang = "en" } = Astro.props;
 const prefix = `/${lang}`;
+const goldColor = "#D4AF37";
 
 const translations = {
   en: {
-    title: "We attend any dental emergency with our specialties.",
+    title: "English Speaking Dentist in Playa del Carmen",
+    subtitle: "We attend any dental emergency with our specialties.",
     cards: [
       { title: "General Dentistry", desc: "We specialize in helping patients with general treatments to beautify their smiles.", img: "/odontologiageneral.webp", url: "/especialidades" },
       { title: "Esthetic Dentistry", desc: "Helps recover your missing teeth by restoring them and improving functionality.", img: "/esteticadental.jpg", url: "/odontologia-estetica" },
@@ -21,7 +23,8 @@ const translations = {
     ]
   },
   es: {
-    title: "Atendemos cualquier emergencia dental con nuestras especialidades.",
+    title: "Clínica Dental en Playa del Carmen y Veracruz",
+    subtitle: "Atendemos cualquier emergencia dental con nuestras especialidades.",
     cards: [
       { title: "Odontología general", desc: "Nos especializamos en ayudar a los pacientes con tratamientos generales para embellecer sus sonrisas.", img: "/odontologiageneral.webp", url: "/especialidades" },
       { title: "Odontología Estética", desc: "Ayuda a recuperar tus dientes faltantes restaurándolos y mejorando su funcionalidad.", img: "/esteticadental.jpg", url: "/odontologia-estetica" },
@@ -40,13 +43,12 @@ const t = translations[lang];
 
 <section class="especialidades" id="especialidades">
   <div class="especialidades__container">
+    <p class="especialidades__subtitle">{t.subtitle}</p>
     <h2 class="especialidades__title">{t.title}</h2>
+    
     <div class="especialidades__grid">
-      {t.cards.map((card) => (
-        <div
-          class="especialidades__card"
-          style={`background-image: url('${card.img}');`}
-        >
+      {translations[lang].cards.map((card) => (
+        <div class="especialidades__card" style={`background-image: url('${card.img}');`}>
           <div class="especialidades__info">
             <h3>{card.title}</h3>
             <p>{card.desc}</p>

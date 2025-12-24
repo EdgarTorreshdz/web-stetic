@@ -9,23 +9,26 @@ const { lang = "en" } = Astro.props;
 
 const translations = {
   en: {
-    welcome: "Welcome",
-    description: "Your smile in the hands of the best dental specialists in",
+    welcome: "U.S. Standard Quality",
+    description: "The preferred dental clinic for Americans and locals in",
     locations: "Playa del Carmen and Veracruz",
-    button: "I want my Stetic Dental smile!",
+    button: "Book My Appointment",
+    // Títulos optimizados para SEO (Dentist in Playa del Carmen)
     titles: [
-      "Smile, <br/> you're in good hands",
-      "Personalized care with extraordinary results",
+      "Dentist in <br/> Playa del Carmen",
+      "Trusted Dental Care <br/> for Americans",
+      "Top Rated Clinic <br/> in Veracruz"
     ]
   },
   es: {
-    welcome: "Bienvenido",
+    welcome: "Calidad Internacional",
     description: "Tu sonrisa en manos de los mejores especialistas dentales en",
     locations: "Playa del Carmen y Veracruz",
     button: "¡Quiero mi sonrisa con Stetic Dental!",
     titles: [
-      `Sonríe, <br/> estás en buenas manos`,
-      "Atención personalizada con resultados extraordinarios",
+      "El Mejor Dentista <br/> en Playa del Carmen",
+      "Atención Dental <br/> de Confianza",
+      "Clínica Líder <br/> en Veracruz"
     ]
   }
 };
@@ -39,19 +42,22 @@ const t = translations[lang];
     <div class="bg"></div>
     <div class="header__overlay"></div>
     <div class="header__content container">
-      <h1 class="header__title"></h1>
       <div class="header__welcome">
         <span class="header__line"></span>
         <span class="header__welcome-text">{t.welcome}</span>
         <span class="header__line"></span>
       </div>
+      
+      <h1 class="header__title"></h1>
+      
       <p class="header__description">
         {t.description}
         <br>
         <strong>{t.locations}</strong>.
       </p>
+      
       <div>
-        <a class="banner-contact__btn" href="#especialidades">
+        <a class="header__btn" href="#especialidades">
           {t.button}
           <Icon name="arrow-down" color="white" class="arrow-down" size={20} />
         </a>
@@ -64,49 +70,40 @@ const t = translations[lang];
   document.addEventListener("DOMContentLoaded", () => {
     const dataEl = document.getElementById('header-data');
     const titles = JSON.parse(dataEl.getAttribute('data-titles'));
-    
-    /* ===== Cambio dinámico del background ===== */
     const backgrounds = ["/bg1.jpg", "/bg2.jpg"];
     let currentBgIndex = 0;
     const bgDivs = Array.from(document.querySelectorAll(".header__background .bg"));
 
-    (bgDivs[0]).style.backgroundImage = `url('${backgrounds[currentBgIndex]}')`;
-    (bgDivs[0]).style.transform = "translateY(0)";
-    (bgDivs[1]).style.backgroundImage = `url('${backgrounds[(currentBgIndex + 1) % backgrounds.length]}')`;
-    (bgDivs[1]).style.transform = "translateY(-100%)";
+    // Inicializar fondos
+    bgDivs[0].style.backgroundImage = `url('${backgrounds[currentBgIndex]}')`;
+    bgDivs[0].style.transform = "translateY(0)";
+    bgDivs[1].style.backgroundImage = `url('${backgrounds[(currentBgIndex + 1) % backgrounds.length]}')`;
+    bgDivs[1].style.transform = "translateY(-100%)";
 
-    /* ===== Cambio de título ===== */
     const headerTitle = document.querySelector(".header__title");
     let currentTitleIndex = 0;
-    if (headerTitle) {
-      headerTitle.innerHTML = titles[currentTitleIndex];
-    }
-
-    const cycleTime = 4000;
-    const swipeDownTime = 1000;
-    const swipeUpTime = 1000;
-    const fadeTime = 500;
+    if (headerTitle) headerTitle.innerHTML = titles[currentTitleIndex];
 
     setInterval(() => {
-      // Animación fondo
-      (bgDivs[1]).style.transition = `transform ${swipeDownTime}ms ease`;
-      (bgDivs[1]).style.transform = "translateY(0)";
+      // Animación de fondos (Deslizamiento vertical)
+      bgDivs[1].style.transition = "transform 1000ms ease";
+      bgDivs[1].style.transform = "translateY(0)";
 
       setTimeout(() => {
-        (bgDivs[0]).style.transition = `transform ${swipeUpTime}ms ease`;
-        (bgDivs[0]).style.transform = "translateY(-100%)";
+        bgDivs[0].style.transition = "transform 1000ms ease";
+        bgDivs[0].style.transform = "translateY(-100%)";
 
         setTimeout(() => {
           currentBgIndex = (currentBgIndex + 1) % backgrounds.length;
-          (bgDivs[0]).style.transition = "none";
-          (bgDivs[0]).style.backgroundImage = `url('${backgrounds[(currentBgIndex + 1) % backgrounds.length]}')`;
+          bgDivs[0].style.transition = "none";
+          bgDivs[0].style.backgroundImage = `url('${backgrounds[(currentBgIndex + 1) % backgrounds.length]}')`;
           const temp = bgDivs[0];
           bgDivs[0] = bgDivs[1];
           bgDivs[1] = temp;
-        }, swipeUpTime);
-      }, swipeDownTime);
+        }, 1000);
+      }, 1000);
 
-      // Animación título
+      // Animación de títulos (Fade)
       if (headerTitle) headerTitle.style.opacity = "0";
       setTimeout(() => {
         currentTitleIndex = (currentTitleIndex + 1) % titles.length;
@@ -114,30 +111,151 @@ const t = translations[lang];
           headerTitle.innerHTML = titles[currentTitleIndex];
           headerTitle.style.opacity = "1";
         }
-      }, fadeTime);
-    }, cycleTime);
+      }, 500);
+    }, 5000); // Aumentado ligeramente para mejor legibilidad
   });
 </script>
 
 <style>
-  /* Se mantienen tus estilos exactamente iguales */
-  .header { position: relative; width: 100%; height: 100dvh; overflow: hidden; }
-  .header__background { position: relative; width: 100%; height: 100%; overflow: hidden; }
-  .header__background .bg { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-size: cover; background-position: center center; transition: transform 1s ease; z-index: 0; }
-  .header__overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 1; background: linear-gradient(to bottom, #03192c -1%, #b9ba9c33); }
-  @media (min-width: 768px) { .header__overlay { background: linear-gradient(to bottom, #03192c 5%, #b9ba9c33); } }
-  .header__content { position: relative; color: #fff; text-align: center; padding: 1rem; z-index: 2; display: flex; flex-direction: column; justify-content: center; height: 70%; }
-  .header__title { font-size: 35px; text-align: center; margin-top: 140px; margin-bottom: 1rem; transition: opacity 1s ease; }
-  @media (min-width: 768px) { .header__title { font-size: 77px; margin-top: 20px; } }
-  .header__welcome { display: flex; align-items: center; justify-content: center; margin: 1rem 0; }
-  .header__line { flex: 1; height: 2px; background-color: #27b9c6; margin: 0 1rem; }
-  .header__welcome-text { font-size: 13px; font-weight: bold; color: #fff; text-transform: uppercase; }
-  .header__description { font-size: 18px; }
-  @media (min-width: 768px) { .header__description { font-size: 22px; } }
-  .container { max-width: 1200px; margin: 0 auto; width: 95%; }
-  .banner-contact__btn { background-color: #27b9c6; color: #fff; display: inline-flex; align-items: center; justify-content: center; text-decoration: none; font-size: 10px; transition: background-color 0.3s ease; text-transform: uppercase; padding: 20px 30px; font-weight: bold; }
-  @media (min-width: 768px) { .banner-contact__btn { font-size: 12px; } }
-  .banner-contact__btn:hover { background-color: #27b9c6; }
-  .arrow-down { margin-left: 20px; animation: bounce 1s ease-in-out infinite; }
-  @keyframes bounce { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(10px); } }
+  /* Contenedor principal ajustado para no chocar con el menú slim */
+  .header { 
+    position: relative; 
+    width: 100%; 
+    height: 90dvh; 
+    overflow: hidden; 
+    background-color: #000;
+  }
+
+  .header__background { 
+    position: relative; 
+    width: 100%; 
+    height: 100%; 
+    overflow: hidden; 
+  }
+
+  .header__background .bg { 
+    position: absolute; 
+    top: 0; 
+    left: 0; 
+    width: 100%; 
+    height: 100%; 
+    background-size: cover; 
+    background-position: center; 
+    z-index: 0; 
+  }
+
+  /* Overlay más oscuro para resaltar el texto blanco y dorado */
+  .header__overlay { 
+    position: absolute; 
+    top: 0; 
+    left: 0; 
+    width: 100%; 
+    height: 100%; 
+    z-index: 1; 
+    background: linear-gradient(to bottom, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.4) 100%); 
+  }
+
+  .header__content { 
+    position: relative; 
+    color: #fff; 
+    text-align: center; 
+    z-index: 2; 
+    display: flex; 
+    flex-direction: column; 
+    justify-content: center; 
+    align-items: center; 
+    height: 100%; 
+    padding-top: 60px; /* Espacio para el Navbar slim */
+  }
+
+  .header__title { 
+    font-size: 38px; 
+    font-weight: 700; 
+    margin: 1rem 0; 
+    transition: opacity 0.5s ease; 
+    text-transform: uppercase; 
+    letter-spacing: 1px; 
+    line-height: 1.1;
+  }
+
+  @media (min-width: 768px) { 
+    .header__title { 
+      font-size: 72px; 
+      max-width: 1000px; 
+    } 
+  }
+
+  .header__welcome { 
+    display: flex; 
+    align-items: center; 
+    width: 100%; 
+    max-width: 450px; 
+    margin-bottom: 10px; 
+  }
+
+  .header__line { 
+    flex: 1; 
+    height: 1px; 
+    background-color: #D4AF37; /* Dorado */
+  }
+
+  .header__welcome-text { 
+    font-size: 11px; 
+    font-weight: 800; 
+    margin: 0 1.5rem; 
+    letter-spacing: 4px; 
+    text-transform: uppercase; 
+    color: #D4AF37; 
+  }
+
+  .header__description { 
+    font-size: 18px; 
+    margin-bottom: 2.5rem; 
+    max-width: 700px; 
+    line-height: 1.5;
+    color: #f0f0f0;
+  }
+
+  @media (min-width: 768px) { 
+    .header__description { font-size: 22px; } 
+  }
+
+  .container { 
+    max-width: 1200px; 
+    margin: 0 auto; 
+    width: 90%; 
+  }
+
+  /* Botón Dorado de Lujo */
+  .header__btn { 
+    background-color: #D4AF37; 
+    color: #fff; 
+    display: inline-flex; 
+    align-items: center; 
+    padding: 20px 40px; 
+    text-decoration: none; 
+    font-weight: 700; 
+    font-size: 13px; 
+    text-transform: uppercase; 
+    letter-spacing: 1px;
+    transition: all 0.3s ease; 
+    border: 1px solid #D4AF37;
+  }
+
+  .header__btn:hover { 
+    background-color: transparent; 
+    color: #D4AF37;
+    transform: translateY(-3px);
+  }
+
+  .arrow-down { 
+    margin-left: 15px; 
+    animation: bounce 2s infinite; 
+  }
+
+  @keyframes bounce { 
+    0%, 20%, 50%, 80%, 100% {transform: translateY(0);} 
+    40% {transform: translateY(10px);} 
+    60% {transform: translateY(5px);} 
+  }
 </style>
