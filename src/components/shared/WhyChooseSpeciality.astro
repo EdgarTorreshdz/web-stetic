@@ -1,0 +1,128 @@
+---
+interface Props {
+  title: string;
+  text1: string;
+  text2: string;
+  imageSrc: string;
+  imageAlt: string;
+}
+
+const { title, text1, text2, imageSrc, imageAlt } = Astro.props;
+---
+
+<section class="why-choose-section">
+  <div class="container">
+    <div class="why-choose__grid">
+      
+      <div class="why-choose__content">
+        <h2 class="why-choose__title">{title}</h2>
+        <div class="why-choose__accent-line"></div>
+        <div class="why-choose__text-box">
+          <p class="why-choose__text highlight">
+            {text1}
+          </p>
+          <p class="why-choose__text">
+            {text2}
+          </p>
+        </div>
+      </div>
+
+      <div class="why-choose__image-container">
+        <div class="why-choose__img-frame">
+          <img src={imageSrc} alt={imageAlt} class="why-choose__img" />
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<style>
+  :root {
+    --gold: #A58E55;
+    --black: #000000;
+    --white: #ffffff;
+  }
+
+  .why-choose-section {
+    padding: 100px 0;
+    background-color: var(--white);
+    color: var(--black);
+  }
+
+    .container { margin: 0 auto; width: 85%; }
+  .why-choose__grid {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 50px;
+  }
+
+  @media (min-width: 992px) {
+    .why-choose__grid {
+      flex-direction: row;
+      justify-content: space-between;
+      gap: 80px;
+    }
+  }
+
+  .why-choose__content {
+    flex: 1.2;
+  }
+
+  .why-choose__title {
+    font-size: 2.2rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    line-height: 1.2;
+    margin-bottom: 20px;
+    color: var(--gold);
+  }
+
+  .why-choose__accent-line {
+    width: 80px;
+    height: 3px;
+    background-color: var(--gold);
+    margin-bottom: 35px;
+  }
+
+  .why-choose__text {
+    font-size: 1.1rem;
+    line-height: 1.8;
+    margin-bottom: 20px;
+    color: #333;
+  }
+
+  .why-choose__text.highlight {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: var(--black);
+    border-left: 4px solid var(--gold);
+    padding-left: 25px;
+  }
+
+  .why-choose__image-container {
+    flex: 1;
+    width: 100%;
+  }
+
+  .why-choose__img-frame {
+    position: relative;
+    box-shadow: 20px 20px 0px var(--gold); /* Sombra sólida dorada estilo moderno */
+    margin-right: 20px;
+    margin-bottom: 20px;
+  }
+
+  .why-choose__img {
+    width: 100%;
+    height: auto;
+    display: block;
+    object-fit: cover;
+  }
+
+  @media (min-width: 992px) {
+    .why-choose__img {
+      max-height: 480px;
+    }
+  }
+</style>

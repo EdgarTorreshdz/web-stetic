@@ -1,0 +1,134 @@
+---
+interface Props {
+  title: string;
+  text1: string;
+  text2: string;
+  imageSrc: string; // Parámetro de imagen
+  imageAlt: string; // Parámetro de Alt
+}
+
+const { title, text1, text2, imageSrc, imageAlt } = Astro.props;
+---
+
+<section class="adults-section">
+  <div class="container">
+    <div class="adults__grid">
+      <div class="adults__image-container">
+        <div class="adults__img-wrapper">
+          <img src={imageSrc} alt={imageAlt} class="adults__img" />
+          <div class="adults__img-accent"></div>
+        </div>
+      </div>
+      
+      <div class="adults__content">
+        <h2 class="adults__title">{title}</h2>
+        <div class="adults__accent-line"></div>
+        <p class="adults__text highlight">{text1}</p>
+        <p class="adults__text secondary">{text2}</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  :root {
+    --gold: #A58E55;
+    --black: #000000;
+    --white: #ffffff;
+    --grey-light: #e0e0e0;
+  }
+
+  .adults-section {
+    padding: 100px 0;
+    background-color: var(--black);
+    color: var(--white);
+  }
+
+    .container { margin: 0 auto; width: 85%; }
+
+  .adults__grid {
+    display: flex;
+    flex-direction: column;
+    gap: 50px;
+    align-items: center;
+  }
+
+  @media (min-width: 992px) {
+    .adults__grid {
+      flex-direction: row-reverse;
+      gap: 80px;
+    }
+  }
+
+  .adults__content {
+    flex: 1;
+  }
+
+  .adults__title {
+    font-size: 2.2rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 20px;
+    line-height: 1.1;
+  }
+
+  .adults__accent-line {
+    width: 60px;
+    height: 4px;
+    background-color: var(--gold);
+    margin-bottom: 30px;
+  }
+
+  .adults__text {
+    font-size: 1.1rem;
+    line-height: 1.8;
+    margin-bottom: 20px;
+  }
+
+  .adults__text.highlight {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: var(--white);
+  }
+
+  .adults__text.secondary {
+    color: var(--grey-light);
+  }
+
+  .adults__image-container {
+    flex: 1;
+    width: 100%;
+  }
+
+  .adults__img-wrapper {
+    position: relative;
+    padding: 15px;
+  }
+
+  .adults__img {
+    width: 100%;
+    height: auto;
+    display: block;
+    position: relative;
+    z-index: 2;
+    box-shadow: 0 20px 50px rgba(165, 142, 85, 0.15);
+  }
+
+  .adults__img-accent {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 70%;
+    height: 100%;
+    border: 2px solid var(--gold);
+    z-index: 1;
+  }
+
+  @media (min-width: 992px) {
+    .adults__img {
+      max-height: 500px;
+      object-fit: cover;
+    }
+  }
+</style>
