@@ -23,7 +23,6 @@ import LocationSpeciality from "../../components/shared/LocationSpeciality.astro
 import FaqSpeciality from "../../components/shared/FaqSpeciality.astro";
 import CtaSpeciality from "../../components/shared/CtaSpeciality.astro";
 
-// 1. Centralizamos todo el contenido de la página aquí
 const pageContent = {
   en: {
     seo: {
@@ -39,19 +38,24 @@ const pageContent = {
         "Modern pain-control techniques",
         "English-speaking dental team"
       ],
-      button: "Schedule Your Root Canal Appointment"
+      button: "Schedule Your Root Canal Appointment",
+      imageSrc: "/especialidad1.jpeg",
+      imageAlt: "Modern dental clinic for root canal treatment"
     },
     about: {
       title: "Need a Root Canal in Playa del Carmen? We’re Ready to Help",
       text1: "Tooth pain, infection, or swelling can be overwhelming—especially while traveling. Our clinic provides professional root canal treatment in Playa del Carmen for American patients and international visitors seeking fast, safe, and effective dental care in Mexico.",
       text2: "If you are searching for a root canal near me while visiting Playa del Carmen, our experienced team is prepared to diagnose the issue and relieve pain as quickly as possible.",
-      imgAlt: "Root Canal Specialist"
+      imageSrc: "/endodoncia.jpg",
+      imgAlt: "Root Canal Specialist examining a patient"
     },
     whatIs: {
       title: "What Is Root Canal Treatment?",
       text1: "Root canal treatment, also known as endodontic treatment, is a procedure that removes infected or damaged tissue from inside the tooth. The goal is to eliminate pain, stop infection, and preserve the natural tooth.",
       text2: "This type of endodontic treatment in Playa del Carmen allows patients to avoid tooth extraction while restoring comfort and oral health.",
-      imgAlt: "Endodontic procedure in Mexico"
+      imageSrc: "/especialidad-about.avif",
+      bgImage: "/especialidad1.jpeg",
+      imgAlt: "Endodontic procedure in Mexico detailed view"
     },
     indications: {
       title: "When Is a Root Canal Needed?",
@@ -69,7 +73,8 @@ const pageContent = {
       title: "Root Canal Treatment by an Endodontist",
       text1: "Root canal procedures are performed by a trained endodontist in Playa del Carmen, a specialist focused on treating infections inside the tooth. Working with a root canal specialist ensures precision, comfort, and long-term success.",
       text2: "Our clinic uses modern techniques and equipment to deliver safe and predictable endodontic care.",
-      imgAlt: "Endodontist specialist working in Playa del Carmen"
+      imageSrc: "/sonrisa1.jpg",
+      imgAlt: "Endodontist specialist working in Playa del Carmen clinic"
     },
     benefits: {
       title: "Benefits of Root Canal Treatment",
@@ -81,13 +86,15 @@ const pageContent = {
         "Restores normal chewing function"
       ],
       footer: "Root canal treatment dentist-led care focuses on comfort and long-term oral health.",
-      imgAlt: "Healthy smile after root canal"
+      imageSrc: "/sonrisa2.jpg",
+      imgAlt: "Healthy smile after successful root canal treatment"
     },
     cost: {
       title: "Root Canal Cost in Mexico",
       text1: "Root canal cost in Mexico is typically much lower than in the United States while maintaining professional standards and modern techniques. The final root canal price depends on the tooth involved, the severity of infection, and whether additional restoration is needed.",
       text2: "After evaluation, we provide clear information about treatment options and cost with no hidden fees.",
-      imgAlt: "Dental consultation and cost breakdown"
+      imageSrc: "/especialidad-about.avif",
+      imgAlt: "Dental consultation regarding root canal cost in Mexico"
     },
     process: {
       title: "Root Canal Treatment Process",
@@ -103,7 +110,8 @@ const pageContent = {
       title: "After Root Canal Treatment: What to Expect",
       text1: "After treatment, most patients experience significant pain relief. In many cases, a dental crown is recommended to protect the treated tooth and restore full function.",
       text2: "Our team will explain the next steps clearly and guide you through recovery and follow-up care.",
-      imgAlt: "Patient recovery after root canal"
+      imageSrc: "/sonrisa3.jpg",
+      imgAlt: "Patient recovery and dental care after root canal"
     },
     americans: {
       title: "Root Canal Treatment for Americans in Mexico",
@@ -112,7 +120,8 @@ const pageContent = {
     location: {
       title: "Root Canal Treatment in Playa del Carmen, Mexico",
       text1: "Our dental clinic is conveniently located in Playa del Carmen, making it easy for travelers and residents to access immediate endodontic care. We prioritize urgent cases and provide timely treatment when pain cannot wait.",
-      imgAlt: "Dental clinic location in Playa del Carmen"
+      imageSrc: "/especialidad1.jpeg",
+      imgAlt: "Dental clinic location in Playa del Carmen downtown"
     },
     faq: {
       title: "Root Canal FAQ",
@@ -145,8 +154,8 @@ const pageContent = {
     },
     cta: {
       title: "Start Your Smile Transformation",
-      description: "Ready for the smile you've always wanted? Contact us today to schedule your orthodontic consultation in Playa del Carmen.",
-      button: "Book Your Orthodontic Appointment",
+      description: "Ready for the smile you've always wanted? Contact us today to schedule your consultation in Playa del Carmen.",
+      button: "Book Your Appointment Now",
       note: "Personalized plans for every patient"
     }
   },
@@ -164,19 +173,24 @@ const pageContent = {
         "Técnicas modernas de control de dolor",
         "Equipo dental bilingüe"
       ],
-      button: "Agenda tu Cita de Endodoncia"
+      button: "Agenda tu Cita de Endodoncia",
+      imageSrc: "/especialidad1.jpeg",
+      imageAlt: "Clínica dental moderna para tratamientos de endodoncia"
     },
     about: {
       title: "¿Necesitas una Endodoncia en Playa del Carmen? Estamos Listos para Ayudarte",
       text1: "El dolor de muelas, la infección o la inflamación pueden ser abrumadores, especialmente cuando viajas. Nuestra clínica ofrece tratamiento de endodoncia profesional en Playa del Carmen para pacientes internacionales que buscan atención dental rápida, segura y eficaz en México.",
       text2: "Si estás buscando un especialista en endodoncia cerca de ti mientras visitas Playa del Carmen, nuestro equipo experimentado está preparado para diagnosticar el problema y aliviar el dolor lo antes posible.",
-      imgAlt: "Especialista en Endodoncia"
+      imageSrc: "/endodoncia.jpg",
+      imgAlt: "Especialista en Endodoncia examinando a un paciente"
     },
     whatIs: {
       title: "¿Qué es el Tratamiento de Endodoncia?",
       text1: "El tratamiento de conducto, también conocido como tratamiento de endodoncia, es un procedimiento que elimina el tejido infectado o dañado del interior del diente. El objetivo es eliminar el dolor, detener la infección y preservar el diente natural.",
       text2: "Este tipo de tratamiento de endodoncia en Playa del Carmen permite a los pacientes evitar la extracción dental mientras restauran la comodidad y la salud bucal.",
-      imgAlt: "Procedimiento de endodoncia en México"
+      imageSrc: "/especialidad-about.avif",
+      bgImage: "/especialidad1.jpeg",
+      imgAlt: "Vista detallada de un procedimiento de endodoncia"
     },
     indications: {
       title: "¿Cuándo se necesita una endodoncia?",
@@ -194,6 +208,7 @@ const pageContent = {
       title: "Tratamiento de Endodoncia por un Especialista",
       text1: "Los procedimientos de conducto son realizados por un endodoncista capacitado en Playa del Carmen, un especialista enfocado en tratar infecciones dentro del diente. Trabajar con un especialista en endodoncia garantiza precisión, comodidad y éxito a largo plazo.",
       text2: "Nuestra clínica utiliza técnicas y equipos modernos para brindar una atención endodóntica segura y predecible.",
+      imageSrc: "/sonrisa1.jpg",
       imgAlt: "Especialista en endodoncia trabajando en Playa del Carmen"
     },
     benefits: {
@@ -206,13 +221,15 @@ const pageContent = {
         "Restaura la función masticatoria normal"
       ],
       footer: "El cuidado dirigido por dentistas especialistas en endodoncia se enfoca en la comodidad y la salud bucal a largo plazo.",
-      imgAlt: "Sonrisa saludable después de endodoncia"
+      imageSrc: "/sonrisa2.jpg",
+      imgAlt: "Sonrisa saludable después de una endodoncia exitosa"
     },
     cost: {
       title: "Costo de Endodoncia en México",
       text1: "El costo de una endodoncia en México suele ser mucho más bajo que en los Estados Unidos, manteniendo estándares profesionales y técnicas modernas. El precio final depende del diente involucrado, la gravedad de la infección y si se requiere restauración adicional.",
       text2: "Después de la evaluación, brindamos información clara sobre las opciones de tratamiento y el costo, sin cargos ocultos.",
-      imgAlt: "Consulta dental y desglose de costos"
+      imageSrc: "/especialidad-about.avif",
+      imgAlt: "Consulta dental sobre el costo de endodoncia en México"
     },
     process: {
       title: "Proceso del Tratamiento de Endodoncia",
@@ -228,7 +245,8 @@ const pageContent = {
       title: "Después de la Endodoncia: Qué Esperar",
       text1: "Después del tratamiento, la mayoría de los pacientes experimentan un alivio significativo del dolor. En muchos casos, se recomienda una corona dental para proteger el diente tratado y restaurar su función completa.",
       text2: "Nuestro equipo explicará los siguientes pasos claramente y lo guiará a través de la recuperación y el cuidado posterior.",
-      imgAlt: "Recuperación del paciente después de la endodoncia"
+      imageSrc: "/sonrisa3.jpg",
+      imgAlt: "Recuperación del paciente y cuidado posterior a la endodoncia"
     },
     americans: {
       title: "Endodoncia para Estadounidenses en México",
@@ -237,41 +255,42 @@ const pageContent = {
     location: {
       title: "Endodoncia en Playa del Carmen, México",
       text1: "Nuestra clínica dental está convenientemente ubicada en Playa del Carmen, lo que facilita el acceso a atención endodóntica inmediata para viajeros y residentes. Priorizamos los casos urgentes y brindamos tratamiento oportuno cuando el dolor no puede esperar.",
-      imgAlt: "Ubicación de la clínica dental en Playa del Carmen"
+      imageSrc: "/especialidad1.jpeg",
+      imgAlt: "Ubicación de la clínica dental en Playa del Carmen centro"
     },
     faq: {
-      title: "Preguntas Frecuentes sobre Ortodoncia",
+      title: "Preguntas Frecuentes sobre Endodoncia",
       items: [
         {
-          question: "¿Cuál es la mejor edad para iniciar un tratamiento?",
-          answer: "Aunque la ortodoncia es efectiva a cualquier edad, se recomienda una primera evaluación a los 7 años. En adultos, el tratamiento es totalmente viable siempre que las encías y el hueso estén sanos."
+          question: "¿Es doloroso el tratamiento?",
+          answer: "Las técnicas modernas permiten que el tratamiento se realice con las mínimas molestias. Nuestra prioridad es el alivio del dolor."
         },
         {
-          question: "¿Cuánto tiempo dura el tratamiento de ortodoncia?",
-          answer: "En promedio, los tratamientos duran entre 12 y 24 meses. La duración exacta depende de la complejidad del caso y del tipo de técnica utilizada (brackets o alineadores)."
+          question: "¿Cuánto cuesta una endodoncia en México?",
+          answer: "El costo varía según el caso, pero generalmente es mucho más accesible que en los EE. UU., con ahorros de hasta el 70%."
         },
         {
-          question: "¿Qué diferencia hay entre brackets e Invisalign?",
-          answer: "Los brackets son fijos y permiten correcciones muy precisas en casos complejos. Invisalign utiliza alineadores transparentes removibles, lo que ofrece una estética superior y mayor comodidad al comer y limpiar los dientes."
+          question: "¿Es seguro el tratamiento en México?",
+          answer: "Sí. El tratamiento es seguro cuando lo realizan especialistas experimentados que utilizan tecnología moderna y protocolos internacionales."
         },
         {
-          question: "¿Duele el tratamiento de ortodoncia?",
-          answer: "Es normal sentir una ligera presión o sensibilidad los primeros días tras un ajuste o cambio de alineador, pero no es un proceso doloroso. Las técnicas actuales son mucho más suaves que las de antes."
+          question: "¿Cuánto tiempo toma el procedimiento?",
+          answer: "La mayoría se completa en una o dos visitas, dependiendo de la complejidad y gravedad de la infección."
         },
         {
-          question: "¿Cuánto cuesta la ortodoncia en Playa del Carmen?",
-          answer: "El costo es significativamente menor que en EE. UU. o Canadá. El precio final depende de si eliges brackets metálicos, estéticos o alineadores invisibles, así como de la duración del plan."
+          question: "¿Necesito una corona después?",
+          answer: "Sí, usualmente se recomienda para proteger el diente debilitado y restaurar su función masticatoria."
         },
         {
-          question: "¿Puedo realizar mi tratamiento si no vivo en México?",
-          answer: "Sí, ofrecemos planes para pacientes internacionales. Podemos coordinar citas más espaciadas o utilizar tecnologías de monitoreo remoto para reducir la frecuencia de tus visitas a la clínica."
+          question: "¿Cuál es la tasa de éxito?",
+          answer: "Muy alta, superando el 95% cuando es realizado por un especialista calificado."
         }
       ]
     },
     cta: {
       title: "Inicia la Transformación de tu Sonrisa",
-      description: "¿Listo para la sonrisa que siempre has deseado? Contáctanos hoy para programar tu consulta de ortodoncia en Playa del Carmen.",
-      button: "Reserva tu Cita de Ortodoncia",
+      description: "¿Listo para la sonrisa que siempre has deseado? Contáctanos hoy para programar tu consulta en Playa del Carmen.",
+      button: "Reserva tu Cita Ahora",
       note: "Planes personalizados para cada paciente"
     }
   }
@@ -291,24 +310,24 @@ const t = pageContent[lang];
       subheadline={t.header.subheadline}
       features={t.header.features}
       buttonText={t.header.button}
-      imageSrc="/especialidad1.jpeg" 
-      imageAlt={t.header.title}
+      imageSrc={t.header.imageSrc} 
+      imageAlt={t.header.imageAlt}
     />
 
     <AboutSpeciality 
       title={t.about.title}
       text1={t.about.text1}
       text2={t.about.text2}
-      imageSrc="/endodoncia.jpg"
+      imageSrc={t.about.imageSrc}
       imageAlt={t.about.imgAlt}
     />
     <WhatIsSpeciality 
       title={t.whatIs.title}
       text1={t.whatIs.text1}
       text2={t.whatIs.text2}
-      imageSrc="/especialidad-about.avif"
+      imageSrc={t.whatIs.imageSrc}
       imageAlt={t.whatIs.imgAlt}
-      bgImage="/especialidad1.jpeg"
+      bgImage={t.whatIs.bgImage}
     />
     <IndicationsSpeciality 
       title={t.indications.title}
@@ -320,21 +339,21 @@ const t = pageContent[lang];
       title={t.specialist.title}
       text1={t.specialist.text1}
       text2={t.specialist.text2}
-      imageSrc="/sonrisa1.jpg"
+      imageSrc={t.specialist.imageSrc}
       imageAlt={t.specialist.imgAlt}
     />
     <BenefitsSpeciality 
       title={t.benefits.title}
       benefits={t.benefits.items}
       footerText={t.benefits.footer}
-      imageSrc="/sonrisa2.jpg"
+      imageSrc={t.benefits.imageSrc}
       imageAlt={t.benefits.imgAlt}
     />
     <CostSpeciality 
       title={t.cost.title}
       text1={t.cost.text1}
       text2={t.cost.text2}
-      imageSrc="/especialidad-about.avif"
+      imageSrc={t.cost.imageSrc}
       imageAlt={t.cost.imgAlt}
     />
     <ProcessSpeciality 
@@ -346,7 +365,7 @@ const t = pageContent[lang];
       title={t.after.title}
       text1={t.after.text1}
       text2={t.after.text2}
-      imageSrc="/sonrisa3.jpg"
+      imageSrc={t.after.imageSrc}
       imageAlt={t.after.imgAlt}
     />
     <AmericansSpeciality 
@@ -356,7 +375,7 @@ const t = pageContent[lang];
     <LocationSpeciality 
       title={t.location.title}
       text1={t.location.text1}
-      imageSrc="/especialidad1.jpeg"
+      imageSrc={t.location.imageSrc}
       imageAlt={t.location.imgAlt}
     />
     <FaqSpeciality 
