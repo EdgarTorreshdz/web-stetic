@@ -1,0 +1,170 @@
+---
+interface Props {
+  lang?: 'en' | 'es';
+}
+
+const { lang = "en" } = Astro.props;
+
+const translations = {
+  en: {
+    title: "After Root Canal Treatment: What to Expect",
+    text1: "After treatment, most patients experience significant pain relief. In many cases, a dental crown is recommended to protect the treated tooth and restore full function.",
+    text2: "Our team will explain the next steps clearly and guide you through recovery and follow-up care."
+  },
+  es: {
+    title: "Después de la Endodoncia: Qué Esperar",
+    text1: "Después del tratamiento, la mayoría de los pacientes experimentan un alivio significativo del dolor. En muchos casos, se recomienda una corona dental para proteger el diente tratado y restaurar su función completa.",
+    text2: "Nuestro equipo explicará los siguientes pasos claramente y lo guiará a través de la recuperación y el cuidado posterior."
+  }
+};
+
+const t = translations[lang];
+---
+
+<section class="after-section">
+  <div class="container">
+    <div class="after__grid">
+      
+      <div class="after__content">
+        <h2 class="after__title">{t.title}</h2>
+        <div class="after__accent-line"></div>
+        <p class="after__text after__text--highlight">
+          {t.text1}
+        </p>
+        <p class="after__text">
+          {t.text2}
+        </p>
+      </div>
+
+      <div class="after__image-container">
+        <div class="after__img-frame">
+            <img src="/sonrisa3.jpg" alt="Recovery after dental treatment" class="after__img" />
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<style>
+  :root {
+    --gold: #A58E55;
+    --black: #000000;
+    --white: #ffffff;
+  }
+
+  .after-section {
+    padding: 100px 0;
+    background-color: var(--black);
+    color: var(--white);
+  }
+
+  .container {
+    margin: 0 auto;
+    width: 85%;
+  }
+
+  .after__grid {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 40px;
+  }
+
+  @media (min-width: 992px) {
+    .after__grid {
+      flex-direction: row;
+      justify-content: space-between;
+      gap: 60px;
+    }
+  }
+
+  .after__content {
+    flex: 1.2;
+    text-align: left;
+  }
+
+  .after__title {
+    font-size: 1.8rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    line-height: 1.2;
+    margin-bottom: 20px;
+    color: var(--white);
+  }
+
+  @media (min-width: 768px) {
+    .after__title {
+      font-size: 2.5rem;
+    }
+  }
+
+  .after__accent-line {
+    width: 80px;
+    height: 3px;
+    background-color: var(--gold);
+    margin-bottom: 30px;
+  }
+
+  .after__text {
+    font-size: 1rem;
+    line-height: 1.7;
+    margin-bottom: 20px;
+    color: #e0e0e0;
+  }
+
+  .after__text--highlight {
+    font-size: 1.15rem;
+    font-weight: 600;
+    color: var(--white);
+    border-left: 4px solid var(--gold);
+    padding-left: 20px;
+  }
+
+  @media (min-width: 768px) {
+    .after__text {
+      font-size: 1.1rem;
+    }
+    .after__text--highlight {
+      font-size: 1.3rem;
+    }
+  }
+
+  /* Estilos de imagen */
+  .after__image-container {
+    flex: 1;
+    width: 100%;
+  }
+
+  .after__img-frame {
+    position: relative;
+    border: 1px solid rgba(165, 142, 85, 0.4);
+    padding: 10px;
+  }
+
+  /* Detalle dorado en la esquina opuesta */
+  .after__img-frame::before {
+    content: "";
+    position: absolute;
+    top: -5px;
+    left: -5px;
+    width: 40px;
+    height: 40px;
+    border-top: 3px solid var(--gold);
+    border-left: 3px solid var(--gold);
+  }
+
+  .after__img {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    display: block;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+  }
+
+  @media (min-width: 992px) {
+    .after__img {
+      max-height: 450px; /* Restricción solicitada */
+    }
+  }
+</style>

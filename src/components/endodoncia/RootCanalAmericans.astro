@@ -1,0 +1,95 @@
+---
+interface Props {
+  lang?: 'en' | 'es';
+}
+
+const { lang = "en" } = Astro.props;
+
+const translations = {
+  en: {
+    title: "Root Canal Treatment for Americans in Mexico",
+    text1: "Many patients choose root canal treatment in Mexico because they receive professional care, English-speaking support, and significant savings. Our clinic has extensive experience treating American patients who need urgent dental care while traveling.",
+  },
+  es: {
+    title: "Endodoncia para Estadounidenses en México",
+    text1: "Muchos pacientes eligen el tratamiento de endodoncia en México porque reciben atención profesional, apoyo en inglés y ahorros significativos. Nuestra clínica tiene amplia experiencia en el tratamiento de pacientes estadounidenses que necesitan atención dental urgente mientras viajan.",
+  }
+};
+
+const t = translations[lang];
+---
+
+<section class="americans-section">
+  <div class="container">
+    <div class="americans__content">
+      <h2 class="americans__title">{t.title}</h2>
+      <div class="americans__accent-line"></div>
+      <p class="americans__text">
+        {t.text1}
+      </p>
+    </div>
+  </div>
+</section>
+
+<style>
+  :root {
+    --gold: #A58E55;
+    --black: #000000;
+    --white: #ffffff;
+  }
+
+  .americans-section {
+    padding: 100px 0;
+    background-color: var(--black); /* Fondo negro */
+    color: var(--white); /* Texto base blanco */
+    text-align: center; /* Centrado de texto */
+  }
+
+  .container {
+    margin: 0 auto;
+    width: 85%;
+  }
+
+  .americans__content {
+    max-width: 900px; /* Ancho máximo para lectura óptima */
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .americans__title {
+    font-size: 2rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    line-height: 1.2;
+    margin-bottom: 20px;
+    color: var(--gold); /* Título dorado */
+  }
+
+  @media (min-width: 768px) {
+    .americans__title {
+      font-size: 3rem;
+    }
+  }
+
+  .americans__accent-line {
+    width: 80px;
+    height: 3px;
+    background-color: var(--gold);
+    margin: 0 auto 35px auto; /* Centrado de la línea */
+  }
+
+  .americans__text {
+    font-size: 1.15rem;
+    line-height: 1.8;
+    color: var(--white);
+    max-width: 800px;
+  }
+
+  @media (min-width: 768px) {
+    .americans__text {
+      font-size: 1.35rem;
+    }
+  }
+</style>

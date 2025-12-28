@@ -1,386 +1,140 @@
 ---
-import { Icon } from "astro-icon/components";
+interface Props {
+  lang?: 'en' | 'es';
+}
+
+const { lang = "en" } = Astro.props;
+
+const translations = {
+  en: {
+    title: "Need a Root Canal in Playa del Carmen? We’re Ready to Help",
+    text1: "Tooth pain, infection, or swelling can be overwhelming—especially while traveling. Our clinic provides professional root canal treatment in Playa del Carmen for American patients and international visitors seeking fast, safe, and effective dental care in Mexico.",
+    text2: "If you are searching for a root canal near me while visiting Playa del Carmen, our experienced team is prepared to diagnose the issue and relieve pain as quickly as possible."
+  },
+  es: {
+    title: "¿Necesitas una Endodoncia en Playa del Carmen? Estamos Listos para Ayudarte",
+    text1: "El dolor de muelas, la infección o la inflamación pueden ser abrumadores, especialmente cuando viajas. Nuestra clínica ofrece tratamiento de endodoncia profesional en Playa del Carmen para pacientes internacionales que buscan atención dental rápida, segura y eficaz en México.",
+    text2: "Si estás buscando un especialista en endodoncia cerca de ti mientras visitas Playa del Carmen, nuestro equipo experimentado está preparado para diagnosticar el problema y aliviar el dolor lo antes posible."
+  }
+};
+
+const t = translations[lang];
 ---
 
-<section class="about-especialidad">
-    <div id="spinnerOverlay" class="spinner-overlay hidden">
-        <div class="spinner"></div>
+<section class="about-section">
+  <div class="container">
+    <div class="about__grid">
+      <div class="about__image-container">
+        <img src="/endodoncia.jpg" alt="Root Canal Specialist" class="about__img" />
       </div>
-    <!-- Íconos de WhatsApp -->
-    <!-- <div
-        class="about-especialidad__whatsapp about-especialidad__whatsapp--mobile"
-    >
-        <a
-            href="https://api.whatsapp.com/send?phone=5219999999999"
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label="WhatsApp para móvil"
-             class="whatsapp-icon"
-        >
-            <Icon name="whats" width="48" height="48" color="white" />
-        </a>
-    </div>
-    <div
-        class="about-especialidad__whatsapp about-especialidad__whatsapp--desktop"
-    >
-        <a
-            href="https://web.whatsapp.com/send?phone=5219999999999"
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label="WhatsApp para escritorio"
-            class="whatsapp-icon"
-        >
-            <Icon name="whats" width="48" height="48" color="white" />
-        </a>
-    </div> -->
 
-    <!-- Contenedor principal con grid -->
-    <div class="about-especialidad__grid"  id="about">
-        <!-- Columna de contenido (izquierda) -->
-        <div
-            class="about-especialidad__column about-especialidad__column--content"
-        >
-            <h2 class="about-especialidad__title">Sobre el tratamiento</h2>
-            <img
-                src="/endodoncia.jpg"
-                alt="Dental crowns"
-                class="about-especialidad__image"
-            />
-            <p class="about-especialidad__text">
-                Tratamiento que elimina la infección dentro del diente,
-                aliviando el dolor y preservando la pieza dental.
-            </p>
-            <ul class="about-especialidad__list">
-                <li class="about-especialidad__list-item">Endodoncia</li>
-                <li class="about-especialidad__list-item">Retratamiento de endodoncia</li>
-                <li class="about-especialidad__list-item">Endoposte</li>
-                <li class="about-especialidad__list-item">Retiro de endopostes</li>
-                <li class="about-especialidad__list-item">Apicoformacion</li>
-                <li class="about-especialidad__list-item">Apicectomias</li>
-                <li class="about-especialidad__list-item">Blanqueamiento interno </li>
-                <li class="about-especialidad__list-item">Blanqueamiento interno </li>
-                <!-- <li class="about-especialidad__list-item">Endodoncia de dientes anteriores y posteriores</li>
-                <li class="about-especialidad__list-item">Retratamiento de dientes anteriores y posteriores</li>
-                <li class="about-especialidad__list-item">Retiro de endopostes</li>
-                <li class="about-especialidad__list-item">
-                    Apicoformación
-                </li> -->
-            </ul>
-        </div>
-
-        <!-- Columna del formulario (derecha) -->
-        <div class="about-especialidad__column about-especialidad__column--form">
-            <form id="contactForm" class="about-especialidad__form">
-              <div class="about-especialidad__header">
-                <p class="about-especialidad__header-text">Endodoncia</p>
-                <h2 class="about-especialidad__header-text-title">Contacto</h2>
-              </div>
-              <input type="text" name="firstName" placeholder="Nombre(s)" required class="about-especialidad__form-input" />
-              <input type="text" name="lastName" placeholder="Apellidos" required class="about-especialidad__form-input" />
-              <input type="email" name="email" placeholder="Correo electrónico" required class="about-especialidad__form-input" />
-              <input type="tel" name="phone" placeholder="Número de teléfono" required class="about-especialidad__form-input" />
-              <select name="treatment" required class="about-especialidad__form-select" style="color: #03192cb3;">
-                <option value="" disabled selected>Selecciona la especialidad</option>
-                <option value="Odontología General">Odontología general</option>
-                <option value="Odontología Estetica">Odontología Estética</option>
-                <option value="Endodoncia">Endodoncia</option>
-                <option value="Ortodoncia">Ortodoncia</option>
-                <option value="Ortopedia">Ortopedia</option>
-                <option value="Cirugia">Cirugía</option>
-                <option value="Odontopediatria">Odontopediatría</option>
-                <option value="Rehabilitación">Rehabilitación</option>
-              </select>
-              <div class="about-especialidad__form-checkbox-container">
-                <input type="checkbox" name="privacy" id="privacy" required class="about-especialidad__form-checkbox" />
-                <label for="privacy">Acepto el aviso de privacidad</label>
-              </div>
-              <button type="submit" class="about-especialidad__form-button">
-                Reservar una cita
-                <Icon name="arrow" width="20" height="20" />
-              </button>
-              <div id="formMessage" class="form-message"></div>
-            </form>
-          </div>
+      <div class="about__content">
+        <h2 class="about__title">{t.title}</h2>
+        <div class="about__accent-line"></div>
+        <p class="about__text about__text--highlight">
+          {t.text1}
+        </p>
+        <p class="about__text">
+          {t.text2}
+        </p>
+      </div>
     </div>
+  </div>
 </section>
 
 <style>
-    /* ---- Bloque principal ---- */
-    .about-especialidad {
-        position: relative;
-        max-width: 1200px;
-        margin: 0 auto;
-        /* padding: 20px; */
-        width: 95%;
-    }
+  :root {
+    --gold: #A58E55;
+    --black: #000000;
+    --white: #ffffff;
+  }
 
-    /* ---- Grid responsivo (1 columna en móvil, 2 en escritorio) ---- */
-    .about-especialidad__grid {
-        display: grid;
-        grid-template-columns: 1fr; /* En móvil, 1 columna */
-        gap: 20px;
+  .about-section {
+    padding: 80px 0;
+    background-color: var(--black); /* Fondo negro */
+    color: var(--white); /* Letras blancas */
+  }
 
-        /* Centra verticalmente las columnas en todas las pantallas */
-        align-items: center;
-    }
-    @media screen and (min-width: 768px) {
-        .about-especialidad__grid {
-            grid-template-columns: 60% 40%;
-        }
-    }
+  .container {
+    margin: 0 auto;
+    width: 85%; /* Estándar solicitado */
+  }
 
-    /* ---- Columnas ---- */
-    .about-especialidad__column {
-        /* Quitar márgenes excesivos para permitir la alineación central vertical */
-        margin: 0;
-    }
-
-    .about-especialidad__column--form {
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-    }
-
-    /* ---- Títulos y textos ---- */
-    .about-especialidad__title {
-        font-size: 30px;
-        font-weight: bold;
-        margin-bottom: 1rem;
-        color: #382e27;
-        text-align: center;
-    }
-
-    @media (min-width: 768px) {
-        .about-especialidad__title {
-        font-size: 42px;
-        text-align: left;
-    }
-    }
-    .about-especialidad__subtitle {
-        font-size: 1.25rem;
-        font-weight: bold;
-        margin-top: 1.5rem;
-        margin-bottom: 0.5rem;
-        color: #382e27;
-    }
-    .about-especialidad__text {
-        font-size: 16.9px;
-        margin-bottom: 1rem;
-        line-height: 1.5;
-    }
-
-    /* ---- Imagen ---- */
-    .about-especialidad__image {
-        width: 100%;
-        height: auto;
-        margin-bottom: 1rem;
-    }
-
-    /* ---- Lista ---- */
-    .about-especialidad__list {
-        list-style: disc;
-        padding-left: 1.5rem;
-        margin-bottom: 1.5rem;
-    }
-    .about-especialidad__list-item {
-        margin-bottom: 0.5rem;
-    }
-
-    /* ---- Formulario ---- */
-    .about-especialidad__header {
-        p,
-        h2 {
-            text-align: center;
-        }
-        h2 {
-            font-size: 1.8em;
-            font-weight: 500;
-        }
-        p {
-            font-size: 1.25rem;
-            font-weight: bold;
-            color: #382e27cc;
-            letter-spacing: 0.2em;
-            text-indent: 0.2em;
-            text-transform: uppercase;
-            font-size: 0.7em;
-            font-weight: 500;
-            font-style: italic;
-        }
-    }
-    .about-especialidad__form {
-        border: 1px solid #27B9C6;
-        padding: 20px;
-        display: flex;
-        flex-direction: column;
-        gap: 1rem;
-        background-color: #faf8f6;
-    }
-
-    @media screen and (min-width: 768px) {
-        .about-especialidad__form {
-        padding: 5rem;
-    }
-    }
-
-    .about-especialidad__form-input,
-    .about-especialidad__form-select {
-        outline: none;
-        border: none;
-        background-color: #faf8f6;
-        border-bottom: 1px solid #27B9C6;
-        border-radius: 4px;
-        padding: 8px;
-        min-height: 64px; /* Aproximado a 4em con font-size base de 16px */
-        font-size: 16px;
-        box-sizing: border-box;
-    }
-
-    /* Checkbox */
-    .about-especialidad__form-checkbox-container {
-        display: flex;
-        align-items: center;
-        gap: 0.5rem;
-    }
-    .about-especialidad__form-checkbox {
-        transform: scale(1.2);
-        cursor: pointer;
-    }
-
-    /* Botón */
-    .about-especialidad__form-button {
-        padding: 1.5em 6.2em 1.5em 3em;
-        font-weight: bold;
-        border: none;
-        cursor: pointer;
-        border-radius: 4px;
-        background-color: #27B9C6;
-        color: #fff;
-        transition: background-color 0.3s ease;
-        margin-top: 20px;
-        letter-spacing: 0.15em;
-        text-transform: uppercase;
-        font-size: 10.5px;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-    }
-    .about-especialidad__form-button:hover {
-        background-color: #004080;
-    }
-
-    /* ---- Íconos de WhatsApp ---- */
-    .about-especialidad__whatsapp {
-        position: fixed;
-        bottom: 16px;
-        right: 16px;
-        z-index: 200;
-    }
-    .whatsapp-icon {
-        background-color: #25d366;
-        padding: 8px;
-        border-radius: 50%;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-    }
-    /* Móvil: se muestra en mobile, se oculta en desktop */
-    .about-especialidad__whatsapp--mobile {
-        display: block;
-    }
-    @media screen and (min-width: 768px) {
-        .about-especialidad__whatsapp--mobile {
-            display: none;
-        }
-    }
-
-    /* Desktop: se muestra en escritorio, se oculta en mobile */
-    .about-especialidad__whatsapp--desktop {
-        display: none;
-    }
-    @media screen and (min-width: 768px) {
-        .about-especialidad__whatsapp--desktop {
-            display: block;
-        }
-    }
-      /* --- Spinner overlay --- */
- .spinner-overlay {
-    position: fixed;
-    top: 0; left: 0;
-    width: 100%; height: 100%;
-    background: rgba(0,0,0,0.4);
+  .about__grid {
     display: flex;
-    justify-content: center;
+    flex-direction: column;
     align-items: center;
-    z-index: 1000;
+    gap: 40px;
   }
-  .spinner-overlay.hidden {
-    display: none !important;
+
+  @media (min-width: 992px) {
+    .about__grid {
+      flex-direction: row; /* Desktop: Imagen izquierda, texto derecha */
+      justify-content: space-between;
+      gap: 60px;
+    }
   }
-  .spinner {
-    border: 4px solid #f3f3f3;
-    border-top: 4px solid #27B9C6;
-    border-radius: 50%;
-    width: 50px; height: 50px;
-    animation: spin 1s linear infinite;
+
+  .about__image-container {
+    flex: 1;
+    width: 100%;
   }
-  @keyframes spin { to { transform: rotate(360deg); } }
-  /* --- Mensaje de estado --- */
-  .form-message {
-    margin-top: 1rem;
-    font-size: 0.9rem;
-    text-align: center;
+
+  .about__img {
+    width: 100%;
+    height: auto;
+    border-radius: 4px;
+    border: 1px solid var(--gold); /* Borde dorado */
+    object-fit: cover;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
   }
-  .form-message.success { color: #006400; }
-  .form-message.error   { color: #8B0000; }
+
+  .about__content {
+    flex: 1.2;
+    text-align: left;
+  }
+
+  .about__title {
+    font-size: 1.8rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    line-height: 1.2;
+    margin-bottom: 20px;
+    color: var(--white);
+  }
+
+  @media (min-width: 768px) {
+    .about__title {
+      font-size: 2.5rem;
+    }
+  }
+
+  .about__accent-line {
+    width: 80px;
+    height: 3px;
+    background-color: var(--gold); /* Línea en dorado */
+    margin-bottom: 30px;
+  }
+
+  .about__text {
+    font-size: 1rem;
+    line-height: 1.7;
+    margin-bottom: 20px;
+    color: #e0e0e0; /* Gris muy claro para lectura suave en fondo negro */
+  }
+
+  .about__text--highlight {
+    font-size: 1.15rem;
+    font-weight: 600;
+    color: var(--gold); /* Texto destacado en dorado */
+  }
+
+  @media (min-width: 768px) {
+    .about__text {
+      font-size: 1.1rem;
+    }
+    .about__text--highlight {
+      font-size: 1.3rem;
+    }
+  }
 </style>
-<script type="module">
-    const form      = document.getElementById('contactForm');
- const submitBtn = form.querySelector('button[type="submit"]');
- const msgEl     = document.getElementById('formMessage');
- const spinner   = document.getElementById('spinnerOverlay');
-
- form.addEventListener('submit', async e => {
-   e.preventDefault();
-   submitBtn.disabled = true;
-   msgEl.textContent = '';
-   msgEl.className = 'form-message';
-
-   // Mostrar spinner
-   spinner.classList.remove('hidden');
-
-   const payload = {
-     firstName: form.firstName.value.trim(),
-     lastName:  form.lastName.value.trim(),
-     email:     form.email.value.trim(),
-     phone:     form.phone.value.trim(),
-     treatment: form.treatment.value,
-     privacy:   form.privacy.checked,
-   };
-
-   try {
-     const res = await fetch('https://correos-stetic-dental.onrender.com/send-email', {
-       method: 'POST',
-       headers: { 'Content-Type': 'application/json' },
-       body: JSON.stringify(payload),
-     });
-     const json = await res.json();
-
-     if (res.ok) {
-       msgEl.textContent = '¡Tu cita ha sido solicitada con éxito!';
-       msgEl.classList.add('success');
-       form.reset();
-     } else {
-       msgEl.textContent = json.error || 'Ocurrió un error al enviar tu solicitud.';
-       msgEl.classList.add('error');
-     }
-   } catch {
-     msgEl.textContent = 'Error de red, por favor inténtalo de nuevo.';
-     msgEl.classList.add('error');
-   } finally {
-     submitBtn.disabled = false;
-     // Ocultar spinner
-     spinner.classList.add('hidden');
-   }
- });
- </script>

@@ -7,6 +7,7 @@ export function getStaticPaths() {
 }
 
 const { lang } = Astro.params as { lang: 'en' | 'es' };
+
 import Layout from "../../layouts/Layout.astro"
 import HeaderEspecialidad from "../../components/endodoncia/HeaderEspecialidad.astro"
 import NavegacionEspecialidad from "../../components/endodoncia/NavegacionEspecialidad.astro"
@@ -14,14 +15,48 @@ import BreadCrumbs from "../../components/endodoncia/BreadCrumbs.astro"
 import AboutEspecialidad from "../../components/endodoncia/AboutEspecialidad.astro"
 import AboutOtherEspecialidad from "../../components/endodoncia/AboutOtherEspecialidad.astro"
 import TestimoniosEspecialidad from "../../components/endodoncia/TestimoniosEspecialidad.astro"
+import WhatIsRootCanal from "../../components/endodoncia/WhatIsRootCanal.astro";
+import RootCanalIndications from "../../components/endodoncia/RootCanalIndications.astro";
+import EndodontistSpecialist from "../../components/endodoncia/EndodontistSpecialist.astro";
+import BenefitsRootCanal from "../../components/endodoncia/BenefitsRootCanal.astro";
+import RootCanalProcess from "../../pages/[lang]/RootCanalProcess.astro";
+import AfterRootCanal from "../../components/endodoncia/AfterRootCanal.astro";
+import RootCanalCost from "../../components/endodoncia/RootCanalCost.astro";
+import RootCanalAmericans from "../../components/endodoncia/RootCanalAmericans.astro";
+import RootCanalLocation from "../../components/endodoncia/RootCanalLocation.astro";
+import RootCanalFAQ from "../../components/endodoncia/RootCanalFAQ.astro";
+import RootCanalCTA from "../../components/endodoncia/RootCanalCTA.astro";
+// Definición de contenidos SEO por idioma
+const seoContent = {
+  en: {
+    title: "Root Canal Treatment in Playa del Carmen | Pain Relief & Expert Care",
+    description: "Get pain-relief focused root canal treatment in Playa del Carmen. Safe endodontic care in Mexico by experienced specialists. Book now."
+  },
+  es: {
+    title: "Endodoncia en Playa del Carmen | Alivio del Dolor y Cuidado Experto",
+    description: "Obtén tratamiento de endodoncia enfocado en el alivio del dolor en Playa del Carmen. Cuidado dental seguro por especialistas experimentados."
+  }
+};
 
+const currentSeo = seoContent[lang];
 ---
 
-<Layout title={lang === 'es' ? "Endodoncia" : "Endodontics"} lang={lang}>
-    <HeaderEspecialidad />
-    <BreadCrumbs />
-    <NavegacionEspecialidad />
-    <AboutEspecialidad />
-    <AboutOtherEspecialidad />
-    <TestimoniosEspecialidad />
+<Layout 
+  title={currentSeo.title} 
+  description={currentSeo.description} 
+  lang={lang}
+>
+    <HeaderEspecialidad lang={lang}/>
+    <AboutEspecialidad lang={lang}/>
+    <WhatIsRootCanal lang={lang}/>
+    <RootCanalIndications lang={lang}/>
+    <EndodontistSpecialist lang={lang}/>
+    <BenefitsRootCanal lang={lang}/>
+    <RootCanalCost lang={lang}/>
+    <RootCanalProcess lang={lang}/>
+    <AfterRootCanal lang={lang}/>
+    <RootCanalAmericans lang={lang}/>
+    <RootCanalLocation lang={lang}/>
+    <RootCanalFAQ lang={lang}/>
+    <RootCanalCTA lang={lang}/>
 </Layout>

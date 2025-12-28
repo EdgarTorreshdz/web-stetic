@@ -1,0 +1,215 @@
+---
+interface Props {
+  lang?: 'en' | 'es';
+}
+
+const { lang = "en" } = Astro.props;
+
+const translations = {
+  en: {
+    title: "Root Canal FAQ",
+    faqs: [
+      {
+        question: "Is root canal treatment painful?",
+        answer: "Modern techniques allow root canal treatment to be performed with minimal discomfort. Our priority is your peace of mind and pain relief."
+      },
+      {
+        question: "How much does a root canal cost in Mexico?",
+        answer: "Root canal cost varies by case but is generally more affordable than in the USA, often representing savings of 50% to 70%."
+      },
+      {
+        question: "Is root canal treatment safe in Mexico?",
+        answer: "Yes. Root canal treatment in Mexico is safe when performed by experienced specialists using proper protocols and modern technology."
+      },
+      {
+        question: "How long does a root canal procedure take?",
+        answer: "Most procedures are completed in one or two visits, depending on the complexity of the tooth and the severity of the infection."
+      },
+      {
+        question: "Do I need a crown after a root canal?",
+        answer: "In most cases, yes. A crown protects the weakened tooth from fracturing and restores its full chewing function."
+      },
+      {
+        question: "What is the success rate of a root canal?",
+        answer: "Root canal treatments have a very high success rate, often exceeding 95% when performed by a specialist."
+      }
+    ]
+  },
+  es: {
+    title: "Preguntas Frecuentes",
+    faqs: [
+      {
+        question: "¿Es doloroso el tratamiento?",
+        answer: "Las técnicas modernas permiten que el tratamiento se realice con las mínimas molestias. Nuestra prioridad es el alivio del dolor."
+      },
+      {
+        question: "¿Cuánto cuesta una endodoncia en México?",
+        answer: "El costo varía según el caso, pero generalmente es mucho más accesible que en los EE. UU., con ahorros significativos."
+      },
+      {
+        question: "¿Es seguro el tratamiento en México?",
+        answer: "Sí. El tratamiento es seguro cuando lo realizan especialistas experimentados que utilizan protocolos adecuados y tecnología moderna."
+      },
+      {
+        question: "¿Cuánto tiempo toma el procedimiento?",
+        answer: "La mayoría de los procedimientos se completan en una o dos visitas, dependiendo de la gravedad de la infección."
+      },
+      {
+        question: "¿Necesito una corona después de la endodoncia?",
+        answer: "En la mayoría de los casos sí. Una corona protege el diente debilitado de fracturas y restaura su función completa."
+      },
+      {
+        question: "¿Cuál es la tasa de éxito?",
+        answer: "Los tratamientos de endodoncia tienen una tasa de éxito muy alta, superando a menudo el 95% cuando los realiza un especialista."
+      }
+    ]
+  }
+};
+
+const t = translations[lang];
+
+const midIndex = Math.ceil(t.faqs.length / 2);
+const leftColumn = t.faqs.slice(0, midIndex);
+const rightColumn = t.faqs.slice(midIndex);
+---
+
+<section class="faq-section">
+  <div class="container">
+    <h2 class="faq__title">{t.title}</h2>
+    <div class="faq__accent-line"></div>
+
+    <div class="faq__grid">
+      <div class="faq__col">
+        {leftColumn.map((faq) => (
+          <details class="faq__item">
+            <summary class="faq__question">
+              {faq.question}
+              <span class="faq__icon">+</span>
+            </summary>
+            <div class="faq__answer">
+              <p>{faq.answer}</p>
+            </div>
+          </details>
+        ))}
+      </div>
+
+      <div class="faq__col">
+        {rightColumn.map((faq) => (
+          <details class="faq__item">
+            <summary class="faq__question">
+              {faq.question}
+              <span class="faq__icon">+</span>
+            </summary>
+            <div class="faq__answer">
+              <p>{faq.answer}</p>
+            </div>
+          </details>
+        ))}
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  :root {
+    --gold: #A58E55;
+    --black: #000000;
+    --white: #ffffff;
+    --grey-border: #e5e5e5;
+  }
+
+  .faq-section {
+    padding: 80px 0;
+    background-color: var(--white); /* Fondo blanco solicitado */
+    color: var(--black); /* Texto base negro */
+  }
+
+  .container {
+    margin: 0 auto;
+    width: 85%;
+  }
+
+  .faq__title {
+    font-size: 2.2rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    text-align: center;
+    color: var(--gold); /* Título dorado solicitado */
+    margin-bottom: 10px;
+  }
+
+  .faq__accent-line {
+    width: 80px;
+    height: 3px;
+    background-color: var(--gold);
+    margin: 0 auto 50px auto;
+  }
+
+  .faq__grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 0 40px;
+  }
+
+  @media (min-width: 992px) {
+    .faq__grid {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+
+  .faq__item {
+    border-bottom: 1px solid var(--grey-border); /* Borde gris para fondo blanco */
+    margin-bottom: 10px;
+  }
+
+  .faq__item[open] .faq__icon {
+    transform: rotate(45deg);
+    color: var(--black);
+  }
+
+  .faq__question {
+    list-style: none;
+    padding: 22px 0;
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--black); /* Pregunta en negro para resaltar sobre blanco */
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    transition: color 0.3s ease;
+  }
+
+  .faq__question:hover {
+    color: var(--gold);
+  }
+
+  .faq__question::-webkit-details-marker {
+    display: none;
+  }
+
+  .faq__icon {
+    font-size: 1.4rem;
+    transition: transform 0.3s ease;
+    color: var(--gold); /* Icono en dorado */
+  }
+
+  .faq__answer {
+    padding: 0 0 25px 0;
+    font-size: 1.05rem;
+    line-height: 1.7;
+    color: #444; /* Respuesta en gris oscuro/negro solicitado */
+    animation: fadeIn 0.4s ease;
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-10px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  @media (min-width: 768px) {
+    .faq__question { font-size: 1.2rem; }
+  }
+</style>

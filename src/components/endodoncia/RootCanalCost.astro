@@ -1,0 +1,173 @@
+---
+interface Props {
+  lang?: 'en' | 'es';
+}
+
+const { lang = "en" } = Astro.props;
+
+const translations = {
+  en: {
+    title: "Root Canal Cost in Mexico",
+    text1: "Root canal cost in Mexico is typically much lower than in the United States while maintaining professional standards and modern techniques. The final root canal price depends on the tooth involved, the severity of infection, and whether additional restoration is needed.",
+    text2: "After evaluation, we provide clear information about treatment options and cost with no hidden fees."
+  },
+  es: {
+    title: "Costo de Endodoncia en México",
+    text1: "El costo de una endodoncia en México suele ser mucho más bajo que en los Estados Unidos, manteniendo estándares profesionales y técnicas modernas. El precio final depende del diente involucrado, la gravedad de la infección y si se requiere restauración adicional.",
+    text2: "Después de la evaluación, brindamos información clara sobre las opciones de tratamiento y el costo, sin cargos ocultos."
+  }
+};
+
+const t = translations[lang];
+---
+
+<section class="cost-section">
+  <div class="container">
+    <div class="cost__grid">
+      
+      <div class="cost__content">
+        <h2 class="cost__title">{t.title}</h2>
+        <div class="cost__accent-line"></div>
+        <p class="cost__text cost__text--highlight">
+          {t.text1}
+        </p>
+        <p class="cost__text">
+          {t.text2}
+        </p>
+      </div>
+
+      <div class="cost__image-container">
+        <div class="cost__img-deco">
+            <img src="/especialidad-about.avif" alt="Dental consultation cost" class="cost__img" />
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<style>
+  :root {
+    --gold: #A58E55;
+    --black: #000000;
+    --white: #ffffff;
+  }
+
+  .cost-section {
+    padding: 100px 0;
+    background-color: var(--white);
+    color: var(--black);
+  }
+
+  .container {
+    margin: 0 auto;
+    width: 85%;
+  }
+
+  .cost__grid {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 40px;
+  }
+
+  @media (min-width: 992px) {
+    .cost__grid {
+      flex-direction: row; /* Texto Izquierda, Imagen Derecha */
+      justify-content: space-between;
+      gap: 60px;
+    }
+  }
+
+  .cost__content {
+    flex: 1.2;
+    text-align: left;
+  }
+
+  .cost__title {
+    font-size: 1.8rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    line-height: 1.2;
+    margin-bottom: 20px;
+    color: var(--black);
+  }
+
+  @media (min-width: 768px) {
+    .cost__title {
+      font-size: 2.5rem;
+    }
+  }
+
+  .cost__accent-line {
+    width: 80px;
+    height: 3px;
+    background-color: var(--gold);
+    margin-bottom: 30px;
+  }
+
+  .cost__text {
+    font-size: 1rem;
+    line-height: 1.7;
+    margin-bottom: 20px;
+    color: #333;
+  }
+
+  .cost__text--highlight {
+    font-size: 1.15rem;
+    font-weight: 600;
+    color: var(--black);
+    border-left: 4px solid var(--gold);
+    padding-left: 20px;
+  }
+
+  @media (min-width: 768px) {
+    .cost__text {
+      font-size: 1.1rem;
+    }
+    .cost__text--highlight {
+      font-size: 1.3rem;
+    }
+  }
+
+  /* Estilos de imagen con restricción */
+  .cost__image-container {
+    flex: 1;
+    width: 100%;
+  }
+
+  .cost__img-deco {
+    position: relative;
+    border: 1px solid #eee;
+    padding: 10px;
+  }
+
+  /* Detalle decorativo dorado en la esquina */
+  .cost__img-deco::after {
+    content: "";
+    position: absolute;
+    bottom: -5px;
+    right: -5px;
+    width: 50px;
+    height: 50px;
+    border-bottom: 4px solid var(--gold);
+    border-right: 4px solid var(--gold);
+    z-index: 0;
+  }
+
+  .cost__img {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    display: block;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+    z-index: 1;
+    position: relative;
+  }
+
+  @media (min-width: 992px) {
+    .cost__img {
+      max-height: 450px; /* Restricción solicitada */
+    }
+  }
+</style>
