@@ -1,0 +1,176 @@
+---
+import { Icon } from "astro-icon/components";
+
+interface Props {
+  title: string;
+  benefits: string[];
+  footerText: string;
+  imageSrc: string;
+  imageAlt: string;
+}
+
+const { title, benefits, footerText, imageSrc, imageAlt } = Astro.props;
+---
+
+<section class="benefits-section">
+  <div class="container">
+    <div class="benefits__header">
+      <h2 class="benefits__title">{title}</h2>
+      <div class="benefits__accent-line"></div>
+    </div>
+
+    <div class="benefits__grid">
+      <div class="benefits__image-container">
+        <div class="benefits__img-deco">
+            <img src={imageSrc} alt={imageAlt} class="benefits__img" />
+        </div>
+      </div>
+
+      <div class="benefits__content">
+        <ul class="benefits__list">
+          {benefits.map((benefit) => (
+            <li class="benefits__item">
+              <Icon name="star" size={18} class="text-gold" />
+              <span>{benefit}</span>
+            </li>
+          ))}
+        </ul>
+
+        <div class="benefits__footer">
+          <p>{footerText}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  :root {
+    --gold: #A58E55;
+    --black: #000000;
+    --white: #ffffff;
+  }
+
+  .benefits-section {
+    padding: 100px 0;
+    background-color: var(--black);
+    color: var(--white);
+  }
+
+  .container {
+    margin: 0 auto;
+    width: 85%;
+  }
+
+  .benefits__header {
+    text-align: center;
+    margin-bottom: 60px;
+    width: 100%;
+  }
+
+  .benefits__title {
+    font-size: 2rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    line-height: 1.2;
+    margin-bottom: 20px;
+    color: var(--gold);
+  }
+
+  @media (min-width: 768px) {
+    .benefits__title { font-size: 3rem; }
+  }
+
+  .benefits__accent-line {
+    width: 80px;
+    height: 3px;
+    background-color: var(--gold);
+    margin: 0 auto;
+  }
+
+  .benefits__grid {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 40px;
+  }
+
+  @media (min-width: 992px) {
+    .benefits__grid {
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 80px;
+    }
+  }
+
+  .benefits__content {
+    flex: 1.2;
+    text-align: left;
+  }
+
+  .benefits__list {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 35px 0;
+  }
+
+  .benefits__item {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    font-size: 1.1rem;
+    font-weight: 500;
+    margin-bottom: 12px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  .text-gold {
+    color: var(--gold);
+  }
+
+  .benefits__footer {
+    padding: 20px;
+    background-color: rgba(255, 255, 255, 0.05);
+    border-left: 4px solid var(--gold);
+    font-style: italic;
+    color: #cccccc;
+  }
+
+  .benefits__image-container {
+    flex: 1;
+    width: 100%;
+  }
+
+  .benefits__img-deco {
+    position: relative;
+    display: flex;
+    justify-content: center;
+  }
+
+  .benefits__img-deco::before {
+    content: "";
+    position: absolute;
+    top: -10px;
+    left: -10px;
+    width: 100px;
+    height: 100px;
+    border-top: 3px solid var(--gold);
+    border-left: 3px solid var(--gold);
+    z-index: 0;
+  }
+
+  .benefits__img {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+    z-index: 1;
+    border: 1px solid rgba(165, 142, 85, 0.3);
+  }
+
+  @media (min-width: 992px) {
+    .benefits__img { max-height: 450px; }
+  }
+</style>

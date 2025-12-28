@@ -1,0 +1,160 @@
+---
+interface Step {
+  title: string;
+  img: string;
+}
+
+interface Props {
+  title: string;
+  footer: string;
+  steps: Step[];
+}
+
+const { title, footer, steps } = Astro.props;
+---
+
+<section class="process-section">
+  <div class="container">
+    <h2 class="process__title">{title}</h2>
+    <div class="process__accent-line"></div>
+
+    <div class="process__grid">
+      {steps.map((step, index) => (
+        <div class="process__step">
+          <div class="process__image-wrapper">
+            <span class="process__number">{index + 1}</span>
+            <img src={step.img} alt={step.title} class="process__img" />
+          </div>
+          <h3 class="process__step-title">{step.title}</h3>
+        </div>
+      ))}
+    </div>
+
+    <div class="process__footer">
+        <p>{footer}</p>
+    </div>
+  </div>
+</section>
+
+<style>
+  :root {
+    --gold: #A58E55;
+    --black: #000000;
+    --white: #ffffff;
+  }
+
+  .process-section {
+    padding: 100px 0;
+    background-color: var(--black);
+    color: var(--white);
+  }
+
+  .container {
+    margin: 0 auto;
+    width: 85%;
+    text-align: center;
+  }
+
+  .process__title {
+    font-size: 2rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    margin-bottom: 20px;
+    color: var(--white);
+  }
+
+  @media (min-width: 768px) {
+    .process__title { font-size: 3rem; }
+  }
+
+  .process__accent-line {
+    width: 80px;
+    height: 3px;
+    background-color: var(--gold);
+    margin: 0 auto 60px auto;
+  }
+
+  .process__grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+
+  @media (min-width: 768px) {
+    .process__grid { grid-template-columns: 1fr 1fr; }
+  }
+
+  @media (min-width: 1200px) {
+    .process__grid { grid-template-columns: 1fr 1fr 1fr 1fr; }
+  }
+
+  .process__step {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .process__image-wrapper {
+    position: relative;
+    width: 100%;
+    margin-bottom: 20px;
+    border: 1px solid rgba(165, 142, 85, 0.3);
+    padding: 8px;
+  }
+
+  .process__number {
+    position: absolute;
+    top: -15px;
+    left: -15px;
+    width: 40px;
+    height: 40px;
+    background-color: var(--gold);
+    color: var(--white);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 800;
+    font-size: 1.2rem;
+    z-index: 2;
+    border-radius: 2px;
+  }
+
+  .process__img {
+    width: 100%;
+    height: 250px;
+    object-fit: cover;
+    display: block;
+    filter: grayscale(30%);
+    transition: all 0.3s ease;
+  }
+
+  .process__step:hover .process__img {
+    filter: grayscale(0%);
+    transform: scale(1.02);
+  }
+
+  .process__step-title {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--gold);
+    text-transform: uppercase;
+    margin-top: 10px;
+    line-height: 1.4;
+  }
+
+  .process__footer {
+    margin-top: 60px;
+    padding: 25px;
+    border: 1px dashed var(--gold);
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .process__footer p {
+    font-size: 1.2rem;
+    font-style: italic;
+    color: #e0e0e0;
+    margin: 0;
+  }
+</style>

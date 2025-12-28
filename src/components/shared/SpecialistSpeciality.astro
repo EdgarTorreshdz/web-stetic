@@ -1,0 +1,147 @@
+---
+interface Props {
+  title: string;
+  text1: string;
+  text2: string;
+  imageSrc: string;
+  imageAlt: string;
+}
+
+const { title, text1, text2, imageSrc, imageAlt } = Astro.props;
+---
+
+<section class="specialist-section">
+  <div class="container">
+    <div class="specialist__grid">
+      
+      <div class="specialist__content">
+        <h2 class="specialist__title">{title}</h2>
+        <div class="specialist__accent-line"></div>
+        <p class="specialist__text specialist__text--highlight">
+          {text1}
+        </p>
+        <p class="specialist__text">
+          {text2}
+        </p>
+      </div>
+
+      <div class="specialist__image-container">
+        <div class="specialist__img-wrapper">
+            <img src={imageSrc} alt={imageAlt} class="specialist__img" />
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<style>
+  :root {
+    --gold: #A58E55;
+    --black: #000000;
+    --white: #ffffff;
+  }
+
+  .specialist-section {
+    padding: 100px 0;
+    background-color: var(--black);
+    color: var(--white);
+  }
+
+  .container {
+    margin: 0 auto;
+    width: 85%;
+  }
+
+  .specialist__grid {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 40px;
+  }
+
+  @media (min-width: 992px) {
+    .specialist__grid {
+      flex-direction: row;
+      justify-content: space-between;
+      gap: 60px;
+    }
+  }
+
+  .specialist__content {
+    flex: 1.2;
+    text-align: left;
+  }
+
+  .specialist__title {
+    font-size: 1.8rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    line-height: 1.2;
+    margin-bottom: 20px;
+    color: var(--white);
+  }
+
+  @media (min-width: 768px) {
+    .specialist__title { font-size: 2.5rem; }
+  }
+
+  .specialist__accent-line {
+    width: 80px;
+    height: 3px;
+    background-color: var(--gold);
+    margin-bottom: 30px;
+  }
+
+  .specialist__text {
+    font-size: 1rem;
+    line-height: 1.7;
+    margin-bottom: 20px;
+    color: #cccccc;
+  }
+
+  .specialist__text--highlight {
+    font-size: 1.15rem;
+    font-weight: 600;
+    color: var(--white);
+    border-left: 4px solid var(--gold);
+    padding-left: 20px;
+  }
+
+  @media (min-width: 768px) {
+    .specialist__text { font-size: 1.1rem; }
+    .specialist__text--highlight { font-size: 1.3rem; }
+  }
+
+  .specialist__image-container {
+    flex: 1;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+  }
+
+  .specialist__img-wrapper {
+    position: relative;
+    border: 1px solid var(--gold);
+    padding: 10px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+  }
+
+  .specialist__img {
+    width: 100%;
+    height: auto;
+    display: block;
+    object-fit: cover;
+    box-shadow: 0 15px 35px rgba(0,0,0,0.8);
+  }
+
+  @media (min-width: 992px) {
+    .specialist__img {
+      max-height: 450px;
+      width: auto;
+      min-width: 100%;
+    }
+  }
+</style>

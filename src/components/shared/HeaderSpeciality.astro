@@ -1,0 +1,90 @@
+---
+import { Icon } from "astro-icon/components";
+
+// 1. Definimos la interfaz de lo que el componente puede recibir
+interface Props {
+  lang: 'en' | 'es';
+  title: string;
+  subheadline: string;
+  features: string[];
+  buttonText: string;
+  imageSrc: string;
+  imageAlt: string;
+}
+
+// 2. Extraemos las propiedades
+const { 
+  lang, 
+  title, 
+  subheadline, 
+  features, 
+  buttonText, 
+  imageSrc, 
+  imageAlt 
+} = Astro.props;
+---
+
+<header class="header">
+  <div class="header__container container">
+    <div class="header__content">
+      <h1 class="header__title">{title}</h1>
+      
+      <p class="header__description">
+        {subheadline}
+      </p>
+
+      <ul class="header__features">
+        {features.map((feature) => (
+          <li class="header__feature-item">
+            <Icon name="star" size={18} class="text-gold" /> 
+            <span>{feature}</span>
+          </li>
+        ))}
+      </ul>
+
+      <div class="header__actions">
+        <a class="header__btn" href="#about">
+          {buttonText}
+          <Icon name="arrow-down" color="white" class="arrow-down" size={20} />
+        </a>
+      </div>
+    </div>
+
+    <div class="header__image-wrapper">
+       <img src={imageSrc} alt={imageAlt} class="header__img" />
+    </div>
+  </div>
+</header>
+
+<style>
+  /* ... (El mismo CSS que ya tienes funciona perfecto) ... */
+  :root {
+    --gold: #A58E55;
+    --black: #000000;
+    --white: #ffffff;
+  }
+  .header { 
+    position: relative; width: 100%; min-height: 85dvh; background-color: var(--black);
+    display: flex; align-items: center; padding: 80px 0; overflow: hidden;
+  }
+  .container { margin: 0 auto; width: 85%; }
+  .header__container { display: flex; flex-direction: column; align-items: center; gap: 50px; }
+  @media (min-width: 992px) {
+    .header__container { flex-direction: row; justify-content: space-between; text-align: left; gap: 60px; }
+  }
+  .header__content { flex: 1.2; color: var(--white); z-index: 2; }
+  .header__title { font-size: 2.2rem; font-weight: 800; margin-bottom: 1.5rem; text-transform: uppercase; line-height: 1.1; color: var(--white); }
+  @media (min-width: 768px) { .header__title { font-size: 3.5rem; } }
+  .header__description { font-size: 1.1rem; margin-bottom: 2rem; line-height: 1.6; color: #e0e0e0; }
+  .header__features { list-style: none; padding: 0; margin: 0 0 3rem 0; display: grid; grid-template-columns: 1fr; gap: 15px; }
+  @media (min-width: 576px) { .header__features { grid-template-columns: 1fr 1fr; } }
+  .header__feature-item { display: flex; align-items: center; gap: 12px; font-size: 1rem; }
+  .text-gold { color: var(--gold); }
+  .header__btn { background-color: var(--gold); color: var(--white); display: inline-flex; align-items: center; padding: 1.2rem 2.5rem; text-decoration: none; font-weight: 700; text-transform: uppercase; font-size: 0.9rem; transition: all 0.3s ease; border: 1px solid var(--gold); }
+  .header__btn:hover { background-color: transparent; color: var(--gold); }
+  .header__image-wrapper { flex: 1; width: 100%; }
+  .header__img { width: 100%; height: auto; border-radius: 4px; object-fit: cover; display: block; box-shadow: 0 20px 40px rgba(0,0,0,0.6); }
+  @media (min-width: 992px) { .header__img { max-height: 450px; } } /* Tu regla de 450px */
+  .arrow-down { margin-left: 12px; animation: bounce 2s infinite; }
+  @keyframes bounce { 0%, 20%, 50%, 80%, 100% {transform: translateY(0);} 40% {transform: translateY(8px);} 60% {transform: translateY(4px);} }
+</style>

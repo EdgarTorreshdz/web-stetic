@@ -1,0 +1,159 @@
+---
+interface FAQ {
+  question: string;
+  answer: string;
+}
+
+interface Props {
+  title: string;
+  faqs: FAQ[];
+}
+
+const { title, faqs } = Astro.props;
+
+// Lógica para dividir las FAQs en dos columnas
+const midIndex = Math.ceil(faqs.length / 2);
+const leftColumn = faqs.slice(0, midIndex);
+const rightColumn = faqs.slice(midIndex);
+---
+
+<section class="faq-section">
+  <div class="container">
+    <h2 class="faq__title">{title}</h2>
+    <div class="faq__accent-line"></div>
+
+    <div class="faq__grid">
+      <div class="faq__col">
+        {leftColumn.map((faq) => (
+          <details class="faq__item">
+            <summary class="faq__question">
+              {faq.question}
+              <span class="faq__icon">+</span>
+            </summary>
+            <div class="faq__answer">
+              <p>{faq.answer}</p>
+            </div>
+          </details>
+        ))}
+      </div>
+
+      <div class="faq__col">
+        {rightColumn.map((faq) => (
+          <details class="faq__item">
+            <summary class="faq__question">
+              {faq.question}
+              <span class="faq__icon">+</span>
+            </summary>
+            <div class="faq__answer">
+              <p>{faq.answer}</p>
+            </div>
+          </details>
+        ))}
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  :root {
+    --gold: #A58E55;
+    --black: #000000;
+    --white: #ffffff;
+    --grey-border: #e5e5e5;
+  }
+
+  .faq-section {
+    padding: 80px 0;
+    background-color: var(--white);
+    color: var(--black);
+  }
+
+  .container {
+    margin: 0 auto;
+    width: 85%;
+  }
+
+  .faq__title {
+    font-size: 2.2rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    text-align: center;
+    color: var(--gold);
+    margin-bottom: 10px;
+  }
+
+  .faq__accent-line {
+    width: 80px;
+    height: 3px;
+    background-color: var(--gold);
+    margin: 0 auto 50px auto;
+  }
+
+  .faq__grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 0 40px;
+  }
+
+  @media (min-width: 992px) {
+    .faq__grid {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+
+  .faq__item {
+    border-bottom: 1px solid var(--grey-border);
+    margin-bottom: 10px;
+  }
+
+  .faq__item[open] .faq__icon {
+    transform: rotate(45deg);
+    color: var(--black);
+  }
+
+  .faq__question {
+    list-style: none;
+    padding: 22px 0;
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--black);
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    transition: color 0.3s ease;
+  }
+
+  .faq__question:hover {
+    color: var(--gold);
+  }
+
+  .faq__question::-webkit-details-marker {
+    display: none;
+  }
+
+  .faq__icon {
+    font-size: 1.4rem;
+    transition: transform 0.3s ease;
+    color: var(--gold);
+  }
+
+  .faq__answer {
+    padding: 0 0 25px 0;
+    font-size: 1.05rem;
+    line-height: 1.7;
+    color: #444;
+    animation: fadeIn 0.4s ease;
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-10px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  @media (min-width: 768px) {
+    .faq__question { font-size: 1.2rem; }
+  }
+</style>

@@ -1,0 +1,149 @@
+---
+interface Props {
+  title: string;
+  text1: string;
+  text2: string;
+  imageSrc: string;
+  imageAlt: string;
+  bgImage: string; // Imagen para el overlay difuminado
+}
+
+const { title, text1, text2, imageSrc, imageAlt, bgImage } = Astro.props;
+---
+
+<section class="what-is-section">
+  <div class="what-is__bg-overlay" style={`background-image: url('${bgImage}');`}></div>
+  
+  <div class="container">
+    <div class="what-is__grid">
+      <div class="what-is__content">
+        <h2 class="what-is__title">{title}</h2>
+        <div class="what-is__accent-line"></div>
+        <p class="what-is__text what-is__text--highlight">
+          {text1}
+        </p>
+        <p class="what-is__text">
+          {text2}
+        </p>
+      </div>
+
+      <div class="what-is__image-container">
+        <img src={imageSrc} alt={imageAlt} class="what-is__img" />
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  :root {
+    --gold: #A58E55;
+    --black: #000000;
+    --white: #ffffff;
+  }
+
+  .what-is-section {
+    position: relative;
+    padding: 100px 0;
+    background-color: var(--white);
+    color: var(--black);
+    overflow: hidden;
+  }
+
+  .what-is__bg-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+    filter: blur(8px);
+    opacity: 0.07;
+    z-index: 0;
+    pointer-events: none;
+  }
+
+  .container {
+    position: relative;
+    z-index: 1;
+    margin: 0 auto;
+    width: 85%;
+  }
+
+  .what-is__grid {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 40px;
+  }
+
+  @media (min-width: 992px) {
+    .what-is__grid {
+      flex-direction: row;
+      justify-content: space-between;
+      gap: 60px;
+    }
+  }
+
+  .what-is__content {
+    flex: 1.2;
+    text-align: left;
+  }
+
+  .what-is__title {
+    font-size: 1.8rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    line-height: 1.2;
+    margin-bottom: 20px;
+    color: var(--black);
+  }
+
+  @media (min-width: 768px) {
+    .what-is__title { font-size: 2.5rem; }
+  }
+
+  .what-is__accent-line {
+    width: 80px;
+    height: 3px;
+    background-color: var(--gold);
+    margin-bottom: 30px;
+  }
+
+  .what-is__text {
+    font-size: 1rem;
+    line-height: 1.7;
+    margin-bottom: 20px;
+    color: #111111;
+  }
+
+  .what-is__text--highlight {
+    font-size: 1.15rem;
+    font-weight: 600;
+    border-left: 4px solid var(--gold);
+    padding-left: 20px;
+  }
+
+  @media (min-width: 768px) {
+    .what-is__text { font-size: 1.1rem; }
+    .what-is__text--highlight { font-size: 1.3rem; }
+  }
+
+  .what-is__image-container {
+    flex: 1;
+    width: 100%;
+  }
+
+  .what-is__img {
+    width: 100%;
+    height: auto;
+    border-radius: 4px;
+    object-fit: cover;
+    display: block;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+  }
+
+  @media (min-width: 992px) {
+    .what-is__img { max-height: 450px; }
+  }
+</style>

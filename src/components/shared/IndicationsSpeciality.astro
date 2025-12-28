@@ -1,0 +1,124 @@
+---
+import { Icon } from "astro-icon/components";
+
+interface Props {
+  title: string;
+  subtitle: string;
+  features: string[];
+  footerText: string;
+}
+
+const { title, subtitle, features, footerText } = Astro.props;
+---
+
+<section class="indications-section">
+  <div class="container">
+    <div class="indications__content">
+      <h2 class="indications__title">{title}</h2>
+      <div class="indications__accent-line"></div>
+      
+      <p class="indications__subtitle">
+        {subtitle}
+      </p>
+
+      <ul class="indications__list">
+        {features.map((item) => (
+          <li class="indications__item">
+            <Icon name="star" size={16} class="text-gold" /> 
+            <span>{item}</span>
+          </li>
+        ))}
+      </ul>
+
+      <p class="indications__footer">
+        {footerText}
+      </p>
+    </div>
+  </div>
+</section>
+
+<style>
+  :root {
+    --gold: #A58E55;
+    --black: #000000;
+    --white: #ffffff;
+  }
+
+  .indications-section {
+    padding: 100px 0;
+    background-color: var(--white);
+    color: var(--black);
+    text-align: center;
+  }
+
+  .container {
+    margin: 0 auto;
+    width: 85%;
+  }
+
+  .indications__content {
+    max-width: 800px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .indications__title {
+    font-size: 2rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    line-height: 1.2;
+    margin-bottom: 20px;
+  }
+
+  @media (min-width: 768px) {
+    .indications__title { font-size: 3rem; }
+  }
+
+  .indications__accent-line {
+    width: 80px;
+    height: 3px;
+    background-color: var(--gold);
+    margin: 0 auto 30px auto;
+  }
+
+  .indications__subtitle {
+    font-size: 1.2rem;
+    font-weight: 600;
+    margin-bottom: 35px;
+  }
+
+  .indications__list {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 40px 0;
+    width: 100%;
+    max-width: 500px;
+    text-align: left;
+  }
+
+  .indications__item {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    font-size: 1.1rem;
+    padding: 12px 0;
+    border-bottom: 1px solid #f0f0f0;
+  }
+
+  .text-gold {
+    color: var(--gold);
+    flex-shrink: 0;
+  }
+
+  .indications__footer {
+    font-size: 1.1rem;
+    font-style: italic;
+    color: #444;
+    padding: 20px;
+    border-top: 2px solid var(--gold);
+    margin-top: 20px;
+    max-width: 600px;
+  }
+</style>
