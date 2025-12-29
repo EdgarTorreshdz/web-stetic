@@ -25,6 +25,9 @@ const translations = {
 };
 
 const t = translations[lang];
+
+// Nota: Para el video, lo ideal es usar un archivo .mp4 directo. 
+// Si usas Instagram, usaremos un Iframe o el script de Embed.
 ---
 
 <section class="tourism">
@@ -45,23 +48,18 @@ const t = translations[lang];
     <div class="tourism__video-wrapper">
       <div class="video-card">
         <div class="video-card__inner">
-          <video 
-            autoplay 
-            muted 
-            loop 
-            playsinline 
-            poster="/odontologiageneral.webp"
-          >
-            <source src="/dental-tourism-video.mp4" type="video/mp4" />
-          </video>
+          <iframe 
+            src="https://www.instagram.com/p/DPCjErMDkTc/embed/captioned" 
+            class="instagram-iframe"
+            scrolling="no" 
+            allowtransparency="true" 
+            frameborder="0">
+          </iframe>
           
           <div class="video-card__overlay">
             <div class="video-card__badge">
               <Icon name="star" size={14} />
               <span>Playa del Carmen</span>
-            </div>
-            <div class="video-card__play">
-              <div class="play-icon"></div>
             </div>
           </div>
         </div>
@@ -85,6 +83,12 @@ const t = translations[lang];
     overflow: hidden;
   }
 
+  .container {
+    margin: 0 auto;
+    width: 85%;
+    max-width: 1200px;
+  }
+
   .tourism__grid {
     display: grid;
     grid-template-columns: 1fr;
@@ -96,21 +100,6 @@ const t = translations[lang];
     .tourism__grid {
       grid-template-columns: 1.2fr 0.8fr;
     }
-  }
-
-  /* Contenido */
-  .tourism__content {
-    text-align: left;
-  }
-
-  .tourism__subtitle {
-    color: var(--gold);
-    font-size: 0.8rem;
-    font-weight: 700;
-    letter-spacing: 4px;
-    text-transform: uppercase;
-    display: block;
-    margin-bottom: 1rem;
   }
 
   .tourism__title {
@@ -145,7 +134,7 @@ const t = translations[lang];
     color: var(--gold);
   }
 
-  /* Video Card (Estilo Reels/TikTok) */
+  /* Video Card Vertical Style */
   .tourism__video-wrapper {
     display: flex;
     justify-content: center;
@@ -155,13 +144,13 @@ const t = translations[lang];
   .video-card {
     position: relative;
     width: 100%;
-    max-width: 320px; /* Ancho de un video vertical */
+    max-width: 320px; 
     z-index: 2;
   }
 
   .video-card__inner {
     position: relative;
-    aspect-ratio: 9 / 16; /* Formato vertical */
+    aspect-ratio: 9 / 16;
     background-color: var(--black);
     border-radius: 20px;
     overflow: hidden;
@@ -169,26 +158,23 @@ const t = translations[lang];
     border: 4px solid var(--black);
   }
 
-  .video-card__inner video {
+  .instagram-iframe {
     width: 100%;
-    height: 100%;
-    object-fit: cover;
+    height: 115%; /* Ajuste para ocultar bordes del embed */
+    transform: translateY(-5%);
+    border: none;
   }
 
   .video-card__overlay {
     position: absolute;
-    inset: 0;
-    background: linear-gradient(to top, rgba(0,0,0,0.6) 0%, transparent 40%);
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    padding: 1.5rem;
+    top: 1.5rem;
+    left: 1.5rem;
+    z-index: 10;
     pointer-events: none;
   }
 
   .video-card__badge {
-    align-self: flex-start;
-    background: rgba(214, 175, 55, 0.9);
+    background: var(--gold);
     color: white;
     padding: 0.4rem 0.8rem;
     border-radius: 50px;
@@ -200,34 +186,6 @@ const t = translations[lang];
     text-transform: uppercase;
   }
 
-  .video-card__play {
-    align-self: center;
-    margin-bottom: 20%;
-  }
-
-  .play-icon {
-    width: 50px;
-    height: 50px;
-    background: rgba(255,255,255,0.2);
-    backdrop-filter: blur(5px);
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border: 1px solid rgba(255,255,255,0.5);
-  }
-
-  .play-icon::after {
-    content: '';
-    width: 0;
-    height: 0;
-    border-top: 10px solid transparent;
-    border-bottom: 10px solid transparent;
-    border-left: 15px solid white;
-    margin-left: 5px;
-  }
-
-  /* Sombra decorativa trasera */
   .video-card__shadow {
     position: absolute;
     top: 20px;
@@ -237,11 +195,6 @@ const t = translations[lang];
     border: 2px solid var(--gold);
     border-radius: 20px;
     z-index: -1;
-  }
-
-  .container {
-    margin: 0 auto;
-    width: 85%;
   }
 
   @media (max-width: 768px) {

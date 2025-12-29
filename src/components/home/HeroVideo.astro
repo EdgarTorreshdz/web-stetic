@@ -1,0 +1,145 @@
+---
+interface Props {
+  lang: 'en' | 'es';
+  title: string;
+  subtitle: string;
+}
+
+const { lang, title, subtitle } = Astro.props;
+
+const labels = {
+  en: { button: "Schedule Consultation" },
+  es: { button: "Agendar Consulta" }
+};
+
+const t = labels[lang];
+---
+
+<section class="video-hero">
+  <div class="container">
+    <div class="hero__grid">
+      <div class="hero__content">
+        <h1 class="hero__title">{title}</h1>
+        <div class="hero__accent-line"></div>
+        <p class="hero__subtitle">{subtitle}</p>
+        <a href="#contacto" class="hero__btn">{t.button}</a>
+      </div>
+
+      <div class="hero__video-container">
+        <blockquote 
+          class="instagram-media" 
+          data-instgrm-captioned 
+          data-instgrm-permalink="https://www.instagram.com/p/DPCjErMDkTc/" 
+          data-instgrm-version="14"
+        >
+        </blockquote>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script async src="//www.instagram.com/embed.js"></script>
+
+<style>
+  :root {
+    --gold: #D4AF37;
+    --black: #000000;
+    --white: #ffffff;
+  }
+
+  .video-hero {
+    background-color: var(--black);
+    padding: 120px 0 80px 0;
+    min-height: 80vh;
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+  }
+
+  .container {
+    width: 85%;
+    margin: 0 auto;
+    max-width: 1200px;
+  }
+
+  .hero__grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 50px;
+    align-items: center;
+  }
+
+  @media (min-width: 992px) {
+    .hero__grid {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+
+  .hero__content {
+    text-align: left;
+  }
+
+  .hero__title {
+    color: var(--white);
+    font-size: 2.5rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    line-height: 1.1;
+    margin-bottom: 20px;
+  }
+
+  @media (min-width: 768px) {
+    .hero__title { font-size: 3.5rem; }
+  }
+
+  .hero__accent-line {
+    width: 80px;
+    height: 4px;
+    background-color: var(--gold);
+    margin-bottom: 30px;
+  }
+
+  .hero__subtitle {
+    color: #cccccc;
+    font-size: 1.2rem;
+    line-height: 1.6;
+    margin-bottom: 40px;
+    max-width: 500px;
+  }
+
+  .hero__btn {
+    display: inline-block;
+    background-color: var(--gold);
+    color: var(--white);
+    padding: 18px 35px;
+    text-decoration: none;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    transition: transform 0.3s ease;
+  }
+
+  .hero__btn:hover {
+    transform: translateY(-3px);
+    background-color: #bfa030;
+  }
+
+  /* Estilos para el video */
+  .hero__video-container {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    /* Ajuste para que el embed no se vea demasiado alto */
+    max-height: 600px; 
+    overflow: hidden;
+    border-radius: 12px;
+    border: 1px solid rgba(212, 175, 55, 0.3);
+  }
+
+  /* Forzar al embed de Instagram a comportarse mejor */
+  :global(.instagram-media) {
+    margin: 0 !important;
+    width: 100% !important;
+    min-width: 320px !important;
+  }
+</style>

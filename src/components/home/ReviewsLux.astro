@@ -1,6 +1,4 @@
 ---
-import { Icon } from "astro-icon/components";
-
 interface Props {
   lang?: 'en' | 'es';
 }
@@ -9,232 +7,71 @@ const { lang = "en" } = Astro.props;
 
 const translations = {
   en: {
-    title: "Real Reviews from Our International Patients",
-    intro: "Patients from the United States and other countries trust our dental clinic in Playa del Carmen for quality care and reliable results. Our reviews reflect real experiences from international patients who chose Mexico for their dental treatment.",
-    description: "From dental implants to cosmetic procedures, our patients highlight professionalism, attention to detail, and outstanding results.",
-    source: "Google Reviews",
-    reviews: [
-      {
-        name: "John D.",
-        country: "USA",
-        text: "Excellent experience. The English-speaking staff made everything easy, and the cost was a fraction of what I'd pay in California.",
-        rating: 5
-      },
-      {
-        name: "Sarah M.",
-        country: "Canada",
-        text: "Professional, clean, and modern. My veneers look amazing. Highly recommend Stetic Dental for anyone traveling to Playa.",
-        rating: 5
-      },
-      {
-        name: "Robert P.",
-        country: "USA",
-        text: "The dental implants were handled with such care. Truly world-class specialists in Mexico.",
-        rating: 5
-      }
-    ]
+    title: "Excellent on Google",
+    subtitle: "Real Reviews from Our International Patients",
+    description: "Patients from the United States and Canada trust our clinic in Playa del Carmen for quality dental care."
   },
   es: {
-    title: "Opiniones Reales de Nuestros Pacientes Internacionales",
-    intro: "Pacientes de Estados Unidos y otros países confían en nuestra clínica dental en Playa del Carmen por su atención de calidad y resultados confiables.",
-    description: "Desde implantes dentales hasta procedimientos estéticos, nuestros pacientes destacan el profesionalismo, la atención al detalle y los resultados sobresalientes.",
-    source: "Reseñas de Google",
-    reviews: [
-      {
-        name: "John D.",
-        country: "USA",
-        text: "Excelente experiencia. El personal bilingüe facilitó todo, y el costo fue una fracción de lo que pagaría en California.",
-        rating: 5
-      },
-      {
-        name: "Sarah M.",
-        country: "Canadá",
-        text: "Profesional, limpio y moderno. Mis carillas se ven increíbles. Recomiendo ampliamente Stetic Dental.",
-        rating: 5
-      },
-      {
-        name: "Robert P.",
-        country: "USA",
-        text: "Los implantes dentales fueron manejados con mucho cuidado. Especialistas de clase mundial en México.",
-        rating: 5
-      }
-    ]
+    title: "Excelente en Google",
+    subtitle: "Opiniones Reales de Nuestros Pacientes Internacionales",
+    description: "Pacientes de Estados Unidos y Canadá confían en nuestra clínica en Playa del Carmen por su atención dental de calidad."
   }
 };
 
 const t = translations[lang];
 ---
 
-<section class="reviews-lux">
+<section class="google-reviews-section">
   <div class="container">
-    <div class="reviews-lux__header">
-      <h2 class="reviews-lux__title">{t.title}</h2>
-      <div class="reviews-lux__intro-box">
-        <p class="reviews-lux__intro">
-          <strong>{t.source}:</strong> {t.intro}
-        </p>
-        <p class="reviews-lux__description">{t.description}</p>
-      </div>
+    <div class="reviews-header text-center mb-5">
+      <h2 class="section-title">{t.subtitle}</h2>
+      <p class="section-description">{t.description}</p>
     </div>
 
-    <div class="reviews-lux__grid">
-      {t.reviews.map((review) => (
-        <div class="review-card">
-          <div class="review-card__stars">
-            {[...Array(review.rating)].map(() => (
-              <Icon name="star" size={16} class="star-icon" />
-            ))}
-          </div>
-          <p class="review-card__text">"{review.text}"</p>
-          <div class="review-card__author">
-            <div class="author-info">
-              <span class="author-name">{review.name}</span>
-              <span class="author-location">{review.country}</span>
-            </div>
-            <Icon name="insignia" size={24} class="verified-icon" />
-          </div>
-        </div>
-      ))}
+    <div class="reviews-widget-container">
+      <script src="https://static.elfsight.com/platform/platform.js" async></script>
+      <div class="elfsight-app-093f8bfd-b23b-449a-8c00-526949c767e0" data-elfsight-app-lazy></div>
     </div>
   </div>
 </section>
 
 <style>
-  :root {
-    --gold: #D4AF37;
-    --black: #000000;
-    --white: #ffffff;
-    --text-gray: #444444;
+  .google-reviews-section {
+    padding: 80px 0;
+    background-color: #f8f9fa; /* Fondo gris claro similar a tu código base */
   }
 
-  .reviews-lux {
-    background-color: var(--white);
-    padding: 8rem 0;
-  }
-
-  .reviews-lux__header {
-    text-align: center;
-    max-width: 900px;
-    margin: 0 auto 5rem;
-  }
-
-  .reviews-lux__subtitle {
-    color: var(--gold);
-    font-size: 0.8rem;
-    font-weight: 700;
-    letter-spacing: 4px;
+  .section-title {
+    font-size: 2.5rem;
+    font-weight: 800;
+    color: #000;
     text-transform: uppercase;
-    display: block;
     margin-bottom: 1rem;
   }
 
-  .reviews-lux__title {
-    font-size: 2.5rem;
-    font-weight: 800;
-    color: var(--black);
-    line-height: 1.1;
-    text-transform: uppercase;
-    margin-bottom: 2rem;
-  }
-
-  .reviews-lux__intro-box {
-    text-align: center;
-    color: var(--text-gray);
-    line-height: 1.6;
+  .section-description {
     font-size: 1.1rem;
-  }
-
-  .reviews-lux__intro strong {
-    color: var(--gold);
-  }
-
-  .reviews-lux__description {
-    margin-top: 1rem;
-    font-style: italic;
-  }
-
-  /* Grid de Reseñas */
-  .reviews-lux__grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 2rem;
-  }
-
-  .review-card {
-    background-color: #fcfcfc;
-    padding: 3rem 2rem;
-    border: 1px solid #eeeeee;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    transition: all 0.3s ease;
-  }
-
-  .review-card:hover {
-    border-color: var(--gold);
-    box-shadow: 0 10px 30px rgba(0,0,0,0.05);
-    transform: translateY(-5px);
-  }
-
-  .review-card__stars {
-    display: flex;
-    gap: 4px;
-    margin-bottom: 1.5rem;
-  }
-
-  .star-icon {
-    color: var(--gold);
-  }
-
-  .review-card__text {
-    font-size: 1rem;
-    color: var(--black);
-    line-height: 1.6;
-    font-style: italic;
-    margin-bottom: 2rem;
-  }
-
-  .review-card__author {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    border-top: 1px solid #eeeeee;
-    padding-top: 1.5rem;
-  }
-
-  .author-info {
-    display: flex;
-    flex-direction: column;
-  }
-
-  .author-name {
-    font-weight: 800;
-    color: var(--black);
-    text-transform: uppercase;
-    font-size: 0.9rem;
-  }
-
-  .author-location {
-    font-size: 0.8rem;
-    color: var(--gold);
-    font-weight: 600;
-  }
-
-  .verified-icon {
-    color: #4CAF50; /* Verde de verificado o podrías usar var(--gold) */
-    opacity: 0.7;
-  }
-
-  .container {
+    color: #666;
+    max-width: 800px;
     margin: 0 auto;
-    width: 85%;
+  }
+
+  .reviews-widget-container {
+    background: white;
+    border-radius: 15px;
+    padding: 20px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+  }
+
+  /* Ajuste de contenedores para que coincida con el ancho de tu web */
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    width: 90%;
   }
 
   @media (max-width: 768px) {
-    .container {
-      width: 90%; 
-    }
-    .reviews-lux__title {
+    .section-title {
       font-size: 1.8rem;
     }
   }
