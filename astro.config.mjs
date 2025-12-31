@@ -1,15 +1,16 @@
-// @ts-check
+// astro.config.mjs
 import { defineConfig } from 'astro/config';
-import react from '@astrojs/react'
+import react from '@astrojs/react';
 import icon from 'astro-icon';
-// https://astro.build/config
+
 export default defineConfig({
-    integrations: [react(),  icon()],
-    i18n: {
+  integrations: [react(), icon()],
+  i18n: {
     defaultLocale: 'en',
     locales: ['en', 'es'],
     routing: {
-      prefixDefaultLocale: false
+      prefixDefaultLocale: true, // Ahora inglés será /en/ y español /es/
+      redirectToDefaultLocale: true 
     }
   }
 });

@@ -1,0 +1,24 @@
+---
+export async function getStaticPaths() {
+  return [
+    { params: { lang: 'en', about: 'about' } },
+    { params: { lang: 'es', about: 'nosotros' } },
+  ];
+}
+
+const { lang } = Astro.params as { lang: 'en' | 'es' };
+import Layout from "../../layouts/Layout.astro"
+import HeaderNosotros from "../../components/nosotros/HeaderNosotros.astro"
+import SectionNosotros from "../../components/nosotros/SectionNosotros.astro"
+import Instalaciones from "../../components/nosotros/Instalaciones.astro"
+const titles = {
+  en: "Dentist in Veracruz & Playa del Carmen | Stetic Dental Clinic",
+  es: "Dentista en Veracruz & Playa del Carmen | Stetic Dental Clinic"
+};
+---
+
+<Layout title={titles[lang]} lang={lang}>
+	<HeaderNosotros/>
+	<SectionNosotros/>
+	<Instalaciones/>
+</Layout>

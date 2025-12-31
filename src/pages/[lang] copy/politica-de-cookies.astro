@@ -1,0 +1,82 @@
+---
+export function getStaticPaths() {
+  return [
+    { params: { lang: 'en' } },
+    { params: { lang: 'es' } },
+  ];
+}
+
+const { lang } = Astro.params as { lang: 'en' | 'es' };
+// PoliticaCookies.astro
+import Layout from "../../layouts/Layout.astro";
+---
+
+<Layout title={lang === 'es' ? "Política de Cookies" : "Cookie Policy"} lang={lang}>
+  <section class="cookies">
+    <div class="cookies__container">
+      <h1 class="cookies__title">Política de Cookies</h1>
+
+      <p>
+        Esta web de <strong>Stetic Dental Clinic</strong> utiliza cookies propias y de terceros para mejorar la eficiencia
+        de sus sitios web y elaboración de perfiles basados en los hábitos de navegación del usuario y
+        ofrecer contenidos adaptados a sus intereses.
+      </p>
+
+      <p>
+        Las cookies son el Archivo de datos que se almacena en el disco duro del equipo de cómputo o del
+        dispositivo de comunicaciones electrónicas de un usuario al navegar en un sitio de internet
+        específico, el cual permite intercambiar información de estado entre dicho sitio y el navegador del
+        usuario. La información de estado puede revelar medios de identificación de sesión, autenticación
+        o preferencias del usuario, así como cualquier dato almacenado por el navegador respecto al sitio
+        de internet.
+      </p>
+
+      <p>
+        <strong>Stetic Dental Clinic</strong> utiliza cookies para facilitar la navegación por su portal, por motivos de
+        seguridad y para obtener una mayor eficacia y personalización de los servicios ofrecidos a los
+        Usuarios mediante el análisis de navegación.
+      </p>
+
+      <p>
+        Si quisiese retirar en cualquier momento su consentimiento relacionado con la presente Política de
+        Cookies, deberá eliminar las cookies almacenadas a través de los ajustes y configuraciones de su
+        navegador de Internet
+      </p>
+    </div>
+  </section>
+</Layout>
+
+<style>
+  /* === Estilos móviles primero === */
+  .cookies {
+    background: #fafafa;
+    padding: 2rem 1rem;
+    font-family: "Montserrat", sans-serif;
+    color: #333;
+    line-height: 1.6;
+  }
+
+  .cookies__container {
+    max-width: 880px;
+    margin: 0 auto;
+  }
+
+  .cookies__title {
+    font-size: 1.75rem;
+    margin-bottom: 1rem;
+    color: #0e4675;
+    text-align: center;
+  }
+
+  /* === Desktop === */
+  @media (min-width: 768px) {
+    .cookies {
+      padding: 3rem 2rem;
+    }
+
+    .cookies__title {
+      font-size: 2.25rem;
+      text-align: left;
+    }
+  }
+</style>

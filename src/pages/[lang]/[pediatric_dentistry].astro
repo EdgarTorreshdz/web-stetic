@@ -1,0 +1,26 @@
+---
+export async function getStaticPaths() {
+  return [
+    { params: { lang: 'en', pediatric_dentistry: 'pediatric-dentistry' } },
+    { params: { lang: 'es', pediatric_dentistry: 'odontopediatria' } },
+  ];
+}
+
+const { lang } = Astro.params as { lang: 'en' | 'es' };
+import Layout from "../../layouts/Layout.astro"
+import HeaderEspecialidad from "../../components/odontopediatria/HeaderEspecialidad.astro"
+import NavegacionEspecialidad from "../../components/odontopediatria/NavegacionEspecialidad.astro"
+import BreadCrumbs from "../../components/odontopediatria/BreadCrumbs.astro"
+import AboutEspecialidad from "../../components/odontopediatria/AboutEspecialidad.astro"
+import AboutOtherEspecialidad from "../../components/odontopediatria/AboutOtherEspecialidad.astro"
+import TestimoniosEspecialidad from "../../components/odontopediatria/TestimoniosEspecialidad.astro"
+---
+
+<Layout title={lang === 'es' ? "Odontopediatría" : "Pediatric Dentistry"} lang={lang}>
+    <HeaderEspecialidad />
+    <BreadCrumbs />
+    <NavegacionEspecialidad />
+    <AboutEspecialidad />
+    <AboutOtherEspecialidad />
+    <TestimoniosEspecialidad />
+</Layout>

@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import DropdownEspecialidades from './DropdownEspecialidades';
 import LanguagePicker from './LanguagePicker';
+import { routes } from '../../i18n/ui';
 
 const Navbar = ({ lang = 'en' }) => {
   const [currentPath, setCurrentPath] = useState('');
   const prefix = `/${lang}`;
   const goldColor = '#D4AF37';
   const blackColor = '#000000';
-  const whiteColor = '#ffffff';
 
   useEffect(() => {
     if (typeof window !== 'undefined') {
@@ -15,137 +15,86 @@ const Navbar = ({ lang = 'en' }) => {
     }
   }, []);
 
-  const isActive = (path) => {
-    const linkPath = `${prefix}${path}`.replace(/\/$/, "");
+  // FUNCIÓN CRÍTICA: Busca la traducción exacta en ui.ts
+  const getLocalizedPath = (key) => {
+    const slug = routes[lang]?.[key] || key;
+    // Evita barras dobles al final y asegura el prefijo
+    const path = `${prefix}/${slug}`.replace(/\/+$/, "");
+    return path || `${prefix}/`;
+  };
+
+  const isActive = (key) => {
+    const targetPath = key === '/' ? prefix : getLocalizedPath(key);
     const activePath = currentPath.replace(/\/$/, "");
-    if (path === '/' && (activePath === prefix || activePath === "")) return true;
-    return activePath === linkPath;
+    return activePath === targetPath;
   };
 
-  const styles = {
-    nav: {
-      display: 'flex',
-      justifyContent: 'flex-end',
-      alignItems: 'center',
-      gap: '5px',
-    },
-    link: (active) => ({
-      color: active ? goldColor : blackColor,
-      textDecoration: 'none',
-      padding: '5px 12px',
-      textTransform: 'uppercase',
-      fontSize: '15px',
-      fontWeight: '700',
-      letterSpacing: '0.8px',
-      transition: 'color 0.3s ease',
-    }),
-    ctaButton: {
-      backgroundColor: goldColor,
-      color: whiteColor,
-      padding: '10px 20px',
-      borderRadius: '4px',
-      textDecoration: 'none',
-      textTransform: 'uppercase',
-      fontSize: '14px',
-      fontWeight: '800',
-      letterSpacing: '1px',
-      marginLeft: '10px',
-      transition: 'all 0.3s ease',
-      boxShadow: '0 4px 10px rgba(212, 175, 55, 0.2)',
-    }
-  };
-
+  // Labels actualizados con Restore y Enhance que faltaban
   const labels = {
     en: { 
       home: 'Home', 
       restore: 'Restore Your Smile', 
-      enhance: 'Enhance Your Smile',
-      tourism: 'Dental Tourism',
-      blog: 'Blog',
+      enhance: 'Enhance Your Smile', 
+      tourism: 'Dental Tourism', 
+      blog: 'Blog', 
       contact: 'Schedule Consultation' 
     },
     es: { 
       home: 'Inicio', 
       restore: 'Restaura tu Sonrisa', 
-      enhance: 'Mejora tu Sonrisa',
-      tourism: 'Turismo Dental',
-      blog: 'Blog',
+      enhance: 'Mejora tu Sonrisa', 
+      tourism: 'Turismo Dental', 
+      blog: 'Blog', 
       contact: 'Agendar Consulta' 
     }
   };
 
   const t = labels[lang] || labels.en;
 
-  const handleMouseEnter = (e) => (e.currentTarget.style.color = goldColor);
-  const handleMouseLeave = (e, active) => {
-    if (!active) e.currentTarget.style.color = blackColor;
-  };
+  const linkStyle = (key) => ({
+    color: isActive(key) ? goldColor : blackColor,
+    textDecoration: 'none',
+    padding: '5px 12px',
+    fontWeight: '700',
+    textTransform: 'uppercase',
+    fontSize: '15px'
+  });
 
   return (
-    <nav style={styles.nav}>
+    <nav style={{ display: 'flex', alignItems: 'center', gap: '5px', justifyContent: 'flex-end' }}>
       {/* HOME */}
-      <a 
-        style={styles.link(isActive('/'))} 
-        href={`${prefix}/`}
-        onMouseEnter={handleMouseEnter}
-        onMouseLeave={(e) => handleMouseLeave(e, isActive('/'))}
-      >
+      <a style={linkStyle('/')} href={`${prefix}/`}>
         {t.home}
       </a>
       
-      {/* RESTORE DROPDOWN */}
-      <DropdownEspecialidades 
-        lang={lang} 
-        currentPath={currentPath} 
-        category="restore" 
-        label={t.restore} 
-      />
+      {/* DROPDOWNS: Asegúrate que dentro de estos componentes uses getLocalizedPath con las keys de ui.ts */}
+      <DropdownEspecialidades lang={lang} currentPath={currentPath} category="restore" label={t.restore} />
+      <DropdownEspecialidades lang={lang} currentPath={currentPath} category="enhance" label={t.enhance} />
 
-      {/* ENHANCE DROPDOWN */}
-      <DropdownEspecialidades 
-        lang={lang} 
-        currentPath={currentPath} 
-        category="enhance" 
-        label={t.enhance} 
-      />
-
-      {/* DENTAL TOURISM */}
-      <a 
-        style={styles.link(isActive('/turismo-dental'))} 
-        href={`${prefix}/turismo-dental`}
-        onMouseEnter={handleMouseEnter}
-        onMouseLeave={(e) => handleMouseLeave(e, isActive('/turismo-dental'))}
-      >
+      {/* DENTAL TOURISM: Key 'dental_tourism' coincide con ui.ts */}
+      <a style={linkStyle('dental_tourism')} href={getLocalizedPath('dental_tourism')}>
         {t.tourism}
       </a>
 
-      {/* BLOG */}
-      <a 
-        style={styles.link(isActive('/blog'))} 
-        href={`${prefix}/blog`}
-        onMouseEnter={handleMouseEnter}
-        onMouseLeave={(e) => handleMouseLeave(e, isActive('/blog'))}
-      >
+      {/* BLOG: Key 'blog' coincide con ui.ts */}
+      <a style={linkStyle('blog')} href={getLocalizedPath('blog')}>
         {t.blog}
       </a>
       
-      {/* IDIOMA */}
-      <div style={{ marginLeft: '5px', marginRight: '10px' }}>
-        <LanguagePicker currentLang={lang} />
-      </div>
+      <LanguagePicker currentLang={lang} />
 
-      {/* CTA BUTTON - Reemplaza Contact/Testimonios/About */}
+      {/* CONTACTO: Key 'contact' coincide con ui.ts */}
       <a 
-        style={styles.ctaButton} 
-        href={`${prefix}/contacto`}
-        onMouseEnter={(e) => {
-          e.currentTarget.style.backgroundColor = blackColor;
-          e.currentTarget.style.transform = 'translateY(-2px)';
-        }}
-        onMouseLeave={(e) => {
-          e.currentTarget.style.backgroundColor = goldColor;
-          e.currentTarget.style.transform = 'translateY(0)';
-        }}
+        style={{ 
+          backgroundColor: goldColor, 
+          color: '#fff', 
+          padding: '10px 20px', 
+          borderRadius: '4px', 
+          textDecoration: 'none', 
+          fontWeight: '800',
+          marginLeft: '10px'
+        }} 
+        href={getLocalizedPath('contact')}
       >
         {t.contact}
       </a>

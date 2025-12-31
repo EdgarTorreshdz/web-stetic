@@ -1,0 +1,26 @@
+---
+export function getStaticPaths() {
+  return [
+    { params: { lang: 'en' } },
+    { params: { lang: 'es' } },
+  ];
+}
+
+const { lang } = Astro.params as { lang: 'en' | 'es' };
+import Layout from "../../layouts/Layout.astro"
+import HeaderEspecialidad from "../../components/endodoncia/HeaderEspecialidad.astro"
+import NavegacionEspecialidad from "../../components/endodoncia/NavegacionEspecialidad.astro"
+import BreadCrumbs from "../../components/endodoncia/BreadCrumbs.astro"
+import AboutEspecialidad from "../../components/endodoncia/AboutEspecialidad.astro"
+import AboutOtherEspecialidad from "../../components/endodoncia/AboutOtherEspecialidad.astro"
+import TestimoniosEspecialidad from "../../components/endodoncia/TestimoniosEspecialidad.astro"
+---
+
+<Layout title={lang === 'es' ? "Endodoncia" : "Endodontics"} lang={lang}>
+    <HeaderEspecialidad />
+    <BreadCrumbs />
+    <NavegacionEspecialidad />
+    <AboutEspecialidad />
+    <AboutOtherEspecialidad />
+    <TestimoniosEspecialidad />
+</Layout>

@@ -1,107 +1,58 @@
 import React from "react";
+import { routes } from "../../i18n/ui";
 
 const DropdownEspecialidades = ({ lang = 'en', currentPath, category, label }) => {
   const [open, setOpen] = React.useState(false);
   const prefix = `/${lang}`;
-  const goldColor = '#D4AF37';
 
   const services = {
     en: {
       restore: [
-        { title: "General Dentistry", url: "/especialidades" },
-        { title: "Endodontics", url: "/endodoncia" },
-        { title: "Surgery", url: "/cirugia" },
-        { title: "Rehabilitation", url: "/rehabilitacion" },
-        { title: "Pediatric Dentistry", url: "/odontopediatria" },
+        { title: "General Dentistry", key: "general_dentistry" },
+        { title: "Endodontics", key: "endodontics" },
+        { title: "Surgery", key: "oral_surgery" },
+        { title: "Rehabilitation", key: "dental_rehabilitation" },
+        { title: "Pediatric Dentistry", key: "pediatric_dentistry" },
       ],
       enhance: [
-        { title: "Esthetic Dentistry", url: "/odontologia-estetica" },
-        { title: "Orthodontics", url: "/ortodoncia" },
-        { title: "Orthopedics", url: "/ortopedia" },
+        { title: "Esthetic Dentistry", key: "cosmetic_dentistry" },
+        { title: "Orthodontics", key: "orthodontics" },
+        { title: "Orthopedics", key: "orthopedics" },
       ]
     },
     es: {
       restore: [
-        { title: "Odontología General", url: "/especialidades" },
-        { title: "Endodoncia", url: "/endodoncia" },
-        { title: "Cirugía", url: "/cirugia" },
-        { title: "Rehabilitación", url: "/rehabilitacion" },
-        { title: "Odontopediatría", url: "/odontopediatria" },
+        { title: "Odontología General", key: "general_dentistry" },
+        { title: "Endodoncia", key: "endodontics" },
+        { title: "Cirugía", key: "oral_surgery" },
+        { title: "Rehabilitación", key: "dental_rehabilitation" },
+        { title: "Odontopediatría", key: "pediatric_dentistry" },
       ],
       enhance: [
-        { title: "Odontología Estética", url: "/odontologia-estetica" },
-        { title: "Ortodoncia", url: "/ortodoncia" },
-        { title: "Ortopedia", url: "/ortopedia" },
+        { title: "Odontología Estética", key: "cosmetic_dentistry" },
+        { title: "Ortodoncia", key: "orthodontics" },
+        { title: "Ortopedia", key: "orthopedics" },
       ]
     }
   };
-
+  
   const currentServices = services[lang][category];
 
-  const styles = {
-    wrapper: { position: "relative", display: "inline-block" },
-    trigger: {
-      color: open ? goldColor : "#000000",
-      textDecoration: "none",
-      padding: "5px 12px",
-      textTransform: "uppercase",
-      fontSize: "16px",
-      fontWeight: "700",
-      letterSpacing: "0.8px",
-      cursor: "pointer",
-      display: "flex",
-      alignItems: "center",
-      transition: "all 0.3s ease",
-    },
-    dropdown: {
-      position: "absolute",
-      top: "100%",
-      left: "0",
-      minWidth: "220px",
-      backgroundColor: "#ffffff",
-      padding: "10px 0",
-      zIndex: 1000,
-      boxShadow: "0px 8px 16px rgba(0,0,0,0.1)",
-      borderTop: `3px solid ${goldColor}`,
-      display: open ? "block" : "none",
-    },
-    item: {
-      display: "block",
-      padding: "10px 20px",
-      color: "#000000",
-      textDecoration: "none",
-      fontSize: "14px",
-      fontWeight: "600",
-      textTransform: "uppercase",
-      transition: "background 0.3s, color 0.3s",
-    }
+  const getLocalizedUrl = (key) => {
+    // Busca el slug traducido en el diccionario
+    const slug = routes[lang]?.[key] || key;
+    return `${prefix}/${slug}`;
   };
 
   return (
-    <div 
-      style={styles.wrapper} 
-      onMouseEnter={() => setOpen(true)} 
-      onMouseLeave={() => setOpen(false)}
-    >
-      <div style={styles.trigger}>
-        {label}
-        <span style={{ marginLeft: "6px", fontSize: "10px" }}>▼</span>
-      </div>
-
-      <div style={styles.dropdown}>
+    <div onMouseEnter={() => setOpen(true)} onMouseLeave={() => setOpen(false)} style={{position: 'relative', display: 'inline-block'}}>
+      <div style={{cursor: 'pointer', padding: '5px 12px', fontWeight: '700'}}>{label} ▼</div>
+      <div style={{display: open ? 'block' : 'none', position: 'absolute', backgroundColor: 'white', minWidth: '220px', boxShadow: '0 8px 16px rgba(0,0,0,0.1)', zIndex: 1000}}>
         {currentServices.map((service, index) => (
           <a
             key={index}
-            href={`${prefix}${service.url}`}
-            style={styles.item}
-            onMouseEnter={(e) => {
-              e.currentTarget.style.backgroundColor = "#f9f9f9";
-              e.currentTarget.style.color = goldColor;
-            }}
-            onMouseLeave={(e) => {
-              e.currentTarget.style.backgroundColor = "transparent";
-              e.currentTarget.style.color = "#000000";
-            }}
+            href={getLocalizedUrl(service.key)} // Genera /en/oral-surgery o /es/cirugia
+            style={{display: 'block', padding: '10px 20px', textDecoration: 'none', color: 'black', fontSize: '14px'}}
           >
             {service.title}
           </a>

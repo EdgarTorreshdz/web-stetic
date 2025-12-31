@@ -1,0 +1,26 @@
+---
+export async function getStaticPaths() {
+  return [
+    { params: { lang: 'en', orthopedics: 'orthopedics' } },
+    { params: { lang: 'es', orthopedics: 'ortopedia' } },
+  ];
+}
+
+const { lang } = Astro.params as { lang: 'en' | 'es' };
+import Layout from "../../layouts/Layout.astro"
+import HeaderEspecialidad from "../../components/ortopedia/HeaderEspecialidad.astro"
+import NavegacionEspecialidad from "../../components/ortopedia/NavegacionEspecialidad.astro"
+import BreadCrumbs from "../../components/ortopedia/BreadCrumbs.astro"
+import AboutEspecialidad from "../../components/ortopedia/AboutEspecialidad.astro"
+import AboutOtherEspecialidad from "../../components/ortopedia/AboutOtherEspecialidad.astro"
+import TestimoniosEspecialidad from "../../components/ortopedia/TestimoniosEspecialidad.astro"
+---
+
+<Layout title={lang === 'es' ? "Ortopedia Maxilofacial" : "Maxillofacial Orthopedics"} lang={lang}>
+    <HeaderEspecialidad />
+    <BreadCrumbs />
+    <NavegacionEspecialidad />
+    <AboutEspecialidad />
+    <AboutOtherEspecialidad />
+    <TestimoniosEspecialidad />
+</Layout>
