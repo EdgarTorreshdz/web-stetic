@@ -4,50 +4,43 @@ import { routes } from "../../i18n/ui";
 const DropdownEspecialidades = ({ lang = 'en', currentPath, category, label }) => {
   const [open, setOpen] = React.useState(false);
   const prefix = `/${lang}`;
+  const goldColor = '#D4AF37';
 
   const services = {
     en: {
       restore: [
         { title: "General Dentistry", key: "general_dentistry" },
-        { title: "Endodontics", key: "endodontics" },
-        { title: "Surgery", key: "oral_surgery" },
-        { title: "Rehabilitation", key: "dental_rehabilitation" },
+        { title: "Root Canal (Endodontics)", key: "endodontics" },
+        { title: "Dental Implants", key: "dental_implants" },
+        { title: "Dental Crowns", key: "dental_crowns" },
+        { title: "Teeth Cleaning", key: "teeth_cleaning" },
+        { title: "Oral Surgery", key: "oral_surgery" },
         { title: "Pediatric Dentistry", key: "pediatric_dentistry" },
       ],
       enhance: [
-        { title: "Esthetic Dentistry", key: "cosmetic_dentistry" },
-        { title: "Orthodontics", key: "orthodontics" },
-        { title: "Orthopedics", key: "orthopedics" },
-        { title: "Dental Implants", key: "dental_implants" },
         { title: "Smile Design", key: "smile_design" },
-        { title: "Dental Veneers", key: "veneers" },
-        { title: "Teeth Cleaning", key: "teeth_cleaning" },
-        { title: "Dental Crowns", key: "dental_crowns" },
-        { title: "Teeth Whitening", key: "teeth_whitening" },
+        { title: "Porcelain Veneers", key: "veneers" },
         { title: "Invisalign", key: "invisalign" },
-        { title: "Dental Tourism", key: "dental_tourism" }
+        { title: "Teeth Whitening", key: "teeth_whitening" },
+        { title: "Cosmetic Dentistry", key: "cosmetic_dentistry" },
       ]
     },
     es: {
       restore: [
         { title: "Odontología General", key: "general_dentistry" },
         { title: "Endodoncia", key: "endodontics" },
-        { title: "Cirugía", key: "oral_surgery" },
-        { title: "Rehabilitación", key: "dental_rehabilitation" },
+        { title: "Implantes Dentales", key: "dental_implants" },
+        { title: "Coronas Dentales", key: "dental_crowns" },
+        { title: "Limpieza Dental", key: "teeth_cleaning" },
+        { title: "Cirugía Oral", key: "oral_surgery" },
         { title: "Odontopediatría", key: "pediatric_dentistry" },
       ],
       enhance: [
-        { title: "Odontología Estética", key: "cosmetic_dentistry" },
-        { title: "Ortodoncia", key: "orthodontics" },
-        { title: "Ortopedia", key: "orthopedics" },
-        { title: "Implantes Dentales", key: "dental_implants" },
         { title: "Diseño de Sonrisa", key: "smile_design" },
         { title: "Carillas Dentales", key: "veneers" },
-        { title: "Limpieza Dental", key: "teeth_cleaning" },
-        { title: "Coronas Dentales", key: "dental_crowns" },
-        { title: "Blanqueamiento Dental", key: "teeth_whitening" },
         { title: "Invisalign", key: "invisalign" },
-        { title: "Turismo Dental", key: "dental_tourism" }
+        { title: "Blanqueamiento Dental", key: "teeth_whitening" },
+        { title: "Odontología Estética", key: "cosmetic_dentistry" },
       ]
     }
   };
@@ -55,20 +48,54 @@ const DropdownEspecialidades = ({ lang = 'en', currentPath, category, label }) =
   const currentServices = services[lang][category];
 
   const getLocalizedUrl = (key) => {
-    // Busca el slug traducido en el diccionario
     const slug = routes[lang]?.[key] || key;
     return `${prefix}/${slug}`;
   };
 
   return (
-    <div onMouseEnter={() => setOpen(true)} onMouseLeave={() => setOpen(false)} style={{position: 'relative', display: 'inline-block'}}>
-      <div style={{cursor: 'pointer', padding: '5px 12px', fontWeight: '700'}}>{label} ▼</div>
-      <div style={{display: open ? 'block' : 'none', position: 'absolute', backgroundColor: 'white', minWidth: '220px', boxShadow: '0 8px 16px rgba(0,0,0,0.1)', zIndex: 1000}}>
+    <div 
+      onMouseEnter={() => setOpen(true)} 
+      onMouseLeave={() => setOpen(false)} 
+      style={{position: 'relative', display: 'inline-block'}}
+    >
+      <div style={{
+        cursor: 'pointer', 
+        padding: '5px 12px', 
+        fontWeight: '700', 
+        textTransform: 'uppercase', 
+        fontSize: '15px',
+        color: open ? goldColor : 'black',
+        transition: 'color 0.3s ease'
+      }}>
+        {label} <span style={{fontSize: '10px', marginLeft: '4px'}}>{open ? '▲' : '▼'}</span>
+      </div>
+
+      <div style={{
+        display: open ? 'block' : 'none', 
+        position: 'absolute', 
+        backgroundColor: 'white', 
+        minWidth: '240px', 
+        boxShadow: '0 8px 16px rgba(0,0,0,0.1)', 
+        zIndex: 1000,
+        top: '100%',
+        left: '0',
+        borderTop: `3px solid ${goldColor}`
+      }}>
         {currentServices.map((service, index) => (
           <a
             key={index}
-            href={getLocalizedUrl(service.key)} // Genera /en/oral-surgery o /es/cirugia
-            style={{display: 'block', padding: '10px 20px', textDecoration: 'none', color: 'black', fontSize: '14px'}}
+            href={getLocalizedUrl(service.key)}
+            style={{
+              display: 'block', 
+              padding: '12px 20px', 
+              textDecoration: 'none', 
+              color: 'black', 
+              fontSize: '14px',
+              fontWeight: '600',
+              borderBottom: '1px solid #f5f5f5 transition 0.2s'
+            }}
+            onMouseEnter={(e) => e.target.style.backgroundColor = '#f9f9f9'}
+            onMouseLeave={(e) => e.target.style.backgroundColor = 'transparent'}
           >
             {service.title}
           </a>

@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react';
+import { routes } from '../../i18n/ui';
 
 const NavbarMobile = ({ lang = 'en' }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [currentPath, setCurrentPath] = useState('');
-  const [openSection, setOpenSection] = useState(null); // Para manejar los colapsables de servicios
+  const [openSection, setOpenSection] = useState(null); 
   
   const prefix = `/${lang}`;
   const goldColor = '#D4AF37';
@@ -18,18 +19,23 @@ const NavbarMobile = ({ lang = 'en' }) => {
 
   const toggleMenu = () => {
     setIsOpen(!isOpen);
-    setOpenSection(null); // Resetear submenús al cerrar/abrir
+    setOpenSection(null); 
   };
 
   const toggleSection = (section) => {
     setOpenSection(openSection === section ? null : section);
   };
 
-  const isActive = (path) => {
-    const linkPath = `${prefix}${path}`.replace(/\/$/, "");
+  const getLocalizedPath = (key) => {
+    const slug = routes[lang]?.[key] || key;
+    const path = `${prefix}/${slug}`.replace(/\/+$/, "");
+    return path || `${prefix}/`;
+  };
+
+  const isActive = (key) => {
+    const targetPath = key === '/' ? prefix : getLocalizedPath(key);
     const activePath = currentPath.replace(/\/$/, "");
-    if (path === '/' && (activePath === prefix || activePath === "")) return true;
-    return activePath === linkPath;
+    return activePath === targetPath;
   };
 
   const labels = {
@@ -51,39 +57,48 @@ const NavbarMobile = ({ lang = 'en' }) => {
     }
   };
 
+  // ACTUALIZADO: Ahora coincide exactamente con el Dropdown de Desktop
   const services = {
     restore: lang === 'es' 
       ? [
-          { title: "Odontología General", url: "/especialidades" },
-          { title: "Endodoncia", url: "/endodoncia" },
-          { title: "Cirugía", url: "/cirugia" },
-          { title: "Rehabilitación", url: "/rehabilitacion" },
-          { title: "Odontopediatría", url: "/odontopediatria" }
+          { title: "Odontología General", key: "general_dentistry" },
+          { title: "Endodoncia", key: "endodontics" },
+          { title: "Implantes Dentales", key: "dental_implants" },
+          { title: "Coronas Dentales", key: "dental_crowns" },
+          { title: "Limpieza Dental", key: "teeth_cleaning" },
+          { title: "Cirugía Oral", key: "oral_surgery" },
+          { title: "Odontopediatría", key: "pediatric_dentistry" },
         ]
       : [
-          { title: "General Dentistry", url: "/especialidades" },
-          { title: "Endodontics", url: "/endodoncia" },
-          { title: "Surgery", url: "/cirugia" },
-          { title: "Rehabilitation", url: "/rehabilitacion" },
-          { title: "Pediatric Dentistry", url: "/odontopediatria" }
+          { title: "General Dentistry", key: "general_dentistry" },
+          { title: "Root Canal (Endodontics)", key: "endodontics" },
+          { title: "Dental Implants", key: "dental_implants" },
+          { title: "Dental Crowns", key: "dental_crowns" },
+          { title: "Teeth Cleaning", key: "teeth_cleaning" },
+          { title: "Oral Surgery", key: "oral_surgery" },
+          { title: "Pediatric Dentistry", key: "pediatric_dentistry" },
         ],
     enhance: lang === 'es'
       ? [
-          { title: "Odontología Estética", url: "/odontologia-estetica" },
-          { title: "Ortodoncia", url: "/ortodoncia" },
-          { title: "Ortopedia", url: "/ortopedia" }
+          { title: "Diseño de Sonrisa", key: "smile_design" },
+          { title: "Carillas Dentales", key: "veneers" },
+          { title: "Invisalign", key: "invisalign" },
+          { title: "Blanqueamiento Dental", key: "teeth_whitening" },
+          { title: "Odontología Estética", key: "cosmetic_dentistry" },
         ]
       : [
-          { title: "Esthetic Dentistry", url: "/odontologia-estetica" },
-          { title: "Orthodontics", url: "/ortodoncia" },
-          { title: "Orthopedics", url: "/ortopedia" }
+          { title: "Smile Design", key: "smile_design" },
+          { title: "Porcelain Veneers", key: "veneers" },
+          { title: "Invisalign", key: "invisalign" },
+          { title: "Teeth Whitening", key: "teeth_whitening" },
+          { title: "Cosmetic Dentistry", key: "cosmetic_dentistry" },
         ]
   };
 
   const t = labels[lang] || labels.en;
 
   const styles = {
-    menuBtn: { background: 'none', border: 'none', color: blackColor, cursor: 'pointer', padding: '10px' },
+    // ... (tus estilos actuales se mantienen igual)
     drawer: {
       position: 'fixed',
       top: 0,
@@ -97,64 +112,21 @@ const NavbarMobile = ({ lang = 'en' }) => {
       flexDirection: 'column',
       padding: '20px',
       boxSizing: 'border-box',
-      overflowY: 'auto'
+      overflowY: 'auto' // Crucial para que si hay muchos servicios se pueda hacer scroll
     },
-    headerDrawer: { display: 'flex', justifyContent: 'flex-end', paddingBottom: '10px' },
-    closeBtn: { color: goldColor, fontSize: '32px', background: 'none', border: 'none' },
-    navLinks: { display: 'flex', flexDirection: 'column', flexGrow: 1, paddingTop: '20px' },
-    link: (active) => ({
-      color: active ? goldColor : blackColor,
-      textDecoration: 'none',
-      fontSize: '20px',
-      fontWeight: '700',
-      textTransform: 'uppercase',
-      margin: '12px 0',
-      letterSpacing: '1px',
-      display: 'flex',
-      justifyContent: 'space-between',
-      alignItems: 'center'
-    }),
     subMenu: {
       display: 'flex',
       flexDirection: 'column',
       paddingLeft: '20px',
       borderLeft: `2px solid ${goldColor}`,
       marginBottom: '10px',
-      maxHeight: '0',
-      overflow: 'hidden',
-      transition: 'max-height 0.3s ease-out'
-    },
-    subMenuActive: { maxHeight: '500px' },
-    subLink: {
-      color: '#555',
-      textDecoration: 'none',
-      fontSize: '16px',
-      fontWeight: '600',
-      margin: '8px 0',
-      textTransform: 'uppercase'
-    },
-    ctaButton: {
-      backgroundColor: goldColor,
-      color: whiteColor,
-      textAlign: 'center',
-      padding: '16px',
-      textDecoration: 'none',
-      fontWeight: '800',
-      textTransform: 'uppercase',
-      borderRadius: '4px',
-      marginTop: '30px',
-      letterSpacing: '1px'
-    },
-    overlay: {
-      position: 'fixed', top: 0, left: 0, width: '100%', height: '100%',
-      backgroundColor: 'rgba(0,0,0,0.5)', display: isOpen ? 'block' : 'none',
-      zIndex: 1000, backdropFilter: 'blur(4px)'
+      overflow: 'hidden'
     }
   };
 
   return (
     <>
-      <button onClick={toggleMenu} style={styles.menuBtn} aria-label="Menu">
+      <button onClick={toggleMenu} style={{ background: 'none', border: 'none', color: blackColor, cursor: 'pointer', padding: '10px' }} aria-label="Menu">
         <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round">
           <line x1="3" y1="6" x2="21" y2="6"></line>
           <line x1="3" y1="12" x2="21" y2="12"></line>
@@ -162,40 +134,45 @@ const NavbarMobile = ({ lang = 'en' }) => {
         </svg>
       </button>
 
-      <div style={styles.overlay} onClick={toggleMenu}></div>
+      <div style={{ position: 'fixed', top: 0, left: 0, width: '100%', height: '100%', backgroundColor: 'rgba(0,0,0,0.5)', display: isOpen ? 'block' : 'none', zIndex: 1000, backdropFilter: 'blur(4px)' }} onClick={toggleMenu}></div>
 
       <div style={styles.drawer}>
-        <div style={styles.headerDrawer}>
-          <button onClick={toggleMenu} style={styles.closeBtn}>✕</button>
+        <div style={{ display: 'flex', justifyContent: 'flex-end', paddingBottom: '10px' }}>
+          <button onClick={toggleMenu} style={{ color: goldColor, fontSize: '32px', background: 'none', border: 'none' }}>✕</button>
         </div>
         
-        <div style={styles.navLinks}>
-          <a href={`${prefix}/`} style={styles.link(isActive('/'))} onClick={toggleMenu}>{t.home}</a>
+        <div style={{ display: 'flex', flexDirection: 'column', flexGrow: 1, paddingTop: '20px' }}>
+          <a href={`${prefix}/`} style={{ color: isActive('/') ? goldColor : blackColor, textDecoration: 'none', fontSize: '20px', fontWeight: '700', textTransform: 'uppercase', margin: '12px 0' }} onClick={toggleMenu}>{t.home}</a>
           
           {/* SECCIÓN RESTAURAR */}
-          <div onClick={() => toggleSection('restore')} style={styles.link(false)}>
+          <div onClick={() => toggleSection('restore')} style={{ color: blackColor, fontSize: '20px', fontWeight: '700', textTransform: 'uppercase', margin: '12px 0', display: 'flex', justifyContent: 'space-between', cursor: 'pointer' }}>
             {t.restore} <span>{openSection === 'restore' ? '−' : '+'}</span>
           </div>
-          <div style={{...styles.subMenu, ...(openSection === 'restore' ? styles.subMenuActive : {})}}>
-            {services.restore.map((s, i) => (
-              <a key={i} href={`${prefix}${s.url}`} style={styles.subLink} onClick={toggleMenu}>{s.title}</a>
-            ))}
-          </div>
+          {openSection === 'restore' && (
+            <div style={styles.subMenu}>
+              {services.restore.map((s, i) => (
+                <a key={i} href={getLocalizedPath(s.key)} style={{ color: '#555', textDecoration: 'none', fontSize: '16px', fontWeight: '600', margin: '8px 0', textTransform: 'uppercase' }} onClick={toggleMenu}>{s.title}</a>
+              ))}
+            </div>
+          )}
 
           {/* SECCIÓN MEJORAR */}
-          <div onClick={() => toggleSection('enhance')} style={styles.link(false)}>
+          <div onClick={() => toggleSection('enhance')} style={{ color: blackColor, fontSize: '20px', fontWeight: '700', textTransform: 'uppercase', margin: '12px 0', display: 'flex', justifyContent: 'space-between', cursor: 'pointer' }}>
             {t.enhance} <span>{openSection === 'enhance' ? '−' : '+'}</span>
           </div>
-          <div style={{...styles.subMenu, ...(openSection === 'enhance' ? styles.subMenuActive : {})}}>
-            {services.enhance.map((s, i) => (
-              <a key={i} href={`${prefix}${s.url}`} style={styles.subLink} onClick={toggleMenu}>{s.title}</a>
-            ))}
-          </div>
+          {openSection === 'enhance' && (
+            <div style={styles.subMenu}>
+              {services.enhance.map((s, i) => (
+                <a key={i} href={getLocalizedPath(s.key)} style={{ color: '#555', textDecoration: 'none', fontSize: '16px', fontWeight: '600', margin: '8px 0', textTransform: 'uppercase' }} onClick={toggleMenu}>{s.title}</a>
+              ))}
+            </div>
+          )}
 
-          <a href={`${prefix}/turismo-dental`} style={styles.link(isActive('/turismo-dental'))} onClick={toggleMenu}>{t.tourism}</a>
-          <a href={`${prefix}/blog`} style={styles.link(isActive('/blog'))} onClick={toggleMenu}>{t.blog}</a>
+          <a href={getLocalizedPath('dental_tourism')} style={{ color: isActive('dental_tourism') ? goldColor : blackColor, textDecoration: 'none', fontSize: '20px', fontWeight: '700', textTransform: 'uppercase', margin: '12px 0' }} onClick={toggleMenu}>{t.tourism}</a>
+          
+          <a href={getLocalizedPath('blog')} style={{ color: isActive('blog') ? goldColor : blackColor, textDecoration: 'none', fontSize: '20px', fontWeight: '700', textTransform: 'uppercase', margin: '12px 0' }} onClick={toggleMenu}>{t.blog}</a>
 
-          <a href={`${prefix}/contacto`} style={styles.ctaButton} onClick={toggleMenu}>
+          <a href={getLocalizedPath('contact')} style={{ backgroundColor: goldColor, color: whiteColor, textAlign: 'center', padding: '16px', textDecoration: 'none', fontWeight: '800', textTransform: 'uppercase', borderRadius: '4px', marginTop: '30px' }} onClick={toggleMenu}>
             {t.contact}
           </a>
         </div>
