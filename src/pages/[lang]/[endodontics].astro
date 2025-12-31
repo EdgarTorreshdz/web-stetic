@@ -1,11 +1,20 @@
 ---
 export async function getStaticPaths() {
   return [
-    { params: { lang: 'en', endodontics: 'endodontics' } },
-    { params: { lang: 'es', endodontics: 'endodoncia' } },
+    { 
+      params: { 
+        lang: 'en', 
+        endodontics: 'root-canal-treatment-playa-del-carmen' // DEBE coincidir con ui.ts
+      } 
+    },
+    { 
+      params: { 
+        lang: 'es', 
+        endodontics: 'endodoncia' 
+      } 
+    },
   ];
 }
-
 const { lang } = Astro.params as { lang: 'en' | 'es' };
 
 import Layout from "../../layouts/Layout.astro"

@@ -1,4 +1,15 @@
 ---
-// src/pages/index.astro
-return Astro.redirect('/en/');
+// src/pages/[lang]/index.astro
+export async function getStaticPaths() {
+  return [
+    { params: { lang: 'en' } },
+    { params: { lang: 'es' } },
+  ];
+}
+
+const { lang } = Astro.params;
+// Si por alguna razón entra algo que no es en/es, podemos forzar un 404 real antes de renderizar
+if (lang !== 'en' && lang !== 'es') {
+  return Astro.redirect('/404');
+}
 ---

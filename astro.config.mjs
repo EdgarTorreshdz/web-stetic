@@ -12,5 +12,9 @@ export default defineConfig({
       prefixDefaultLocale: true, // Ahora inglés será /en/ y español /es/
       redirectToDefaultLocale: true 
     }
+  },
+  redirects: {
+    '/wp-json': '/404',
+    '/wp-json/[...slug]': '/404',
   }
 });
