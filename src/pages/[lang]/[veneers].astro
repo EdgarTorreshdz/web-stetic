@@ -1,0 +1,350 @@
+---
+// src/pages/[lang]/[veneers].astro
+
+export async function getStaticPaths() {
+  return [
+    { 
+      params: { 
+        lang: 'en', 
+        veneers: 'porcelain-veneers-playa-del-carmen' 
+      } 
+    },
+    { 
+      params: { 
+        lang: 'es', 
+        veneers: 'carillas-dentales' 
+      } 
+    },
+  ];
+}
+
+const { lang } = Astro.params as { lang: 'en' | 'es' };
+
+import Layout from "../../layouts/Layout.astro";
+import HeaderSpeciality from "../../components/shared/HeaderSpeciality.astro";
+import AboutSpeciality from "../../components/shared/AboutSpeciality.astro";
+import WhatIsSpeciality from "../../components/shared/WhatIsSpeciality.astro";
+import OptionsSpeciality from "../../components/shared/OptionsSpeciality.astro";
+import BenefitsSpeciality from "../../components/shared/BenefitsSpeciality.astro";
+import SpecialistSpeciality from "../../components/shared/SpecialistSpeciality.astro";
+import CostSpeciality from "../../components/shared/CostSpeciality.astro";
+import ProcessSpeciality from "../../components/shared/ProcessSpeciality.astro";
+import LocationSpeciality from "../../components/shared/LocationSpeciality.astro";
+import FaqSpeciality from "../../components/shared/FaqSpeciality.astro";
+import CtaSpeciality from "../../components/shared/CtaSpeciality.astro";
+import BeforeAfter from "../../components/shared/BeforeAfter.astro";
+
+const pageContent = {
+  en: {
+    seo: {
+      title: "Porcelain Veneers in Playa del Carmen | Natural Smile Results for Americans",
+      description: "Enhance your smile with porcelain veneers in Playa del Carmen. High-quality cosmetic veneers in Mexico with significant savings vs USA. Book today."
+    },
+    header: {
+      title: "Porcelain Veneers in Playa del Carmen, Mexico",
+      subheadline: "High-quality porcelain veneers for Americans seeking natural, long-lasting cosmetic dental results in Mexico.",
+      features: [
+        "Cosmetic veneers clinic",
+        "Experienced aesthetic dentists",
+        "English-speaking dental team",
+        "Significant savings compared to U.S. veneer costs"
+      ],
+      button: "Schedule Your Veneers Consultation",
+      imageSrc: "/especialidad1.jpeg",
+      imageAlt: "Porcelain veneers treatment in Playa del Carmen"
+    },
+    about: {
+      title: "Looking for Porcelain Veneers in Playa del Carmen You Can Trust?",
+      text1: "Porcelain veneers are one of the most effective ways to enhance your smile by improving tooth color, shape, and symmetry. Our clinic specializes in porcelain veneers in Playa del Carmen for American patients looking for high-quality cosmetic dental care in Mexico.",
+      text2: "We focus on precision, aesthetics, and natural-looking results, helping international patients feel confident choosing a professional dental veneers treatment abroad.",
+      imageSrc: "/nosotros.jpg",
+      imgAlt: "Veneers consultation in Mexico"
+    },
+    whatIs: {
+      title: "What Are Porcelain Veneers?",
+      text1: "Porcelain veneers are thin, custom-made shells designed to cover the front surface of teeth. They are used to correct discoloration, chips, gaps, and minor misalignment while maintaining a natural appearance.",
+      text2: "This dental veneers treatment is minimally invasive and offers durable, aesthetic results when performed by experienced cosmetic dentists.",
+      imageSrc: "/especialidad-about.avif",
+      bgImage: "/especialidad1.jpeg",
+      imgAlt: "Understanding Porcelain Veneers"
+    },
+    benefits: {
+      title: "Benefits of Porcelain Veneers",
+      items: [
+        "Improve tooth color and brightness",
+        "Enhance shape and symmetry",
+        "Natural-looking aesthetic results",
+        "Long-lasting and stain-resistant material",
+        "Minimally invasive cosmetic solution"
+      ],
+      footer: "Porcelain veneers are ideal for patients seeking a refined and balanced smile without extensive dental procedures.",
+      imageSrc: "/sonrisa2.jpg",
+      imgAlt: "Smiling with new veneers"
+    },
+    candidate: {
+      title: "Who Is a Good Candidate for Porcelain Veneers?",
+      text1: "You may be a good candidate if you have stained, chipped, or worn teeth, as well as gaps or mild alignment issues. A personalized consultation is essential to determine if veneers are the right option for your smile goals.",
+      text2: "We ensure your teeth and gums are healthy before proceeding with any cosmetic transformation.",
+      imageSrc: "/especialidad1.jpeg",
+      imgAlt: "Candidate evaluation for veneers"
+    },
+    cost: {
+      title: "Porcelain Veneers Cost in Playa del Carmen",
+      text1: "Porcelain veneers cost varies depending on the number of veneers needed and materials used. However, patients often save a significant amount compared to cosmetic dentistry prices in the United States.",
+      text2: "For patients seeking a full smile transformation, full set veneers cost in Mexico is typically much lower than in the USA, while maintaining high standards of quality and care.",
+      imageSrc: "/especialidad-about.avif",
+      imgAlt: "Cost comparison for veneers"
+    },
+    specialist: {
+      title: "Why Choose Our Cosmetic Veneers Clinic",
+      text1: "Experienced cosmetic dentists focused on aesthetics, using high-quality porcelain materials and personalized veneer planning. Our clinic is dedicated to delivering predictable and natural-looking results.",
+      text2: "Clear communication in English and extensive experience with international patients make us a top choice for travelers.",
+      imageSrc: "/sonrisa1.jpg",
+      imgAlt: "Expert veneers dentist"
+    },
+    process: {
+      title: "Porcelain Veneers Treatment Process",
+      footer: "Our team guides you through every step to ensure comfort, clarity, and satisfaction.",
+      steps: [
+        { title: "Online consultation and smile evaluation", img: "/especialidad1.jpeg" },
+        { title: "Personalized veneer planning", img: "/especialidad-about.avif" },
+        { title: "Tooth preparation and impressions", img: "/sonrisa1.jpg" },
+        { title: "Veneer placement and adjustment", img: "/sonrisa2.jpg" }
+      ]
+    },
+    results: {
+      title: "Porcelain Veneers Before and After",
+      text1: "Viewing real veneers before and after cases helps patients understand what is possible. Our clinic showcases real results from international patients who chose cosmetic veneers in Playa del Carmen to enhance their smiles.",
+      beforeLabel: "Before",
+      afterLabel: "After"
+    },
+    location: {
+      title: "Porcelain Veneers in Playa del Carmen, Mexico",
+      text1: "Our dental clinic is located in Playa del Carmen, a safe and popular destination for dental tourism. Patients benefit from easy access, comfortable accommodations, and a relaxing environment.",
+      imageSrc: "/especialidad1.jpeg",
+      imgAlt: "Veneers clinic location"
+    },
+    faq: {
+      title: "Porcelain Veneers FAQ",
+      items: [
+        { question: "How long do porcelain veneers last?", answer: "With proper care, porcelain veneers can last many years." },
+        { question: "Are porcelain veneers safe in Mexico?", answer: "Yes. When performed by experienced professionals using high-quality materials, veneers in Mexico are safe and reliable." },
+        { question: "How much does a full set of veneers cost in Mexico?", answer: "Full set veneers cost in Mexico varies by case, but it is significantly lower than in the USA." },
+        { question: "Do veneers look natural?", answer: "Yes. Porcelain veneers are designed to match natural tooth color and shape." }
+      ]
+    },
+    cta: {
+      title: "Schedule Your Porcelain Veneers Consultation",
+      description: "If you are considering porcelain veneers in Playa del Carmen, our team is ready to help you achieve a brighter, more confident smile.",
+      button: "Book Your Veneers Consultation",
+      note: "Expert care for international patients"
+    }
+  },
+  es: {
+    seo: {
+      title: "Carillas de Porcelana en Playa del Carmen | Resultados Naturales",
+      description: "Mejora tu sonrisa con carillas de porcelana en Playa del Carmen. Carillas cosméticas de alta calidad en México con grandes ahorros. Agenda hoy."
+    },
+    header: {
+      title: "Carillas de Porcelana en Playa del Carmen, México",
+      subheadline: "Carillas de alta calidad para quienes buscan resultados cosméticos naturales y duraderos en México.",
+      features: [
+        "Clínica de carillas cosméticas",
+        "Dentistas estéticos experimentados",
+        "Equipo bilingüe",
+        "Ahorros significativos comparado con EE. UU."
+      ],
+      button: "Agenda tu Consulta de Carillas",
+      imageSrc: "/especialidad1.jpeg",
+      imageAlt: "Tratamiento de carillas de porcelana"
+    },
+    about: {
+      title: "¿Buscas Carillas de Porcelana Confiables en Playa del Carmen?",
+      text1: "Las carillas de porcelana son una de las formas más efectivas de mejorar tu sonrisa al perfeccionar el color, la forma y la simetría de los dientes. Nuestra clínica se especializa en carillas en Playa del Carmen para pacientes que buscan excelencia estética.",
+      text2: "Nos enfocamos en la precisión y resultados de aspecto natural, ayudando a nuestros pacientes a sentirse seguros eligiendo un tratamiento profesional en el extranjero.",
+      imageSrc: "/nosotros.jpg",
+      imgAlt: "Consulta de carillas en México"
+    },
+    whatIs: {
+      title: "¿Qué son las Carillas de Porcelana?",
+      text1: "Son láminas delgadas hechas a medida para cubrir la superficie frontal de los dientes. Se usan para corregir decoloración, astillas, espacios y desalineaciones menores manteniendo una apariencia natural.",
+      text2: "Este tratamiento es mínimamente invasivo y ofrece resultados duraderos cuando es realizado por dentistas cosméticos experimentados.",
+      imageSrc: "/especialidad-about.avif",
+      bgImage: "/especialidad1.jpeg",
+      imgAlt: "Entendiendo las carillas"
+    },
+    benefits: {
+      title: "Beneficios de las Carillas de Porcelana",
+      items: [
+        "Mejoran el color y el brillo dental",
+        "Realzan la forma y la simetría",
+        "Resultados estéticos de aspecto natural",
+        "Material duradero y resistente a manchas",
+        "Solución cosmética mínimamente invasiva"
+      ],
+      footer: "Las carillas de porcelana son ideales para pacientes que buscan una sonrisa refinada y equilibrada.",
+      imageSrc: "/sonrisa2.jpg",
+      imgAlt: "Sonrisa con carillas"
+    },
+    candidate: {
+      title: "¿Quién es el Candidato Ideal?",
+      text1: "Puedes ser un buen candidato si tienes dientes manchados, desgastados o con espacios. Una consulta personalizada es esencial para determinar si las carillas son la mejor opción para tus metas.",
+      text2: "Garantizamos que tus dientes y encías estén sanos antes de proceder con cualquier transformación.",
+      imageSrc: "/especialidad1.jpeg",
+      imgAlt: "Evaluación para carillas"
+    },
+    cost: {
+      title: "Costo de Carillas de Porcelana en Playa del Carmen",
+      text1: "El costo varía según el número de carillas y los materiales. Sin embargo, los pacientes suelen ahorrar significativamente en comparación con los precios en EE. UU.",
+      text2: "Para quienes buscan una transformación completa, el costo del set completo de carillas en México es mucho más bajo, manteniendo altos estándares de calidad.",
+      imageSrc: "/especialidad-about.avif",
+      imgAlt: "Costos de carillas"
+    },
+    specialist: {
+      title: "Por qué Elegir Nuestra Clínica",
+      text1: "Dentistas cosméticos enfocados en la estética, materiales de alta calidad y planificación personalizada. Estamos dedicados a entregar resultados predecibles y naturales.",
+      text2: "Comunicación clara y amplia experiencia con pacientes internacionales nos convierten en la mejor opción.",
+      imageSrc: "/sonrisa1.jpg",
+      imgAlt: "Especialista en carillas"
+    },
+    process: {
+      title: "Proceso del Tratamiento",
+      footer: "Nuestro equipo te guía en cada paso para asegurar comodidad y satisfacción.",
+      steps: [
+        { title: "Consulta en línea y evaluación", img: "/especialidad1.jpeg" },
+        { title: "Planificación personalizada", img: "/especialidad-about.avif" },
+        { title: "Preparación dental e impresiones", img: "/sonrisa1.jpg" },
+        { title: "Colocación y ajuste de carillas", img: "/sonrisa2.jpg" }
+      ]
+    },
+    results: {
+      title: "Resultados Antes y Después",
+      text1: "Ver casos reales ayuda a entender lo que es posible. Mostramos resultados reales de pacientes internacionales que eligieron nuestras carillas para mejorar su sonrisa.",
+      beforeLabel: "Antes",
+      afterLabel: "Después"
+    },
+    location: {
+      title: "Carillas de Porcelana en Playa del Carmen, México",
+      text1: "Nuestra clínica está ubicada en Playa del Carmen, un destino seguro y popular. Los pacientes disfrutan de fácil acceso y un ambiente relajante durante su tratamiento.",
+      imageSrc: "/especialidad1.jpeg",
+      imgAlt: "Ubicación de la clínica"
+    },
+    faq: {
+      title: "Preguntas Frecuentes",
+      items: [
+        { question: "¿Cuánto duran las carillas?", answer: "Con el cuidado adecuado, pueden durar muchos años." },
+        { question: "¿Es seguro hacerse carillas en México?", answer: "Sí. Realizado por profesionales con materiales de alta calidad, es seguro y confiable." },
+        { question: "¿Cuánto cuesta el set completo?", answer: "Varía según el caso, pero es significativamente más bajo que en EE. UU." },
+        { question: "¿Se ven naturales?", answer: "Sí, están diseñadas para coincidir con el color y la forma de tus dientes naturales." }
+      ]
+    },
+    cta: {
+      title: "Agenda tu Consulta de Carillas de Porcelana",
+      description: "Si estás considerando carillas en Playa del Carmen, estamos listos para ayudarte a lograr una sonrisa más segura.",
+      button: "Reserva tu Consulta de Carillas",
+      note: "Atención experta personalizada"
+    }
+  }
+};
+
+const t = pageContent[lang];
+---
+
+<Layout 
+  title={t.seo.title} 
+  description={t.seo.description} 
+  lang={lang}
+>
+  <HeaderSpeciality 
+      lang={lang}
+      title={t.header.title}
+      subheadline={t.header.subheadline}
+      features={t.header.features}
+      buttonText={t.header.button}
+      imageSrc={t.header.imageSrc} 
+      imageAlt={t.header.imageAlt}
+    />
+
+  <AboutSpeciality 
+      title={t.about.title}
+      text1={t.about.text1}
+      text2={t.about.text2}
+      imageSrc={t.about.imageSrc}
+      imageAlt={t.about.imgAlt}
+    />
+
+  <WhatIsSpeciality 
+      title={t.whatIs.title}
+      text1={t.whatIs.text1}
+      text2={t.whatIs.text2}
+      imageSrc={t.whatIs.imageSrc}
+      imageAlt={t.whatIs.imgAlt}
+      bgImage={t.whatIs.bgImage}
+    />
+
+  <BenefitsSpeciality 
+      title={t.benefits.title}
+      benefits={t.benefits.items}
+      footerText={t.benefits.footer}
+      imageSrc={t.benefits.imageSrc}
+      imageAlt={t.benefits.imgAlt}
+    />
+
+  <SpecialistSpeciality 
+      title={t.candidate.title}
+      text1={t.candidate.text1}
+      text2={t.candidate.text2}
+      imageSrc={t.candidate.imageSrc}
+      imageAlt={t.candidate.imgAlt}
+    />
+
+  <CostSpeciality 
+      title={t.cost.title}
+      text1={t.cost.text1}
+      text2={t.cost.text2}
+      imageSrc={t.cost.imageSrc}
+      imageAlt={t.cost.imgAlt}
+    />
+
+  <SpecialistSpeciality 
+      title={t.specialist.title}
+      text1={t.specialist.text1}
+      text2={t.specialist.text2}
+      imageSrc={t.specialist.imageSrc}
+      imageAlt={t.specialist.imgAlt}
+    />
+
+  <ProcessSpeciality 
+      title={t.process.title}
+      footer={t.process.footer}
+      steps={t.process.steps}
+    />
+
+  <BeforeAfter 
+      title={t.results.title}
+      description={t.results.text1}
+      beforeImage="/especialidad1.jpeg"
+      afterImage="/sonrisa2.jpg"
+      beforeLabel={t.results.beforeLabel}
+      afterLabel={t.results.afterLabel}
+    />
+
+  <LocationSpeciality 
+      title={t.location.title}
+      text1={t.location.text1}
+      imageSrc={t.location.imageSrc}
+      imageAlt={t.location.imgAlt}
+    />
+
+  <FaqSpeciality 
+      title={t.faq.title}
+      faqs={t.faq.items}
+    />
+
+  <CtaSpeciality 
+      title={t.cta.title}
+      description={t.cta.description}
+      buttonText={t.cta.button}
+      note={t.cta.note}
+    />
+</Layout>

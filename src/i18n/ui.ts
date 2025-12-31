@@ -35,7 +35,6 @@ export const routes = {
   en: {
     'about': 'about',
     'contact': 'contact',
-    'dental_tourism': 'dental-tourism',
     'general_dentistry': 'general-dentistry',
     'endodontics': 'root-canal-treatment-playa-del-carmen',
     'oral_surgery': 'oral-surgery',
@@ -44,12 +43,19 @@ export const routes = {
     'cosmetic_dentistry': 'cosmetic-dentistry',
     'orthodontics': 'orthodontist-playa-del-carmen',
     'orthopedics': 'orthopedics',
-    'blog': 'blog'
+    'blog': 'blog',
+    'dental_implants': 'dental-implants-playa-del-carmen',
+    'smile_design': 'smile-design-playa-del-carmen',
+    'veneers': 'porcelain-veneers-playa-del-carmen',
+    'teeth_cleaning': 'teeth-cleaning-playa-del-carmen',
+    'dental_crowns': 'dental-crowns-playa-del-carmen',
+    'teeth_whitening': 'teeth-whitening-playa-del-carmen',
+    'invisalign': 'invisalign-playa-del-carmen',
+    'dental_tourism': 'dental-tourism-mexico'
   },
   es: {
     'about': 'nosotros',
     'contact': 'contacto',
-    'dental_tourism': 'turismo-dental',
     'general_dentistry': 'especialidades',
     'endodontics': 'endodoncia',
     'oral_surgery': 'cirugia',
@@ -58,6 +64,14 @@ export const routes = {
     'cosmetic_dentistry': 'odontologia-estetica',
     'orthodontics': 'ortodoncia',
     'orthopedics': 'ortopedia',
-    'blog': 'blog'
+    'blog': 'blog',
+    'dental_implants': 'implantes-dentales',
+    'smile_design': 'diseno-de-sonrisa',
+    'veneers': 'carillas-dentales',
+    'teeth_cleaning': 'limpieza-dental',
+    'dental_crowns': 'coronas-dentales',
+    'teeth_whitening': 'blanqueamiento-dental',
+    'invisalign': 'invisalign',
+    'dental_tourism': 'turismo-dental'
   },
 };

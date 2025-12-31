@@ -1,0 +1,186 @@
+---
+interface Treatment {
+  title: string;
+  url: string;
+  image: string;
+}
+
+interface Props {
+  title: string;
+  description: string;
+  footerText: string;
+  treatments: Treatment[];
+}
+
+const { title, description, footerText, treatments } = Astro.props;
+---
+
+<section class="popular-section">
+  <div class="container">
+    <div class="popular__header">
+      <h2 class="popular__title">{title}</h2>
+      <div class="popular__accent-line"></div>
+      <p class="popular__description">
+        {description}
+      </p>
+    </div>
+
+    <div class="popular__grid">
+      {treatments.map((item) => (
+        <a href={item.url} class="popular__card">
+          <div class="popular__img-container">
+            <img src={item.image} alt={item.title} class="popular__img" />
+            <div class="popular__overlay">
+              <h3 class="popular__card-title">{item.title}</h3>
+              <span class="popular__link-text">
+                View Treatment <span>→</span>
+              </span>
+            </div>
+          </div>
+        </a>
+      ))}
+    </div>
+
+    {footerText && <p class="popular__footer">{footerText}</p>}
+  </div>
+</section>
+
+<style>
+  :root {
+    --gold: #A58E55;
+    --black: #000000;
+    --white: #ffffff;
+    --gray: #333333;
+  }
+
+  .popular-section {
+    padding: 100px 0;
+    background-color: var(--white);
+    color: var(--black);
+  }
+
+  .container {
+    margin: 0 auto;
+    width: 85%;
+  }
+
+  .popular__header {
+    text-align: center;
+    margin-bottom: 50px;
+  }
+
+  .popular__title {
+    font-size: 1.8rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    margin-bottom: 15px;
+  }
+
+  @media (min-width: 768px) {
+    .popular__title { font-size: 2.5rem; }
+  }
+
+  .popular__accent-line {
+    width: 60px;
+    height: 3px;
+    background-color: var(--gold);
+    margin: 0 auto 25px;
+  }
+
+  .popular__description {
+    font-size: 1.1rem;
+    line-height: 1.6;
+    color: var(--gray);
+    max-width: 800px;
+    margin: 0 auto;
+  }
+
+  /* Grid: 2x2 Desktop, Carrusel Horizontal Mobile */
+  .popular__grid {
+    display: flex;
+    overflow-x: auto;
+    gap: 20px;
+    padding-bottom: 20px;
+    scroll-snap-type: x mandatory;
+    scrollbar-width: thin;
+    scrollbar-color: var(--gold) #eee;
+  }
+
+  @media (min-width: 992px) {
+    .popular__grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      overflow-x: visible;
+      padding-bottom: 0;
+    }
+  }
+
+  .popular__card {
+    text-decoration: none;
+    flex: 0 0 85%; /* En mobile se ve el 85% para invitar a deslizar */
+    scroll-snap-align: start;
+    transition: transform 0.4s ease;
+  }
+
+  @media (min-width: 992px) {
+    .popular__card {
+      flex: none;
+    }
+    .popular__card:hover {
+      transform: translateY(-10px);
+    }
+  }
+
+  .popular__img-container {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    overflow: hidden;
+    border: 1px solid #eee;
+  }
+
+  .popular__img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.6s ease;
+  }
+
+  .popular__card:hover .popular__img {
+    transform: scale(1.1);
+  }
+
+  .popular__overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.2) 60%, transparent 100%);
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 30px;
+    color: var(--white);
+  }
+
+  .popular__card-title {
+    font-size: 1.25rem;
+    font-weight: 700;
+    margin-bottom: 10px;
+    text-transform: uppercase;
+  }
+
+  .popular__link-text {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--gold);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+
+  .popular__footer {
+    margin-top: 40px;
+    text-align: center;
+    font-size: 1rem;
+    font-style: italic;
+    color: #666;
+  }
+</style>

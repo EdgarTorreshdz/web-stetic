@@ -1,0 +1,375 @@
+---
+// src/pages/[lang]/[smile_design].astro
+
+export async function getStaticPaths() {
+  return [
+    { 
+      params: { 
+        lang: 'en', 
+        smile_design: 'smile-design-playa-del-carmen' 
+      } 
+    },
+    { 
+      params: { 
+        lang: 'es', 
+        smile_design: 'diseno-de-sonrisa' 
+      } 
+    },
+  ];
+}
+
+const { lang } = Astro.params as { lang: 'en' | 'es' };
+
+import Layout from "../../layouts/Layout.astro";
+import HeaderSpeciality from "../../components/shared/HeaderSpeciality.astro";
+import AboutSpeciality from "../../components/shared/AboutSpeciality.astro";
+import WhatIsSpeciality from "../../components/shared/WhatIsSpeciality.astro";
+import OptionsSpeciality from "../../components/shared/OptionsSpeciality.astro";
+import BenefitsSpeciality from "../../components/shared/BenefitsSpeciality.astro";
+import WhyChooseSpeciality from "../../components/shared/WhyChooseSpeciality.astro";
+import CostSpeciality from "../../components/shared/CostSpeciality.astro";
+import ProcessSpeciality from "../../components/shared/ProcessSpeciality.astro";
+import LocationSpeciality from "../../components/shared/LocationSpeciality.astro";
+import FaqSpeciality from "../../components/shared/FaqSpeciality.astro";
+import CtaSpeciality from "../../components/shared/CtaSpeciality.astro";
+import SpecialistSpeciality from "../../components/shared/SpecialistSpeciality.astro";
+
+const pageContent = {
+  en: {
+    seo: {
+      title: "Smile Design in Playa del Carmen | Smile Makeover for Americans",
+      description: "Transform your smile with smile design in Playa del Carmen. Personalized smile makeover treatments in Mexico for Americans. Book your consultation today."
+    },
+    header: {
+      title: "Smile Design in Playa del Carmen, Mexico",
+      subheadline: "Personalized smile makeover treatments for Americans seeking natural, aesthetic dental results in Mexico.",
+      features: [
+        "Cosmetic smile design dentist",
+        "Digital smile design technology",
+        "English-speaking dental team",
+        "Customized aesthetic treatment plans"
+      ],
+      button: "Get Your Digital Smile Preview",
+      imageSrc: "/especialidad1.jpeg",
+      imageAlt: "Smile Design treatment in Playa del Carmen"
+    },
+    about: {
+      title: "Looking for a Smile Design Dentist in Playa del Carmen You Can Trust?",
+      text1: "Smile design is more than cosmetic dentistry—it is a personalized approach to creating a balanced, natural-looking smile that fits your facial features. Our clinic specializes in smile design in Playa del Carmen for American patients seeking high-quality aesthetic dental care in Mexico.",
+      text2: "By combining experience, digital planning, and modern materials, we help international patients achieve predictable and beautiful results through a professional smile makeover treatment.",
+      imageSrc: "/nosotros.jpg",
+      imgAlt: "Smile design consultation in Mexico"
+    },
+    whatIs: {
+      title: "What Is Smile Design?",
+      text1: "Smile design is a comprehensive cosmetic dentistry smile makeover that focuses on improving the appearance, symmetry, and harmony of your smile. Instead of treating teeth individually, smile design considers facial proportions, tooth shape, gum line, and overall aesthetics.",
+      text2: "Each smile makeover treatment is fully customized, ensuring results that look natural and enhance your confidence.",
+      imageSrc: "/especialidad-about.avif",
+      bgImage: "/especialidad1.jpeg",
+      imgAlt: "Understanding Smile Design"
+    },
+    digital: {
+      title: "Digital Smile Design: See Your New Smile Before Treatment",
+      text1: "Using advanced digital smile design technology, we can plan and visualize your new smile before treatment begins. This process allows patients to see expected results and participate in the design of their smile.",
+      text2: "Digital smile design improves accuracy, predictability, and patient satisfaction, making it a preferred approach for smile design in Mexico.",
+      imageSrc: "/sonrisa1.jpg",
+      imgAlt: "Digital Smile Design Technology"
+    },
+    options: {
+      title: "What Treatments Are Included in a Smile Makeover?",
+      description: "A smile design treatment may include one or more of the following procedures, depending on your needs:",
+      items: [
+        { title: "Porcelain veneers", description: "Custom-made shells to improve tooth shape and color.", subtext: "Aesthetic and durable." },
+        { title: "Teeth whitening", description: "Professional brightening for a radiant smile.", subtext: "Fast results." },
+        { title: "Dental crowns", description: "Full coverage for damaged or weakened teeth.", subtext: "Strength and beauty." },
+        { title: "Minor orthodontic adjustments", description: "Correction of slight misalignments.", subtext: "Perfect symmetry." },
+        { title: "Gum contouring", description: "Reshaping the gum line for better balance.", subtext: "Enhanced harmony." }
+      ]
+    },
+    benefits: {
+      title: "Why Get a Smile Makeover in Mexico?",
+      items: [
+        "High-quality aesthetic dental care at a significantly lower cost than in the US",
+        "Expert cosmetic dentistry in modern, world-class clinics",
+        "Personalized attention and English-speaking support",
+        "Transform your smile in a comfortable and safe environment"
+      ],
+      footer: "Smile design in Playa del Carmen combines technology and art for a perfect result.",
+      imageSrc: "/sonrisa2.jpg",
+      imgAlt: "Benefits of Smile Makeover in Mexico"
+    },
+    whyChoose: {
+      title: "Why Choose Our Clinic for Smile Design",
+      text1: "Experienced cosmetic smile design dentist focusing on natural, aesthetic results with advanced digital planning technology. Our English-speaking team provides personalized care for international patients.",
+      text2: "Our clinic is dedicated to delivering predictable, high-quality smile design results for patients traveling from the United States.",
+      imageSrc: "/sonrisa3.jpg",
+      imgAlt: "Why choose our dental clinic"
+    },
+    cost: {
+      title: "Smile Makeover Cost in Playa del Carmen",
+      text1: "Smile makeover cost varies depending on the treatments involved, materials used, and individual dental needs. However, patients often save a significant amount by choosing smile design in Playa del Carmen compared to cosmetic dentistry prices in the USA.",
+      text2: "After an initial consultation, we provide a clear treatment plan and transparent pricing tailored to your smile makeover goals.",
+      imageSrc: "/especialidad-about.avif",
+      imgAlt: "Cost comparison for Smile Makeover"
+    },
+    process: {
+      title: "Smile Design Process for American Patients",
+      footer: "Our team guides you through every step to ensure a smooth and stress-free experience.",
+      steps: [
+        { title: "Online consultation and smile evaluation", img: "/especialidad1.jpeg" },
+        { title: "Digital smile design preview", img: "/especialidad-about.avif" },
+        { title: "Personalized treatment plan and timeline", img: "/sonrisa1.jpg" },
+        { title: "Smile makeover treatment in Playa del Carmen", img: "/sonrisa2.jpg" }
+      ]
+    },
+    results: {
+      title: "Smile Design Results for International Patients",
+      text1: "Patients from the United States trust our clinic for smile design in Playa del Carmen because of our attention to detail, aesthetic focus, and natural-looking results. Before-and-after cases and patient testimonials reflect the quality of our smile makeover treatments.",
+      imageSrc: "/sonrisa3.jpg",
+      imgAlt: "Actual Smile Design Results"
+    },
+    location: {
+      title: "Smile Design in Playa del Carmen, Mexico",
+      text1: "Our dental clinic is located in Playa del Carmen, a popular and safe destination for dental tourism. The location allows patients to receive professional smile design treatment while enjoying a comfortable recovery environment.",
+      imageSrc: "/especialidad1.jpeg",
+      imgAlt: "Clinic location in Playa del Carmen"
+    },
+    faq: {
+      title: "Smile Design FAQ",
+      items: [
+        { question: "What is the difference between smile design and veneers?", answer: "Smile design is a comprehensive plan that may include veneers and other treatments to achieve the desired aesthetic result." },
+        { question: "How long does a smile makeover take?", answer: "Treatment time depends on the complexity of the case and is discussed during your consultation." },
+        { question: "Is smile design safe in Mexico?", answer: "Yes. When performed by certified professionals using modern technology, smile design in Mexico is safe and reliable." },
+        { question: "How much does a smile makeover cost?", answer: "Smile makeover cost varies based on individual needs and treatment options." }
+      ]
+    },
+    cta: {
+      title: "Book Your Smile Design Consultation",
+      description: "If you are considering smile design in Playa del Carmen, our team is ready to help you achieve the smile you want. Contact us today to schedule your consultation and begin your smile makeover journey in Mexico.",
+      button: "Book Your Consultation Now",
+      note: "Start your transformation today"
+    }
+  },
+  es: {
+    seo: {
+      title: "Diseño de Sonrisa en Playa del Carmen | Cambio de Imagen para Estadounidenses",
+      description: "Transforma tu sonrisa con el diseño de sonrisa en Playa del Carmen. Tratamientos personalizados en México para estadounidenses. Agenda tu consulta hoy."
+    },
+    header: {
+      title: "Diseño de Sonrisa en Playa del Carmen, México",
+      subheadline: "Tratamientos personalizados de cambio de imagen dental para quienes buscan resultados naturales y estéticos en México.",
+      features: [
+        "Dentista experto en diseño de sonrisa cosmético",
+        "Tecnología de diseño de sonrisa digital",
+        "Equipo dental de habla inglesa",
+        "Planes de tratamiento estético personalizados"
+      ],
+      button: "Obtén tu Previsualización Digital de Sonrisa",
+      imageSrc: "/especialidad1.jpeg",
+      imageAlt: "Tratamiento de Diseño de Sonrisa en Playa del Carmen"
+    },
+    about: {
+      title: "¿Buscas un Dentista de Diseño de Sonrisa de Confianza en Playa del Carmen?",
+      text1: "El diseño de sonrisa es más que odontología cosmética: es un enfoque personalizado para crear una sonrisa equilibrada y de aspecto natural que se adapte a tus rasgos faciales. Nuestra clínica se especializa en diseño de sonrisa para pacientes que buscan atención estética de alta calidad en México.",
+      text2: "Al combinar experiencia, planificación digital y materiales modernos, ayudamos a pacientes internacionales a lograr resultados predecibles y hermosos a través de un tratamiento profesional.",
+      imageSrc: "/nosotros.jpg",
+      imgAlt: "Consulta de diseño de sonrisa en México"
+    },
+    whatIs: {
+      title: "¿Qué es el Diseño de Sonrisa?",
+      text1: "El diseño de sonrisa es un cambio de imagen dental cosmético integral que se enfoca en mejorar la apariencia, simetría y armonía de tu sonrisa. En lugar de tratar los dientes individualmente, el diseño de sonrisa considera las proporciones faciales, la forma del diente, la línea de la encía y la estética general.",
+      text2: "Cada tratamiento es totalmente personalizado, lo que garantiza resultados que se ven naturales y aumentan tu confianza.",
+      imageSrc: "/especialidad-about.avif",
+      bgImage: "/especialidad1.jpeg",
+      imgAlt: "Entendiendo el Diseño de Sonrisa"
+    },
+    digital: {
+      title: "Diseño de Sonrisa Digital: Mira tu Nueva Sonrisa Antes del Tratamiento",
+      text1: "Utilizando tecnología avanzada de diseño de sonrisa digital, podemos planificar y visualizar tu nueva sonrisa antes de que comience el tratamiento. Este proceso permite a los pacientes ver los resultados esperados y participar en el diseño de su sonrisa.",
+      text2: "El diseño de sonrisa digital mejora la precisión, la previsibilidad y la satisfacción del paciente, convirtiéndolo en el enfoque preferido en México.",
+      imageSrc: "/sonrisa1.jpg",
+      imgAlt: "Tecnología de Diseño de Sonrisa Digital"
+    },
+    options: {
+      title: "¿Qué Tratamientos Incluye un Cambio de Imagen Dental?",
+      description: "Un tratamiento de diseño de sonrisa puede incluir uno o más de los siguientes procedimientos, según tus necesidades:",
+      items: [
+        { title: "Carillas de porcelana", description: "Láminas personalizadas para mejorar la forma y el color.", subtext: "Estético y duradero." },
+        { title: "Blanqueamiento dental", description: "Aclaramiento profesional para una sonrisa radiante.", subtext: "Resultados rápidos." },
+        { title: "Coronas dentales", description: "Cobertura total para dientes dañados o debilitados.", subtext: "Resistencia y belleza." },
+        { title: "Ajustes ortodónticos menores", description: "Corrección de ligeras desalineaciones.", subtext: "Simetría perfecta." },
+        { title: "Contorneado de encías", description: "Remodelación de la encía para un mejor equilibrio.", subtext: "Armonía mejorada." }
+      ]
+    },
+    benefits: {
+      title: "¿Por qué Hacerse un Cambio de Imagen Dental en México?",
+      items: [
+        "Atención dental estética de alta calidad a un costo significativamente menor que en EE. UU.",
+        "Odontología cosmética experta en clínicas modernas de clase mundial",
+        "Atención personalizada y apoyo bilingüe",
+        "Transforma tu sonrisa en un entorno cómodo y seguro"
+      ],
+      footer: "El diseño de sonrisa en Playa del Carmen combina tecnología y arte para un resultado perfecto.",
+      imageSrc: "/sonrisa2.jpg",
+      imgAlt: "Beneficios del cambio de imagen dental en México"
+    },
+    whyChoose: {
+      title: "¿Por qué Elegir Nuestra Clínica para el Diseño de Sonrisa?",
+      text1: "Contamos con un dentista experto enfocado en resultados naturales y estéticos con tecnología de planificación digital avanzada. Nuestro equipo bilingüe brinda atención personalizada para pacientes internacionales.",
+      text2: "Nuestra clínica se dedica a ofrecer resultados de diseño de sonrisa predecibles y de alta calidad para pacientes que viajan desde el extranjero.",
+      imageSrc: "/sonrisa3.jpg",
+      imgAlt: "Por qué elegir nuestra clínica dental"
+    },
+    cost: {
+      title: "Costo del Cambio de Imagen Dental en Playa del Carmen",
+      text1: "El costo varía según los tratamientos involucrados, los materiales utilizados y las necesidades dentales individuales. Sin embargo, los pacientes suelen ahorrar una cantidad significativa al elegir Playa del Carmen en comparación con los precios en EE. UU.",
+      text2: "Después de una consulta inicial, proporcionamos un plan de tratamiento claro y precios transparentes adaptados a tus objetivos.",
+      imageSrc: "/especialidad-about.avif",
+      imgAlt: "Comparación de costos de diseño de sonrisa"
+    },
+    process: {
+      title: "Proceso de Diseño de Sonrisa para Pacientes Internacionales",
+      footer: "Nuestro equipo te guía en cada paso para garantizar una experiencia fluida y sin estrés.",
+      steps: [
+        { title: "Consulta en línea y evaluación de la sonrisa", img: "/especialidad1.jpeg" },
+        { title: "Previsualización digital del diseño", img: "/especialidad-about.avif" },
+        { title: "Plan de tratamiento y cronograma", img: "/sonrisa1.jpg" },
+        { title: "Tratamiento de cambio de imagen en Playa del Carmen", img: "/sonrisa2.jpg" }
+      ]
+    },
+    results: {
+      title: "Resultados de Diseño de Sonrisa para Pacientes Internacionales",
+      text1: "Pacientes de todo el mundo confían en nuestra clínica por nuestra atención al detalle, enfoque estético y resultados de aspecto natural. Los casos de antes y después reflejan la calidad de nuestros tratamientos.",
+      imageSrc: "/sonrisa3.jpg",
+      imgAlt: "Resultados reales de Diseño de Sonrisa"
+    },
+    location: {
+      title: "Diseño de Sonrisa en Playa del Carmen, México",
+      text1: "Nuestra clínica dental está ubicada en Playa del Carmen, un destino popular y seguro para el turismo dental. La ubicación permite a los pacientes recibir tratamiento profesional mientras disfrutan de un entorno de recuperación cómodo.",
+      imageSrc: "/especialidad1.jpeg",
+      imgAlt: "Ubicación de la clínica en Playa del Carmen"
+    },
+    faq: {
+      title: "Preguntas Frecuentes sobre Diseño de Sonrisa",
+      items: [
+        { question: "¿Cuál es la diferencia entre diseño de sonrisa y carillas?", answer: "El diseño de sonrisa es un plan integral que puede incluir carillas y otros tratamientos para lograr el resultado estético deseado." },
+        { question: "¿Cuánto tiempo toma un cambio de imagen dental?", answer: "El tiempo de tratamiento depende de la complejidad del caso y se analiza durante la consulta." },
+        { question: "¿Es seguro el diseño de sonrisa en México?", answer: "Sí. Cuando es realizado por profesionales certificados que utilizan tecnología moderna, el diseño de sonrisa en México es seguro y confiable." },
+        { question: "¿Cuánto cuesta un cambio de imagen dental?", answer: "El costo varía según las necesidades individuales y las opciones de tratamiento." }
+      ]
+    },
+    cta: {
+      title: "Agenda tu Consulta de Diseño de Sonrisa",
+      description: "Si estás considerando un diseño de sonrisa en Playa del Carmen, nuestro equipo está listo para ayudarte a lograr la sonrisa que deseas. Contáctanos hoy para programar tu consulta.",
+      button: "Agenda tu Consulta Ahora",
+      note: "Comienza tu transformación hoy mismo"
+    }
+  }
+};
+
+const t = pageContent[lang];
+---
+
+<Layout 
+  title={t.seo.title} 
+  description={t.seo.description} 
+  lang={lang}
+>
+  <HeaderSpeciality 
+      lang={lang}
+      title={t.header.title}
+      subheadline={t.header.subheadline}
+      features={t.header.features}
+      buttonText={t.header.button}
+      imageSrc={t.header.imageSrc} 
+      imageAlt={t.header.imageAlt}
+    />
+
+  <AboutSpeciality 
+      title={t.about.title}
+      text1={t.about.text1}
+      text2={t.about.text2}
+      imageSrc={t.about.imageSrc}
+      imageAlt={t.about.imgAlt}
+    />
+
+  <WhatIsSpeciality 
+      title={t.whatIs.title}
+      text1={t.whatIs.text1}
+      text2={t.whatIs.text2}
+      imageSrc={t.whatIs.imageSrc}
+      imageAlt={t.whatIs.imgAlt}
+      bgImage={t.whatIs.bgImage}
+    />
+
+  <SpecialistSpeciality 
+      title={t.digital.title}
+      text1={t.digital.text1}
+      text2={t.digital.text2}
+      imageSrc={t.digital.imageSrc}
+      imageAlt={t.digital.imgAlt}
+    />
+
+  <OptionsSpeciality 
+      title={t.options.title}
+      description={t.options.description}
+      options={t.options.items}
+    />
+
+  <BenefitsSpeciality 
+      title={t.benefits.title}
+      benefits={t.benefits.items}
+      footerText={t.benefits.footer}
+      imageSrc={t.benefits.imageSrc}
+      imageAlt={t.benefits.imgAlt}
+    />
+
+  <WhyChooseSpeciality 
+      title={t.whyChoose.title}
+      text1={t.whyChoose.text1}
+      text2={t.whyChoose.text2}
+      imageSrc={t.whyChoose.imageSrc}
+      imageAlt={t.whyChoose.imgAlt}
+    />
+
+  <CostSpeciality 
+      title={t.cost.title}
+      text1={t.cost.text1}
+      text2={t.cost.text2}
+      imageSrc={t.cost.imageSrc}
+      imageAlt={t.cost.imgAlt}
+    />
+
+  <ProcessSpeciality 
+      title={t.process.title}
+      footer={t.process.footer}
+      steps={t.process.steps}
+    />
+
+  <SpecialistSpeciality 
+      title={t.results.title}
+      text1={t.results.text1}
+      text2=""
+      imageSrc={t.results.imageSrc}
+      imageAlt={t.results.imgAlt}
+    />
+
+  <LocationSpeciality 
+      title={t.location.title}
+      text1={t.location.text1}
+      imageSrc={t.location.imageSrc}
+      imageAlt={t.location.imgAlt}
+    />
+
+  <FaqSpeciality 
+      title={t.faq.title}
+      faqs={t.faq.items}
+    />
+
+  <CtaSpeciality 
+      title={t.cta.title}
+      description={t.cta.description}
+      buttonText={t.cta.button}
+      note={t.cta.note}
+    />
+</Layout>

@@ -1,0 +1,343 @@
+---
+// src/pages/[lang]/[dental_crowns].astro
+
+export async function getStaticPaths() {
+  return [
+    { 
+      params: { 
+        lang: 'en', 
+        dental_crowns: 'dental-crowns-playa-del-carmen' 
+      } 
+    },
+    { 
+      params: { 
+        lang: 'es', 
+        dental_crowns: 'coronas-dentales' 
+      } 
+    },
+  ];
+}
+
+const { lang } = Astro.params as { lang: 'en' | 'es' };
+
+import Layout from "../../layouts/Layout.astro";
+import HeaderSpeciality from "../../components/shared/HeaderSpeciality.astro";
+import AboutSpeciality from "../../components/shared/AboutSpeciality.astro";
+import WhatIsSpeciality from "../../components/shared/WhatIsSpeciality.astro";
+import OptionsSpeciality from "../../components/shared/OptionsSpeciality.astro";
+import BenefitsSpeciality from "../../components/shared/BenefitsSpeciality.astro";
+import CostSpeciality from "../../components/shared/CostSpeciality.astro";
+import ProcessSpeciality from "../../components/shared/ProcessSpeciality.astro";
+import LocationSpeciality from "../../components/shared/LocationSpeciality.astro";
+import FaqSpeciality from "../../components/shared/FaqSpeciality.astro";
+import CtaSpeciality from "../../components/shared/CtaSpeciality.astro";
+import SpecialistSpeciality from "../../components/shared/SpecialistSpeciality.astro";
+import WhyChooseSpeciality from "../../components/shared/WhyChooseSpeciality.astro";
+
+const pageContent = {
+  en: {
+    seo: {
+      title: "Dental Crowns in Playa del Carmen | Durable Restorations at Affordable Cost",
+      description: "Restore damaged teeth with dental crowns in Playa del Carmen. High-quality crown treatment in Mexico with significant savings vs USA. Book today."
+    },
+    header: {
+      title: "Dental Crowns in Playa del Carmen, Mexico",
+      subheadline: "High-quality dental crown treatment for Americans seeking durable, natural-looking tooth restorations in Mexico.",
+      features: [
+        "Prosthetic dentistry clinic",
+        "High-quality crown materials",
+        "English-speaking dental team",
+        "Affordable dental care compared to the USA"
+      ],
+      button: "Schedule Your Dental Crown Consultation",
+      imageSrc: "/especialidad1.jpeg",
+      imageAlt: "Dental crown treatment in Playa del Carmen"
+    },
+    about: {
+      title: "Looking for Dental Crowns in Playa del Carmen You Can Trust?",
+      text1: "Dental crowns are a reliable solution for restoring damaged, weakened, or worn teeth. Our clinic provides dental crowns in Playa del Carmen for American patients looking for professional care, durable materials, and transparent treatment options in Mexico.",
+      text2: "Whether your tooth has been damaged by decay, fracture, or a previous procedure, our dental crown treatment focuses on restoring strength, function, and a natural appearance.",
+      imageSrc: "/nosotros.jpg",
+      imgAlt: "Dental restoration consultation in Mexico"
+    },
+    whatIs: {
+      title: "What Are Dental Crowns?",
+      text1: "Dental crowns are custom-made restorations that fully cover a damaged or weakened tooth. They are designed to protect the tooth, restore proper function, and improve its appearance.",
+      text2: "This dental crown treatment is commonly recommended after root canal therapy or when a tooth is too damaged to be restored with a filling alone.",
+      imageSrc: "/especialidad-about.avif",
+      bgImage: "/especialidad1.jpeg",
+      imgAlt: "Process of dental crown placement"
+    },
+    options: {
+      title: "Types of Dental Crowns We Offer",
+      description: "We use different high-quality materials depending on the location of the tooth and your specific needs:",
+      items: [
+        { 
+          title: "Porcelain Dental Crowns", 
+          description: "Ideal for front or visible teeth, providing a natural look that blends with surrounding teeth.", 
+          subtext: "Superior aesthetics." 
+        },
+        { 
+          title: "Zirconia Dental Crowns", 
+          description: "Known for their extreme strength and durability, suitable for molars and high-pressure areas.", 
+          subtext: "Maximum resistance." 
+        },
+        { 
+          title: "Crowns After Root Canal", 
+          description: "Necessary to protect the treated tooth and prevent future damage or fractures.", 
+          subtext: "Post-endodontic protection." 
+        }
+      ]
+    },
+    benefits: {
+      title: "Benefits of Dental Crowns",
+      items: [
+        "Restore tooth strength and structure",
+        "Improve chewing function and bite alignment",
+        "Protect weakened or treated teeth",
+        "Natural-looking and long-lasting results",
+        "Reliable restorative solution"
+      ],
+      footer: "Dental crowns provide both functional and aesthetic benefits, making them a dependable restorative treatment.",
+      imageSrc: "/sonrisa2.jpg",
+      imgAlt: "Benefits of restorative dentistry"
+    },
+    cost: {
+      title: "Tooth Crown Cost in Playa del Carmen",
+      text1: "Tooth crown cost in Playa del Carmen is significantly lower than in the United States, while maintaining high standards of quality and care. The final cost depends on the type of crown and materials used.",
+      text2: "After a clinical evaluation, we provide a clear treatment plan with transparent pricing so you can make an informed decision.",
+      imageSrc: "/especialidad-about.avif",
+      imgAlt: "Affordable dental crown pricing"
+    },
+    whyChoose: {
+      title: "Why Choose Our Prosthetic Dentistry Clinic",
+      text1: "Experience in restorative and prosthetic dentistry with high-quality materials and technology. We offer personalized treatment planning and clear communication in English.",
+      text2: "Our focus is on restoring dental function and long-term stability for every international patient.",
+      imageSrc: "/sonrisa1.jpg",
+      imgAlt: "Professional prosthetic dental care"
+    },
+    process: {
+      title: "Dental Crown Treatment Process",
+      footer: "The process is designed to be efficient, comfortable, and predictable for international patients.",
+      steps: [
+        { title: "Dental examination and diagnosis", img: "/especialidad1.jpeg" },
+        { title: "Tooth preparation", img: "/especialidad-about.avif" },
+        { title: "Crown fabrication", img: "/sonrisa1.jpg" },
+        { title: "Crown placement and adjustment", img: "/sonrisa2.jpg" }
+      ]
+    },
+    location: {
+      title: "Dental Crowns in Playa del Carmen, Mexico",
+      text1: "Our dental clinic is conveniently located in Playa del Carmen, a safe destination for dental tourism. Patients from the USA benefit from high-quality care while enjoying a comfortable stay.",
+      imageSrc: "/especialidad1.jpeg",
+      imgAlt: "Location for dental crowns"
+    },
+    faq: {
+      title: "Dental Crowns FAQ",
+      items: [
+        { question: "How long do dental crowns last?", answer: "With proper care, dental crowns can last many years." },
+        { question: "Are dental crowns safe in Mexico?", answer: "Yes. When performed by experienced professionals using quality materials, they are safe and reliable." },
+        { question: "How much does a tooth crown cost?", answer: "Cost varies by material but is generally 50-70% lower than in the USA." },
+        { question: "Are crowns necessary after root canal?", answer: "In many cases, yes, to protect the weakened tooth from fracturing." }
+      ]
+    },
+    cta: {
+      title: "Schedule Your Dental Crown Consultation",
+      description: "If you need dental crowns in Playa del Carmen, our team is ready to help restore your tooth’s strength and function.",
+      button: "Book Your Dental Crown Consultation",
+      note: "Restore your smile with professional care"
+    }
+  },
+  es: {
+    seo: {
+      title: "Coronas Dentales en Playa del Carmen | Restauraciones Duraderas y Asequibles",
+      description: "Restaura dientes dañados con coronas dentales en Playa del Carmen. Tratamiento de alta calidad en México con ahorros significativos. Agenda hoy."
+    },
+    header: {
+      title: "Coronas Dentales en Playa del Carmen, México",
+      subheadline: "Tratamiento de coronas dentales de alta calidad para quienes buscan restauraciones duraderas y naturales en México.",
+      features: [
+        "Clínica de odontología protésica",
+        "Materiales de alta calidad",
+        "Equipo dental bilingüe",
+        "Precios asequibles comparado con EE. UU."
+      ],
+      button: "Agenda tu Consulta de Coronas Dentales",
+      imageSrc: "/especialidad1.jpeg",
+      imageAlt: "Tratamiento de coronas dentales"
+    },
+    about: {
+      title: "¿Buscas Coronas Dentales de Confianza en Playa del Carmen?",
+      text1: "Las coronas dentales son una solución confiable para restaurar dientes dañados, debilitados o desgastados. Nuestra clínica ofrece este servicio para pacientes que buscan cuidado profesional y materiales duraderos.",
+      text2: "Ya sea que tu diente haya sido dañado por caries, fractura o un procedimiento previo, nos enfocamos en restaurar su fuerza, función y apariencia natural.",
+      imageSrc: "/nosotros.jpg",
+      imgAlt: "Consulta de restauración dental"
+    },
+    whatIs: {
+      title: "¿Qué son las Coronas Dentales?",
+      text1: "Son restauraciones hechas a medida que cubren completamente un diente dañado. Están diseñadas para proteger la pieza, restaurar su función y mejorar su estética.",
+      text2: "Este tratamiento se recomienda comúnmente después de una endodoncia o cuando un diente está demasiado dañado para una resina normal.",
+      imageSrc: "/especialidad-about.avif",
+      bgImage: "/especialidad1.jpeg",
+      imgAlt: "Colocación de corona dental"
+    },
+    options: {
+      title: "Tipos de Coronas que Ofrecemos",
+      description: "Utilizamos diferentes materiales de alta calidad según la ubicación del diente y tus necesidades:",
+      items: [
+        { title: "Coronas de Porcelana", description: "Ideales para dientes frontales o visibles, brindando un aspecto natural que se mezcla con los demás.", subtext: "Estética superior." },
+        { title: "Coronas de Zirconia", description: "Conocidas por su extrema fuerza y durabilidad, adecuadas para molares y zonas de mucha presión.", subtext: "Máxima resistencia." },
+        { title: "Coronas Post-Endodoncia", description: "Necesarias para proteger el diente tratado y prevenir futuras fracturas o daños.", subtext: "Protección post-tratamiento." }
+      ]
+    },
+    benefits: {
+      title: "Beneficios de las Coronas Dentales",
+      items: [
+        "Restauran la fuerza y estructura del diente",
+        "Mejoran la función masticatoria y alineación de la mordida",
+        "Protegen dientes debilitados o tratados",
+        "Resultados de aspecto natural y duraderos",
+        "Solución restauradora confiable"
+      ],
+      footer: "Brindan beneficios tanto funcionales como estéticos, siendo un tratamiento restaurador seguro.",
+      imageSrc: "/sonrisa2.jpg",
+      imgAlt: "Beneficios de odontología restauradora"
+    },
+    cost: {
+      title: "Costo de Coronas Dentales en Playa del Carmen",
+      text1: "El costo es significativamente más bajo que en los Estados Unidos, manteniendo altos estándares de calidad. El precio final depende del material y la condición del diente.",
+      text2: "Tras una evaluación, entregamos un plan de tratamiento claro con precios transparentes.",
+      imageSrc: "/especialidad-about.avif",
+      imgAlt: "Precios de coronas dentales"
+    },
+    whyChoose: {
+      title: "Por qué Elegir Nuestra Clínica",
+      text1: "Experiencia en odontología restauradora y protésica con tecnología de punta. Ofrecemos planes personalizados y comunicación clara.",
+      text2: "Nuestro enfoque es devolver la función dental y la estabilidad a largo plazo para cada paciente.",
+      imageSrc: "/sonrisa1.jpg",
+      imgAlt: "Cuidado dental protésico"
+    },
+    process: {
+      title: "Proceso del Tratamiento",
+      footer: "El proceso es eficiente, cómodo y predecible para pacientes internacionales.",
+      steps: [
+        { title: "Examen dental y diagnóstico", img: "/especialidad1.jpeg" },
+        { title: "Preparación del diente", img: "/especialidad-about.avif" },
+        { title: "Fabricación de la corona", img: "/sonrisa1.jpg" },
+        { title: "Colocación y ajuste", img: "/sonrisa2.jpg" }
+      ]
+    },
+    location: {
+      title: "Coronas Dentales en Playa del Carmen, México",
+      text1: "Ubicados en un destino seguro para el turismo dental. Los pacientes disfrutan de cuidado de alta calidad mientras gozan de su estancia.",
+      imageSrc: "/especialidad1.jpeg",
+      imgAlt: "Ubicación en Playa del Carmen"
+    },
+    faq: {
+      title: "Preguntas Frecuentes",
+      items: [
+        { question: "¿Cuánto duran las coronas?", answer: "Con el cuidado adecuado, pueden durar muchos años." },
+        { question: "¿Es seguro hacerse coronas en México?", answer: "Sí, realizado por profesionales y materiales de calidad es totalmente seguro." },
+        { question: "¿Cuánto cuesta una corona?", answer: "Varía según el material pero suele ser mucho más accesible que en EE. UU." },
+        { question: "¿Es necesaria después de una endodoncia?", answer: "En la mayoría de los casos sí, para evitar que el diente se fracture." }
+      ]
+    },
+    cta: {
+      title: "Agenda tu Consulta de Coronas Dentales",
+      description: "Si necesitas restaurar la fuerza y función de tus dientes, nuestro equipo está listo para ayudarte.",
+      button: "Reserva tu Consulta Ahora",
+      note: "Restaura tu sonrisa con cuidado profesional"
+    }
+  }
+};
+
+const t = pageContent[lang];
+---
+
+<Layout 
+  title={t.seo.title} 
+  description={t.seo.description} 
+  lang={lang}
+>
+  <HeaderSpeciality 
+      lang={lang}
+      title={t.header.title}
+      subheadline={t.header.subheadline}
+      features={t.header.features}
+      buttonText={t.header.button}
+      imageSrc={t.header.imageSrc} 
+      imageAlt={t.header.imageAlt}
+    />
+
+  <AboutSpeciality 
+      title={t.about.title}
+      text1={t.about.text1}
+      text2={t.about.text2}
+      imageSrc={t.about.imageSrc}
+      imageAlt={t.about.imgAlt}
+    />
+
+  <WhatIsSpeciality 
+      title={t.whatIs.title}
+      text1={t.whatIs.text1}
+      text2={t.whatIs.text2}
+      imageSrc={t.whatIs.imageSrc}
+      imageAlt={t.whatIs.imgAlt}
+      bgImage={t.whatIs.bgImage}
+    />
+
+  <OptionsSpeciality 
+      title={t.options.title}
+      description={t.options.description}
+      options={t.options.items}
+    />
+
+  <BenefitsSpeciality 
+      title={t.benefits.title}
+      benefits={t.benefits.items}
+      footerText={t.benefits.footer}
+      imageSrc={t.benefits.imageSrc}
+      imageAlt={t.benefits.imgAlt}
+    />
+
+  <CostSpeciality 
+      title={t.cost.title}
+      text1={t.cost.text1}
+      text2={t.cost.text2}
+      imageSrc={t.cost.imageSrc}
+      imageAlt={t.cost.imgAlt}
+    />
+
+  <WhyChooseSpeciality 
+      title={t.whyChoose.title}
+      text1={t.whyChoose.text1}
+      text2={t.whyChoose.text2}
+      imageSrc={t.whyChoose.imageSrc}
+      imageAlt={t.whyChoose.imgAlt}
+    />
+
+  <ProcessSpeciality 
+      title={t.process.title}
+      footer={t.process.footer}
+      steps={t.process.steps}
+    />
+
+  <LocationSpeciality 
+      title={t.location.title}
+      text1={t.location.text1}
+      imageSrc={t.location.imageSrc}
+      imageAlt={t.location.imgAlt}
+    />
+
+  <FaqSpeciality 
+      title={t.faq.title}
+      faqs={t.faq.items}
+    />
+
+  <CtaSpeciality 
+      title={t.cta.title}
+      description={t.cta.description}
+      buttonText={t.cta.button}
+      note={t.cta.note}
+    />
+</Layout>

@@ -1,0 +1,341 @@
+---
+// src/pages/[lang]/[dental_implants].astro
+
+export async function getStaticPaths() {
+  return [
+    { 
+      params: { 
+        lang: 'en', 
+        dental_implants: 'dental-implants-playa-del-carmen' 
+      } 
+    },
+    { 
+      params: { 
+        lang: 'es', 
+        dental_implants: 'implantes-dentales' 
+      } 
+    },
+  ];
+}
+const { lang } = Astro.params as { lang: 'en' | 'es' };
+
+import Layout from "../../layouts/Layout.astro"
+import HeaderSpeciality from "../../components/shared/HeaderSpeciality.astro";
+import AboutSpeciality from "../../components/shared/AboutSpeciality.astro";
+import WhatIsSpeciality from "../../components/shared/WhatIsSpeciality.astro";
+import OptionsSpeciality from "../../components/shared/OptionsSpeciality.astro";
+import BenefitsSpeciality from "../../components/shared/BenefitsSpeciality.astro";
+import WhyChooseSpeciality from "../../components/shared/WhyChooseSpeciality.astro";
+import CostSpeciality from "../../components/shared/CostSpeciality.astro";
+import ProcessSpeciality from "../../components/shared/ProcessSpeciality.astro";
+import AmericansSpeciality from "../../components/shared/AmericansSpeciality.astro";
+import LocationSpeciality from "../../components/shared/LocationSpeciality.astro";
+import FaqSpeciality from "../../components/shared/FaqSpeciality.astro";
+import CtaSpeciality from "../../components/shared/CtaSpeciality.astro";
+
+const pageContent = {
+  en: {
+    seo: {
+      title: "Dental Implants in Playa del Carmen | Safe & Affordable Care for Americans",
+      description: "Get dental implants in Playa del Carmen with certified specialists. Safe, modern and affordable implant solutions in Mexico for American patients. Book today."
+    },
+    header: {
+      title: "Dental Implants in Playa del Carmen, Mexico",
+      subheadline: "Safe, modern and affordable dental implant solutions for American and international patients.",
+      features: [
+        "Certified dental implant specialists",
+        "Advanced implant technology and materials",
+        "English-speaking dental team",
+        "Significant savings compared to U.S. dental costs"
+      ],
+      button: "Get a Dental Implants Quote",
+      imageSrc: "/especialidad1.jpeg",
+      imageAlt: "Dental implants treatment in Mexico"
+    },
+    about: {
+      title: "Looking for Dental Implants in Playa del Carmen You Can Trust?",
+      text1: "Choosing dental implants is an important decision, especially when you are considering treatment abroad. Our clinic specializes in providing dental implants in Playa del Carmen for American patients who want safe procedures, experienced specialists, and transparent treatment plans.",
+      text2: "We combine international-quality materials, modern technology, and personalized care to deliver reliable dental implant solutions in Mexico.",
+      imageSrc: "/nosotros.jpg",
+      imgAlt: "Professional dental implant consultation"
+    },
+    whatIs: {
+      title: "What Are Dental Implants?",
+      text1: "Dental implants are a permanent solution for replacing missing teeth. They consist of a titanium post that is placed in the jawbone, acting as a strong foundation for a crown, bridge, or full arch restoration.",
+      text2: "Implants look, feel, and function like natural teeth, helping restore chewing ability, speech, and confidence. They are one of the most reliable and long-lasting dental treatments available today.",
+      imageSrc: "/especialidad-about.avif",
+      bgImage: "/especialidad1.jpeg",
+      imgAlt: "Anatomy of a dental implant"
+    },
+    options: {
+      title: "Types of Dental Implants We Offer",
+      description: "Every patient has different needs. Our specialists recommend the most appropriate implant solution for your specific case.",
+      items: [
+        { title: "Single Tooth Dental Implants", description: "Ideal for replacing a single missing tooth without affecting surrounding teeth.", subtext: "Safe and durable foundation." },
+        { title: "Multiple Dental Implants", description: "Designed to support bridges or replace several missing teeth securely.", subtext: "Stable restorations." },
+        { title: "Full Mouth Dental Implants", description: "A comprehensive solution for patients who have lost most or all of their teeth.", subtext: "Complete restoration." },
+        { title: "All-on-4 Dental Implants", description: "An advanced technique that restores a full arch of teeth using a minimal number of implants.", subtext: "Efficient and fast." }
+      ]
+    },
+    benefits: {
+      title: "Why Get Dental Implants in Mexico?",
+      items: [
+        "Same quality of care as the U.S. at a significantly lower cost",
+        "Excellent balance of affordability, safety, and professional expertise",
+        "Modern facilities and experienced implant specialists",
+        "Comfortable environment for recovery in Playa del Carmen"
+      ],
+      footer: "Save 50% to 70% compared to U.S. prices while receiving world-class dental care.",
+      imageSrc: "/sonrisa2.jpg",
+      imgAlt: "Benefits of dental tourism in Mexico"
+    },
+    whyChoose: {
+      title: "Why Choose Our Dental Clinic for Implants",
+      text1: "Our focus is to provide safe and predictable implant results while making the process easy for patients traveling from the United States.",
+      text2: "We offer certified implant specialists with international training, high-quality implant systems, advanced diagnostic technology, and clear communication in English.",
+      imageSrc: "/sonrisa1.jpg",
+      imgAlt: "Certified dental specialists in Mexico"
+    },
+    cost: {
+      title: "Dental Implants Cost in Playa del Carmen",
+      text1: "The cost of dental implants in Playa del Carmen is significantly lower than in the United States, often allowing patients to save between 50% and 70% compared to U.S. prices.",
+      text2: "Final costs depend on the number of implants needed, the type of restoration, and individual requirements.",
+      imageSrc: "/especialidad-about.avif",
+      imgAlt: "Dental cost savings in Mexico"
+    },
+    process: {
+      title: "Dental Implants Process for Americans",
+      footer: "Our team guides you through each step to ensure a smooth and stress-free experience.",
+      steps: [
+        { title: "Online consultation and evaluation", img: "/especialidad1.jpeg" },
+        { title: "Personalized treatment plan", img: "/especialidad-about.avif" },
+        { title: "Implant procedure by specialists", img: "/sonrisa1.jpg" },
+        { title: "Follow-up and support", img: "/sonrisa2.jpg" }
+      ]
+    },
+    americans: {
+      title: "Expert Care for International Patients",
+      text1: "Our clinic is focused on providing safe and predictable implant results while making the process easy for patients traveling from the United States and Canada.",
+    },
+    location: {
+      title: "Dental Implants in Playa del Carmen, Mexico",
+      text1: "Our clinic is located in a safe and accessible destination for dental tourism. Playa del Carmen offers convenient travel options and a perfect environment for recovery.",
+      imageSrc: "/especialidad1.jpeg",
+      imgAlt: "Dental clinic location in Playa del Carmen"
+    },
+    faq: {
+      title: "Dental Implants FAQ",
+      items: [
+        { question: "Are dental implants safe in Mexico?", answer: "Yes. They are safe when performed by certified specialists using modern technology and international protocols." },
+        { question: "How long do dental implants last?", answer: "With proper care, dental implants can last many years and often a lifetime." },
+        { question: "How many visits are required?", answer: "Treatment timelines vary depending on the procedure and healing process. This is discussed during your consultation." }
+      ]
+    },
+    cta: {
+      title: "Book Your Dental Implants Evaluation",
+      description: "If you are considering dental implants in Playa del Carmen, our team is ready to help. Contact us today to receive expert implant care in Mexico.",
+      button: "Book Your Appointment Now",
+      note: "Expert care for international patients"
+    }
+  },
+  es: {
+    seo: {
+      title: "Implantes Dentales en Playa del Carmen | Cuidado Seguro y Asequible",
+      description: "Obtén implantes dentales en Playa del Carmen con especialistas certificados. Soluciones de implantes seguras y modernas en México para pacientes internacionales."
+    },
+    header: {
+      title: "Implantes Dentales en Playa del Carmen, México",
+      subheadline: "Soluciones de implantes dentales seguras, modernas y accesibles para pacientes internacionales.",
+      features: [
+        "Especialistas certificados en implantes dentales",
+        "Tecnología y materiales avanzados",
+        "Equipo dental bilingüe",
+        "Ahorros significativos en costos dentales"
+      ],
+      button: "Obtén una Cotización de Implantes",
+      imageSrc: "/especialidad1.jpeg",
+      imageAlt: "Tratamiento de implantes dentales en México"
+    },
+    about: {
+      title: "¿Buscas Implantes Dentales de Confianza en Playa del Carmen?",
+      text1: "Elegir implantes dentales es una decisión importante. Nuestra clínica se especializa en brindar implantes dentales en Playa del Carmen para pacientes que buscan procedimientos seguros y planes transparentes.",
+      text2: "Combinamos materiales de calidad internacional y tecnología moderna para ofrecer soluciones confiables.",
+      imageSrc: "/nosotros.jpg",
+      imgAlt: "Consulta de implantes dentales en México"
+    },
+    whatIs: {
+      title: "¿Qué son los Implantes Dentales?",
+      text1: "Los implantes dentales son una solución permanente para reemplazar dientes perdidos. Consisten en un poste de titanio que se coloca en el hueso maxilar, actuando como raíz para una corona o puente.",
+      text2: "Se ven, se sienten y funcionan como dientes naturales, restaurando la capacidad de masticar, el habla y la confianza.",
+      imageSrc: "/especialidad-about.avif",
+      bgImage: "/especialidad1.jpeg",
+      imgAlt: "Estructura de un implante dental"
+    },
+    options: {
+      title: "Tipos de Implantes que Ofrecemos",
+      description: "Ofrecemos una variedad de soluciones de implantes adaptadas a tus necesidades específicas.",
+      items: [
+        { title: "Implante de un Solo Diente", description: "Ideal para reemplazar una pieza faltante sin afectar los dientes vecinos.", subtext: "Aspecto natural." },
+        { title: "Múltiples Implantes", description: "Diseñados para soportar puentes o reemplazar varios dientes de forma segura.", subtext: "Estable y duradero." },
+        { title: "Implantes de Boca Completa", description: "Solución integral para pacientes que han perdido la mayoría o todos sus dientes.", subtext: "Restauración completa." },
+        { title: "Implantes All-on-4", description: "Técnica avanzada que restaura un arco completo con un número mínimo de implantes.", subtext: "Rápido y eficiente." }
+      ]
+    },
+    benefits: {
+      title: "¿Por qué hacerse implantes en México?",
+      items: [
+        "Misma calidad que en EE. UU. a un costo significativamente menor",
+        "Equilibrio entre asequibilidad, seguridad y experiencia profesional",
+        "Instalaciones modernas y especialistas experimentados",
+        "Ambiente cómodo para la recuperación en Playa del Carmen"
+      ],
+      footer: "Ahorra entre un 50% y un 70% comparado con los precios de EE. UU.",
+      imageSrc: "/sonrisa2.jpg",
+      imgAlt: "Beneficios del turismo dental"
+    },
+    whyChoose: {
+      title: "¿Por qué elegir nuestra clínica para implantes?",
+      text1: "Nuestro enfoque es proporcionar resultados seguros y predecibles facilitando el proceso para pacientes extranjeros.",
+      text2: "Contamos con especialistas certificados con formación internacional, tecnología de diagnóstico avanzada y comunicación clara.",
+      imageSrc: "/sonrisa1.jpg",
+      imgAlt: "Especialistas certificados en México"
+    },
+    cost: {
+      title: "Costo de Implantes en Playa del Carmen",
+      text1: "El costo es significativamente más bajo que en los Estados Unidos, permitiendo ahorros de hasta el 70%.",
+      text2: "Los costos finales dependen del número de implantes y el tipo de restauración necesaria.",
+      imageSrc: "/especialidad-about.avif",
+      imgAlt: "Ahorro en costos dentales"
+    },
+    process: {
+      title: "Proceso para el Paciente",
+      footer: "Nuestro equipo te guía en cada paso para asegurar una experiencia sin estrés.",
+      steps: [
+        { title: "Consulta en línea y evaluación", img: "/especialidad1.jpeg" },
+        { title: "Plan de tratamiento personalizado", img: "/especialidad-about.avif" },
+        { title: "Procedimiento de implante", img: "/sonrisa1.jpg" },
+        { title: "Seguimiento y soporte", img: "/sonrisa2.jpg" }
+      ]
+    },
+    americans: {
+      title: "Atención Especializada para Extranjeros",
+      text1: "Nuestra clínica está enfocada en brindar resultados seguros mientras hacemos el proceso sencillo para pacientes de EE. UU. y Canadá.",
+    },
+    location: {
+      title: "Implantes Dentales en Playa del Carmen, México",
+      text1: "Nuestra clínica se encuentra en un destino seguro y accesible. Playa del Carmen ofrece opciones de viaje convenientes y un entorno perfecto para la recuperación.",
+      imageSrc: "/especialidad1.jpeg",
+      imgAlt: "Ubicación de la clínica en Playa del Carmen"
+    },
+    faq: {
+      title: "Preguntas Frecuentes",
+      items: [
+        { question: "¿Son seguros los implantes en México?", answer: "Sí. Son seguros cuando los realizan especialistas certificados usando tecnología moderna y protocolos internacionales." },
+        { question: "¿Cuánto duran?", answer: "Con el cuidado adecuado, pueden durar muchos años y a menudo toda la vida." },
+        { question: "¿Cuántas visitas necesito?", answer: "Los plazos varían según el procedimiento y la curación, lo cual se discute en la consulta." }
+      ]
+    },
+    cta: {
+      title: "Reserva tu Evaluación de Implantes",
+      description: "Si estás considerando implantes dentales en Playa del Carmen, nuestro equipo está listo para ayudarte.",
+      button: "Reserva tu Cita Ahora",
+      note: "Atención experta para pacientes internacionales"
+    }
+  }
+};
+
+const t = pageContent[lang];
+---
+
+<Layout 
+  title={t.seo.title} 
+  description={t.seo.description} 
+  lang={lang}
+>
+  <HeaderSpeciality 
+      lang={lang}
+      title={t.header.title}
+      subheadline={t.header.subheadline}
+      features={t.header.features}
+      buttonText={t.header.button}
+      imageSrc={t.header.imageSrc} 
+      imageAlt={t.header.imageAlt}
+    />
+
+  <AboutSpeciality 
+      title={t.about.title}
+      text1={t.about.text1}
+      text2={t.about.text2}
+      imageSrc={t.about.imageSrc}
+      imageAlt={t.about.imgAlt}
+    />
+
+  <WhatIsSpeciality 
+      title={t.whatIs.title}
+      text1={t.whatIs.text1}
+      text2={t.whatIs.text2}
+      imageSrc={t.whatIs.imageSrc}
+      imageAlt={t.whatIs.imgAlt}
+      bgImage={t.whatIs.bgImage}
+    />
+
+  <OptionsSpeciality 
+      title={t.options.title}
+      description={t.options.description}
+      options={t.options.items}
+    />
+
+  <BenefitsSpeciality 
+      title={t.benefits.title}
+      benefits={t.benefits.items}
+      footerText={t.benefits.footer}
+      imageSrc={t.benefits.imageSrc}
+      imageAlt={t.benefits.imgAlt}
+    />
+
+  <WhyChooseSpeciality 
+      title={t.whyChoose.title}
+      text1={t.whyChoose.text1}
+      text2={t.whyChoose.text2}
+      imageSrc={t.whyChoose.imageSrc}
+      imageAlt={t.whyChoose.imgAlt}
+    />
+
+  <CostSpeciality 
+      title={t.cost.title}
+      text1={t.cost.text1}
+      text2={t.cost.text2}
+      imageSrc={t.cost.imageSrc}
+      imageAlt={t.cost.imgAlt}
+    />
+
+  <ProcessSpeciality 
+      title={t.process.title}
+      footer={t.process.footer}
+      steps={t.process.steps}
+    />
+
+  <AmericansSpeciality 
+      title={t.americans.title}
+      text1={t.americans.text1}
+    />
+
+  <LocationSpeciality 
+      title={t.location.title}
+      text1={t.location.text1}
+      imageSrc={t.location.imageSrc}
+      imageAlt={t.location.imgAlt}
+    />
+
+  <FaqSpeciality 
+      title={t.faq.title}
+      faqs={t.faq.items}
+    />
+
+  <CtaSpeciality 
+      title={t.cta.title}
+      description={t.cta.description}
+      buttonText={t.cta.button}
+      note={t.cta.note}
+    />
+</Layout>

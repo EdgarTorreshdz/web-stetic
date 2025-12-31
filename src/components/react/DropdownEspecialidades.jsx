@@ -18,6 +18,14 @@ const DropdownEspecialidades = ({ lang = 'en', currentPath, category, label }) =
         { title: "Esthetic Dentistry", key: "cosmetic_dentistry" },
         { title: "Orthodontics", key: "orthodontics" },
         { title: "Orthopedics", key: "orthopedics" },
+        { title: "Dental Implants", key: "dental_implants" },
+        { title: "Smile Design", key: "smile_design" },
+        { title: "Dental Veneers", key: "veneers" },
+        { title: "Teeth Cleaning", key: "teeth_cleaning" },
+        { title: "Dental Crowns", key: "dental_crowns" },
+        { title: "Teeth Whitening", key: "teeth_whitening" },
+        { title: "Invisalign", key: "invisalign" },
+        { title: "Dental Tourism", key: "dental_tourism" }
       ]
     },
     es: {
@@ -32,6 +40,14 @@ const DropdownEspecialidades = ({ lang = 'en', currentPath, category, label }) =
         { title: "Odontología Estética", key: "cosmetic_dentistry" },
         { title: "Ortodoncia", key: "orthodontics" },
         { title: "Ortopedia", key: "orthopedics" },
+        { title: "Implantes Dentales", key: "dental_implants" },
+        { title: "Diseño de Sonrisa", key: "smile_design" },
+        { title: "Carillas Dentales", key: "veneers" },
+        { title: "Limpieza Dental", key: "teeth_cleaning" },
+        { title: "Coronas Dentales", key: "dental_crowns" },
+        { title: "Blanqueamiento Dental", key: "teeth_whitening" },
+        { title: "Invisalign", key: "invisalign" },
+        { title: "Turismo Dental", key: "dental_tourism" }
       ]
     }
   };
