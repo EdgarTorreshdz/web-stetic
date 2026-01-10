@@ -59,39 +59,33 @@ const NavbarMobile = ({ lang = 'en' }) => {
 
   // ACTUALIZADO: Ahora coincide exactamente con el Dropdown de Desktop
   const services = {
-    restore: lang === 'es' 
+    restore: lang === 'en' 
       ? [
-          { title: "Odontología General", key: "general_dentistry" },
-          { title: "Endodoncia", key: "endodontics" },
-          { title: "Implantes Dentales", key: "dental_implants" },
-          { title: "Coronas Dentales", key: "dental_crowns" },
-          { title: "Limpieza Dental", key: "teeth_cleaning" },
-          { title: "Cirugía Oral", key: "oral_surgery" },
-          { title: "Odontopediatría", key: "pediatric_dentistry" },
-        ]
-      : [
-          { title: "General Dentistry", key: "general_dentistry" },
-          { title: "Root Canal (Endodontics)", key: "endodontics" },
           { title: "Dental Implants", key: "dental_implants" },
-          { title: "Dental Crowns", key: "dental_crowns" },
-          { title: "Teeth Cleaning", key: "teeth_cleaning" },
-          { title: "Oral Surgery", key: "oral_surgery" },
-          { title: "Pediatric Dentistry", key: "pediatric_dentistry" },
-        ],
-    enhance: lang === 'es'
-      ? [
-          { title: "Diseño de Sonrisa", key: "smile_design" },
-          { title: "Carillas Dentales", key: "veneers" },
+          { title: "Crowns & Bridges", key: "dental_crowns" },
+          { title: "Root Canal (Endodontics)", key: "endodontics" },
+          { title: "Orthodontics", key: "orthodontics" },
           { title: "Invisalign", key: "invisalign" },
-          { title: "Blanqueamiento Dental", key: "teeth_whitening" },
-          { title: "Odontología Estética", key: "cosmetic_dentistry" },
         ]
       : [
           { title: "Smile Design", key: "smile_design" },
-          { title: "Porcelain Veneers", key: "veneers" },
-          { title: "Invisalign", key: "invisalign" },
+          { title: "Dental Veneers", key: "veneers" },
           { title: "Teeth Whitening", key: "teeth_whitening" },
-          { title: "Cosmetic Dentistry", key: "cosmetic_dentistry" },
+          { title: "Teeth Cleaning", key: "teeth_cleaning" },
+        ],
+    enhance: lang === 'es'
+      ? [
+          { title: "Implantes Dentales", key: "dental_implants" },
+          { title: "Coronas y Puentes", key: "dental_crowns" },
+          { title: "Endodoncia", key: "endodontics" },
+          { title: "Ortodoncia", key: "orthodontics" },
+          { title: "Invisalign", key: "invisalign" },
+        ]
+      : [
+          { title: "Diseño de Sonrisa", key: "smile_design" },
+          { title: "Carillas Dentales", key: "veneers" },
+          { title: "Blanqueamiento Dental", key: "teeth_whitening" },
+          { title: "Limpieza Dental", key: "teeth_cleaning" },
         ]
   };
 

@@ -4,7 +4,7 @@ export async function getStaticPaths() {
     { 
       params: { 
         lang: 'en', 
-        endodontics: 'root-canal-treatment-playa-del-carmen' // DEBE coincidir con ui.ts
+        endodontics: 'root-canal-treatment-playa-del-carmen' 
       } 
     },
     { 
@@ -15,6 +15,7 @@ export async function getStaticPaths() {
     },
   ];
 }
+
 const { lang } = Astro.params as { lang: 'en' | 'es' };
 
 import Layout from "../../layouts/Layout.astro"
@@ -162,10 +163,10 @@ const pageContent = {
       ]
     },
     cta: {
-      title: "Start Your Smile Transformation",
-      description: "Ready for the smile you've always wanted? Contact us today to schedule your consultation in Playa del Carmen.",
-      button: "Book Your Appointment Now",
-      note: "Personalized plans for every patient"
+      title: "Schedule Your Root Canal Treatment",
+      description: "If you are experiencing dental pain and need immediate care, our team is ready to help. Contact us today to get relief as soon as possible.",
+      button: "Book Your Root Canal Appointment Now",
+      note: "Personalized care for every patient"
     }
   },
   es: {
@@ -297,10 +298,10 @@ const pageContent = {
       ]
     },
     cta: {
-      title: "Inicia la Transformación de tu Sonrisa",
-      description: "¿Listo para la sonrisa que siempre has deseado? Contáctanos hoy para programar tu consulta en Playa del Carmen.",
-      button: "Reserva tu Cita Ahora",
-      note: "Planes personalizados para cada paciente"
+      title: "Reserva tu Tratamiento de Endodoncia",
+      description: "Si experimentas dolor dental y necesitas atención inmediata, nuestro equipo está listo para ayudarte. Contáctanos hoy para obtener alivio lo antes posible.",
+      button: "Reserva tu Cita de Endodoncia Ahora",
+      note: "Atención personalizada para cada paciente"
     }
   }
 };
