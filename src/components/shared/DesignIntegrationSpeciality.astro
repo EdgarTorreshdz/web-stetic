@@ -1,0 +1,114 @@
+---
+interface Props {
+  title: string;
+  text1: string;
+  text2: string;
+}
+
+const { title, text1, text2 } = Astro.props;
+---
+
+<section class="design-integration">
+  <div class="container">
+    <div class="integration-wrapper">
+      <div class="integration__content">
+        <h2 class="integration__title">{title}</h2>
+        <div class="integration__accent-line"></div>
+        
+        <div class="integration__text-container">
+          <p class="integration__main-text">
+            {text1}
+          </p>
+          <div class="integration__note">
+            <p>{text2}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  :root {
+    --gold: #A58E55;
+    --black: #000000;
+    --white: #ffffff;
+    --soft-bg: #F9F7F2; /* Crema muy suave para diferenciar del blanco puro */
+  }
+
+  .design-integration {
+    padding: 100px 0;
+    background-color: var(--white);
+  }
+
+  .container {
+    margin: 0 auto;
+    width: 85%;
+    max-width: 1100px;
+  }
+
+  .integration-wrapper {
+    background-color: var(--soft-bg);
+    padding: 60px;
+    border-radius: 4px; /* Bordes rectos para un look más arquitectónico/clínico */
+    position: relative;
+    overflow: hidden;
+  }
+
+  /* Detalle decorativo dorado en la esquina */
+  .integration-wrapper::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 5px;
+    height: 100%;
+    background-color: var(--gold);
+  }
+
+  .integration__title {
+    font-size: 2rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    color: var(--black);
+    margin-bottom: 25px;
+    line-height: 1.2;
+    max-width: 700px;
+  }
+
+  .integration__accent-line {
+    width: 60px;
+    height: 2px;
+    background-color: var(--gold);
+    margin-bottom: 40px;
+  }
+
+  .integration__main-text {
+    font-size: 1.2rem;
+    line-height: 1.8;
+    color: #333;
+    margin-bottom: 30px;
+  }
+
+  .integration__note {
+    background-color: var(--white);
+    padding: 25px;
+    border: 1px solid rgba(165, 142, 85, 0.2);
+    display: inline-block;
+  }
+
+  .integration__note p {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--black);
+    margin: 0;
+    font-style: italic;
+  }
+
+  @media (max-width: 768px) {
+    .design-integration { padding: 60px 0; }
+    .integration-wrapper { padding: 40px 30px; }
+    .integration__title { font-size: 1.6rem; }
+    .integration__main-text { font-size: 1.1rem; }
+  }
+</style>
