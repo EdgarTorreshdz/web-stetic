@@ -1,0 +1,100 @@
+---
+interface Props {
+  title: string;
+  text1: string;
+  text2: string;
+}
+
+const { title, text1, text2 } = Astro.props;
+---
+
+<section class="benefits-text">
+  <div class="container">
+    <div class="benefits-text__card">
+      <h2 class="benefits-text__title">{title}</h2>
+      <div class="benefits-text__accent-line"></div>
+      
+      <div class="benefits-text__content">
+        <p class="benefits-text__main">
+          {text1}
+        </p>
+        <div class="benefits-text__divider"></div>
+        <p class="benefits-text__secondary">
+          {text2}
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  :root {
+    --gold: #A58E55;
+    --black: #000000;
+    --white: #ffffff;
+  }
+
+  .benefits-text {
+    padding: 100px 0;
+    background-color: #f9f9f9; /* Fondo gris muy sutil para resaltar la tarjeta blanca */
+  }
+
+  .container {
+    margin: 0 auto;
+    width: 85%;
+    max-width: 1000px;
+  }
+
+  .benefits-text__card {
+    background-color: var(--white);
+    padding: 60px 50px;
+    border-radius: 20px;
+    text-align: center;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.05);
+    border: 1px solid rgba(165, 142, 85, 0.1);
+  }
+
+  .benefits-text__title {
+    font-size: 2.2rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    color: var(--black);
+    margin-bottom: 20px;
+  }
+
+  .benefits-text__accent-line {
+    width: 60px;
+    height: 3px;
+    background-color: var(--gold);
+    margin: 0 auto 40px;
+  }
+
+  .benefits-text__main {
+    font-size: 1.3rem;
+    font-weight: 600;
+    line-height: 1.7;
+    color: var(--black);
+    margin-bottom: 30px;
+  }
+
+  .benefits-text__divider {
+    width: 40px;
+    height: 1px;
+    background-color: #eee;
+    margin: 0 auto 30px;
+  }
+
+  .benefits-text__secondary {
+    font-size: 1.1rem;
+    line-height: 1.8;
+    color: #555;
+    margin: 0;
+  }
+
+  @media (max-width: 768px) {
+    .benefits-text { padding: 60px 0; }
+    .benefits-text__card { padding: 40px 25px; }
+    .benefits-text__title { font-size: 1.8rem; }
+    .benefits-text__main { font-size: 1.15rem; }
+  }
+</style>

@@ -1,0 +1,181 @@
+---
+import { Icon } from "astro-icon/components";
+
+interface Props {
+  title: string;
+  description: string;
+  items: string[];
+  footerText: string;
+  imageSrc: string;
+  imageAlt: string;
+}
+
+const { title, description, items, footerText, imageSrc, imageAlt } = Astro.props;
+---
+
+<section class="candidate-section">
+  <div class="container">
+    <div class="candidate__grid">
+      
+      <div class="candidate__image-container">
+        <div class="candidate__img-wrapper">
+          <img src={imageSrc} alt={imageAlt} class="candidate__img" />
+        </div>
+      </div>
+
+      <div class="candidate__content">
+        <h2 class="candidate__title">{title}</h2>
+        <div class="candidate__accent-line"></div>
+        <p class="candidate__description">{description}</p>
+        
+        <ul class="candidate__list">
+          {items.map((item) => (
+            <li class="candidate__item">
+              <div class="candidate__check">
+                <Icon name="star" size={18} class="text-gold" />
+              </div>
+              <span class="candidate__item-text">{item}</span>
+            </li>
+          ))}
+        </ul>
+
+        <div class="candidate__footer-info">
+          <p>{footerText}</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<style>
+  :root {
+    --gold: #A58E55;
+    --black: #000000;
+    --white: #ffffff;
+  }
+
+  .candidate-section {
+    padding: 100px 0;
+    background-color: var(--black); /* Fondo oscuro como el componente base */
+    color: var(--white);
+  }
+
+  .container {
+    margin: 0 auto;
+    width: 85%;
+  }
+
+  .candidate__grid {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 40px;
+  }
+
+  @media (min-width: 992px) {
+    .candidate__grid {
+      flex-direction: row;
+      justify-content: space-between;
+      gap: 60px;
+    }
+  }
+
+  .candidate__image-container {
+    flex: 1;
+    width: 100%;
+  }
+
+  .candidate__img-wrapper {
+    position: relative;
+    width: 100%;
+  }
+
+  .candidate__img {
+    width: 100%;
+    /* Aumentamos la altura máxima para que sea más larga */
+    height: auto;
+    max-height: 450px; 
+    object-fit: cover;
+    display: block;
+    border-radius: 4px;
+    border: 1px solid var(--gold); /* Borde dorado como el ejemplo */
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+  }
+
+  .candidate__content {
+    flex: 1.2;
+    text-align: left;
+  }
+
+  .candidate__title {
+    font-size: 1.8rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    line-height: 1.2;
+    margin-bottom: 20px;
+    color: var(--white);
+  }
+
+  @media (min-width: 768px) {
+    .candidate__title { font-size: 2.5rem; }
+  }
+
+  .candidate__accent-line {
+    width: 80px;
+    height: 3px;
+    background-color: var(--gold);
+    margin-bottom: 30px;
+  }
+
+  .candidate__description {
+    font-size: 1.15rem;
+    font-weight: 600;
+    margin-bottom: 25px;
+    color: var(--gold); /* Resaltado en dorado */
+  }
+
+  .candidate__list {
+    list-style: none;
+    padding: 0;
+    margin-bottom: 35px;
+  }
+
+  .candidate__item {
+    display: flex;
+    align-items: flex-start;
+    gap: 15px;
+    margin-bottom: 15px;
+  }
+
+  .candidate__item-text {
+    font-size: 1rem;
+    line-height: 1.7;
+    color: #e0e0e0;
+  }
+
+  @media (min-width: 768px) {
+    .candidate__item-text { font-size: 1.1rem; }
+  }
+
+  .candidate__check {
+    margin-top: 2px;
+  }
+
+  .text-gold {
+    color: var(--gold);
+  }
+
+  .candidate__footer-info {
+    padding: 20px;
+    border-left: 4px solid var(--gold);
+    background-color: rgba(255, 255, 255, 0.05);
+    font-style: italic;
+    color: #cccccc;
+  }
+
+  @media (max-width: 768px) {
+    .candidate-section { padding: 60px 0; }
+    .candidate__img { max-height: 450px; }
+  }
+</style>

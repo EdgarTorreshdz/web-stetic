@@ -3,34 +3,22 @@ interface Props {
   title: string;
   text1: string;
   text2: string;
-  imageSrc: string;
-  imageAlt: string;
 }
 
-const { title, text1, text2, imageSrc, imageAlt } = Astro.props;
+const { title, text1, text2 } = Astro.props;
 ---
 
 <section class="cost-section">
   <div class="container">
-    <div class="cost__grid">
-      
-      <div class="cost__content">
-        <h2 class="cost__title">{title}</h2>
-        <div class="cost__accent-line"></div>
-        <p class="cost__text cost__text--highlight">
-          {text1}
-        </p>
-        <p class="cost__text">
-          {text2}
-        </p>
-      </div>
-
-      <div class="cost__image-container">
-        <div class="cost__img-deco">
-            <img src={imageSrc} alt={imageAlt} class="cost__img" />
-        </div>
-      </div>
-
+    <div class="cost__content">
+      <h2 class="cost__title">{title}</h2>
+      <div class="cost__accent-line"></div>
+      <p class="cost__text cost__text--highlight">
+        {text1}
+      </p>
+      <p class="cost__text">
+        {text2}
+      </p>
     </div>
   </div>
 </section>
@@ -43,7 +31,7 @@ const { title, text1, text2, imageSrc, imageAlt } = Astro.props;
   }
 
   .cost-section {
-    padding: 100px 0;
+    padding: 80px 0;
     background-color: var(--white);
     color: var(--black);
   }
@@ -51,26 +39,14 @@ const { title, text1, text2, imageSrc, imageAlt } = Astro.props;
   .container {
     margin: 0 auto;
     width: 85%;
-  }
-
-  .cost__grid {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 40px;
-  }
-
-  @media (min-width: 992px) {
-    .cost__grid {
-      flex-direction: row;
-      justify-content: space-between;
-      gap: 60px;
-    }
+    max-width: 1200px; /* Ancho máximo para optimizar la lectura del texto centrado */
   }
 
   .cost__content {
-    flex: 1.2;
-    text-align: left;
+    text-align: center; /* Centra el texto */
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Centra la línea de acento y bloques internos */
   }
 
   .cost__title {
@@ -104,49 +80,14 @@ const { title, text1, text2, imageSrc, imageAlt } = Astro.props;
     font-size: 1.15rem;
     font-weight: 600;
     color: var(--black);
-    border-left: 4px solid var(--gold);
-    padding-left: 20px;
+    /* Eliminamos el borde izquierdo y el padding lateral para el diseño centrado */
+    border-left: none;
+    padding-left: 0;
+    margin-bottom: 25px;
   }
 
   @media (min-width: 768px) {
     .cost__text { font-size: 1.1rem; }
     .cost__text--highlight { font-size: 1.3rem; }
-  }
-
-  .cost__image-container {
-    flex: 1;
-    width: 100%;
-  }
-
-  .cost__img-deco {
-    position: relative;
-    border: 1px solid #eee;
-    padding: 10px;
-  }
-
-  .cost__img-deco::after {
-    content: "";
-    position: absolute;
-    bottom: -5px;
-    right: -5px;
-    width: 50px;
-    height: 50px;
-    border-bottom: 4px solid var(--gold);
-    border-right: 4px solid var(--gold);
-    z-index: 0;
-  }
-
-  .cost__img {
-    width: 100%;
-    height: auto;
-    object-fit: cover;
-    display: block;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.05);
-    z-index: 1;
-    position: relative;
-  }
-
-  @media (min-width: 992px) {
-    .cost__img { max-height: 450px; }
   }
 </style>

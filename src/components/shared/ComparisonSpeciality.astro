@@ -1,0 +1,120 @@
+---
+interface Props {
+  title: string;
+  text1: string;
+  text2: string;
+}
+
+const { title, text1, text2 } = Astro.props;
+---
+
+<section class="comparison-section">
+  <div class="container">
+    <div class="comparison__content">
+      <h2 class="comparison__title">{title}</h2>
+      <div class="comparison__accent-line"></div>
+      
+      <div class="comparison__body">
+        <p class="comparison__text-main">
+          {text1}
+        </p>
+        
+        <div class="comparison__highlight-card">
+          <p class="comparison__text-focus">
+            {text2}
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  :root {
+    --gold: #A58E55;
+    --black: #000000;
+    --white: #ffffff;
+  }
+
+  .comparison-section {
+    padding: 100px 0;
+    background-color: #fafafa; /* Fondo sutil para contrastar */
+    color: var(--black);
+  }
+
+  .container {
+    margin: 0 auto;
+    width: 85%;
+    max-width: 900px;
+    text-align: center;
+  }
+
+  .comparison__content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .comparison__title {
+    font-size: 2rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    line-height: 1.2;
+    margin-bottom: 20px;
+    color: var(--black);
+  }
+
+  @media (min-width: 768px) {
+    .comparison__title { font-size: 2.5rem; }
+  }
+
+  .comparison__accent-line {
+    width: 80px;
+    height: 3px;
+    background-color: var(--gold);
+    margin-bottom: 40px;
+  }
+
+  .comparison__text-main {
+    font-size: 1.15rem;
+    line-height: 1.8;
+    color: #333;
+    margin-bottom: 45px;
+    text-align: center;
+  }
+
+  .comparison__highlight-card {
+    background-color: var(--white);
+    padding: 35px;
+    border-radius: 15px;
+    border: 1px solid rgba(165, 142, 85, 0.15);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.04);
+    position: relative;
+  }
+
+  /* Detalle lateral dorado */
+  .comparison__highlight-card::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 20%;
+    height: 60%;
+    width: 4px;
+    background-color: var(--gold);
+  }
+
+  .comparison__text-focus {
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: var(--black);
+    line-height: 1.6;
+    margin: 0;
+    font-style: italic;
+  }
+
+  @media (max-width: 768px) {
+    .comparison-section { padding: 60px 0; }
+    .comparison__text-main { font-size: 1.1rem; }
+    .comparison__highlight-card { padding: 25px; }
+  }
+</style>

@@ -100,6 +100,8 @@ const { title, footer, steps } = Astro.props;
     margin-bottom: 20px;
     border: 1px solid rgba(165, 142, 85, 0.3);
     padding: 8px;
+    /* Redondeado del borde exterior */
+    border-radius: 15px; 
   }
 
   .process__number {
@@ -116,7 +118,8 @@ const { title, footer, steps } = Astro.props;
     font-weight: 800;
     font-size: 1.2rem;
     z-index: 2;
-    border-radius: 2px;
+    /* Redondeado del número para que haga juego */
+    border-radius: 8px;
   }
 
   .process__img {
@@ -126,6 +129,8 @@ const { title, footer, steps } = Astro.props;
     display: block;
     filter: grayscale(30%);
     transition: all 0.3s ease;
+    /* Redondeado de la imagen */
+    border-radius: 10px;
   }
 
   .process__step:hover .process__img {
@@ -149,6 +154,8 @@ const { title, footer, steps } = Astro.props;
     max-width: 800px;
     margin-left: auto;
     margin-right: auto;
+    /* Redondeado del pie de sección */
+    border-radius: 15px;
   }
 
   .process__footer p {

@@ -1,13 +1,15 @@
 ---
+import { Icon } from "astro-icon/components";
+
 interface Props {
   title: string;
-  text1: string;
-  text2: string;
-  imageSrc: string;
-  imageAlt: string;
+  description?: string; // Agregamos description como opcional
+  items: string[];
+  footerText?: string;
+  reelId: string;
 }
 
-const { title, text1, text2, imageSrc, imageAlt } = Astro.props;
+const { title, description, items, footerText, reelId } = Astro.props;
 ---
 
 <section class="why-choose-section">
@@ -17,25 +19,50 @@ const { title, text1, text2, imageSrc, imageAlt } = Astro.props;
       <div class="why-choose__content">
         <h2 class="why-choose__title">{title}</h2>
         <div class="why-choose__accent-line"></div>
-        <div class="why-choose__text-box">
-          <p class="why-choose__text highlight">
-            {text1}
-          </p>
-          <p class="why-choose__text">
-            {text2}
+        
+        {description && <p class="why-choose__description">{description}</p>}
+        
+        <ul class="why-choose__list">
+          {items.map((item) => (
+            <li class="why-choose__item">
+              <Icon name="star" size={18} class="text-gold" />
+              <span>{item}</span>
+            </li>
+          ))}
+        </ul>
+
+        <div class="why-choose__footer-box">
+          <p class="why-choose__footer-text">
+            {footerText}
           </p>
         </div>
       </div>
 
-      <div class="why-choose__image-container">
-        <div class="why-choose__img-frame">
-          <img src={imageSrc} alt={imageAlt} class="why-choose__img" />
+      <div class="why-choose__video-container">
+        <div class="video-card">
+          <div class="video-card__inner">
+            <iframe 
+              src={`https://www.instagram.com/p/${reelId}/embed/captioned`} 
+              class="instagram-iframe"
+              scrolling="no" 
+              allowtransparency="true" 
+              frameborder="0">
+            </iframe>
+            <div class="video-card__overlay">
+              <div class="video-card__badge">
+                <Icon name="star" size={14} />
+                <span>Premium Care</span>
+              </div>
+            </div>
+          </div>
+          <div class="video-card__shadow"></div>
         </div>
       </div>
 
     </div>
   </div>
 </section>
+
 
 <style>
   :root {
@@ -49,8 +76,17 @@ const { title, text1, text2, imageSrc, imageAlt } = Astro.props;
     background-color: var(--white);
     color: var(--black);
   }
+  .why-choose__description {
+    font-size: 1.1rem;
+    line-height: 1.6;
+    color: #444;
+    margin-bottom: 25px;
+  }
+  .container { 
+    margin: 0 auto; 
+    width: 85%; 
+  }
 
-    .container { margin: 0 auto; width: 85%; }
   .why-choose__grid {
     display: flex;
     flex-direction: column;
@@ -62,6 +98,7 @@ const { title, text1, text2, imageSrc, imageAlt } = Astro.props;
     .why-choose__grid {
       flex-direction: row;
       justify-content: space-between;
+      align-items: center;
       gap: 80px;
     }
   }
@@ -86,43 +123,110 @@ const { title, text1, text2, imageSrc, imageAlt } = Astro.props;
     margin-bottom: 35px;
   }
 
-  .why-choose__text {
+  /* Estilos de la lista de beneficios */
+  .why-choose__list {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 35px 0;
+  }
+
+  .why-choose__item {
+    display: flex;
+    align-items: center;
+    gap: 15px;
     font-size: 1.1rem;
-    line-height: 1.8;
-    margin-bottom: 20px;
+    font-weight: 500;
+    margin-bottom: 12px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
     color: #333;
   }
 
-  .why-choose__text.highlight {
-    font-size: 1.25rem;
-    font-weight: 600;
-    color: var(--black);
+  .text-gold {
+    color: var(--gold);
+  }
+
+  .why-choose__footer-box {
+    padding: 20px;
+    background-color: rgba(165, 142, 85, 0.05);
     border-left: 4px solid var(--gold);
-    padding-left: 25px;
   }
 
-  .why-choose__image-container {
-    flex: 1;
+  .why-choose__footer-text {
+    font-size: 1.1rem;
+    line-height: 1.6;
+    color: #444;
+    font-style: italic;
+    margin: 0;
+  }
+
+  /* Video Card Logic */
+  .why-choose__video-container {
+    flex: 0.8;
     width: 100%;
+    display: flex;
+    justify-content: center;
   }
 
-  .why-choose__img-frame {
+  .video-card {
     position: relative;
-    box-shadow: 20px 20px 0px var(--gold); /* Sombra sólida dorada estilo moderno */
-    margin-right: 20px;
-    margin-bottom: 20px;
-  }
-
-  .why-choose__img {
     width: 100%;
-    height: auto;
-    display: block;
-    object-fit: cover;
+    max-width: 320px; 
+    z-index: 2;
   }
 
-  @media (min-width: 992px) {
-    .why-choose__img {
-      max-height: 480px;
-    }
+  .video-card__inner {
+    position: relative;
+    aspect-ratio: 9 / 16;
+    background-color: var(--black);
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+    border: 4px solid var(--black);
+  }
+
+  .instagram-iframe {
+    width: 100%;
+    height: 115%;
+    transform: translateY(-5%);
+    border: none;
+  }
+
+  .video-card__overlay {
+    position: absolute;
+    top: 1.5rem;
+    left: 1.5rem;
+    z-index: 10;
+    pointer-events: none;
+  }
+
+  .video-card__badge {
+    background: var(--gold);
+    color: white;
+    padding: 0.4rem 0.8rem;
+    border-radius: 50px;
+    font-size: 0.7rem;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    text-transform: uppercase;
+  }
+
+  .video-card__shadow {
+    position: absolute;
+    top: 20px;
+    right: -20px;
+    width: 100%;
+    height: 100%;
+    background-color: var(--gold);
+    border-radius: 20px;
+    z-index: -1;
+  }
+
+  @media (max-width: 768px) {
+    .why-choose__title { font-size: 1.8rem; }
+    .video-card { max-width: 280px; }
+    .video-card__shadow { right: -10px; top: 10px; }
   }
 </style>

@@ -62,6 +62,7 @@ const { title, description, footerText, treatments } = Astro.props;
   .container {
     margin: 0 auto;
     width: 85%;
+    max-width: 1400px; /* Incrementado para acomodar 3 columnas cómodamente */
   }
 
   .popular__header {
@@ -95,7 +96,7 @@ const { title, description, footerText, treatments } = Astro.props;
     margin: 0 auto;
   }
 
-  /* Grid: 2x2 Desktop, Carrusel Horizontal Mobile */
+  /* Carrusel Horizontal en Mobile */
   .popular__grid {
     display: flex;
     overflow-x: auto;
@@ -106,18 +107,20 @@ const { title, description, footerText, treatments } = Astro.props;
     scrollbar-color: var(--gold) #eee;
   }
 
+  /* Cuadrícula de 3 columnas en Desktop */
   @media (min-width: 992px) {
     .popular__grid {
       display: grid;
-      grid-template-columns: repeat(2, 1fr);
+      grid-template-columns: repeat(3, 1fr); /* Cambio a 3 columnas */
       overflow-x: visible;
       padding-bottom: 0;
+      gap: 30px; /* Un poco más de espacio entre tarjetas */
     }
   }
 
   .popular__card {
     text-decoration: none;
-    flex: 0 0 85%; /* En mobile se ve el 85% para invitar a deslizar */
+    flex: 0 0 85%; 
     scroll-snap-align: start;
     transition: transform 0.4s ease;
   }
@@ -134,9 +137,10 @@ const { title, description, footerText, treatments } = Astro.props;
   .popular__img-container {
     position: relative;
     width: 100%;
-    aspect-ratio: 16 / 9;
+    aspect-ratio: 4 / 3; /* Proporción ligeramente más vertical para que 3 quepan mejor visualmente */
     overflow: hidden;
     border: 1px solid #eee;
+    border-radius: 8px; /* Agregado para consistencia con los otros componentes */
   }
 
   .popular__img {
@@ -153,23 +157,23 @@ const { title, description, footerText, treatments } = Astro.props;
   .popular__overlay {
     position: absolute;
     inset: 0;
-    background: linear-gradient(to top, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.2) 60%, transparent 100%);
+    background: linear-gradient(to top, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.2) 60%, transparent 100%);
     display: flex;
     flex-direction: column;
     justify-content: flex-end;
-    padding: 30px;
+    padding: 25px;
     color: var(--white);
   }
 
   .popular__card-title {
-    font-size: 1.25rem;
+    font-size: 1.1rem; /* Ligeramente más pequeño para que quepa bien en 3 columnas */
     font-weight: 700;
-    margin-bottom: 10px;
+    margin-bottom: 8px;
     text-transform: uppercase;
   }
 
   .popular__link-text {
-    font-size: 0.9rem;
+    font-size: 0.85rem;
     font-weight: 600;
     color: var(--gold);
     text-transform: uppercase;

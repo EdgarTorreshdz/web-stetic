@@ -1,0 +1,159 @@
+---
+import { Icon } from "astro-icon/components";
+
+interface Props {
+  title: string;
+  description: string;
+  items: string[];
+  footer: string;
+}
+
+const { title, description, items, footer } = Astro.props;
+---
+
+<section class="packages-section">
+  <div class="container">
+    <div class="packages__header">
+      <h2 class="packages__title">{title}</h2>
+      <div class="packages__accent-line"></div>
+      <p class="packages__description">
+        {description}
+      </p>
+    </div>
+
+    <div class="packages__content-card">
+      <div class="packages__grid">
+        {items.map((item) => (
+          <div class="packages__item">
+            <div class="packages__icon-wrapper">
+              <Icon name="star" size={20} class="text-gold" />
+            </div>
+            <p class="packages__item-text">{item}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+
+    <div class="packages__footer-box">
+      <p class="packages__footer-text">
+        {footer}
+      </p>
+    </div>
+  </div>
+</section>
+
+<style>
+  :root {
+    --gold: #A58E55;
+    --black: #000000;
+    --white: #ffffff;
+    --light-gray: #f9f9f9;
+  }
+
+  .packages-section {
+    padding: 80px 0;
+    background-color: var(--white);
+    color: var(--black);
+  }
+
+  .container {
+    margin: 0 auto;
+    width: 85%;
+  }
+
+  .packages__header {
+    text-align: center;
+    margin-bottom: 40px;
+  }
+
+  .packages__title {
+    font-size: 2rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    margin-bottom: 20px;
+  }
+
+  @media (min-width: 768px) {
+    .packages__title { font-size: 2.5rem; }
+  }
+
+  .packages__accent-line {
+    width: 80px;
+    height: 3px;
+    background-color: var(--gold);
+    margin: 0 auto 30px;
+  }
+
+  .packages__description {
+    font-size: 1.1rem;
+    line-height: 1.7;
+    color: #333;
+    margin: 0 auto;
+  }
+
+  .packages__content-card {
+    background-color: var(--light-gray);
+    padding: 40px;
+    border-radius: 15px;
+    border: 1px solid #eee;
+    margin-bottom: 40px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.03);
+  }
+
+  .packages__grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  @media (min-width: 768px) {
+    .packages__grid {
+      grid-template-columns: 1fr 1fr;
+      gap: 30px;
+    }
+  }
+
+  .packages__item {
+    display: flex;
+    align-items: flex-start;
+    gap: 15px;
+  }
+
+  .packages__icon-wrapper {
+    margin-top: 3px;
+  }
+
+  .text-gold {
+    color: var(--gold);
+  }
+
+  .packages__item-text {
+    font-size: 1.05rem;
+    font-weight: 500;
+    line-height: 1.4;
+    color: #111;
+    margin: 0;
+  }
+
+  .packages__footer-box {
+    padding: 25px;
+    border-left: 4px solid var(--gold);
+    background-color: #fff;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+    border-radius: 0 8px 8px 0;
+  }
+
+  .packages__footer-text {
+    font-size: 1rem;
+    line-height: 1.6;
+    color: #555;
+    font-style: italic;
+    margin: 0;
+  }
+
+  @media (max-width: 768px) {
+    .packages__content-card {
+      padding: 25px;
+    }
+  }
+</style>

@@ -32,7 +32,10 @@ import ProcessSpeciality from "../../components/shared/ProcessSpeciality.astro";
 import LocationSpeciality from "../../components/shared/LocationSpeciality.astro";
 import FaqSpeciality from "../../components/shared/FaqSpeciality.astro";
 import CtaSpeciality from "../../components/shared/CtaSpeciality.astro";
-
+import ComparisonSpeciality from "../../components/shared/ComparisonSpeciality.astro";
+import CandidateSpeciality from "../../components/shared/CandidateSpeciality.astro";
+import ResultSpeciality from "../../components/shared/ResultSpeciality.astro";
+const imgPath = "/invisalign/";
 const pageContent = {
   en: {
     seo: {
@@ -69,23 +72,21 @@ const pageContent = {
     },
     comparison: {
       title: "Invisalign vs Braces: What’s the Difference?",
-      description: "When comparing Invisalign vs braces, many adults choose Invisalign because it offers greater comfort, flexibility, and discretion.",
-      items: [
-        { title: "Removable", description: "Aligners can be removed for eating and oral hygiene.", subtext: "Better hygiene." },
-        { title: "Comfort", description: "No metal wires or brackets that can cause irritation.", subtext: "Discreet treatment." }
-      ]
+      text1: "When comparing Invisalign vs braces, many adults choose Invisalign because it offers greater comfort, flexibility, and discretion. Invisalign aligners can be removed for eating and oral hygiene, while traditional braces are fixed and more noticeable.",
+      text2: "Invisalign is ideal for patients who want effective orthodontic results with minimal impact on their daily routine."
     },
     candidate: {
       title: "Who Is a Good Candidate for Invisalign?",
+      description: "You may be a good candidate for Invisalign if you:",
       items: [
-        "Adults with mild to moderate alignment issues",
-        "Patients preferring a discreet orthodontic solution",
-        "Those wanting removable aligners instead of fixed braces",
-        "Patients committed to the recommended wear schedule"
+        "Are an adult with mild to moderate alignment issues",
+        "Prefer a discreet orthodontic solution",
+        "Want removable aligners instead of metal braces",
+        "Can follow the recommended wear schedule"
       ],
-      footer: "A consultation with an Invisalign dentist is essential to confirm eligibility.",
-      imageSrc: "/sonrisa2.jpg",
-      imgAlt: "Adult patient with Invisalign"
+      footerText: "A consultation with an Invisalign dentist is essential to confirm eligibility and treatment expectations.",
+      imageSrc: imgPath + "Invisalign - IMG 5.webp", // Asegúrate de que exista en tu carpeta
+      imageAlt: "Invisalign candidate evaluation"
     },
     process: {
       title: "Invisalign Treatment Process",
@@ -99,23 +100,28 @@ const pageContent = {
     },
     cost: {
       title: "Invisalign Cost in Mexico",
-      text1: "Invisalign cost in Mexico is typically lower than in the United States while using the same brand system and technology.",
-      text2: "After an evaluation, our team provides a clear treatment plan and transparent information about the price of Invisalign.",
+      text1: "Invisalign cost in Mexico is typically lower than in the United States while using the same brand system and technology. The price of Invisalign depends on the complexity of the case, treatment length, and number of aligners required.",
+      text2: "After an evaluation, our team provides a clear treatment plan and transparent information about the price of Invisalign, allowing patients to make an informed decision.",
       imageSrc: "/especialidad-about.avif",
       imgAlt: "Invisalign pricing consultation"
     },
     whyChoose: {
       title: "Why Choose Our Invisalign Dentist",
-      text1: "We are a certified Invisalign clinic with extensive experience treating adult and international patients.",
-      text2: "Our team offers digital orthodontic planning and clear communication in English to ensure a smooth experience.",
-      imageSrc: "/sonrisa1.jpg",
-      imgAlt: "Certified Invisalign dentist"
+      items: [
+        "Certified Invisalign dentist",
+        "Experience treating adult patients",
+        "Digital orthodontic planning",
+        "Clear communication in English",
+        "Extensive experience with international patients"
+      ],
+      footerText: "Many patients choose our clinic when looking for a highly experienced Invisalign dentist in Playa del Carmen.",
+      reelId: "DPCjErMDkTc" // Reemplaza con el ID real de tu Reel
     },
     location: {
       title: "Invisalign in Playa del Carmen, Mexico",
-      text1: "Our dental clinic is located in a safe and popular destination for dental tourism. Patients benefit from professional care while enjoying their stay in Mexico.",
-      imageSrc: "/especialidad1.jpeg",
-      imgAlt: "Clinic location in Playa del Carmen"
+      text1: "Our dental clinic is located in Playa del Carmen, a popular and accessible destination for dental tourism. Patients from the United States benefit from professional Invisalign treatment while enjoying the convenience and comfort of care in Mexico.",
+      mapUrl: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3762.8236434869563!2d-87.0736590249982!3d20.629600986253736!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8f4c299c6e6f3d5b%3A0x6d5a7b4e4f4e4b6a!2sLux%20Dental%20Clinic!5e0!3m2!1ses!2smx!4v1696548765432!5m2!1ses!2smx",
+
     },
     faq: {
       title: "Invisalign FAQ",
@@ -123,7 +129,7 @@ const pageContent = {
         { question: "How long does Invisalign treatment take?", answer: "Many adult treatments range from several months to over a year depending on the case." },
         { question: "Is Invisalign safe in Mexico?", answer: "Yes. It is safe when provided by a certified Invisalign dentist using approved systems." },
         { question: "How much does Invisalign cost in Mexico?", answer: "It is generally more affordable than in the USA, depending on your specific plan." },
-        { question: "Is Invisalign better than braces for adults?", answer: "For many, it offers greater comfort and discretion compared to traditional braces." }
+        { question: "Is Invisalign better than braces for adults?", answer: "For many adults, Invisalign offers greater comfort and discretion compared to traditional braces." }
       ]
     },
     cta: {
@@ -135,7 +141,6 @@ const pageContent = {
     results: {
       title: "Invisalign Results and Monitoring",
       text1: "Invisalign treatment offers gradual and controlled tooth movement. Regular check-ups ensure progress is on track, and adjustments to the Invisalign dental plan can be made when necessary to achieve optimal results.",
-      text2: "Our clinical team monitors every stage of your transformation to ensure the final outcome matches the initial digital smile design.",
       imageSrc: "/sonrisa3.jpg",
       imgAlt: "Patient showing Invisalign progress"
     },
@@ -175,23 +180,21 @@ const pageContent = {
     },
     comparison: {
       title: "Invisalign vs Brackets: ¿Cuál es la diferencia?",
-      description: "Al comparar Invisalign vs brackets, muchos eligen Invisalign por su comodidad y flexibilidad.",
-      items: [
-        { title: "Removible", description: "Los alineadores se pueden quitar para comer y realizar la higiene bucal.", subtext: "Mejor higiene." },
-        { title: "Comodidad", description: "Sin alambres ni brackets metálicos que causen irritación.", subtext: "Tratamiento discreto." }
-      ]
+      text1: "Al comparar Invisalign frente a los brackets, muchos adultos eligen Invisalign porque ofrece mayor comodidad, flexibilidad y discreción. Los alineadores Invisalign se pueden quitar para comer y para la higiene bucal, mientras que los brackets tradicionales son fijos y más notorios.",
+      text2: "Invisalign es ideal para pacientes que desean resultados de ortodoncia efectivos con un impacto mínimo en su rutina diaria."
     },
     candidate: {
-      title: "¿Quién es un buen candidato?",
+      title: "¿Quién es un buen candidato para Invisalign?",
+      description: "Usted puede ser un buen candidato para Invisalign si:",
       items: [
-        "Adultos con problemas leves a moderados de alineación",
-        "Pacientes que prefieren una solución estética",
-        "Quienes buscan alineadores removibles",
-        "Pacientes comprometidos con el tiempo de uso recomendado"
+        "Es un adulto con problemas de alineación leves a moderados",
+        "Prefiere una solución de ortodoncia discreta",
+        "Desea alineadores removibles en lugar de brackets metálicos",
+        "Puede seguir el horario de uso recomendado"
       ],
-      footer: "Una consulta con un dentista certificado es esencial para confirmar la elegibilidad.",
-      imageSrc: "/sonrisa2.jpg",
-      imgAlt: "Paciente con Invisalign"
+      footerText: "Una consulta con un dentista de Invisalign es esencial para confirmar la elegibilidad y las expectativas del tratamiento.",
+      imageSrc: imgPath + "Invisalign - IMG 5.webp",
+      imageAlt: "Evaluación de candidato para Invisalign"
     },
     process: {
       title: "Proceso del Tratamiento",
@@ -205,23 +208,27 @@ const pageContent = {
     },
     cost: {
       title: "Costo de Invisalign en México",
-      text1: "El costo suele ser más bajo que en los Estados Unidos utilizando el mismo sistema de marca y tecnología.",
-      text2: "Tras una evaluación, brindamos información transparente sobre el precio de Invisalign.",
+      text1: "El costo de Invisalign en México suele ser más bajo que en Estados Unidos, utilizando el mismo sistema y tecnología de la marca. El precio depende de la complejidad del caso, la duración del tratamiento y la cantidad de alineadores necesarios.",
+      text2: "Tras una evaluación, brindamos información transparente sobre el precio de Invisalign, permitiendo que los pacientes tomen una decisión informada.",
       imageSrc: "/especialidad-about.avif",
       imgAlt: "Consulta de precios"
     },
     whyChoose: {
-      title: "Por qué Elegir a Nuestro Especialista",
-      text1: "Somos una clínica certificada con amplia experiencia tratando pacientes internacionales.",
-      text2: "Ofrecemos planificación digital y comunicación clara en español e inglés.",
-      imageSrc: "/sonrisa1.jpg",
-      imgAlt: "Especialista certificado"
+      title: "¿Por qué elegir a nuestro dentista de Invisalign?",
+      items: [
+        "Dentista certificado en Invisalign",
+        "Experiencia en el tratamiento de pacientes adultos",
+        "Planeación de ortodoncia digital",
+        "Comunicación clara en inglés",
+        "Amplia experiencia con pacientes internacionales"
+      ],
+      footerText: "Muchos pacientes nos eligen al buscar un dentista de Invisalign con amplia experiencia en Playa del Carmen.",
+      reelId: "DPCjErMDkTc"
     },
     location: {
       title: "Invisalign en Playa del Carmen, México",
-      text1: "Nuestra clínica está ubicada en un destino seguro y accesible. Disfruta de atención profesional durante tu estancia en México.",
-      imageSrc: "/especialidad1.jpeg",
-      imgAlt: "Ubicación en Playa del Carmen"
+      text1: "Nuestra clínica dental está ubicada en Playa del Carmen, un destino popular y accesible para el turismo dental. Los pacientes de Estados Unidos se benefician de un tratamiento profesional de Invisalign mientras disfrutan de la comodidad y conveniencia de recibir atención en México.",
+      mapUrl: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3762.8236434869563!2d-87.0736590249982!3d20.629600986253736!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8f4c299c6e6f3d5b%3A0x6d5a7b4e4f4e4b6a!2sLux%20Dental%20Clinic!5e0!3m2!1ses!2smx!4v1696548765432!5m2!1ses!2smx",
     },
     faq: {
       title: "Preguntas Frecuentes",
@@ -241,7 +248,6 @@ const pageContent = {
     results: {
       title: "Resultados y Monitoreo de Invisalign",
       text1: "El tratamiento con Invisalign ofrece un movimiento dental gradual y controlado. Las revisiones regulares aseguran que el progreso vaya por buen camino.",
-      text2: "Se pueden realizar ajustes al plan dental de Invisalign cuando sea necesario para lograr resultados óptimos y una alineación perfecta.",
       imageSrc: "/sonrisa3.jpg",
       imgAlt: "Paciente mostrando progreso de Invisalign"
     },
@@ -278,25 +284,23 @@ const t = pageContent[lang];
       title={t.whatIs.title}
       text1={t.whatIs.text1}
       text2={t.whatIs.text2}
-      imageSrc={t.whatIs.imageSrc}
-      imageAlt={t.whatIs.imgAlt}
-      bgImage={t.whatIs.bgImage}
+      
     />
 
-  <OptionsSpeciality 
-      title={t.comparison.title}
-      description={t.comparison.description}
-      options={t.comparison.items}
-    />
+  <ComparisonSpeciality 
+    title={t.comparison.title}
+    text1={t.comparison.text1}
+    text2={t.comparison.text2}
+  />
 
-  <BenefitsSpeciality 
-      title={t.candidate.title}
-      benefits={t.candidate.items}
-      footerText={t.candidate.footer}
-      imageSrc={t.candidate.imageSrc}
-      imageAlt={t.candidate.imgAlt}
-    />
-
+  <CandidateSpeciality 
+    title={t.candidate.title}
+    description={t.candidate.description}
+    items={t.candidate.items}
+    footerText={t.candidate.footerText}
+    imageSrc={t.candidate.imageSrc}
+    imageAlt={t.candidate.imageAlt}
+  />
     <ProcessSpeciality 
       title={t.process.title}
       footer={t.process.footer}
@@ -308,24 +312,17 @@ const t = pageContent[lang];
       title={t.cost.title}
       text1={t.cost.text1}
       text2={t.cost.text2}
-      imageSrc={t.cost.imageSrc}
-      imageAlt={t.cost.imgAlt}
+      
     />
-
-  <WhyChooseSpeciality 
+    <WhyChooseSpeciality 
       title={t.whyChoose.title}
-      text1={t.whyChoose.text1}
-      text2={t.whyChoose.text2}
-      imageSrc={t.whyChoose.imageSrc}
-      imageAlt={t.whyChoose.imgAlt}
+      items={t.whyChoose.items}
+      footerText={t.whyChoose.footerText}
+      reelId={t.whyChoose.reelId}
     />
-
-  
-
-    <AboutSpeciality 
+    <ResultSpeciality 
       title={t.results.title}
       text1={t.results.text1}
-      text2={t.results.text2}
       imageSrc={t.results.imageSrc}
       imageAlt={t.results.imgAlt}
     />
@@ -334,8 +331,7 @@ const t = pageContent[lang];
   <LocationSpeciality 
       title={t.location.title}
       text1={t.location.text1}
-      imageSrc={t.location.imageSrc}
-      imageAlt={t.location.imgAlt}
+      mapUrl={t.location.mapUrl}
     />
 
   <FaqSpeciality 

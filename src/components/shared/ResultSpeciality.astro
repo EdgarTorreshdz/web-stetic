@@ -1,0 +1,132 @@
+---
+interface Props {
+  title: string;
+  text1: string;
+  imageSrc: string;
+  imageAlt: string;
+}
+
+const { title, text1, imageSrc, imageAlt } = Astro.props;
+---
+
+<section class="result-section">
+  <div class="container">
+    <div class="result__grid">
+      <div class="result__image-container">
+        <img src={imageSrc} alt={imageAlt} class="result__img" />
+      </div>
+
+      <div class="result__content">
+        <h2 class="result__title">{title}</h2>
+        <div class="result__accent-line"></div>
+        <p class="result__text result__text--highlight">
+          {text1}
+        </p>
+        
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  :root {
+    --gold: #A58E55;
+    --black: #000000;
+    --white: #ffffff;
+  }
+
+  .result-section {
+    padding: 80px 0;
+    background-color: var(--black);
+    color: var(--white);
+  }
+
+  .container {
+    margin: 0 auto;
+    width: 85%;
+  }
+
+  .result__grid {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 40px;
+  }
+
+  @media (min-width: 992px) {
+    .result__grid {
+      flex-direction: row;
+      justify-content: space-between;
+      gap: 60px;
+    }
+  }
+
+  .result__image-container {
+    flex: 1;
+    width: 100%;
+  }
+
+  .result__img {
+    width: 100%;
+    height: auto;
+    border-radius: 4px;
+    border: 1px solid var(--gold);
+    object-fit: cover;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+  }
+
+  @media (min-width: 992px) {
+    .result__img {
+      max-height: 450px; /* Manteniendo tu regla de 450px */
+    }
+  }
+
+  .result__content {
+    flex: 1.2;
+    text-align: left;
+  }
+
+  .result__title {
+    font-size: 1.8rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    line-height: 1.2;
+    margin-bottom: 20px;
+    color: var(--white);
+  }
+
+  @media (min-width: 768px) {
+    .result__title {
+      font-size: 2.5rem;
+    }
+  }
+
+  .result__accent-line {
+    width: 80px;
+    height: 3px;
+    background-color: var(--gold);
+    margin-bottom: 30px;
+  }
+
+  .result__text {
+    font-size: 1rem;
+    line-height: 1.7;
+    margin-bottom: 20px;
+    color: #e0e0e0;
+  }
+
+  .result__text--highlight {
+    font-size: 1.15rem;
+    font-weight: 600;
+    color: var(--gold);
+  }
+
+  @media (min-width: 768px) {
+    .result__text {
+      font-size: 1.1rem;
+    }
+    .result__text--highlight {
+      font-size: 1.3rem;
+    }
+  }
+</style>

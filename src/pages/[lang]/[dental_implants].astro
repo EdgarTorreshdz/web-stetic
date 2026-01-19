@@ -24,15 +24,13 @@ import HeaderSpeciality from "../../components/shared/HeaderSpeciality.astro";
 import AboutSpeciality from "../../components/shared/AboutSpeciality.astro";
 import WhatIsSpeciality from "../../components/shared/WhatIsSpeciality.astro";
 import OptionsSpeciality from "../../components/shared/OptionsSpeciality.astro";
-import BenefitsSpeciality from "../../components/shared/BenefitsSpeciality.astro";
 import WhyChooseSpeciality from "../../components/shared/WhyChooseSpeciality.astro";
 import CostSpeciality from "../../components/shared/CostSpeciality.astro";
 import ProcessSpeciality from "../../components/shared/ProcessSpeciality.astro";
-import AmericansSpeciality from "../../components/shared/AmericansSpeciality.astro";
 import LocationSpeciality from "../../components/shared/LocationSpeciality.astro";
 import FaqSpeciality from "../../components/shared/FaqSpeciality.astro";
 import CtaSpeciality from "../../components/shared/CtaSpeciality.astro";
-
+import BenefitsTextSpeciality from "../../components/shared/BenefitsTextSpeciality.astro";
 const imgPath = '/dental_implants/';
 const pageContent = {
   en: {
@@ -56,7 +54,7 @@ const pageContent = {
     about: {
       title: "Looking for Dental Implants in Playa del Carmen You Can Trust?",
       text1: "Choosing dental implants is an important decision, especially when you are considering treatment abroad. Our clinic specializes in providing dental implants in Playa del Carmen for American patients who want safe procedures, experienced specialists, and transparent treatment plans.",
-      text2: "We combine international-quality materials, modern technology, and personalized care to deliver reliable dental implant solutions in Mexico.",
+      text2: "We combine international-quality materials, modern technology, and personalized care to deliver reliable dental implant solutions in Mexico. Patients from the United States trust our team for both single tooth replacements and full mouth restorations.",
       imageSrc: imgPath + "Dental-implants-IMG-2.webp",
       imgAlt: "Professional dental implant consultation"
     },
@@ -64,13 +62,9 @@ const pageContent = {
       title: "What Are Dental Implants?",
       text1: "Dental implants are a permanent solution for replacing missing teeth. They consist of a titanium post that is placed in the jawbone, acting as a strong foundation for a crown, bridge, or full arch restoration.",
       text2: "Implants look, feel, and function like natural teeth, helping restore chewing ability, speech, and confidence. They are one of the most reliable and long-lasting dental treatments available today.",
-      imageSrc: imgPath + "Dental-implants-IMG-3.webp",
-      bgImage: imgPath + "Dental-implants-IMG-3.webp",
-      imgAlt: "Anatomy of a dental implant"
     },
     options: {
       title: "Types of Dental Implants We Offer",
-      description: "Every patient has different needs. Our specialists recommend the most appropriate implant solution for your specific case.",
       items: [
         { title: "Single Tooth Dental Implants", description: "Ideal for replacing a single missing tooth without affecting surrounding teeth.", subtext: "Safe and durable foundation." },
         { title: "Multiple Dental Implants", description: "Designed to support bridges or replace several missing teeth securely.", subtext: "Stable restorations." },
@@ -78,58 +72,80 @@ const pageContent = {
         { title: "All-on-4 Dental Implants", description: "An advanced technique that restores a full arch of teeth using a minimal number of implants.", subtext: "Efficient and fast." }
       ]
     },
-    benefits: {
+    benefitsText: {
       title: "Why Get Dental Implants in Mexico?",
-      items: [
-        "Same quality of care as the U.S. at a significantly lower cost",
-        "Excellent balance of affordability, safety, and professional expertise",
-        "Modern facilities and experienced implant specialists",
-        "Comfortable environment for recovery in Playa del Carmen"
-      ],
-      footer: "Save 50% to 70% compared to U.S. prices while receiving world-class dental care.",
-      imageSrc: imgPath + "Dental-implants-IMG-4.webp",
-      imgAlt: "Benefits of dental tourism in Mexico"
+      text1: "Many Americans choose dental implants in Mexico because they receive the same quality of care found in the United States at a significantly lower cost...",
+      text2: "In addition to cost savings, patients benefit from modern facilities, experienced implant specialists, and a comfortable environment for recovery."
     },
     whyChoose: {
       title: "Why Choose Our Dental Clinic for Implants",
-      text1: "Our focus is to provide safe and predictable implant results while making the process easy for patients traveling from the United States.",
-      text2: "We offer certified implant specialists with international training, high-quality implant systems, advanced diagnostic technology, and clear communication in English.",
-      imageSrc: "/sonrisa1.jpg",
-      imgAlt: "Certified dental specialists in Mexico"
+      description: "Our clinic is equipped with the latest technology and a highly specialized team to ensure your dental implant procedure is precise, comfortable, and durable.",
+      items: [
+        "Certified implant specialists with international training",
+        "High-quality implant systems and materials",
+        "Advanced diagnostic and surgical technology",
+        "Clear communication in English",
+        "Personalized treatment plans for international patients"
+      ],
+      footerText: "Our focus is to provide safe and predictable implant results while making the process easy for patients traveling from the United States.",
+      reelId: "DPCjErMDkTc", // Reemplazar con el ID del reel correspondiente
     },
     cost: {
       title: "Dental Implants Cost in Playa del Carmen",
       text1: "The cost of dental implants in Playa del Carmen is significantly lower than in the United States, often allowing patients to save between 50% and 70% compared to U.S. prices.",
-      text2: "Final costs depend on the number of implants needed, the type of restoration, and individual requirements.",
-      imageSrc: "/especialidad-about.avif",
-      imgAlt: "Dental cost savings in Mexico"
+      text2: "Final costs depend on the number of implants needed, the type of restoration, and individual treatment requirements. We provide detailed treatment plans and transparent pricing after an initial evaluation.",
     },
     process: {
-      title: "Dental Implants Process for Americans",
+      title: "Dental Implants Process for American Patients",
       footer: "Our team guides you through each step to ensure a smooth and stress-free experience.",
       steps: [
-        { title: "Online consultation and evaluation", img: "/especialidad1.jpeg" },
-        { title: "Personalized treatment plan", img: "/especialidad-about.avif" },
-        { title: "Implant procedure by specialists", img: "/sonrisa1.jpg" },
-        { title: "Follow-up and support", img: "/sonrisa2.jpg" }
+        { 
+          title: "Online consultation and dental evaluation", 
+          img: imgPath + "Dental-implants-IMG-1.webp" 
+        },
+        { 
+          title: "Personalized treatment plan and timeline", 
+          img: imgPath + "Dental-implants-IMG-2.webp" 
+        },
+        { 
+          title: "Travel planning assistance", 
+          img: imgPath + "Dental-implants-IMG-3.webp" 
+        },
+        { 
+          title: "Implant procedure performed by specialists", 
+          img: imgPath + "Dental-implants-IMG-4.webp" 
+        },
+        { 
+          title: "Follow-up and post-treatment support", 
+          img: imgPath + "Dental-implants-IMG-1.webp" // Puedes reutilizar o usar otra de la carpeta
+        }
       ]
     },
-    americans: {
-      title: "Expert Care for International Patients",
-      text1: "Our clinic is focused on providing safe and predictable implant results while making the process easy for patients traveling from the United States and Canada.",
-    },
+    
     location: {
       title: "Dental Implants in Playa del Carmen, Mexico",
-      text1: "Our clinic is located in a safe and accessible destination for dental tourism. Playa del Carmen offers convenient travel options and a perfect environment for recovery.",
-      imageSrc: "/especialidad1.jpeg",
-      imgAlt: "Dental clinic location in Playa del Carmen"
+      text1: "Our dental clinic is located in Playa del Carmen, a safe and accessible destination for dental tourism. The area offers convenient travel options, nearby accommodations, and a comfortable environment for recovery after dental implant treatment.",
+      mapUrl: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3762.5141916224283!2d-87.0736590249982!3d20.629444986253736!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8f4c2996f6f5e1b7%3A0x6d3f5c4e4e4e4e4e!2sStetic%20Dental%20Clinic!5e0!3m2!1sen!2smx!4v1695761234567!5m2!1sen!2smx",
     },
     faq: {
       title: "Dental Implants FAQ",
       items: [
-        { question: "Are dental implants safe in Mexico?", answer: "Yes. They are safe when performed by certified specialists using modern technology and international protocols." },
-        { question: "How long do dental implants last?", answer: "With proper care, dental implants can last many years and often a lifetime." },
-        { question: "How many visits are required?", answer: "Treatment timelines vary depending on the procedure and healing process. This is discussed during your consultation." }
+        { 
+          question: "Are dental implants safe in Mexico?", 
+          answer: "Yes. Dental implants in Mexico are safe when performed by certified specialists using modern technology and international protocols." 
+        },
+        { 
+          question: "How long do dental implants last?", 
+          answer: "With proper care, dental implants can last many years and often a lifetime." 
+        },
+        { 
+          question: "How many visits are required?", 
+          answer: "Treatment timelines vary depending on the procedure and healing process. This is discussed during your consultation." 
+        },
+        { 
+          question: "Do you work with American patients?", 
+          answer: "Yes. We specialize in treating American patients and provide full support throughout the process." 
+        }
       ]
     },
     cta: {
@@ -174,7 +190,6 @@ const pageContent = {
     },
     options: {
       title: "Tipos de Implantes que Ofrecemos",
-      description: "Ofrecemos una variedad de soluciones de implantes adaptadas a tus necesidades específicas.",
       items: [
         { title: "Implante de un Solo Diente", description: "Ideal para reemplazar una pieza faltante sin afectar los dientes vecinos.", subtext: "Aspecto natural." },
         { title: "Múltiples Implantes", description: "Diseñados para soportar puentes o reemplazar varios dientes de forma segura.", subtext: "Estable y duradero." },
@@ -182,58 +197,82 @@ const pageContent = {
         { title: "Implantes All-on-4", description: "Técnica avanzada que restaura un arco completo con un número mínimo de implantes.", subtext: "Rápido y eficiente." }
       ]
     },
-    benefits: {
-      title: "¿Por qué hacerse implantes en México?",
-      items: [
-        "Misma calidad que en EE. UU. a un costo significativamente menor",
-        "Equilibrio entre asequibilidad, seguridad y experiencia profesional",
-        "Instalaciones modernas y especialistas experimentados",
-        "Ambiente cómodo para la recuperación en Playa del Carmen"
-      ],
-      footer: "Ahorra entre un 50% y un 70% comparado con los precios de EE. UU.",
-      imageSrc: "/sonrisa2.jpg",
-      imgAlt: "Beneficios del turismo dental"
+    benefitsText: {
+      title: "¿Por qué Hacerse Implantes en México?",
+      text1: "Muchos pacientes eligen implantes dentales en México porque reciben la misma calidad de atención que en los Estados Unidos a un costo significativamente menor...",
+      text2: "Además del ahorro, los pacientes se benefician de instalaciones modernas, especialistas experimentados y un ambiente cómodo para la recuperación."
     },
     whyChoose: {
-      title: "¿Por qué elegir nuestra clínica para implantes?",
-      text1: "Nuestro enfoque es proporcionar resultados seguros y predecibles facilitando el proceso para pacientes extranjeros.",
-      text2: "Contamos con especialistas certificados con formación internacional, tecnología de diagnóstico avanzada y comunicación clara.",
-      imageSrc: "/sonrisa1.jpg",
-      imgAlt: "Especialistas certificados en México"
+      title: "¿Por qué elegir nuestra clínica para implantes dentales?",
+      description: "Nuestra clínica cuenta con la última tecnología y un equipo altamente especializado para asegurar que su procedimiento de implantes sea preciso, cómodo y duradero.",
+      items: [
+        "Especialistas en implantes certificados con formación internacional",
+        "Sistemas y materiales de implantes de alta calidad",
+        "Tecnología avanzada de diagnóstico y cirugía",
+        "Comunicación clara en inglés",
+        "Planes de tratamiento personalizados para pacientes internacionales"
+      ],
+      footerText: "Nuestro enfoque es proporcionar resultados de implantes seguros y predecibles, facilitando el proceso para los pacientes que viajan desde el extranjero.",
+      reelId: "DPCjErMDkTc",
     },
     cost: {
       title: "Costo de Implantes en Playa del Carmen",
       text1: "El costo es significativamente más bajo que en los Estados Unidos, permitiendo ahorros de hasta el 70%.",
-      text2: "Los costos finales dependen del número de implantes y el tipo de restauración necesaria.",
+      text2: "Los costos finales dependen del número de implantes y el tipo de restauración. Proporcionamos planes detallados y precios transparentes tras la evaluación inicial.",
       imageSrc: "/especialidad-about.avif",
       imgAlt: "Ahorro en costos dentales"
     },
     process: {
-      title: "Proceso para el Paciente",
-      footer: "Nuestro equipo te guía en cada paso para asegurar una experiencia sin estrés.",
+      title: "Proceso de Implantes Dentales para Pacientes Estadounidenses",
+      footer: "Nuestro equipo lo guía a través de cada paso para garantizar una experiencia fluida y sin estrés.",
       steps: [
-        { title: "Consulta en línea y evaluación", img: "/especialidad1.jpeg" },
-        { title: "Plan de tratamiento personalizado", img: "/especialidad-about.avif" },
-        { title: "Procedimiento de implante", img: "/sonrisa1.jpg" },
-        { title: "Seguimiento y soporte", img: "/sonrisa2.jpg" }
+        { 
+          title: "Consulta en línea y evaluación dental", 
+          img: imgPath + "Dental-implants-IMG-1.webp" 
+        },
+        { 
+          title: "Plan de tratamiento personalizado y cronograma", 
+          img: imgPath + "Dental-implants-IMG-2.webp" 
+        },
+        { 
+          title: "Asistencia en la planificación del viaje", 
+          img: imgPath + "Dental-implants-IMG-3.webp" 
+        },
+        { 
+          title: "Procedimiento de implante realizado por especialistas", 
+          img: imgPath + "Dental-implants-IMG-4.webp" 
+        },
+        { 
+          title: "Seguimiento y soporte post-tratamiento", 
+          img: imgPath + "Dental-implants-IMG-1.webp" 
+        }
       ]
     },
-    americans: {
-      title: "Atención Especializada para Extranjeros",
-      text1: "Nuestra clínica está enfocada en brindar resultados seguros mientras hacemos el proceso sencillo para pacientes de EE. UU. y Canadá.",
-    },
+    
     location: {
       title: "Implantes Dentales en Playa del Carmen, México",
-      text1: "Nuestra clínica se encuentra en un destino seguro y accesible. Playa del Carmen ofrece opciones de viaje convenientes y un entorno perfecto para la recuperación.",
-      imageSrc: "/especialidad1.jpeg",
-      imgAlt: "Ubicación de la clínica en Playa del Carmen"
+      text1: "Nuestra clínica dental está ubicada en Playa del Carmen, un destino seguro y accesible para el turismo dental. La zona ofrece opciones de viaje convenientes, alojamientos cercanos y un ambiente cómodo para la recuperación después del tratamiento de implantes dentales.",
+      mapUrl: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3762.5141916224283!2d-87.0736590249982!3d20.629444986253736!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8f4c2996f6f5e1b7%3A0x6d3f5c4e4e4e4e4e!2sStetic%20Dental%20Clinic!5e0!3m2!1sen!2smx!4v1695761234567!5m2!1sen!2smx",
     },
     faq: {
-      title: "Preguntas Frecuentes",
+      title: "Preguntas Frecuentes sobre Implantes Dentales",
       items: [
-        { question: "¿Son seguros los implantes en México?", answer: "Sí. Son seguros cuando los realizan especialistas certificados usando tecnología moderna y protocolos internacionales." },
-        { question: "¿Cuánto duran?", answer: "Con el cuidado adecuado, pueden durar muchos años y a menudo toda la vida." },
-        { question: "¿Cuántas visitas necesito?", answer: "Los plazos varían según el procedimiento y la curación, lo cual se discute en la consulta." }
+        { 
+          question: "¿Son seguros los implantes dentales en México?", 
+          answer: "Sí. Los implantes dentales en México son seguros cuando son realizados por especialistas certificados que utilizan tecnología moderna y protocolos internacionales." 
+        },
+        { 
+          question: "¿Cuánto duran los implantes dentales?", 
+          answer: "Con el cuidado adecuado, los implantes dentales pueden durar muchos años y, a menudo, toda la vida." 
+        },
+        { 
+          question: "¿Cuántas visitas se requieren?", 
+          answer: "Los plazos del tratamiento varían según el procedimiento y el proceso de curación. Esto se discute durante su consulta." 
+        },
+        { 
+          question: "¿Trabajan con pacientes estadounidenses?", 
+          answer: "Sí. Nos especializamos en la atención a pacientes estadounidenses y brindamos apoyo total durante todo el proceso." 
+        }
       ]
     },
     cta: {
@@ -275,39 +314,31 @@ const t = pageContent[lang];
       title={t.whatIs.title}
       text1={t.whatIs.text1}
       text2={t.whatIs.text2}
-      imageSrc={t.whatIs.imageSrc}
-      imageAlt={t.whatIs.imgAlt}
-      bgImage={t.whatIs.bgImage}
     />
 
   <OptionsSpeciality 
       title={t.options.title}
-      description={t.options.description}
       options={t.options.items}
     />
 
-  <BenefitsSpeciality 
-      title={t.benefits.title}
-      benefits={t.benefits.items}
-      footerText={t.benefits.footer}
-      imageSrc={t.benefits.imageSrc}
-      imageAlt={t.benefits.imgAlt}
-    />
+  <BenefitsTextSpeciality 
+    title={t.benefitsText.title}
+    text1={t.benefitsText.text1}
+    text2={t.benefitsText.text2}
+  />
 
   <WhyChooseSpeciality 
-      title={t.whyChoose.title}
-      text1={t.whyChoose.text1}
-      text2={t.whyChoose.text2}
-      imageSrc={t.whyChoose.imageSrc}
-      imageAlt={t.whyChoose.imgAlt}
-    />
+    title={t.whyChoose.title}
+    description={t.whyChoose.description}
+    items={t.whyChoose.items}
+    footerText={t.whyChoose.footerText}
+    reelId={t.whyChoose.reelId}
+  />
 
   <CostSpeciality 
       title={t.cost.title}
       text1={t.cost.text1}
       text2={t.cost.text2}
-      imageSrc={t.cost.imageSrc}
-      imageAlt={t.cost.imgAlt}
     />
 
   <ProcessSpeciality 
@@ -316,17 +347,13 @@ const t = pageContent[lang];
       steps={t.process.steps}
     />
 
-  <AmericansSpeciality 
-      title={t.americans.title}
-      text1={t.americans.text1}
-    />
-
+  
   <LocationSpeciality 
       title={t.location.title}
       text1={t.location.text1}
-      imageSrc={t.location.imageSrc}
-      imageAlt={t.location.imgAlt}
+      mapUrl={t.location.mapUrl}
     />
+
 
   <FaqSpeciality 
       title={t.faq.title}

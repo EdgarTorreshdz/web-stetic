@@ -1,0 +1,118 @@
+---
+interface Props {
+  title: string;
+  description: string;
+  highlightText: string;
+}
+
+const { title, description, highlightText } = Astro.props;
+---
+
+<section class="planning-section">
+  <div class="container">
+    <div class="planning__content">
+      <h2 class="planning__title">{title}</h2>
+      <div class="planning__accent-line"></div>
+      
+      <p class="planning__description">
+        {description}
+      </p>
+
+      <div class="planning__highlight-box">
+        <p class="planning__highlight-text">
+          {highlightText}
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  :root {
+    --gold: #A58E55;
+    --black: #000000;
+    --white: #ffffff;
+  }
+
+  .planning-section {
+    padding: 80px 0;
+    background-color: #fcfcfc; /* Un gris casi blanco muy sutil para diferenciar secciones */
+    color: var(--black);
+  }
+
+  .container {
+    margin: 0 auto;
+    width: 85%;
+    max-width: 900px;
+    text-align: center;
+  }
+
+  .planning__content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .planning__title {
+    font-size: 2rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    line-height: 1.2;
+    margin-bottom: 20px;
+  }
+
+  @media (min-width: 768px) {
+    .planning__title { font-size: 2.5rem; }
+  }
+
+  .planning__accent-line {
+    width: 80px;
+    height: 3px;
+    background-color: var(--gold);
+    margin-bottom: 35px;
+  }
+
+  .planning__description {
+    font-size: 1.15rem;
+    line-height: 1.8;
+    color: #444;
+    margin-bottom: 40px;
+  }
+
+  .planning__highlight-box {
+    padding: 30px;
+    background-color: var(--white);
+    border: 1px solid rgba(165, 142, 85, 0.2);
+    border-radius: 15px; /* Consistencia con bordes redondeados */
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+    position: relative;
+    max-width: 800px;
+  }
+
+  /* Pequeño detalle decorativo */
+  .planning__highlight-box::before {
+    content: "";
+    position: absolute;
+    top: -2px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 40px;
+    height: 4px;
+    background-color: var(--gold);
+    border-radius: 10px;
+  }
+
+  .planning__highlight-text {
+    font-size: 1.1rem;
+    font-weight: 600;
+    font-style: italic;
+    color: var(--black);
+    line-height: 1.6;
+    margin: 0;
+  }
+
+  @media (max-width: 768px) {
+    .planning-section { padding: 60px 0; }
+    .planning__highlight-box { padding: 20px; }
+  }
+</style>

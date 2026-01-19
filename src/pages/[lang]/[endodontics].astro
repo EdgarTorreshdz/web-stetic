@@ -130,8 +130,7 @@ const pageContent = {
     location: {
       title: "Root Canal Treatment in Playa del Carmen, Mexico",
       text1: "Our dental clinic is conveniently located in Playa del Carmen, making it easy for travelers and residents to access immediate endodontic care. We prioritize urgent cases and provide timely treatment when pain cannot wait.",
-      imageSrc: "/especialidad1.jpeg",
-      imgAlt: "Dental clinic location in Playa del Carmen downtown"
+      mapUrl: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3762.8236434869563!2d-87.0736590249982!3d20.629600986253736!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8f4c299c6e6f3d5b%3A0x6d5a7b4e4f4e4b6a!2sLux%20Dental%20Clinic!5e0!3m2!1sen!2smx!4v1696548765432!5m2!1sen!2smx",
     },
     faq: {
       title: "Root Canal FAQ",
@@ -151,14 +150,6 @@ const pageContent = {
         {
           question: "How long does a root canal procedure take?",
           answer: "Most procedures are completed in one or two visits, depending on the complexity of the tooth and the severity of the infection."
-        },
-        {
-          question: "Do I need a crown after a root canal?",
-          answer: "In most cases, yes. A crown protects the weakened tooth from fracturing and restores its full chewing function."
-        },
-        {
-          question: "What is the success rate of a root canal?",
-          answer: "Root canal treatments have a very high success rate, often exceeding 95% when performed by a specialist."
         }
       ]
     },
@@ -265,8 +256,7 @@ const pageContent = {
     location: {
       title: "Endodoncia en Playa del Carmen, México",
       text1: "Nuestra clínica dental está convenientemente ubicada en Playa del Carmen, lo que facilita el acceso a atención endodóntica inmediata para viajeros y residentes. Priorizamos los casos urgentes y brindamos tratamiento oportuno cuando el dolor no puede esperar.",
-      imageSrc: "/especialidad1.jpeg",
-      imgAlt: "Ubicación de la clínica dental en Playa del Carmen centro"
+      mapUrl: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3762.8236434869563!2d-87.0736590249982!3d20.629600986253736!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8f4c299c6e6f3d5b%3A0x6d5a7b4e4f4e4b6a!2sLux%20Dental%20Clinic!5e0!3m2!1ses!2smx!4v1696548765432!5m2!1ses!2smx",
     },
     faq: {
       title: "Preguntas Frecuentes sobre Endodoncia",
@@ -286,14 +276,6 @@ const pageContent = {
         {
           question: "¿Cuánto tiempo toma el procedimiento?",
           answer: "La mayoría se completa en una o dos visitas, dependiendo de la complejidad y gravedad de la infección."
-        },
-        {
-          question: "¿Necesito una corona después?",
-          answer: "Sí, usualmente se recomienda para proteger el diente debilitado y restaurar su función masticatoria."
-        },
-        {
-          question: "¿Cuál es la tasa de éxito?",
-          answer: "Muy alta, superando el 95% cuando es realizado por un especialista calificado."
         }
       ]
     },
@@ -335,9 +317,7 @@ const t = pageContent[lang];
       title={t.whatIs.title}
       text1={t.whatIs.text1}
       text2={t.whatIs.text2}
-      imageSrc={t.whatIs.imageSrc}
-      imageAlt={t.whatIs.imgAlt}
-      bgImage={t.whatIs.bgImage}
+      
     />
     <IndicationsSpeciality 
       title={t.indications.title}
@@ -363,8 +343,7 @@ const t = pageContent[lang];
       title={t.cost.title}
       text1={t.cost.text1}
       text2={t.cost.text2}
-      imageSrc={t.cost.imageSrc}
-      imageAlt={t.cost.imgAlt}
+      
     />
     <ProcessSpeciality 
       title={t.process.title}
@@ -385,8 +364,7 @@ const t = pageContent[lang];
     <LocationSpeciality 
       title={t.location.title}
       text1={t.location.text1}
-      imageSrc={t.location.imageSrc}
-      imageAlt={t.location.imgAlt}
+      mapUrl={t.location.mapUrl}
     />
     <FaqSpeciality 
       title={t.faq.title}
