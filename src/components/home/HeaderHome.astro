@@ -9,20 +9,27 @@ const { lang = "en" } = Astro.props;
 
 const translations = {
   en: {
-    button: "Book My Appointment",
-    titles: [
-      "Trusted Dentist in <br/> Playa del Carmen, Mexico",
-      "World-Class Dental Care <br/> at Local Prices",
-      "English-Speaking Specialists <br/> You Can Trust"
-    ]
+    // 1. Above the fold - Bloque crítico
+    h1: "Trusted Dentist in Playa del Carmen, Mexico",
+    subheadline: "High-quality dental care for international patients and Americans looking for safe, affordable treatment in Mexico.",
+    benefits: [
+      "English-speaking dentists",
+      "Certified specialists",
+      "Modern dental clinic in Playa del Carmen",
+      "Affordable dental care vs USA"
+    ],
+    cta: "Book Your Consultation"
   },
   es: {
-    button: "¡Quiero mi sonrisa con Stetic Dental!",
-    titles: [
-      "Dentista de Confianza <br/> en Playa del Carmen, México",
-      "Cuidado Dental de Clase Mundial <br/> a Precios Locales",
-      "Especialistas Certificados <br/> para tu Sonrisa"
-    ]
+    h1: "Dentista de Confianza en Playa del Carmen, México",
+    subheadline: "Atención dental de alta calidad para pacientes internacionales que buscan un tratamiento seguro y asequible en México.",
+    benefits: [
+      "Dentistas bilingües",
+      "Especialistas certificados",
+      "Clínica dental moderna",
+      "Precios asequibles vs USA/Canadá"
+    ],
+    cta: "Agenda tu Consulta"
   }
 };
 
@@ -45,45 +52,31 @@ const t = translations[lang];
     
     <div class="header__content container">
       <h1 class="header__title">
-        </h1>
+        {t.h1}
+      </h1>
+      
+      <p class="header__subheadline">
+        {t.subheadline}
+      </p>
+
+      <ul class="header__benefits">
+        {t.benefits.map((benefit) => (
+          <li class="header__benefit-item">
+            <Icon name="asterik" class="text-gold" size={14} />
+            <span>{benefit}</span>
+          </li>
+        ))}
+      </ul>
       
       <div class="header__actions">
-        <a class="header__btn" href="#especialidades">
-          {t.button}
+        <a class="header__btn" href="#contact">
+          {t.cta}
           <Icon name="arrow-down" color="white" class="arrow-down" size={20} />
         </a>
       </div>
     </div>
   </div>
 </header>
-
-<script is:inline id="header-data" data-titles={JSON.stringify(t.titles)}>
-  document.addEventListener("DOMContentLoaded", () => {
-    const dataEl = document.getElementById('header-data');
-    const titles = JSON.parse(dataEl.getAttribute('data-titles'));
-    const headerTitle = document.querySelector(".header__title");
-    let currentTitleIndex = 0;
-
-    if (headerTitle) {
-      headerTitle.innerHTML = titles[currentTitleIndex];
-      headerTitle.style.opacity = "1";
-    }
-
-    setInterval(() => {
-      if (headerTitle) {
-        headerTitle.style.opacity = "0";
-        headerTitle.style.transform = "translateY(10px)";
-        
-        setTimeout(() => {
-          currentTitleIndex = (currentTitleIndex + 1) % titles.length;
-          headerTitle.innerHTML = titles[currentTitleIndex];
-          headerTitle.style.opacity = "1";
-          headerTitle.style.transform = "translateY(0)";
-        }, 600);
-      }
-    }, 5000);
-  });
-</script>
 
 <style>
   :root {
@@ -95,8 +88,8 @@ const t = translations[lang];
   .header { 
     position: relative; 
     width: 100%; 
-    height: 85dvh; /* Altura media pantalla */
-    min-height: 450px; 
+    height: 90dvh; 
+    min-height: 550px; 
     overflow: hidden; 
     background-color: var(--black);
   }
@@ -118,7 +111,7 @@ const t = translations[lang];
     transform: translate(-50%, -50%);
     object-fit: cover;
     z-index: 0;
-    filter: brightness(0.5);
+    filter: brightness(0.4);
   }
 
   .header__overlay { 
@@ -128,11 +121,10 @@ const t = translations[lang];
     width: 100%; 
     height: 100%; 
     z-index: 1; 
-    /* Gradiente hacia la izquierda para favorecer la lectura del texto */
     background: linear-gradient(
       90deg, 
-      rgba(0, 0, 0, 0.9) 0%, 
-      rgba(0, 0, 0, 0.4) 50%, 
+      rgba(0, 0, 0, 0.85) 0%, 
+      rgba(0, 0, 0, 0.4) 60%, 
       rgba(0, 0, 0, 0.2) 100%
     ); 
   }
@@ -140,59 +132,62 @@ const t = translations[lang];
   .header__content { 
     position: relative; 
     color: var(--white); 
-    text-align: left; /* Alineación de texto a la izquierda */
+    text-align: left; 
     z-index: 2; 
     display: flex; 
     flex-direction: column; 
     justify-content: center; 
-    align-items: flex-start; /* Contenido a la izquierda */
+    align-items: flex-start; 
     height: 100%; 
-    padding: 0 2rem;
+    padding: 0 1rem;
   }
 
+  /* H1 Style */
   .header__title { 
     font-size: 2.2rem; 
     font-weight: 800; 
-    margin: 1rem 0; 
-    transition: all 0.6s ease; 
+    margin: 0.5rem 0; 
     text-transform: uppercase; 
     letter-spacing: -1px; 
     line-height: 1.1;
-    max-width: 800px;
+    max-width: 750px;
     color: var(--white);
   }
 
+  /* Subheadline Style */
+  .header__subheadline {
+    font-size: 1.1rem;
+    line-height: 1.4;
+    max-width: 600px;
+    margin-bottom: 1.5rem;
+    color: #e0e0e0;
+    font-weight: 400;
+  }
+
+  /* Benefits List */
+  .header__benefits {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 2.5rem 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+  }
+
+  .header__benefit-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 0.95rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+
   @media (min-width: 768px) { 
-    .header__title { font-size: 3.5rem; } 
-  }
-
-  .header__welcome { 
-    display: flex; 
-    align-items: center; 
-    gap: 1rem;
-    margin-bottom: 0.5rem; 
-  }
-
-  .header__line { 
-    width: 60px; /* Línea decorativa después del texto */
-    height: 2px; 
-    background-color: var(--gold); 
-  }
-
-  .header__welcome-text { 
-    font-size: 0.75rem; 
-    font-weight: 700; 
-    letter-spacing: 4px; 
-    text-transform: uppercase; 
-    color: var(--gold); 
-  }
-
-  .header__description { 
-    font-size: 1rem; 
-    margin-bottom: 2rem; 
-    max-width: 600px; 
-    line-height: 1.5;
-    color: #f0f0f0;
+    .header__title { font-size: 4rem; } 
+    .header__subheadline { font-size: 1.3rem; }
+    .header__content { padding: 0 2rem; }
   }
 
   .text-gold {
@@ -202,7 +197,7 @@ const t = translations[lang];
   .header__actions {
     width: 100%;
     display: flex;
-    justify-content: flex-start; /* Botón a la izquierda */
+    justify-content: flex-start;
   }
 
   .header__btn { 
@@ -210,25 +205,25 @@ const t = translations[lang];
     color: var(--white); 
     display: inline-flex; 
     align-items: center; 
-    padding: 1rem 2.5rem; 
+    padding: 1.2rem 2.8rem; 
     text-decoration: none; 
     font-weight: 700; 
-    font-size: 0.85rem; 
+    font-size: 0.9rem; 
     text-transform: uppercase; 
     letter-spacing: 2px;
     transition: all 0.3s ease; 
-    border: 1px solid var(--gold);
+    border: 2px solid var(--gold);
   }
 
   .header__btn:hover { 
     background-color: transparent; 
     color: var(--gold);
-    transform: translateX(10px); /* Animación hacia la derecha al hover */
+    transform: scale(1.05);
   }
 
   .container { 
     margin: 0 auto; 
-    width: 85%; 
+    width: 90%; 
   }
 
   .arrow-down { 

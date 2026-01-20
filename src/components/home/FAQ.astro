@@ -9,6 +9,7 @@ const { lang = "en" } = Astro.props;
 
 const translations = {
   en: {
+    // 8. FAQ (captura long-tail + rich results)
     title: "Frequently Asked Questions About Dental Care in Mexico",
     faqs: [
       {
@@ -17,15 +18,15 @@ const translations = {
       },
       {
         question: "Do you speak English?",
-        answer: "Yes. Our dental team speaks English and works daily with American patients to ensure clear communication."
+        answer: "Yes. Our dental team speaks English and works daily with American patients."
       },
       {
         question: "How much can I save compared to the USA?",
-        answer: "Patients often save between 50% and 70% on dental treatments compared to U.S. prices, without compromising quality."
+        answer: "Patients often save between 50% and 70% on dental treatments compared to U.S. prices."
       },
       {
         question: "How long do treatments take?",
-        answer: "Treatment time depends on the procedure. We provide clear timelines before you travel so you can plan your stay accordingly."
+        answer: "Treatment time depends on the procedure. We provide clear timelines before you travel."
       }
     ]
   },
@@ -34,7 +35,7 @@ const translations = {
     faqs: [
       {
         question: "¿Es seguro realizarse trabajos dentales en México?",
-        answer: "Sí. Muchas clínicas en Playa del Carmen siguen estándares internacionales y utilizan tecnología moderna comparable a la de EE. UU."
+        answer: "Sí. Muchas clínicas dentales en Playa del Carmen siguen estándares internacionales y utilizan tecnología moderna comparable a la de EE. UU."
       },
       {
         question: "¿Hablan inglés?",
@@ -53,7 +54,23 @@ const translations = {
 };
 
 const t = translations[lang];
+
+// FAQ Schema para SEO
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": t.faqs.map(faq => ({
+    "@type": "Question",
+    "name": faq.question,
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": faq.answer
+    }
+  }))
+};
 ---
+
+<script type="application/ld+json" set:html={JSON.stringify(faqSchema)} />
 
 <section class="faq">
   <div class="container">
@@ -79,7 +96,7 @@ const t = translations[lang];
 
 <style>
   :root {
-    --gold: #D4AF37;
+    --gold: #A58E55;
     --black: #000000;
     --white: #ffffff;
     --border-color: #eeeeee;
@@ -96,22 +113,12 @@ const t = translations[lang];
     margin: 0 auto 4rem;
   }
 
-  .faq__subtitle {
-    color: var(--gold);
-    font-size: 0.8rem;
-    font-weight: 700;
-    letter-spacing: 4px;
-    text-transform: uppercase;
-    display: block;
-    margin-bottom: 1rem;
-  }
-
   .faq__title {
     font-size: 2.2rem;
     font-weight: 800;
     color: var(--black);
     text-transform: uppercase;
-    line-height: 1.2;
+    line-height: 1.1;
   }
 
   .faq__container {
@@ -129,12 +136,13 @@ const t = translations[lang];
   .faq__item[open] {
     background-color: var(--white);
     border-left: 4px solid var(--gold);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.05);
   }
 
   .faq__question {
     list-style: none;
     padding: 1.5rem 2rem;
-    font-size: 1.1rem;
+    font-size: 1.05rem;
     font-weight: 700;
     color: var(--black);
     cursor: pointer;
@@ -145,7 +153,6 @@ const t = translations[lang];
     letter-spacing: 0.5px;
   }
 
-  /* Quitar flecha por defecto en Safari */
   .faq__question::-webkit-details-marker {
     display: none;
   }
@@ -161,26 +168,24 @@ const t = translations[lang];
 
   .faq__answer {
     padding: 0 2rem 1.5rem;
-    color: #555;
-    line-height: 1.6;
-    font-size: 1.05rem;
+    color: #444;
+    line-height: 1.7;
+    font-size: 1.1rem;
   }
 
   .container {
     margin: 0 auto;
-    width: 85%;
+    width: 90%;
+    max-width: 1200px;
   }
 
   @media (max-width: 768px) {
-    .container {
-      width: 90%; 
-    }
-    .faq__title {
-      font-size: 1.8rem;
-    }
+    .faq { padding: 4rem 0; }
+    .faq__title { font-size: 1.8rem; }
     .faq__question {
       font-size: 0.95rem;
       padding: 1.2rem;
     }
+    .faq__answer { font-size: 1rem; }
   }
 </style>

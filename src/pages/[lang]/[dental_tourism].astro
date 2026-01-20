@@ -165,14 +165,14 @@ const pageContent = {
       subheadline: "Atención dental de alta calidad en México para pacientes internacionales.",
       features: ["Especialistas experimentados", "Tecnología moderna", "Equipos bilingües", "Ahorros significativos"],
       button: "Planifique su Viaje Dental a México",
-      imageSrc: imgPath + "Dental-Tourism-IMG-7.webp",
+      imageSrc: imgPath + "Dental-Tourism-IMG-1.webp",
       imageAlt: "Turismo Dental en México"
     },
     about: {
       title: "Por Qué Elegir Stetic Dental Clinic",
       text1: "Tenemos experiencia en el tratamiento de pacientes internacionales que viajan a México.",
       text2: "Hacemos que su experiencia sea segura, confiable y cómoda.",
-      imageSrc: imgPath + "Dental-Tourism-IMG-8.webp",
+      imageSrc: imgPath + "Dental-Tourism-IMG-2.webp",
       imgAlt: "Equipo de Stetic Dental Clinic"
     },
     safety: {
@@ -184,7 +184,7 @@ const pageContent = {
       title: "Turismo Dental para Estadounidenses",
       text1: "Muchos pacientes eligen México para recibir el mismo nivel de atención a un costo menor.",
       text2: "Ofrecemos equipos bilingües y planeación adaptada a su calendario.",
-      imageSrc: "/sonrisa1.jpg",
+      imageSrc: imgPath + "Dental-Tourism-IMG-3.webp",
       imgAlt: "Atención para pacientes de EE. UU."
     },
     packages: {
@@ -205,9 +205,9 @@ const pageContent = {
       description: "Tratamientos que requieren experiencia avanzada y ofrecen alto valor.",
       footer: "Realizados por especialistas para soluciones a largo plazo.",
       items: [
-        { title: "Implantes Dentales", url: "/es/implantes-dentales", image: "/especialidad1.jpeg" },
-        { title: "Diseño de Sonrisa", url: "/es/diseno-de-sonrisa", image: "/sonrisa1.jpg" },
-        { title: "Implantes de Arcada Completa", url: "/es/implantes-dentales", image: "/nosotros.jpg" },
+        { title: "Implantes Dentales", url: "/es/implantes-dentales", image: imgPath + "Dental-Tourism-IMG-5.webp" },
+        { title: "Diseño de Sonrisa", url: "/es/diseno-de-sonrisa", image: imgPath + "Dental-Tourism-IMG-6.webp" },
+        { title: "Implantes de Arcada Completa", url: "/es/implantes-dentales", image: imgPath + "Dental-Tourism-IMG-7.webp" },
       ]
     },
     planningTourism: {
@@ -352,6 +352,7 @@ const t = pageContent[lang];
     />
 
   <CtaSpeciality 
+      lang={lang}
       title={t.cta.title}
       description={t.cta.description}
       buttonText={t.cta.button}

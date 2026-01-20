@@ -2,13 +2,31 @@
 import { Icon } from "astro-icon/components";
 
 interface Props {
+  lang: 'en' | 'es'; // Cambiado para manejar el idioma del form
   title: string;
   description: string;
   buttonText: string;
   note: string;
 }
 
-const { title, description, buttonText, note } = Astro.props;
+const { lang = "en", title, description, buttonText, note } = Astro.props;
+
+const formData = {
+  en: {
+    id: "inline-2tYqHhtdE1tG0rLJonF4",
+    src: "https://api.leadconnectorhq.com/widget/form/2tYqHhtdE1tG0rLJonF4",
+    formId: "2tYqHhtdE1tG0rLJonF4",
+    name: "Formulario website - ENG",
+  },
+  es: {
+    id: "inline-gXE4nbJldN7n7pbF9zzd",
+    src: "https://api.leadconnectorhq.com/widget/form/gXE4nbJldN7n7pbF9zzd",
+    formId: "gXE4nbJldN7n7pbF9zzd",
+    name: "Formulario website - ESP",
+  }
+};
+
+const currentForm = formData[lang] || formData.en;
 ---
 
 <section class="cta-section">
@@ -21,11 +39,25 @@ const { title, description, buttonText, note } = Astro.props;
         {description}
       </p>
 
-      <div class="cta__actions">
-        <a href="contact" class="cta__btn">
-          {buttonText}
-          <Icon name="whats" size={24} class="cta__icon" />
-        </a>
+      <div class="cta__form-container">
+        <iframe
+          src={currentForm.src}
+          style="width:100%; height:100%; border:none; background:transparent;"
+          id={currentForm.id}
+          data-layout="{'id':'INLINE'}"
+          data-trigger-type="alwaysShow"
+          data-trigger-value=""
+          data-activation-type="alwaysActivated"
+          data-activation-value=""
+          data-deactivation-type="neverDeactivate"
+          data-deactivation-value=""
+          data-form-name={currentForm.name}
+          data-height="700"
+          data-layout-iframe-id={currentForm.id}
+          data-form-id={currentForm.formId}
+          title={currentForm.name}
+        >
+        </iframe>
       </div>
       
       <p class="cta__note">
@@ -35,9 +67,8 @@ const { title, description, buttonText, note } = Astro.props;
   </div>
 </section>
 
-<style>
-  /* Aquí mantienes tus estilos de CSS tal cual los tenías */
-</style>
+<script is:inline src="https://link.msgsndr.com/js/form_embed.js"></script>
+
 <style>
   :root {
     --gold: #A58E55;
@@ -53,7 +84,6 @@ const { title, description, buttonText, note } = Astro.props;
     overflow: hidden;
   }
 
-  /* Efecto de luz de fondo sutil */
   .cta-section::before {
     content: "";
     position: absolute;
@@ -68,7 +98,8 @@ const { title, description, buttonText, note } = Astro.props;
 
   .container {
     margin: 0 auto;
-    width: 85%;
+    width: 90%;
+    max-width: 1200px;
     position: relative;
     z-index: 1;
   }
@@ -77,24 +108,22 @@ const { title, description, buttonText, note } = Astro.props;
     max-width: 900px;
     margin: 0 auto;
     text-align: center;
-    padding: 60px 40px;
-    border: 1px solid rgba(165, 142, 85, 0.3);
-    background-color: rgba(255, 255, 255, 0.02);
+    padding: 60px 20px;
+    border: 1px solid rgba(165, 142, 85, 0.2);
+    background-color: rgba(255, 255, 255, 0.01);
   }
 
   .cta__title {
     font-size: 2.2rem;
     font-weight: 800;
     text-transform: uppercase;
-    color: var(--gold); /* Título dorado solicitado */
+    color: var(--gold);
     margin-bottom: 20px;
     line-height: 1.2;
   }
 
   @media (min-width: 768px) {
-    .cta__title {
-      font-size: 3.2rem;
-    }
+    .cta__title { font-size: 3.2rem; }
   }
 
   .cta__accent-line {
@@ -107,53 +136,19 @@ const { title, description, buttonText, note } = Astro.props;
   .cta__description {
     font-size: 1.1rem;
     line-height: 1.8;
-    color: #e0e0e0; /* Letras blancas/gris claro */
+    color: #e0e0e0;
     margin-bottom: 40px;
     max-width: 700px;
     margin-left: auto;
     margin-right: auto;
   }
 
-  @media (min-width: 768px) {
-    .cta__description {
-      font-size: 1.3rem;
-    }
-  }
-
-  .cta__actions {
-    display: flex;
-    justify-content: center;
-    margin-bottom: 20px;
-  }
-
-  .cta__btn {
-    background-color: var(--gold);
-    color: var(--white);
-    padding: 20px 40px;
-    text-decoration: none;
-    font-weight: 800;
-    text-transform: uppercase;
-    font-size: 1rem;
-    display: flex;
-    align-items: center;
-    gap: 15px;
-    letter-spacing: 1px;
-    transition: all 0.3s ease;
-    box-shadow: 0 10px 30px rgba(165, 142, 85, 0.2);
-  }
-
-  .cta__btn:hover {
-    transform: translateY(-5px);
-    background-color: #c4ae6d;
-    box-shadow: 0 15px 40px rgba(165, 142, 85, 0.4);
-  }
-
-  .cta__icon {
-    transition: transform 0.3s ease;
-  }
-
-  .cta__btn:hover .cta__icon {
-    transform: scale(1.2);
+  /* Estilos para el formulario integrado */
+  .cta__form-container {
+    width: 100%;
+    min-height: 650px; /* Ajuste según la longitud de tu form */
+    margin: 0 auto;
+    background: transparent;
   }
 
   .cta__note {
@@ -162,6 +157,15 @@ const { title, description, buttonText, note } = Astro.props;
     font-weight: 600;
     text-transform: uppercase;
     letter-spacing: 2px;
-    margin-top: 15px;
+    margin-top: 30px;
+  }
+
+  @media (max-width: 768px) {
+    .cta__form-container {
+      min-height: 850px; /* Más alto en móviles por inputs apilados */
+    }
+    .cta__card {
+      padding: 40px 15px;
+    }
   }
 </style>

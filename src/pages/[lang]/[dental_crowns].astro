@@ -98,7 +98,7 @@ const pageContent = {
         "Reliable restorative solution"
       ],
       footer: "Dental crowns provide both functional and aesthetic benefits, making them a dependable restorative treatment.",
-      imageSrc: imgPath + "Crown-IMG-4.webp",
+      imageSrc: imgPath + "Crown-IMG-3.webp",
       imgAlt: "Benefits of restorative dentistry"
     },
     cost: {
@@ -164,22 +164,22 @@ const pageContent = {
         "Precios asequibles comparado con EE. UU."
       ],
       button: "Agenda tu Consulta de Coronas Dentales",
-      imageSrc: "/especialidad1.jpeg",
+      imageSrc: imgPath + "Crown-IMG-1.webp",
       imageAlt: "Tratamiento de coronas dentales"
     },
     about: {
       title: "¿Buscas Coronas Dentales de Confianza en Playa del Carmen?",
       text1: "Las coronas dentales son una solución confiable para restaurar dientes dañados, debilitados o desgastados. Nuestra clínica ofrece este servicio para pacientes que buscan cuidado profesional y materiales duraderos.",
       text2: "Ya sea que tu diente haya sido dañado por caries, fractura o un procedimiento previo, nos enfocamos en restaurar su fuerza, función y apariencia natural.",
-      imageSrc: "/nosotros.jpg",
+      imageSrc: imgPath + "Crown-IMG-2.webp",
       imgAlt: "Consulta de restauración dental"
     },
     whatIs: {
       title: "¿Qué son las Coronas Dentales?",
       text1: "Son restauraciones hechas a medida que cubren completamente un diente dañado. Están diseñadas para proteger la pieza, restaurar su función y mejorar su estética.",
       text2: "Este tratamiento se recomienda comúnmente después de una endodoncia o cuando un diente está demasiado dañado para una resina normal.",
-      imageSrc: "/especialidad-about.avif",
-      bgImage: "/especialidad1.jpeg",
+      imageSrc: imgPath + "Crown-IMG-3.webp",
+      bgImage: imgPath + "Crown-IMG-1.webp",
       imgAlt: "Colocación de corona dental"
     },
     options: {
@@ -208,8 +208,6 @@ const pageContent = {
       title: "Costo de Coronas Dentales en Playa del Carmen",
       text1: "El costo es significativamente más bajo que en los Estados Unidos, manteniendo altos estándares de calidad. El precio final depende del material y la condición del diente.",
       text2: "Tras una evaluación, entregamos un plan de tratamiento claro con precios transparentes.",
-      imageSrc: "/especialidad-about.avif",
-      imgAlt: "Precios de coronas dentales"
     },
     whyChoose: {
       title: "¿Por qué elegir nuestra clínica de odontología protésica?",
@@ -334,11 +332,11 @@ const t = pageContent[lang];
     />
 
   <CtaSpeciality 
+      lang={lang}
       title={t.cta.title}
       description={t.cta.description}
       buttonText={t.cta.button}
       note={t.cta.note}
     />
-    <ContactForm lang={lang} />
 
 </Layout>

@@ -38,7 +38,7 @@ const t = translations[lang];
 ---
 
 <section class="why-choose">
-  <div class="container">
+  <div class="container-fluid">
     <div class="why-choose__header">
       <span class="why-choose__subtitle">{t.subtitle}</span>
       <h2 class="why-choose__title">{t.title}</h2>
@@ -67,15 +67,16 @@ const t = translations[lang];
 
 <style>
   :root {
-    --gold: #D4AF37;
+    --gold: #A58E55;
     --black: #000000;
     --dark-accent: #0a0a0a;
     --white: #ffffff;
+    --gray-border: #1a1a1a;
   }
 
   .why-choose {
-    background-color: var(--black); /* Fondo Negro */
-    color: var(--white); /* Texto Blanco */
+    background-color: var(--black);
+    color: var(--white);
     padding: 8rem 0;
   }
 
@@ -85,55 +86,83 @@ const t = translations[lang];
     max-width: 850px;
     margin-left: auto;
     margin-right: auto;
+    padding: 0 1rem;
   }
 
   .why-choose__subtitle {
-    color: var(--gold); /* Dorado */
+    color: var(--gold);
     font-size: 0.8rem;
     font-weight: 700;
     letter-spacing: 4px;
     text-transform: uppercase;
     display: block;
-    margin-bottom: 1rem;
+    margin-bottom: 1.2rem;
   }
 
   .why-choose__title {
-    font-size: 2.5rem;
+    font-size: 2.3rem;
     font-weight: 800;
-    color: var(--white); /* Blanco */
+    color: var(--white);
     line-height: 1.1;
     text-transform: uppercase;
+    letter-spacing: -0.5px;
   }
 
-  /* Grid de Beneficios */
+  /* Grid Ajustado a 5 columnas */
   .why-choose__grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 2.5rem;
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
     margin-bottom: 5rem;
+    padding: 0 1rem;
+  }
+
+  /* Tablets */
+  @media (min-width: 640px) {
+    .why-choose__grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  /* Laptops */
+  @media (min-width: 1024px) {
+    .why-choose__grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+
+  /* Desktop Grande: 5 Columnas */
+  @media (min-width: 1440px) {
+    .why-choose__grid {
+      grid-template-columns: repeat(5, 1fr);
+      gap: 1rem;
+    }
   }
 
   .benefit-item {
-    padding: 3rem 2rem;
-    background-color: var(--dark-accent); /* Fondo gris muy oscuro */
-    border: 1px solid #1a1a1a;
+    padding: 2.5rem 1.5rem; /* Reducido para 5 columnas */
+    background-color: var(--dark-accent);
+    border: 1px solid var(--gray-border);
     display: flex;
     flex-direction: column;
     align-items: center;
     text-align: center;
     position: relative;
-    transition: all 0.4s ease;
+    transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+    min-height: 300px;
+    justify-content: center;
   }
 
   .benefit-item:hover {
     border-color: var(--gold);
     transform: translateY(-10px);
-    background-color: #111;
+    background-color: #0f0f0f;
+    box-shadow: 0 15px 30px rgba(0,0,0,0.5);
   }
 
   .benefit-item__icon-wrapper {
-    width: 60px;
-    height: 60px;
+    width: 55px; /* Reducido ligeramente */
+    height: 55px;
     background-color: var(--black);
     border: 1px solid var(--gold);
     border-radius: 50%;
@@ -148,13 +177,16 @@ const t = translations[lang];
   .benefit-item:hover .benefit-item__icon-wrapper {
     background-color: var(--gold);
     color: var(--white);
+    transform: rotate(15deg);
   }
 
   .benefit-item__text {
-    font-size: 1.1rem;
+    font-size: 0.95rem; /* Reducido para que el texto largo no rompa el diseño */
     font-weight: 600;
     color: var(--white);
     line-height: 1.4;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
   }
 
   .benefit-item__line {
@@ -163,28 +195,28 @@ const t = translations[lang];
     left: 50%;
     transform: translateX(-50%);
     width: 0;
-    height: 3px;
+    height: 4px;
     background-color: var(--gold);
     transition: width 0.4s ease;
   }
 
   .benefit-item:hover .benefit-item__line {
-    width: 50%;
+    width: 60%;
   }
 
-  /* Footer de la sección */
   .why-choose__footer {
-    border-top: 1px solid #1a1a1a;
-    padding-top: 3rem;
-    max-width: 900px;
+    border-top: 1px solid var(--gray-border);
+    padding-top: 4rem;
+    max-width: 950px;
     margin: 0 auto;
   }
 
   .why-choose__footer-content {
     display: flex;
     align-items: center;
-    gap: 2rem;
+    gap: 2.5rem;
     text-align: left;
+    padding: 0 1rem;
   }
 
   .footer-icon {
@@ -193,27 +225,24 @@ const t = translations[lang];
   }
 
   .footer-text {
-    font-size: 1.1rem;
-    color: #bbbbbb; /* Gris claro para el párrafo largo */
-    line-height: 1.6;
-    font-style: italic;
+    font-size: 1.15rem;
+    color: #cccccc;
+    line-height: 1.7;
+    font-weight: 300;
   }
 
-  .container {
+  .container-fluid {
     margin: 0 auto;
-    width: 85%;
+    width: 95%;
+    max-width: 1600px;
   }
 
   @media (max-width: 768px) {
-    .container {
-      width: 90%; 
-    }
-    .why-choose__title {
-      font-size: 1.8rem;
-    }
+    .why-choose__title { font-size: 1.8rem; }
     .why-choose__footer-content {
       flex-direction: column;
       text-align: center;
+      gap: 1.5rem;
     }
   }
 </style>

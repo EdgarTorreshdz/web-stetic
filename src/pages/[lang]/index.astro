@@ -10,9 +10,6 @@ const { lang } = Astro.params as { lang: 'en' | 'es' };
 
 import Layout from "../../layouts/Layout.astro";
 import HeaderHome from "../../components/home/HeaderHome.astro";
-import EspecialidadesHome from "../../components/home/EspecialidadesHome.astro";
-import BannerContact from "../../components/home/BannerContact.astro";
-import CintilloBanner from "../../components/home/CintilloBanner.astro";
 import AboutLux from "../../components/home/AboutLux.astro";
 import ServicesLux from "../../components/home/ServicesLux.astro";
 import DentalTourism from "../../components/home/DentalTourism.astro";
@@ -22,15 +19,15 @@ import LocationLux from "../../components/home/LocationLux.astro";
 import FAQ from "../../components/home/FAQ.astro";
 import ContactForm from "../../components/shared/ContactForm.astro";
 
-// SEO DATA OPTIMIZADA
+// SEO DATA OPTIMIZADA SEGÚN REQUERIMIENTO
 const seoData = {
   en: {
     title: "Dentist in Playa del Carmen | Trusted Dental Clinic for Americans",
-    description: "Top rated dentist in Playa del Carmen. Stetic Dental Clinic offers English speaking dentists, affordable premium care, and specialized treatments for Americans and Canadians.",
+    description: "Looking for a trusted dentist in Playa del Carmen? We offer safe, affordable dental care in Mexico for Americans and international patients. Book today.",
   },
   es: {
     title: "Dentista en Playa del Carmen | Clínica Dental de Confianza",
-    description: "La mejor clínica dental en Playa del Carmen y Veracruz. Especialistas bilingües en implantes, diseño de sonrisa y odontología estética con tecnología avanzada.",
+    description: "La mejor clínica dental en Playa del Carmen. Especialistas bilingües en implantes, diseño de sonrisa y odontología estética con tecnología avanzada.",
   }
 };
 
@@ -43,15 +40,20 @@ const currentSeo = seoData[lang];
   lang={lang}
 >
     <HeaderHome lang={lang} />
+
     <AboutLux lang={lang} />
+
     <ServicesLux lang={lang} />
+
     <DentalTourism lang={lang} />
+
     <WhyChooseUs lang={lang} />
+
     <ReviewsLux lang={lang} />
+
     <LocationLux lang={lang} />
+
     <FAQ lang={lang} />
+
     <ContactForm lang={lang} />
-    <!-- <EspecialidadesHome lang={lang} />
-    <BannerContact lang={lang} />
-    <CintilloBanner lang={lang} /> -->
 </Layout>

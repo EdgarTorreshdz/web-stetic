@@ -7,7 +7,7 @@ const { lang } = Astro.params as { lang: 'en' | 'es' } || Astro.props;
 
 const formData = {
   en: {
-    title: "Schedule Your Appointment",
+    title: "Book Your Dental Appointment in Playa del Carmen",
     id: "inline-2tYqHhtdE1tG0rLJonF4",
     src: "https://api.leadconnectorhq.com/widget/form/2tYqHhtdE1tG0rLJonF4",
     formId: "2tYqHhtdE1tG0rLJonF4",
@@ -15,7 +15,7 @@ const formData = {
     height: "100%"
   },
   es: {
-    title: "Agenda tu Cita",
+    title: "Reserva tu Cita Dental en Playa del Carmen",
     id: "inline-gXE4nbJldN7n7pbF9zzd",
     src: "https://api.leadconnectorhq.com/widget/form/gXE4nbJldN7n7pbF9zzd",
     formId: "gXE4nbJldN7n7pbF9zzd",
@@ -27,17 +27,17 @@ const formData = {
 const currentForm = formData[lang] || formData.en;
 ---
 
-<section class="py-16 bg-black w-full">
-  <div class="container mx-auto px-4 flex flex-col items-center">
+<section id="contact" class="contact-section">
+  <div class="container">
     
-    <h2 class="title-gold w-full text-center text-3xl md:text-5xl font-bold mb-10 tracking-tight">
+    <h2 class="contact-title">
       {currentForm.title}
     </h2>
 
-    <div class="form-container w-full max-w-4xl mx-auto bg-white p-2 rounded-lg">
+    <div class="form-wrapper">
       <iframe
         src={currentForm.src}
-        style="width:100%; height:100%; border:none; border-radius:3px"
+        style="width:100%; height:100%; border:none;"
         id={currentForm.id}
         data-layout="{'id':'INLINE'}"
         data-trigger-type="alwaysShow"
@@ -60,20 +60,59 @@ const currentForm = formData[lang] || formData.en;
 <script is:inline src="https://link.msgsndr.com/js/form_embed.js"></script>
 
 <style>
-  .title-gold {
-    text-align: center !important;
-    display: block;
-    width: 100%;
-    /* Dorado plano sólido */
-    color: #D4AF37; 
+  :root {
+    --gold: #A58E55;
+    --black: #000000;
+    --white: #ffffff;
   }
 
-  .form-container {
+  .contact-section {
+    padding: 6rem 0;
+    background-color: var(--black);
     width: 100%;
-    min-height: 850px;
+    display: flex;
+    justify-content: center;
+  }
+
+  .container {
+    width: 90%;
+    max-width: 900px; /* Un poco más estrecho para que el form luzca más estilizado */
+    margin: 0 auto;
+  }
+
+  .contact-title {
+    text-align: center;
+    font-size: 2.2rem;
+    font-weight: 800;
+    color: var(--white);
+    text-transform: uppercase;
+    margin-bottom: 3rem;
+    line-height: 1.1;
+    letter-spacing: -0.5px;
+  }
+
+  .form-wrapper {
+    width: 100%;
+    /* Ajustamos la altura mínima para evitar saltos visuales mientras carga */
+    min-height: 700px;
     height: auto;
+    background-color: transparent; /* Eliminamos el fondo gris/blanco */
+    padding: 0; /* Eliminamos el marco interno */
+    border: none; /* Eliminamos cualquier borde o marco */
+    box-shadow: none; /* Eliminamos sombras para que se integre al fondo negro */
     overflow: hidden;
-    /* Borde dorado plano */
-    border: 2px solid #D4AF37;
+  }
+
+  @media (max-width: 768px) {
+    .contact-section {
+      padding: 4rem 0;
+    }
+    .contact-title {
+      font-size: 1.7rem;
+      margin-bottom: 2rem;
+    }
+    .form-wrapper {
+      min-height: 850px;
+    }
   }
 </style>

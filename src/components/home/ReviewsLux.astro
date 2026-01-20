@@ -7,72 +7,145 @@ const { lang = "en" } = Astro.props;
 
 const translations = {
   en: {
-    title: "Excellent on Google",
-    subtitle: "Real Reviews from Our International Patients",
-    description: "Patients from the United States and Canada trust our clinic in Playa del Carmen for quality dental care."
+    // 6. Prueba social (reviews + resultados)
+    title: "Real Reviews from Our International Patients",
+    descriptionTop: "Patients from the United States and other countries trust our dental clinic in Playa del Carmen for quality care and reliable results. Our reviews reflect real experiences from international patients who chose Mexico for their dental treatment.",
+    descriptionBottom: "From dental implants to cosmetic procedures, our patients highlight professionalism, attention to detail, and outstanding results.",
+    badge: "Google Reviews"
   },
   es: {
-    title: "Excelente en Google",
-    subtitle: "Opiniones Reales de Nuestros Pacientes Internacionales",
-    description: "Pacientes de Estados Unidos y Canadá confían en nuestra clínica en Playa del Carmen por su atención dental de calidad."
+    title: "Opiniones Reales de Nuestros Pacientes Internacionales",
+    descriptionTop: "Pacientes de los Estados Unidos y otros países confían en nuestra clínica dental en Playa del Carmen por su atención de calidad y resultados confiables. Nuestras reseñas reflejan experiencias reales de pacientes internacionales que eligieron México.",
+    descriptionBottom: "Desde implantes dentales hasta procedimientos estéticos, nuestros pacientes destacan el profesionalismo, la atención al detalle y los resultados sobresalientes.",
+    badge: "Reseñas de Google"
   }
 };
 
 const t = translations[lang];
 ---
 
-<section class="google-reviews-section">
+<section class="reviews-lux">
   <div class="container">
-    <div class="reviews-header text-center mb-5">
-      <h2 class="section-title">{t.subtitle}</h2>
-      <p class="section-description">{t.description}</p>
+    <div class="reviews-lux__header">
+      <span class="reviews-lux__badge">{t.badge}</span>
+      <h2 class="reviews-lux__title">{t.title}</h2>
+      
+      <div class="reviews-lux__text-block">
+        <p class="reviews-lux__description">{t.descriptionTop}</p>
+        <p class="reviews-lux__description">{t.descriptionBottom}</p>
+      </div>
     </div>
 
-    <div class="reviews-widget-container">
+    <div class="reviews-lux__widget-container">
       <script src="https://static.elfsight.com/platform/platform.js" async></script>
       <div class="elfsight-app-093f8bfd-b23b-449a-8c00-526949c767e0" data-elfsight-app-lazy></div>
+      
+      <div class="reviews-lux__footer">
+        <div class="google-stars">
+          {"★".repeat(5)}
+          <span class="rating-text">5.0 Star Rating</span>
+        </div>
+      </div>
     </div>
   </div>
 </section>
 
 <style>
-  .google-reviews-section {
-    padding: 80px 0;
-    background-color: #f8f9fa; /* Fondo gris claro similar a tu código base */
+  :root {
+    --gold: #A58E55;
+    --black: #000000;
+    --white: #ffffff;
+    --light-bg: #fdfdfd;
   }
 
-  .section-title {
-    font-size: 2.5rem;
-    font-weight: 800;
-    color: #000;
+  .reviews-lux {
+    padding: 8rem 0;
+    background-color: var(--light-bg);
+    overflow: hidden;
+  }
+
+  .reviews-lux__header {
+    text-align: center;
+    max-width: 850px;
+    margin: 0 auto 4rem auto;
+  }
+
+  .reviews-lux__badge {
+    color: var(--gold);
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 3px;
     text-transform: uppercase;
     margin-bottom: 1rem;
+    display: block;
   }
 
-  .section-description {
+  .reviews-lux__title {
+    font-size: 2.2rem;
+    font-weight: 800;
+    color: var(--black);
+    text-transform: uppercase;
+    margin-bottom: 2rem;
+    line-height: 1.1;
+  }
+
+  .reviews-lux__text-block {
+    display: flex;
+    flex-direction: column;
+    gap: 1.2rem;
+  }
+
+  .reviews-lux__description {
     font-size: 1.1rem;
-    color: #666;
-    max-width: 800px;
-    margin: 5 auto;
+    color: #555;
+    line-height: 1.6;
+    font-weight: 400;
   }
 
-  .reviews-widget-container {
-    background: white;
-    border-radius: 15px;
-    padding: 20px;
-    box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+  .reviews-lux__widget-container {
+    background: var(--white);
+    border-radius: 4px;
+    padding: 2rem;
+    box-shadow: 0 15px 40px rgba(0,0,0,0.05);
+    border: 1px solid rgba(165, 142, 85, 0.1);
+    position: relative;
   }
 
-  /* Ajuste de contenedores para que coincida con el ancho de tu web */
+  .reviews-lux__footer {
+    margin-top: 2rem;
+    padding-top: 2rem;
+    border-top: 1px solid #eee;
+    text-align: center;
+  }
+
+  .google-stars {
+    color: #fbbc04; /* Color oficial de estrellas de Google */
+    font-size: 1.4rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+  }
+
+  .rating-text {
+    color: var(--black);
+    font-size: 0.9rem;
+    font-weight: 700;
+    margin-left: 10px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+
   .container {
-    max-width: 1200px;
     margin: 0 auto;
     width: 90%;
+    max-width: 1200px;
   }
 
   @media (max-width: 768px) {
-    .section-title {
-      font-size: 1.8rem;
-    }
+    .reviews-lux { padding: 4rem 0; }
+    .reviews-lux__title { font-size: 1.7rem; }
+    .reviews-lux__description { font-size: 1rem; }
+    .reviews-lux__widget-container { padding: 1rem; }
   }
 </style>
