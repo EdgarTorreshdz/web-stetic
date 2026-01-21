@@ -9,7 +9,6 @@ const { lang = "en" } = Astro.props;
 
 const translations = {
   en: {
-    // 1. Above the fold - Bloque crítico
     h1: "Trusted Dentist in Playa del Carmen, Mexico",
     subheadline: "High-quality dental care for international patients and Americans looking for safe, affordable treatment in Mexico.",
     benefits: [
@@ -45,6 +44,7 @@ const t = translations[lang];
       playsinline 
       class="header__video"
     >
+      <source src="/home/Slide-Home-Mobile.mp4" type="video/mp4" media="(max-width: 768px)" />
       <source src="/home/Slide-Home-1.mp4" type="video/mp4" />
     </video>
     
@@ -114,6 +114,16 @@ const t = translations[lang];
     filter: brightness(0.4);
   }
 
+  /* Ajuste para que en móvil el video se vea mejor si es vertical */
+  @media (max-width: 768px) {
+    .header {
+      height: 100dvh; /* Más alto en móvil para cubrir toda la pantalla */
+    }
+    .header__video {
+      object-fit: cover;
+    }
+  }
+
   .header__overlay { 
     position: absolute; 
     top: 0; 
@@ -129,6 +139,18 @@ const t = translations[lang];
     ); 
   }
 
+  /* Gradiente más oscuro para móvil para asegurar legibilidad */
+  @media (max-width: 768px) {
+    .header__overlay {
+      background: linear-gradient(
+        0deg, 
+        rgba(0, 0, 0, 0.9) 0%, 
+        rgba(0, 0, 0, 0.5) 50%, 
+        rgba(0, 0, 0, 0.7) 100%
+      );
+    }
+  }
+
   .header__content { 
     position: relative; 
     color: var(--white); 
@@ -142,7 +164,6 @@ const t = translations[lang];
     padding: 0 1rem;
   }
 
-  /* H1 Style */
   .header__title { 
     font-size: 2.2rem; 
     font-weight: 800; 
@@ -154,7 +175,6 @@ const t = translations[lang];
     color: var(--white);
   }
 
-  /* Subheadline Style */
   .header__subheadline {
     font-size: 1.1rem;
     line-height: 1.4;
@@ -164,7 +184,6 @@ const t = translations[lang];
     font-weight: 400;
   }
 
-  /* Benefits List */
   .header__benefits {
     list-style: none;
     padding: 0;

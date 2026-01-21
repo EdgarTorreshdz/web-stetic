@@ -1,7 +1,6 @@
 ---
 interface Step {
   title: string;
-  img: string;
 }
 
 interface Props {
@@ -11,6 +10,9 @@ interface Props {
 }
 
 const { title, footer, steps } = Astro.props;
+
+// Calculamos el número de columnas basado en la cantidad de pasos
+const totalSteps = steps.length;
 ---
 
 <section class="process-section">
@@ -18,12 +20,11 @@ const { title, footer, steps } = Astro.props;
     <h2 class="process__title">{title}</h2>
     <div class="process__accent-line"></div>
 
-    <div class="process__grid">
+    <div class="process__grid" style={`--total-columns: ${totalSteps};`}>
       {steps.map((step, index) => (
         <div class="process__step">
-          <div class="process__image-wrapper">
-            <span class="process__number">{index + 1}</span>
-            <img src={step.img} alt={step.title} class="process__img" />
+          <div class="process__number-container">
+            <span class="process__big-number">{index + 1}</span>
           </div>
           <h3 class="process__step-title">{step.title}</h3>
         </div>
@@ -51,22 +52,22 @@ const { title, footer, steps } = Astro.props;
 
   .container {
     margin: 0 auto;
-    width: 85%;
+    width: 90%; /* Un poco más ancho para dar espacio a más columnas */
     text-align: center;
   }
 
+  /* ... (Estilos de título y línea de acento iguales) ... */
   .process__title {
     font-size: 2rem;
     font-weight: 800;
     text-transform: uppercase;
     margin-bottom: 20px;
     color: var(--white);
+    letter-spacing: 1px;
   }
-
   @media (min-width: 768px) {
     .process__title { font-size: 3rem; }
   }
-
   .process__accent-line {
     width: 80px;
     height: 3px;
@@ -76,90 +77,87 @@ const { title, footer, steps } = Astro.props;
 
   .process__grid {
     display: grid;
-    grid-template-columns: 1fr;
-    gap: 40px;
+    grid-template-columns: 1fr; /* Móvil: 1 columna */
+    gap: 30px;
   }
 
+  /* Tablets: de 2 en 2 si hay muchos, o 1 si hay pocos */
   @media (min-width: 768px) {
-    .process__grid { grid-template-columns: 1fr 1fr; }
+    .process__grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
   }
 
+  /* Escritorio: Usa la variable dinámica --total-columns */
   @media (min-width: 1200px) {
-    .process__grid { grid-template-columns: 1fr 1fr 1fr 1fr; }
+    .process__grid {
+      /* repeat(var, 1fr) hace que si tienes 5 pasos, cree 5 columnas */
+      grid-template-columns: repeat(var(--total-columns), 1fr);
+    }
   }
 
   .process__step {
     display: flex;
     flex-direction: column;
     align-items: center;
+    transition: transform 0.3s ease;
   }
 
-  .process__image-wrapper {
+  .process__number-container {
     position: relative;
-    width: 100%;
-    margin-bottom: 20px;
-    border: 1px solid rgba(165, 142, 85, 0.3);
-    padding: 8px;
-    /* Redondeado del borde exterior */
-    border-radius: 15px; 
-  }
-
-  .process__number {
-    position: absolute;
-    top: -15px;
-    left: -15px;
-    width: 40px;
-    height: 40px;
-    background-color: var(--gold);
-    color: var(--white);
+    width: 100px; /* Reducido un poco para que quepan más en horizontal */
+    height: 100px;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-weight: 800;
-    font-size: 1.2rem;
-    z-index: 2;
-    /* Redondeado del número para que haga juego */
-    border-radius: 8px;
+    border: 1px solid rgba(165, 142, 85, 0.4);
+    border-radius: 50%;
+    margin-bottom: 25px;
+    transition: all 0.4s ease;
   }
 
-  .process__img {
-    width: 100%;
-    height: 250px;
-    object-fit: cover;
-    display: block;
-    filter: grayscale(30%);
-    transition: all 0.3s ease;
-    /* Redondeado de la imagen */
-    border-radius: 10px;
+  .process__big-number {
+    font-size: 3rem;
+    font-weight: 700;
+    color: var(--gold);
+    font-family: serif;
+    line-height: 1;
   }
 
-  .process__step:hover .process__img {
-    filter: grayscale(0%);
-    transform: scale(1.02);
+  /* Hover effects */
+  .process__step:hover {
+    transform: translateY(-5px);
+  }
+  .process__step:hover .process__number-container {
+    background-color: var(--gold);
+    border-color: var(--gold);
+  }
+  .process__step:hover .process__big-number {
+    color: var(--white);
   }
 
   .process__step-title {
-    font-size: 1.1rem;
+    font-size: 0.95rem; /* Reducido un poco para evitar que se pisen los textos */
     font-weight: 600;
-    color: var(--gold);
+    color: var(--white);
     text-transform: uppercase;
     margin-top: 10px;
-    line-height: 1.4;
+    line-height: 1.3;
+    max-width: 180px;
   }
 
   .process__footer {
-    margin-top: 60px;
-    padding: 25px;
+    margin-top: 80px;
+    padding: 30px;
     border: 1px dashed var(--gold);
     max-width: 800px;
     margin-left: auto;
     margin-right: auto;
-    /* Redondeado del pie de sección */
     border-radius: 15px;
   }
 
   .process__footer p {
-    font-size: 1.2rem;
+    font-size: 1.1rem;
     font-style: italic;
     color: #e0e0e0;
     margin: 0;

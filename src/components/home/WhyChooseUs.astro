@@ -12,11 +12,26 @@ const translations = {
     subtitle: "STETIC DENTAL QUALITY",
     title: "Why International Patients Choose Our Dental Clinic",
     benefits: [
-      "Certified and experienced dental specialists",
-      "English-speaking team for clear communication",
-      "Advanced dental technology and materials",
-      "Transparent treatment plans and pricing",
-      "Personalized care for international patients"
+      { 
+        text: "Certified and experienced dental specialists", 
+        img: "/home/Iconos/certified-and-experienced-dental-specialist.png" 
+      },
+      { 
+        text: "English-speaking team for clear communication", 
+        img: "/home/Iconos/English-speaking-team-for-clear-communication.png" 
+      },
+      { 
+        text: "Advanced dental technology and materials", 
+        img: "/home/Iconos/Advanced-dental-technology-and-materials.png" 
+      },
+      { 
+        text: "Transparent treatment plans and pricing", 
+        img: "/home/Iconos/Transparent-treatment-plans-and-pricing.png" 
+      },
+      { 
+        text: "Personalized care for international patients", 
+        img: "/home/Iconos/Personalized-care-for-international-patients.png" 
+      }
     ],
     footerText: "We understand the concerns of patients traveling from abroad and focus on providing a professional, safe, and comfortable dental experience in Playa del Carmen."
   },
@@ -24,11 +39,26 @@ const translations = {
     subtitle: "CALIDAD STETIC DENTAL",
     title: "¿Por qué los pacientes internacionales eligen nuestra clínica?",
     benefits: [
-      "Especialistas dentales certificados y experimentados",
-      "Equipo de habla inglesa para una comunicación clara",
-      "Tecnología y materiales dentales avanzados",
-      "Planes de tratamiento y precios transparentes",
-      "Atención personalizada para pacientes internacionales"
+      { 
+        text: "Especialistas dentales certificados y experimentados", 
+        img: "/home/Iconos/certified-and-experienced-dental-specialist.png" 
+      },
+      { 
+        text: "Equipo de habla inglesa para una comunicación clara", 
+        img: "/home/Iconos/English-speaking-team-for-clear-communication.png" 
+      },
+      { 
+        text: "Tecnología y materiales dentales avanzados", 
+        img: "/home/Iconos/Advanced-dental-technology-and-materials.png" 
+      },
+      { 
+        text: "Planes de tratamiento y precios transparentes", 
+        img: "/home/Iconos/Transparent-treatment-plans-and-pricing.png" 
+      },
+      { 
+        text: "Atención personalizada para pacientes internacionales", 
+        img: "/home/Iconos/Personalized-care-for-international-patients.png" 
+      }
     ],
     footerText: "Entendemos las preocupaciones de los pacientes que viajan desde el extranjero y nos enfocamos en brindar una experiencia dental profesional, segura y cómoda en Playa del Carmen."
   }
@@ -48,9 +78,9 @@ const t = translations[lang];
       {t.benefits.map((benefit) => (
         <div class="benefit-item">
           <div class="benefit-item__icon-wrapper">
-            <Icon name="star" size={24} class="benefit-icon" />
+            <img src={benefit.img} alt={benefit.text} class="benefit-image" />
           </div>
-          <p class="benefit-item__text">{benefit}</p>
+          <p class="benefit-item__text">{benefit.text}</p>
           <div class="benefit-item__line"></div>
         </div>
       ))}
@@ -108,7 +138,6 @@ const t = translations[lang];
     letter-spacing: -0.5px;
   }
 
-  /* Grid Ajustado a 5 columnas */
   .why-choose__grid {
     display: grid;
     grid-template-columns: 1fr;
@@ -117,21 +146,14 @@ const t = translations[lang];
     padding: 0 1rem;
   }
 
-  /* Tablets */
   @media (min-width: 640px) {
-    .why-choose__grid {
-      grid-template-columns: repeat(2, 1fr);
-    }
+    .why-choose__grid { grid-template-columns: repeat(2, 1fr); }
   }
 
-  /* Laptops */
   @media (min-width: 1024px) {
-    .why-choose__grid {
-      grid-template-columns: repeat(3, 1fr);
-    }
+    .why-choose__grid { grid-template-columns: repeat(3, 1fr); }
   }
 
-  /* Desktop Grande: 5 Columnas */
   @media (min-width: 1440px) {
     .why-choose__grid {
       grid-template-columns: repeat(5, 1fr);
@@ -140,7 +162,7 @@ const t = translations[lang];
   }
 
   .benefit-item {
-    padding: 2.5rem 1.5rem; /* Reducido para 5 columnas */
+    padding: 2.5rem 1.5rem;
     background-color: var(--dark-accent);
     border: 1px solid var(--gray-border);
     display: flex;
@@ -161,27 +183,32 @@ const t = translations[lang];
   }
 
   .benefit-item__icon-wrapper {
-    width: 55px; /* Reducido ligeramente */
-    height: 55px;
-    background-color: var(--black);
-    border: 1px solid var(--gold);
-    border-radius: 50%;
+    width: 70px;
+    height: 70px;
     display: flex;
     align-items: center;
     justify-content: center;
     margin-bottom: 1.5rem;
-    color: var(--gold);
     transition: all 0.3s ease;
   }
 
-  .benefit-item:hover .benefit-item__icon-wrapper {
-    background-color: var(--gold);
-    color: var(--white);
-    transform: rotate(15deg);
+  .benefit-image {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    /* Invertimos el color a blanco para que resalte en el fondo negro */
+    filter: brightness(0) invert(1);
+    transition: all 0.3s ease;
+  }
+
+  .benefit-item:hover .benefit-image {
+    transform: scale(1.1) rotate(5deg);
+    /* Al pasar el mouse, el icono se vuelve dorado */
+    filter: sepia(1) saturate(5) hue-rotate(10deg);
   }
 
   .benefit-item__text {
-    font-size: 0.95rem; /* Reducido para que el texto largo no rompa el diseño */
+    font-size: 0.85rem;
     font-weight: 600;
     color: var(--white);
     line-height: 1.4;

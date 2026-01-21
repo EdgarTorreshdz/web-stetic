@@ -6,23 +6,24 @@ interface Props {
 }
 
 const { lang = "en" } = Astro.props;
-
+const imgPath = '/home/';
+const imgPathServicces = imgPath + 'services/';
 const translations = {
   en: {
     title: "Our Dental Services in Playa del Carmen",
     description: "We offer a full range of dental services tailored for international patients looking for reliable dental care in Mexico:",
     viewMore: "View Details",
     services: [
-      { title: "Dental implants", desc: "Permanent solutions to replace missing teeth with natural-looking results.", img: "/dental_implants/Dental-implants-IMG-1.webp", link: "/en/dental-implants" },
-      { title: "Veneers", desc: "Custom porcelain veneers designed to enhance your smile with long-lasting aesthetics.", img: "/veneers/Veneers-IMG-1.webp", link: "/en/veneers" },
-      { title: "Crowns", desc: "Durable dental crowns that restore strength, function, and natural appearance.", img: "/dental_crowns/Crown-IMG-1.webp", link: "/en/dental-crowns" },
-      { title: "Clear Aligners", desc: "Discreet orthodontic solutions to straighten teeth comfortably and effectively.", img: "/invisalign/Invisalign-IMG-1.webp", link: "/en/invisalign" },
-      { title: "Root canal", desc: "Modern procedures to relieve pain, save your tooth, and restore oral health.", img: "/root_canal_treatment/Root-canal-IMG-1.webp", link: "/en/endodontics" },
-      { title: "Smile design", desc: "Personalized treatments to create a balanced, natural and confident smile.", img: "/smile_design/Smile-design-IMG-1.webp", link: "/en/smile-design" },
-      { title: "Teeth cleaning", desc: "Professional cleanings to remove plaque, protect gums, and maintain oral health.", img: "/teeth_cleaning/Theeth-cleaning-IMG-1.webp", link: "/en/teeth-cleaning" },
-      { title: "Teeth Whitening", desc: "Professional whitening treatments for a brighter, healthier-looking smile.", img: "/teeth_whitening/Teeth-whitening-IMG-1.webp", link: "/en/teeth-whitening" },
-      { title: "Braces", desc: "Traditional orthodontic treatments to align teeth and improve bite function.", img: "/ortodoncia.png", link: "/en/orthodontics" },
-      { title: "Dental treatment abroad", desc: "Complete support for international patients seeking safe, affordable dental care.", img: "/dental_tourism/Dental-Tourism-IMG-1.webp", link: "/en/dental-tourism-mexico" }
+      { title: "Dental implants", desc: "Permanent solutions to replace missing teeth with natural-looking results.", img: imgPathServicces + "Dental-implant.webp", link: "/en/dental-implants" },
+      { title: "Veneers", desc: "Custom porcelain veneers designed to enhance your smile with long-lasting aesthetics.", img: imgPathServicces + "VeneersVeeners.webp", link: "/en/veneers" },
+      { title: "Crowns", desc: "Durable dental crowns that restore strength, function, and natural appearance.", img: imgPathServicces + "Crown.webp", link: "/en/dental-crowns" },
+      { title: "Clear Aligners", desc: "Discreet orthodontic solutions to straighten teeth comfortably and effectively.", img: imgPathServicces + "Clear-Aligners.webp", link: "/en/invisalign" },
+      { title: "Root canal", desc: "Modern procedures to relieve pain, save your tooth, and restore oral health.", img: imgPathServicces + "Root-canal.webp", link: "/en/endodontics" },
+      { title: "Smile design", desc: "Personalized treatments to create a balanced, natural and confident smile.", img: imgPathServicces + "Smile-design.webp", link: "/en/smile-design" },
+      { title: "Teeth cleaning", desc: "Professional cleanings to remove plaque, protect gums, and maintain oral health.", img: imgPathServicces + "Theet-cleaning.webp", link: "/en/teeth-cleaning" },
+      { title: "Teeth Whitening", desc: "Professional whitening treatments for a brighter, healthier-looking smile.", img: imgPathServicces + "Theet-whitening.webp", link: "/en/teeth-whitening" },
+      { title: "Braces", desc: "Traditional orthodontic treatments to align teeth and improve bite function.", img: imgPathServicces + "Braces.webp", link: "/en/orthodontics" },
+      { title: "Dental treatment abroad", desc: "Complete support for international patients seeking safe, affordable dental care.", img: imgPathServicces + "Dental-treatment.webp", link: "/en/dental-tourism-mexico" }
     ]
   },
   es: {
