@@ -1,29 +1,41 @@
 ---
 import { Icon } from "astro-icon/components";
+import { routes } from "../../i18n/ui"; // Importamos las rutas oficiales
 
 interface Props {
   lang?: 'en' | 'es';
 }
 
 const { lang = "en" } = Astro.props;
-const imgPath = '/home/';
-const imgPathServicces = imgPath + 'services/';
+
+/**
+ * Función para obtener la URL correcta según el idioma y la clave.
+ * Se utiliza 'as keyof' para evitar el error de indexación dinámica en TypeScript.
+ */
+const getUrl = (key: string) => {
+  const langRoutes = routes[lang as keyof typeof routes];
+  const slug = langRoutes[key as keyof typeof langRoutes] || key;
+  return `/${lang}/${slug}`;
+};
+
+const imgPathServicces = '/home/services/';
+
 const translations = {
   en: {
     title: "Our Dental Services in Playa del Carmen",
     description: "We offer a full range of dental services tailored for international patients looking for reliable dental care in Mexico:",
     viewMore: "View Details",
     services: [
-      { title: "Dental implants", desc: "Permanent solutions to replace missing teeth with natural-looking results.", img: imgPathServicces + "Dental-implant.webp", link: "/en/dental-implants" },
-      { title: "Veneers", desc: "Custom porcelain veneers designed to enhance your smile with long-lasting aesthetics.", img: imgPathServicces + "VeneersVeeners.webp", link: "/en/veneers" },
-      { title: "Crowns", desc: "Durable dental crowns that restore strength, function, and natural appearance.", img: imgPathServicces + "Crown.webp", link: "/en/dental-crowns" },
-      { title: "Clear Aligners", desc: "Discreet orthodontic solutions to straighten teeth comfortably and effectively.", img: imgPathServicces + "Clear-Aligners.webp", link: "/en/invisalign" },
-      { title: "Root canal", desc: "Modern procedures to relieve pain, save your tooth, and restore oral health.", img: imgPathServicces + "Root-canal.webp", link: "/en/endodontics" },
-      { title: "Smile design", desc: "Personalized treatments to create a balanced, natural and confident smile.", img: imgPathServicces + "Smile-design.webp", link: "/en/smile-design" },
-      { title: "Teeth cleaning", desc: "Professional cleanings to remove plaque, protect gums, and maintain oral health.", img: imgPathServicces + "Theet-cleaning.webp", link: "/en/teeth-cleaning" },
-      { title: "Teeth Whitening", desc: "Professional whitening treatments for a brighter, healthier-looking smile.", img: imgPathServicces + "Theet-whitening.webp", link: "/en/teeth-whitening" },
-      { title: "Braces", desc: "Traditional orthodontic treatments to align teeth and improve bite function.", img: imgPathServicces + "Braces.webp", link: "/en/orthodontics" },
-      { title: "Dental treatment abroad", desc: "Complete support for international patients seeking safe, affordable dental care.", img: imgPathServicces + "Dental-treatment.webp", link: "/en/dental-tourism-mexico" }
+      { key: "dental_implants", title: "Dental implants", desc: "Permanent solutions to replace missing teeth with natural-looking results.",  img: imgPathServicces + "Dental-implant.webp" },
+      { key: "veneers", title: "Veneers", desc: "Custom porcelain veneers designed to enhance your smile with long-lasting aesthetics.", img: imgPathServicces + "VeneersVeeners.webp" },
+      { key: "dental_crowns", title: "Crowns", desc: "Durable dental crowns that restore strength, function, and natural appearance.", img: imgPathServicces + "Crown.webp" },
+      { key: "invisalign", title: "Clear Aligners", desc: "Discreet orthodontic solutions to straighten teeth comfortably and effectively.", img: imgPathServicces + "Clear-Aligners.webp" },
+      { key: "endodontics", title: "Root canal", desc: "Modern procedures to relieve pain, save your tooth, and restore oral health.", img: imgPathServicces + "Root-canal.webp" },
+      { key: "smile_design", title: "Smile design", desc: "Personalized treatments to create a balanced, natural and confident smile.", img: imgPathServicces + "Smile-design.webp" },
+      { key: "teeth_cleaning", title: "Teeth cleaning", desc: "Professional cleanings to remove plaque, protect gums, and maintain oral health.", img: imgPathServicces + "Theet-cleaning.webp" },
+      { key: "teeth_whitening", title: "Teeth Whitening", desc: "Professional whitening treatments for a brighter, healthier-looking smile.", img: imgPathServicces + "Theet-whitening.webp" },
+      { key: "orthodontics", title: "Braces", desc: "Traditional orthodontic treatments to align teeth and improve bite function.", img: imgPathServicces + "Braces.webp" },
+      { key: "dental_tourism", title: "Dental tourism", desc: "Complete support for international patients seeking safe, affordable dental care.", img: imgPathServicces + "Dental-treatment.webp" }
     ]
   },
   es: {
@@ -31,21 +43,21 @@ const translations = {
     description: "Ofrecemos una gama completa de servicios dentales adaptados para pacientes internacionales que buscan atención dental confiable en México:",
     viewMore: "Ver detalles",
     services: [
-      { title: "Implantes Dentales", desc: "Soluciones permanentes para reemplazar dientes perdidos con resultados naturales.", img: "/dental_implants/Dental-implants-IMG-1.webp", link: "/es/implantes-dentales" },
-      { title: "Carillas", desc: "Carillas de porcelana personalizadas diseñadas para mejorar su sonrisa.", img: "/veneers/Veneers-IMG-1.webp", link: "/es/carillas" },
-      { title: "Coronas", desc: "Coronas dentales duraderas que restauran la fuerza, función y apariencia natural.", img: "/dental_crowns/Crown-IMG-1.webp", link: "/es/coronas-dentales" },
-      { title: "Alineadores Claros", desc: "Soluciones de ortodoncia discretas para enderezar los dientes cómodamente.", img: "/invisalign/Invisalign-IMG-1.webp", link: "/es/invisalign" },
-      { title: "Endodoncia", desc: "Procedimientos modernos para aliviar el dolor, salvar su diente y restaurar la salud.", img: "/root_canal_treatment/Root-canal-IMG-1.webp", link: "/es/endodoncia" },
-      { title: "Diseño de Sonrisa", desc: "Tratamientos personalizados para crear una sonrisa equilibrada y natural.", img: "/smile_design/Smile-design-IMG-1.webp", link: "/es/diseno-de-sonrisa" },
-      { title: "Limpieza Dental", desc: "Limpiezas profesionales para eliminar la placa, proteger las encías y mantener la salud.", img: "/teeth_cleaning/Theeth-cleaning-IMG-1.webp", link: "/es/limpieza-dental" },
-      { title: "Blanqueamiento", desc: "Tratamientos profesionales para una sonrisa más brillante y saludable.", img: "/teeth_whitening/Teeth-whitening-IMG-1.webp", link: "/es/blanqueamiento-dental" },
-      { title: "Brackets", desc: "Tratamientos tradicionales de ortodoncia para alinear los dientes.", img: "/ortodoncia.png", link: "/es/ortodoncia" },
-      { title: "Tratamiento Dental en el Extranjero", desc: "Soporte completo para pacientes internacionales que buscan atención segura.", img: "/dental_tourism/Dental-Tourism-IMG-1.webp", link: "/es/turismo-dental" }
+      { key: "dental_implants", title: "Implantes Dentales", desc: "Soluciones permanentes para reemplazar dientes perdidos con resultados naturales.", img: imgPathServicces + "Dental-implant.webp" },
+      { key: "veneers", title: "Carillas", desc: "Carillas de porcelana personalizadas diseñadas para mejorar su sonrisa.", img:  imgPathServicces + "VeneersVeeners.webp" },
+      { key: "dental_crowns", title: "Coronas", desc: "Coronas dentales duraderas que restauran la fuerza, función y apariencia natural.", img: imgPathServicces + "Crown.webp" },
+      { key: "invisalign", title: "Alineadores Claros", desc: "Soluciones de ortodoncia discretas para enderezar los dientes cómodamente.", img: imgPathServicces + "Clear-Aligners.webp" },
+      { key: "endodontics", title: "Endodoncia", desc: "Procedimientos modernos para aliviar el dolor, salvar su diente y restaurar la salud.", img: imgPathServicces + "Root-canal.webp" },
+      { key: "smile_design", title: "Diseño de Sonrisa", desc: "Tratamientos personalizados para crear una sonrisa equilibrada y natural.", img: imgPathServicces + "Smile-design.webp" },
+      { key: "teeth_cleaning", title: "Limpieza Dental", desc: "Limpiezas profesionales para eliminar la placa, proteger las encías y mantener la salud.", img: imgPathServicces + "Theet-cleaning.webp" },
+      { key: "teeth_whitening", title: "Blanqueamiento", desc: "Tratamientos profesionales para una sonrisa más brillante y saludable.", img: imgPathServicces + "Theet-whitening.webp" },
+      { key: "orthodontics", title: "Brackets", desc: "Tratamientos tradicionales de ortodoncia para alinear los dientes.", img: imgPathServicces + "Braces.webp" },
+      { key: "dental_tourism", title: "Turismo Dental", desc: "Soporte completo para pacientes internacionales que buscan atención segura.", img: imgPathServicces + "Dental-treatment.webp" }
     ]
   }
 };
 
-const t = translations[lang];
+const t = translations[lang as keyof typeof translations];
 ---
 
 <section class="services-lux">
@@ -57,7 +69,7 @@ const t = translations[lang];
 
     <div class="services-lux__grid">
       {t.services.map((service) => (
-        <a href={service.link} class="service-card">
+        <a href={getUrl(service.key)} class="service-card">
           <img src={service.img} alt={service.title} class="service-card__bg" />
           <div class="service-card__overlay"></div>
           
@@ -115,37 +127,19 @@ const t = translations[lang];
 
   .services-lux__grid {
     display: grid;
-    /* Configuración para 5 columnas en desktop */
-    grid-template-columns: repeat(1, 1fr);
+    grid-template-columns: 1fr;
     gap: 1rem;
     padding: 0 1rem;
   }
 
-  /* Tablets: 2 o 3 columnas */
-  @media (min-width: 640px) {
-    .services-lux__grid {
-      grid-template-columns: repeat(2, 1fr);
-    }
-  }
-
-  @media (min-width: 1024px) {
-    .services-lux__grid {
-      grid-template-columns: repeat(3, 1fr);
-    }
-  }
-
-  /* Desktop Grande: Forzamos las 5 columnas */
-  @media (min-width: 1440px) {
-    .services-lux__grid {
-      grid-template-columns: repeat(5, 1fr);
-      gap: 0.75rem;
-    }
-  }
+  @media (min-width: 640px) { .services-lux__grid { grid-template-columns: repeat(2, 1fr); } }
+  @media (min-width: 1024px) { .services-lux__grid { grid-template-columns: repeat(3, 1fr); } }
+  @media (min-width: 1440px) { .services-lux__grid { grid-template-columns: repeat(5, 1fr); gap: 0.75rem; } }
 
   .service-card {
     position: relative;
     width: 100%;
-    height: 380px; /* Reducido ligeramente para balancear el ancho menor */
+    height: 380px;
     display: flex;
     flex-direction: column;
     justify-content: flex-end;
@@ -167,26 +161,20 @@ const t = translations[lang];
   }
 
   .service-card__overlay {
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(
-      to top, 
-      rgba(0,0,0,0.9) 0%, 
-      rgba(0,0,0,0.4) 50%, 
-      rgba(0,0,0,0.1) 100%
-    );
+    position: absolute;inset: 0;
+    background: linear-gradient(to top, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.4) 50%, rgba(0,0,0,0.1) 100%);
     z-index: 1;
   }
 
   .service-card__content {
     position: relative;
     z-index: 2;
-    padding: 1.25rem; /* Padding reducido para tarjetas más delgadas */
+    padding: 1.25rem;
     text-align: left;
   }
 
   .service-card__title {
-    font-size: 1.15rem; /* Tamaño de fuente ajustado para 5 columnas */
+    font-size: 1.15rem;
     font-weight: 800;
     color: var(--white);
     text-transform: uppercase;
@@ -227,23 +215,15 @@ const t = translations[lang];
   }
 
   @media (hover: hover) {
-    .service-card:hover .service-card__bg {
-      transform: scale(1.1);
-    }
-    .service-card:hover .service-card__border {
-      width: 100%;
-    }
+    .service-card:hover .service-card__bg { transform: scale(1.1); }
+    .service-card:hover .service-card__border { width: 100%; }
   }
 
   .container-fluid {
     margin: 0 auto;
     width: 95%;
-    max-width: 1600px; /* Max-width ampliado para dar espacio a las 5 columnas */
+    max-width: 1600px;
   }
 
-  @media (max-width: 768px) {
-    .services-lux__title {
-      font-size: 1.8rem;
-    }
-  }
+  @media (max-width: 768px) { .services-lux__title { font-size: 1.8rem; } }
 </style>
