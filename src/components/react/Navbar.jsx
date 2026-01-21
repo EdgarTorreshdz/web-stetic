@@ -15,21 +15,22 @@ const Navbar = ({ lang = 'en' }) => {
     }
   }, []);
 
-  // FUNCIÓN CRÍTICA: Busca la traducción exacta en ui.ts
   const getLocalizedPath = (key) => {
     const slug = routes[lang]?.[key] || key;
-    // Evita barras dobles al final y asegura el prefijo
     const path = `${prefix}/${slug}`.replace(/\/+$/, "");
     return path || `${prefix}/`;
   };
 
   const isActive = (key) => {
+    // Para el blog, verificamos si la URL actual contiene /blog
+    if (key === 'blog') {
+      return currentPath.includes('/blog');
+    }
     const targetPath = key === '/' ? prefix : getLocalizedPath(key);
     const activePath = currentPath.replace(/\/$/, "");
     return activePath === targetPath;
   };
 
-  // Labels actualizados con Restore y Enhance que faltaban
   const labels = {
     en: { 
       home: 'Home', 
@@ -51,6 +52,11 @@ const Navbar = ({ lang = 'en' }) => {
 
   const t = labels[lang] || labels.en;
 
+  // Lógica de URL para el Blog (WordPress directo)
+  const blogUrl = lang === 'es' 
+    ? '/blog/' 
+    : '/blog/en/';
+
   const linkStyle = (key) => ({
     color: isActive(key) ? goldColor : blackColor,
     textDecoration: 'none',
@@ -62,28 +68,24 @@ const Navbar = ({ lang = 'en' }) => {
 
   return (
     <nav style={{ display: 'flex', alignItems: 'center', gap: '5px', justifyContent: 'flex-end' }}>
-      {/* HOME */}
       <a style={linkStyle('/')} href={`${prefix}/`}>
         {t.home}
       </a>
       
-      {/* DROPDOWNS: Asegúrate que dentro de estos componentes uses getLocalizedPath con las keys de ui.ts */}
       <DropdownEspecialidades lang={lang} currentPath={currentPath} category="restore" label={t.restore} />
       <DropdownEspecialidades lang={lang} currentPath={currentPath} category="enhance" label={t.enhance} />
 
-      {/* DENTAL TOURISM: Key 'dental_tourism' coincide con ui.ts */}
       <a style={linkStyle('dental_tourism')} href={getLocalizedPath('dental_tourism')}>
         {t.tourism}
       </a>
 
-      {/* BLOG: Key 'blog' coincide con ui.ts */}
-      <a style={linkStyle('blog')} href={getLocalizedPath('blog')}>
+      {/* BLOG: Usamos la variable blogUrl directa en lugar de getLocalizedPath */}
+      <a style={linkStyle('blog')} href={blogUrl}>
         {t.blog}
       </a>
       
       <LanguagePicker currentLang={lang} />
 
-      {/* CONTACTO: Key 'contact' coincide con ui.ts */}
       <a 
         style={{ 
           backgroundColor: goldColor, 

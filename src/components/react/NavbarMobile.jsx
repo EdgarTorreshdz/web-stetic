@@ -33,6 +33,10 @@ const NavbarMobile = ({ lang = 'en' }) => {
   };
 
   const isActive = (key) => {
+    // Lógica especial para el Blog
+    if (key === 'blog') {
+      return currentPath.includes('/blog');
+    }
     const targetPath = key === '/' ? prefix : getLocalizedPath(key);
     const activePath = currentPath.replace(/\/$/, "");
     return activePath === targetPath;
@@ -57,42 +61,29 @@ const NavbarMobile = ({ lang = 'en' }) => {
     }
   };
 
-  // ACTUALIZADO: Ahora coincide exactamente con el Dropdown de Desktop
+  // URL directa para WordPress
+  const blogUrl = lang === 'es' ? '/blog/' : '/blog/en/';
+
+  // SINCRONIZADO: Misma estructura que DropdownEspecialidades
   const services = {
-    restore: lang === 'en' 
-      ? [
-          { title: "Dental Implants", key: "dental_implants" },
-          { title: "Crowns & Bridges", key: "dental_crowns" },
-          { title: "Root Canal (Endodontics)", key: "endodontics" },
-          { title: "Orthodontics", key: "orthodontics" },
-          { title: "Invisalign", key: "invisalign" },
-        ]
-      : [
-          { title: "Smile Design", key: "smile_design" },
-          { title: "Dental Veneers", key: "veneers" },
-          { title: "Teeth Whitening", key: "teeth_whitening" },
-          { title: "Teeth Cleaning", key: "teeth_cleaning" },
-        ],
-    enhance: lang === 'es'
-      ? [
-          { title: "Implantes Dentales", key: "dental_implants" },
-          { title: "Coronas y Puentes", key: "dental_crowns" },
-          { title: "Endodoncia", key: "endodontics" },
-          { title: "Ortodoncia", key: "orthodontics" },
-          { title: "Invisalign", key: "invisalign" },
-        ]
-      : [
-          { title: "Diseño de Sonrisa", key: "smile_design" },
-          { title: "Carillas Dentales", key: "veneers" },
-          { title: "Blanqueamiento Dental", key: "teeth_whitening" },
-          { title: "Limpieza Dental", key: "teeth_cleaning" },
-        ]
+    restore: [
+      { title: lang === 'en' ? "Dental Implants" : "Implantes Dentales", key: "dental_implants" },
+      { title: lang === 'en' ? "Crowns & Bridges" : "Coronas y Puentes", key: "dental_crowns" },
+      { title: lang === 'en' ? "Root Canal (Endodontics)" : "Endodoncia", key: "endodontics" },
+      { title: lang === 'en' ? "Orthodontics" : "Ortodoncia", key: "orthodontics" },
+      { title: lang === 'en' ? "Invisalign" : "Invisalign", key: "invisalign" },
+    ],
+    enhance: [
+      { title: lang === 'en' ? "Smile Design" : "Diseño de Sonrisa", key: "smile_design" },
+      { title: lang === 'en' ? "Dental Veneers" : "Carillas Dentales", key: "veneers" },
+      { title: lang === 'en' ? "Teeth Whitening" : "Blanqueamiento Dental", key: "teeth_whitening" },
+      { title: lang === 'en' ? "Teeth Cleaning" : "Limpieza Dental", key: "teeth_cleaning" },
+    ]
   };
 
   const t = labels[lang] || labels.en;
 
   const styles = {
-    // ... (tus estilos actuales se mantienen igual)
     drawer: {
       position: 'fixed',
       top: 0,
@@ -106,7 +97,7 @@ const NavbarMobile = ({ lang = 'en' }) => {
       flexDirection: 'column',
       padding: '20px',
       boxSizing: 'border-box',
-      overflowY: 'auto' // Crucial para que si hay muchos servicios se pueda hacer scroll
+      overflowY: 'auto'
     },
     subMenu: {
       display: 'flex',
@@ -138,7 +129,6 @@ const NavbarMobile = ({ lang = 'en' }) => {
         <div style={{ display: 'flex', flexDirection: 'column', flexGrow: 1, paddingTop: '20px' }}>
           <a href={`${prefix}/`} style={{ color: isActive('/') ? goldColor : blackColor, textDecoration: 'none', fontSize: '20px', fontWeight: '700', textTransform: 'uppercase', margin: '12px 0' }} onClick={toggleMenu}>{t.home}</a>
           
-          {/* SECCIÓN RESTAURAR */}
           <div onClick={() => toggleSection('restore')} style={{ color: blackColor, fontSize: '20px', fontWeight: '700', textTransform: 'uppercase', margin: '12px 0', display: 'flex', justifyContent: 'space-between', cursor: 'pointer' }}>
             {t.restore} <span>{openSection === 'restore' ? '−' : '+'}</span>
           </div>
@@ -150,7 +140,6 @@ const NavbarMobile = ({ lang = 'en' }) => {
             </div>
           )}
 
-          {/* SECCIÓN MEJORAR */}
           <div onClick={() => toggleSection('enhance')} style={{ color: blackColor, fontSize: '20px', fontWeight: '700', textTransform: 'uppercase', margin: '12px 0', display: 'flex', justifyContent: 'space-between', cursor: 'pointer' }}>
             {t.enhance} <span>{openSection === 'enhance' ? '−' : '+'}</span>
           </div>
@@ -164,7 +153,8 @@ const NavbarMobile = ({ lang = 'en' }) => {
 
           <a href={getLocalizedPath('dental_tourism')} style={{ color: isActive('dental_tourism') ? goldColor : blackColor, textDecoration: 'none', fontSize: '20px', fontWeight: '700', textTransform: 'uppercase', margin: '12px 0' }} onClick={toggleMenu}>{t.tourism}</a>
           
-          <a href={getLocalizedPath('blog')} style={{ color: isActive('blog') ? goldColor : blackColor, textDecoration: 'none', fontSize: '20px', fontWeight: '700', textTransform: 'uppercase', margin: '12px 0' }} onClick={toggleMenu}>{t.blog}</a>
+          {/* BLOG: Usamos la URL directa de WordPress */}
+          <a href={blogUrl} style={{ color: isActive('blog') ? goldColor : blackColor, textDecoration: 'none', fontSize: '20px', fontWeight: '700', textTransform: 'uppercase', margin: '12px 0' }} onClick={toggleMenu}>{t.blog}</a>
 
           <a href={getLocalizedPath('contact')} style={{ backgroundColor: goldColor, color: whiteColor, textAlign: 'center', padding: '16px', textDecoration: 'none', fontWeight: '800', textTransform: 'uppercase', borderRadius: '4px', marginTop: '30px' }} onClick={toggleMenu}>
             {t.contact}
