@@ -1,0 +1,119 @@
+---
+import { Icon } from "astro-icon/components";
+
+interface Props {
+  lang?: 'en' | 'es';
+}
+
+const { lang = "en" } = Astro.props;
+
+// Diccionario de textos según el idioma
+const translations = {
+  en: {
+    tooltip: "Chat with us",
+    aria: "Contact us on WhatsApp"
+  },
+  es: {
+    tooltip: "Contáctanos",
+    aria: "Contáctanos por WhatsApp"
+  }
+};
+
+const t = translations[lang as keyof typeof translations];
+
+// Tu enlace de wa.link actualizado
+const whatsappUrl = "https://wa.link/ejverv";
+---
+
+<a 
+  href={whatsappUrl} 
+  class="whatsapp-float" 
+  target="_blank" 
+  rel="noopener noreferrer" 
+  aria-label={t.aria}
+>
+  <div class="whatsapp-tooltip">{t.tooltip}</div>
+  <Icon name="whatsapp" size={35} class="whatsapp-icon" />
+</a>
+
+<style>
+  .whatsapp-float {
+    position: fixed;
+    width: 60px;
+    height: 60px;
+    bottom: 40px;
+    right: 40px;
+    background-color: #25d366;
+    color: #FFF;
+    border-radius: 50px;
+    text-align: center;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    animation: pulse-green 2s infinite;
+  }
+
+  .whatsapp-icon {
+    transition: transform 0.3s ease;
+  }
+
+  .whatsapp-float:hover {
+    background-color: #128c7e;
+    transform: scale(1.1);
+  }
+
+  .whatsapp-tooltip {
+    position: absolute;
+    right: 75px;
+    background-color: #333;
+    color: white;
+    padding: 8px 15px;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 600;
+    white-space: nowrap;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+  }
+
+  .whatsapp-tooltip::after {
+    content: '';
+    position: absolute;
+    right: -5px;
+    top: 50%;
+    transform: translateY(-50%);
+    border-top: 5px solid transparent;
+    border-bottom: 5px solid transparent;
+    border-left: 5px solid #333;
+  }
+
+  .whatsapp-float:hover .whatsapp-tooltip {
+    opacity: 1;
+    visibility: visible;
+    right: 80px;
+  }
+
+  @keyframes pulse-green {
+    0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.7); }
+    70% { transform: scale(1); box-shadow: 0 0 0 15px rgba(37, 211, 102, 0); }
+    100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(37, 211, 102, 0); }
+  }
+
+  @media (max-width: 768px) {
+    .whatsapp-float {
+      width: 55px;
+      height: 55px;
+      bottom: 20px;
+      right: 20px;
+    }
+    .whatsapp-tooltip {
+      display: none;
+    }
+  }
+</style>

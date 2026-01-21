@@ -4,7 +4,7 @@ import Footer from "../components/Footer.astro";
 import NavbarMobile from "../components/react/NavbarMobile";
 import { Icon } from "astro-icon/components";
 import LanguagePicker from '../components/react/LanguagePicker.jsx';
-
+import WhatsappButton from '../components/shared/WhatsappButton.astro';
 interface Props {
   title?: string;
   description?: string; // Nueva prop para SEO
@@ -111,5 +111,7 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site || "https://steticde
       <slot />
     </main>
     <Footer />
+    <slot /> <WhatsappButton lang={lang}/> </body>
+
   </body>
 </html>
