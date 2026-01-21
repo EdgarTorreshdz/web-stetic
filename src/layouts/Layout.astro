@@ -110,8 +110,9 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site || "https://steticde
     <main id="contenido">
       <slot />
     </main>
-    <Footer />
-    <slot /> <WhatsappButton lang={lang}/> </body>
 
+    <Footer lang={lang} />
+
+    <WhatsappButton lang={lang}/> 
   </body>
 </html>

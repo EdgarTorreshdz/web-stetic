@@ -1,5 +1,38 @@
 ---
 import { Icon } from "astro-icon/components";
+import { routes } from "../i18n/ui"; // Asegúrate de que la ruta a ui.ts sea correcta
+
+interface Props {
+  lang?: 'en' | 'es';
+}
+
+const { lang = "en" } = Astro.props;
+
+// Función para obtener la URL correcta
+const getUrl = (key: string) => {
+  const langRoutes = routes[lang as keyof typeof routes];
+  const slug = langRoutes[key as keyof typeof langRoutes] || key;
+  return `/${lang}/${slug}`;
+};
+
+const translations = {
+  en: {
+    privacy: "Privacy Policy",
+    terms: "Terms & Conditions",
+    cookies: "Cookies",
+    rights: "All rights reserved.",
+    developed: "Developed by"
+  },
+  es: {
+    privacy: "Aviso de Privacidad",
+    terms: "Términos y Condiciones",
+    cookies: "Cookies",
+    rights: "Todos los derechos reservados.",
+    developed: "Desarrollado por"
+  }
+};
+
+const t = translations[lang];
 ---
 
 <footer class="footer">
@@ -12,23 +45,23 @@ import { Icon } from "astro-icon/components";
         <a href="https://www.instagram.com/steticdentalplaya" target="_blank" aria-label="Instagram">
           <Icon name="instagram" size={24} />
         </a>
-        <a href="https://wa.me/529841880338" target="_blank" aria-label="WhatsApp">
+        <a href="https://wa.link/ejverv" target="_blank" aria-label="WhatsApp">
           <Icon name="whatsapp" size={24} />
         </a>
       </div>
 
       <nav class="footer__legal">
-        <a href="/aviso-de-privacidad">Privacy Policy</a>
+        <a href={getUrl('aviso-de-privacidad')}>{t.privacy}</a>
         <span class="separator">|</span>
-        <a href="/terminos-condiciones">Terms & Conditions</a>
+        <a href={getUrl('terminos-condiciones')}>{t.terms}</a>
         <span class="separator">|</span>
-        <a href="/politica-de-cookies">Cookies</a>
+        <a href={getUrl('politica-de-cookies')}>{t.cookies}</a>
       </nav>
 
       <div class="footer__bottom">
-        <p>Stetic Dental Clinic © 2025. All rights reserved.</p>
+        <p>Stetic Dental Clinic © 2026. {t.rights}</p>
         <p class="developer">
-          Developed by 
+          {t.developed} 
           <a href="https://huella-digital.mx/" target="_blank" rel="noopener noreferrer">Huella Digital — Agencia de marketing digital en México</a>
         </p>
       </div>
@@ -46,7 +79,7 @@ import { Icon } from "astro-icon/components";
   .footer {
     background-color: var(--black);
     color: var(--white);
-    padding: 4rem 0 3rem 0; /* Padding ajustado por la falta de logo */
+    padding: 4rem 0 3rem 0;
     border-top: 1px solid #1a1a1a;
   }
 
@@ -63,7 +96,6 @@ import { Icon } from "astro-icon/components";
     gap: 2rem;
   }
 
-  /* Social Icons */
   .footer__social {
     display: flex;
     gap: 2rem;
@@ -79,7 +111,6 @@ import { Icon } from "astro-icon/components";
     transform: translateY(-3px);
   }
 
-  /* Legal Links */
   .footer__legal {
     display: flex;
     flex-wrap: wrap;
@@ -104,7 +135,6 @@ import { Icon } from "astro-icon/components";
     color: #333;
   }
 
-  /* Bottom Copyright */
   .footer__bottom {
     display: flex;
     flex-direction: column;
@@ -126,7 +156,6 @@ import { Icon } from "astro-icon/components";
     text-decoration: underline;
   }
 
-  /* Mobile Adjustment */
   @media (max-width: 768px) {
     .container {
       width: 90%;
