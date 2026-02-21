@@ -11,18 +11,21 @@ const { lang = "en" } = Astro.props;
 const translations = {
   en: {
     tooltip: "Chat with us",
-    aria: "Contact us on WhatsApp"
+    aria: "Contact us on WhatsApp",
+    message: "Hello! I would like to schedule a dental appointment."
   },
   es: {
     tooltip: "Contáctanos",
-    aria: "Contáctanos por WhatsApp"
+    aria: "Contáctanos por WhatsApp",
+    message: "¡Hola! Me gustaría agendar una cita dental."
   }
 };
 
 const t = translations[lang as keyof typeof translations];
 
-// Tu enlace de wa.link actualizado
-const whatsappUrl = "https://wa.link/ejverv";
+// Configuración del nuevo número
+const phoneNumber = "5219844634150";
+const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(t.message)}`;
 ---
 
 <a 
