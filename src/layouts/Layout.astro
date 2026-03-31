@@ -7,23 +7,51 @@ import LanguagePicker from '../components/react/LanguagePicker.jsx';
 import WhatsappButton from '../components/shared/WhatsappButton.astro';
 interface Props {
   title?: string;
-  description?: string; // Nueva prop para SEO
+  description?: string;
   lang?: 'en' | 'es';
+  enPath?: string;
+  esPath?: string;
+  schema?: object;
 }
-
-const { title, description, lang = 'en' } = Astro.props;
-const canonicalURL = new URL(Astro.url.pathname, Astro.site || "https://steticdental.com.mx");
+const { title, description, lang = 'en', enPath, esPath, schema } = Astro.props;
+const siteUrl = "https://www.steticdental.com.mx";
+const finalEnUrl = enPath ? `${siteUrl}${enPath}` : `${siteUrl}/en/`;
+const finalEsUrl = esPath ? `${siteUrl}${esPath}` : `${siteUrl}/es/`;
+const canonicalURL = lang === 'es' ? finalEsUrl : finalEnUrl;
 ---
 
 <!doctype html>
 <html lang={lang}>
   <head>
+    <script is:inline>
+      (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+      new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+      j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+      'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+      })(window,document,'script','dataLayer','GTM-MRMX2GHT');
+    </script>
+    <script is:inline>
+      !function(f,b,e,v,n,t,s)
+      {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+      n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+      if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+      n.queue=[];t=b.createElement(e);t.async=!0;
+      t.src=v;s=b.getElementsByTagName(e)[0];
+      s.parentNode.insertBefore(t,s)}(window, document,'script',
+      'https://connect.facebook.net/en_US/fbevents.js');
+      fbq('init', '1685472592440023');
+      fbq('track', 'PageView');
+    </script>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    
+    <meta name="facebook-domain-verification" content="del22vvbg399vkmty95eh9nxyuo6tz" />
+
     <title>{title}</title>
     <meta name="description" content={description} />
     <link rel="canonical" href={canonicalURL} />
+    <link rel="alternate" hreflang="en" href={finalEnUrl} />
+    <link rel="alternate" hreflang="es" href={finalEsUrl} />
+    <link rel="alternate" hreflang="x-default" href={finalEnUrl} />
     <meta name="robots" content="index, follow" />
 
     <meta property="og:type" content="website" />
@@ -87,9 +115,19 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site || "https://steticde
       .navbar-mobile-container img { width: 100px; }
       @media(min-width:768px){ .navbar-mobile-container { display: none; } }
     </style>
+    {schema && (
+      <script type="application/ld+json" is:inline set:html={JSON.stringify(schema)} />
+    )}
   </head>
   
   <body>
+    <noscript>
+      <iframe src="https://www.googletagmanager.com/ns.html?id=GTM-MRMX2GHT"
+      height="0" width="0" style="display:none;visibility:hidden"></iframe>
+      <img height="1" width="1" style="display:none"
+      src="https://www.facebook.com/tr?id=1685472592440023&ev=PageView&noscript=1"
+      />
+    </noscript>
     <header class="main-header">
       <div class="header-container">
         <a href={`/${lang}/`}>

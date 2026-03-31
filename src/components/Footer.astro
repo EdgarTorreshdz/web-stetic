@@ -21,18 +21,23 @@ const translations = {
     terms: "Terms & Conditions",
     cookies: "Cookies",
     rights: "All rights reserved.",
-    developed: "Developed by"
+    developed: "Developed by",
+    whatsappMsg: "Hello! I would like to schedule a dental appointment."
   },
   es: {
     privacy: "Aviso de Privacidad",
     terms: "Términos y Condiciones",
     cookies: "Cookies",
     rights: "Todos los derechos reservados.",
-    developed: "Desarrollado por"
+    developed: "Desarrollado por",
+    whatsappMsg: "¡Hola! Me gustaría agendar una cita dental."
   }
 };
 
 const t = translations[lang];
+
+const phoneNumber = "5219844634150";
+const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(t.whatsappMsg)}`;
 ---
 
 <footer class="footer">
@@ -45,7 +50,7 @@ const t = translations[lang];
         <a href="https://www.instagram.com/steticdentalplaya" target="_blank" aria-label="Instagram">
           <Icon name="instagram" size={24} />
         </a>
-        <a href="https://wa.link/ejverv" target="_blank" aria-label="WhatsApp">
+        <a href={whatsappUrl} target="_blank" rel="noopener noreferrer" aria-label="WhatsApp">
           <Icon name="whatsapp" size={24} />
         </a>
       </div>

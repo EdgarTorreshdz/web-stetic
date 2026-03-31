@@ -9,12 +9,12 @@ export default defineConfig({
     defaultLocale: 'en',
     locales: ['en', 'es'],
     routing: {
-      prefixDefaultLocale: true, // Ahora inglés será /en/ y español /es/
+      prefixDefaultLocale: true, 
       redirectToDefaultLocale: true 
     }
   },
   redirects: {
     '/wp-json': '/404',
-    '/wp-json/[...slug]': '/404',
+    '/wp-json/v2': '/404', 
   }
 });

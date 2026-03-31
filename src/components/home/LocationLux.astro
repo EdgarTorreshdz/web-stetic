@@ -7,128 +7,280 @@ const { lang = "en" } = Astro.props;
 
 const translations = {
   en: {
-    title: "Dental Clinic in Playa del Carmen, Mexico",
-    text: "Our dental clinic is conveniently located in Playa del Carmen, one of Mexico’s most accessible and safe destinations for dental tourism. Easily reachable from major airports and close to hotels and tourist areas, our location allows patients to combine dental care with a comfortable stay.",
-    mapUrl: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3733.3082531362793!2d-87.0768!3d20.6296!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMjDCsDM3JzQ2LjYiTiA4N8KwMDQnMzYuNSJX!5e0!3m2!1sen!2smx!4v1700000000000!5m2!1sen!2smx" 
+    title: "VISIT OUR DENTAL CLINIC IN PLAYA DEL CARMEN, MEXICO",
+    text1: "Our dental clinic in Playa del Carmen is conveniently located in a central and easily accessible area for international patients. Whether you are staying nearby or visiting for dental tourism in Mexico, reaching our clinic is simple and stress-free.",
+    text2: "Located close to hotels, main avenues, and tourist areas, our clinic allows you to combine high-quality dental care with a comfortable and well-planned visit.",
+    text3: "Easily accessible for patients looking for a trusted dentist in Playa del Carmen.",
+    locationLabel: "Location",
+    address: "Avenida 10 Nte, Calle 38 Nte Con, Zazil-ha",
+    hoursLabel: "Hours",
+    hours: [
+      "Mon – Thu: 10:00 AM – 6:00 PM",
+      "Fri: 10:00 AM – 5:00 PM",
+      "Sat: 10:00 AM – 2:00 PM",
+      "Sun: Closed"
+    ],
+    helpTitle: "Need help finding us or booking your visit?",
+    helpText: "Contact our team and get directions instantly.",
+    btnText: "Get directions on WhatsApp",
+    mapFooter: "Just minutes away from Playa del Carmen’s main tourist areas.",
+    whatsappMsg: "Hello! I need help finding the clinic or directions to arrive."
   },
   es: {
-    title: "Clínica Dental en Playa del Carmen, México",
-    text: "Nuestra clínica dental está convenientemente ubicada en Playa del Carmen, uno de los destinos más accesibles y seguros de México para el turismo dental. De fácil acceso desde los principales aeropuertos y cerca de hoteles y zonas turísticas.",
-    mapUrl: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3733.3082531362793!2d-87.0768!3d20.6296!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMjDCsDM3JzQ2LjYiTiA4N8KwMDQnMzYuNSJX!5e0!3m2!1ses!2smx!4v1700000000000!5m2!1ses!2smx"
+    title: "VISITA NUESTRA CLÍNICA DENTAL EN PLAYA DEL CARMEN, MÉXICO",
+    text1: "Nuestra clínica dental en Playa del Carmen está convenientemente ubicada en una zona céntrica y de fácil acceso para pacientes internacionales.",
+    text2: "Ubicada cerca de hoteles, avenidas principales y zonas turísticas, nuestra clínica le permite combinar una atención dental de alta calidad con una visita cómoda.",
+    text3: "Fácilmente accesible para pacientes que buscan un dentista de confianza en Playa del Carmen.",
+    locationLabel: "Ubicación",
+    address: "Avenida 10 Nte, Calle 38 Nte Con, Zazil-ha",
+    hoursLabel: "Horarios",
+    hours: [
+      "Lun – Jue: 10:00 AM – 6:00 PM",
+      "Vie: 10:00 AM – 5:00 PM",
+      "Sáb: 10:00 AM – 2:00 PM",
+      "Dom: Cerrado"
+    ],
+    helpTitle: "¿Necesitas ayuda para encontrarnos?",
+    helpText: "Contacta a nuestro equipo y obtén direcciones al instante.",
+    btnText: "Direcciones por WhatsApp",
+    mapFooter: "A solo minutos de las principales zonas turísticas de Playa del Carmen.",
+    whatsappMsg: "¡Hola! Necesito ayuda para encontrar la clínica o indicaciones para llegar."
   }
 };
 
 const t = translations[lang];
+
+// Enlace compartido de Google Maps
+const googleMapsLink = "https://share.google/EmVJhxRKacxxHIszh";
+const phoneNumber = "5219844634150";
+const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(t.whatsappMsg)}`;
+
+/**
+ * MAPA CORREGIDO:
+ * He usado la URL de inserción (embed) con las coordenadas de Stetic Dental
+ * para que el Pin rojo aparezca correctamente sobre la clínica.
+ */
+const mapEmbedUrl = "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3733.308235284379!2d-87.06584282386472!3d20.63665328091535!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8f4e43383a8f170f%3A0xc3f8373b7501e544!2sStetic%20Dental!5e0!3m2!1ses-419!2smx!4v1711200000000!5m2!1ses-419!2smx";
 ---
 
 <section class="location-lux">
   <div class="container">
     <div class="location-lux__header">
       <h2 class="location-lux__title">{t.title}</h2>
-      <p class="location-lux__text">{t.text}</p>
+      <div class="location-lux__intro">
+        <p>{t.text1}</p>
+        <p>{t.text2}</p>
+        <p><strong>{t.text3}</strong></p>
+      </div>
     </div>
 
-    <div class="location-lux__map-container">
-      <iframe 
-        src={t.mapUrl} 
-        width="100%" 
-        height="450" 
-        style="border:0;" 
-        allowfullscreen="" 
-        loading="lazy" 
-        referrerpolicy="no-referrer-when-downgrade"
-        class="location-lux__map"
-      ></iframe>
-      <div class="location-lux__map-border"></div>
+    <div class="location-lux__grid">
+      <div class="location-lux__info">
+        <div class="info-block">
+          <div class="info-block__title">
+            <span class="emoji">📍</span> {t.locationLabel}:
+          </div>
+          <a href={googleMapsLink} target="_blank" rel="noopener noreferrer" class="address-link">
+            {t.address}
+          </a>
+        </div>
+
+        <div class="info-block">
+          <div class="info-block__title">
+            <span class="emoji">🕒</span> {t.hoursLabel}:
+          </div>
+          <ul class="hours-list">
+            {t.hours.map(hour => <li>{hour}</li>)}
+          </ul>
+        </div>
+
+        <div class="info-cta">
+          <h4>{t.helpTitle}</h4>
+          <p>{t.helpText}</p>
+          <a href={whatsappUrl} target="_blank" rel="noopener noreferrer" class="btn-whatsapp">
+            <span class="emoji">👉</span> {t.btnText}
+          </a>
+        </div>
+      </div>
+
+      <div class="location-lux__map-wrapper">
+        <div class="map-container">
+          <iframe 
+            src={mapEmbedUrl}
+            width="100%" 
+            height="450" 
+            style="border:0;" 
+            allowfullscreen="" 
+            loading="lazy" 
+            referrerpolicy="no-referrer-when-downgrade"
+            class="map-iframe"
+          ></iframe>
+        </div>
+        <p class="map-note">{t.mapFooter}</p>
+      </div>
     </div>
   </div>
 </section>
 
 <style>
   :root {
-    --gold: #D4AF37;
+    --gold: #A58E55;
     --black: #000000;
     --white: #ffffff;
     --gray-text: #444444;
+    --light-gray: #f9f9f9;
   }
 
   .location-lux {
     background-color: var(--white);
-    padding: 6rem 0;
-  }
-
-  .location-lux__header {
-    text-align: center;
-    max-width: 850px;
-    margin: 0 auto 4rem;
-  }
-
-  .location-lux__subtitle {
-    color: var(--gold);
-    font-size: 0.8rem;
-    font-weight: 700;
-    letter-spacing: 4px;
-    text-transform: uppercase;
-    display: block;
-    margin-bottom: 1rem;
-  }
-
-  .location-lux__title {
-    font-size: 2.2rem;
-    font-weight: 800;
-    color: var(--black);
-    text-transform: uppercase;
-    margin-bottom: 1.5rem;
-    line-height: 1.2;
-  }
-
-  .location-lux__text {
-    font-size: 1.1rem;
-    color: var(--gray-text);
-    line-height: 1.6;
-  }
-
-  .location-lux__map-container {
-    position: relative;
-    width: 100%;
-    box-shadow: 0 20px 40px rgba(0,0,0,0.1);
-    border-radius: 4px;
-    overflow: hidden;
-  }
-
-  .location-lux__map {
-    display: block;
-    filter: grayscale(0.2) contrast(1.1); /* Toque elegante para el mapa */
-  }
-
-  /* Borde decorativo dorado sutil */
-  .location-lux__map-border {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    height: 4px;
-    background-color: var(--gold);
-    z-index: 2;
+    padding: 8rem 0;
   }
 
   .container {
     margin: 0 auto;
-    width: 85%;
+    width: 90%;
+    max-width: 1200px;
+  }
+
+  .location-lux__header {
+    margin-bottom: 4rem;
+    max-width: 900px;
+  }
+
+  .location-lux__title {
+    font-size: 2rem;
+    font-weight: 800;
+    color: var(--black);
+    margin-bottom: 2rem;
+    line-height: 1.2;
+    text-transform: uppercase;
+  }
+
+  .location-lux__intro p {
+    font-size: 1.1rem;
+    color: var(--gray-text);
+    line-height: 1.6;
+    margin-bottom: 1rem;
+  }
+
+  .location-lux__grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 4rem;
+    align-items: start;
+  }
+
+  @media (min-width: 992px) {
+    .location-lux__grid {
+      grid-template-columns: 0.8fr 1.2fr;
+    }
+  }
+
+  .info-block {
+    margin-bottom: 2.5rem;
+  }
+
+  .info-block__title {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-weight: 800;
+    text-transform: uppercase;
+    font-size: 0.9rem;
+    color: var(--black);
+    margin-bottom: 0.8rem;
+    letter-spacing: 1px;
+  }
+
+  .emoji {
+    font-size: 1.2rem;
+  }
+
+  .address-link {
+    font-size: 1.1rem;
+    color: var(--gray-text);
+    text-decoration: none;
+    line-height: 1.5;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 4px;
+    transition: all 0.3s ease;
+  }
+
+  .address-link:hover {
+    color: var(--gold);
+    border-color: var(--gold);
+  }
+
+  .hours-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .hours-list li {
+    font-size: 1rem;
+    color: var(--gray-text);
+    margin-bottom: 0.4rem;
+  }
+
+  .info-cta {
+    background-color: var(--light-gray);
+    padding: 2rem;
+    border-left: 4px solid var(--gold);
+  }
+
+  .info-cta h4 {
+    font-weight: 800;
+    margin-bottom: 0.5rem;
+    font-size: 1.1rem;
+  }
+
+  .info-cta p {
+    font-size: 0.95rem;
+    color: var(--gray-text);
+    margin-bottom: 1.5rem;
+  }
+
+  .btn-whatsapp {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background-color: #25d366;
+    color: white;
+    padding: 1rem 1.5rem;
+    text-decoration: none;
+    font-weight: 700;
+    border-radius: 4px;
+    transition: all 0.3s ease;
+  }
+
+  .btn-whatsapp:hover {
+    background-color: #128c7e;
+    transform: translateY(-2px);
+  }
+
+  .map-container {
+    box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+    border-radius: 8px;
+    overflow: hidden;
+    background-color: #eee;
+  }
+
+  .map-iframe {
+    display: block;
+  }
+
+  .map-note {
+    margin-top: 1.5rem;
+    font-size: 0.9rem;
+    color: var(--gray-text);
+    font-style: italic;
+    text-align: center;
   }
 
   @media (max-width: 768px) {
-    .container {
-      width: 90%; 
-    }
-    .location-lux {
-      padding: 4rem 0;
-    }
-    .location-lux__title {
-      font-size: 1.8rem;
-    }
-    .location-lux__map {
-      height: 350px;
-    }
+    .location-lux { padding: 4rem 0; }
+    .location-lux__title { font-size: 1.6rem; }
+    .location-lux__grid { gap: 3rem; }
   }
 </style>

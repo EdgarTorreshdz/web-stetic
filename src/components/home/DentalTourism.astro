@@ -9,17 +9,16 @@ const { lang = "en" } = Astro.props;
 
 const translations = {
   en: {
-    // 4. Bloque de Dental Tourism (confianza + intención informativa)
     title: "Dental Tourism in Mexico: Why Choose Playa del Carmen?",
-    text1: "Dental tourism in Mexico has become a trusted option for thousands of Americans every year. Playa del Carmen offers modern dental clinics, experienced professionals, and significantly lower costs compared to the United States.",
-    text2: "Patients choose Playa del Carmen not only for affordable dental care, but also for safety, accessibility, and a comfortable recovery environment. Our clinic supports international patients throughout the entire process, from the first consultation to post-treatment follow-up.",
+    text1: "DDental tourism in Mexico has become one of the most popular options for patients seeking high-quality and affordable care. Playa del Carmen offers modern dental clinics, experienced specialists, and significantly lower costs compared to the United States and Canada.",
+    text2: "Patients choose Playa del Carmen not only for affordable dental care, but also for safety, accessibility, and a comfortable recovery environment. If you are looking for a trusted dentist in Playa del Carmen, you can expect personalized treatment, advanced technology, and a smooth experience from your first consultation to post-treatment follow-up. Many international patients combine their treatment with a vacation, making Playa del Carmen one of the top destinations for dental tourism in Mexico. From dental implants to veneers and full smile makeovers, you can achieve high-quality results while enjoying your stay.",
     linkText: "Learn more about dental tourism in Mexico and how it works.",
     url: "/en/dental-tourism-mexico"
   },
   es: {
     title: "Turismo Dental en México: ¿Por qué elegir Playa del Carmen?",
-    text1: "El turismo dental en México se ha convertido en una opción confiable para miles de estadounidenses cada año. Playa del Carmen ofrece clínicas dentales modernas, profesionales experimentados y costos significativamente más bajos en comparación con los Estados Unidos.",
-    text2: "Los pacientes eligen Playa del Carmen no solo por la atención dental asequible, sino también por la seguridad, la accesibilidad y un entorno de recuperación confortable. Nuestra clínica apoya a los pacientes internacionales durante todo el proceso.",
+    text1: "El turismo dental en México se ha convertido en una opción confiable para miles de estadounidenses cada año. Playa del Carmen ofrece clínicas dentales modernas, profesionales experimentados y costos significativamente más bajos.",
+    text2: "Los pacientes eligen Playa del Carmen no solo por la atención dental asequible, sino también por la seguridad, la accesibilidad y un entorno de recuperación confortable.",
     linkText: "Conoce más sobre el turismo dental en México y cómo funciona.",
     url: "/es/turismo-dental-mexico"
   }
@@ -45,24 +44,19 @@ const t = translations[lang];
     </div>
 
     <div class="tourism__video-wrapper">
-      <div class="video-card">
-        <div class="video-card__inner">
-          <iframe 
-            src="https://www.instagram.com/p/DPCjErMDkTc/embed/captioned" 
-            class="instagram-iframe"
-            scrolling="no" 
-            allowtransparency="true" 
-            frameborder="0">
-          </iframe>
-          
-          <div class="video-card__overlay">
-            <div class="video-card__badge">
-              <Icon name="map-pin" size={14} />
-              <span>Playa del Carmen</span>
-            </div>
-          </div>
+      <div class="video-clean">
+        <div class="video-clean__badge">
+          <Icon name="map-pin" size={14} />
+          <span>Playa del Carmen</span>
         </div>
-        <div class="video-card__shadow"></div>
+
+        <iframe 
+          src="https://www.instagram.com/p/DPCjErMDkTc/embed" 
+          class="instagram-iframe-clean"
+          scrolling="no" 
+          allowtransparency="true" 
+          frameborder="0">
+        </iframe>
       </div>
     </div>
   </div>
@@ -139,75 +133,48 @@ const t = translations[lang];
     transform: translateX(10px);
   }
 
-  /* Video Card Vertical Style */
+  /* --- ESTILO LIMPIO PARA EL REEL --- */
   .tourism__video-wrapper {
     display: flex;
     justify-content: center;
-    position: relative;
   }
 
-  .video-card {
+  .video-clean {
     position: relative;
     width: 100%;
-    max-width: 340px; 
-    z-index: 2;
+    max-width: 320px; /* Ajustado para simular formato Reel */
   }
 
-  .video-card__inner {
-    position: relative;
-    aspect-ratio: 9 / 16;
-    background-color: var(--black);
-    border-radius: 12px;
-    overflow: hidden;
-    box-shadow: 0 25px 50px rgba(0,0,0,0.15);
-    border: 1px solid rgba(0,0,0,0.05);
-  }
-
-  .instagram-iframe {
+  .instagram-iframe-clean {
     width: 100%;
-    height: 115%; 
-    transform: translateY(-5%);
+    aspect-ratio: 9 / 16; /* Formato vertical puro */
+    border-radius: 8px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
     border: none;
   }
 
-  .video-card__overlay {
+  .video-clean__badge {
     position: absolute;
-    top: 1.5rem;
-    left: 1.5rem;
-    z-index: 10;
-    pointer-events: none;
-  }
-
-  .video-card__badge {
+    top: 15px;
+    left: 15px;
+    z-index: 5;
     background: var(--gold);
     color: white;
-    padding: 0.5rem 1rem;
-    border-radius: 2px;
-    font-size: 0.75rem;
+    padding: 6px 12px;
+    font-size: 0.7rem;
     font-weight: 700;
     display: flex;
     align-items: center;
-    gap: 0.5rem;
+    gap: 6px;
     text-transform: uppercase;
     letter-spacing: 1px;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
-  }
-
-  .video-card__shadow {
-    position: absolute;
-    top: 25px;
-    right: -25px;
-    width: 100%;
-    height: 100%;
-    border: 2px solid var(--gold);
-    border-radius: 12px;
-    z-index: -1;
+    pointer-events: none;
+    border-radius: 2px;
   }
 
   @media (max-width: 768px) {
     .tourism { padding: 4rem 0; }
     .tourism__title { font-size: 1.8rem; }
-    .video-card { max-width: 290px; }
-    .video-card__shadow { right: -15px; top: 15px; }
+    .video-clean { max-width: 280px; }
   }
 </style>

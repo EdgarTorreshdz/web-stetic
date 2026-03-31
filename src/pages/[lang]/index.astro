@@ -7,6 +7,8 @@ export function getStaticPaths() {
 }
 
 const { lang } = Astro.params as { lang: 'en' | 'es' };
+const enPath = "/en";
+const esPath = "/es";
 
 import Layout from "../../layouts/Layout.astro";
 import HeaderHome from "../../components/home/HeaderHome.astro";
@@ -22,8 +24,8 @@ import ContactForm from "../../components/shared/ContactForm.astro";
 // SEO DATA OPTIMIZADA SEGÚN REQUERIMIENTO
 const seoData = {
   en: {
-    title: "Dentist in Playa del Carmen | Trusted Dental Clinic for Americans",
-    description: "Looking for a trusted dentist in Playa del Carmen? We offer safe, affordable dental care in Mexico for Americans and international patients. Book today.",
+    title: "Dentist in Playa del Carmen | Implants, Veneers & Smile Design",
+    description: "Your trusted dentist in Playa del Carmen. Stetic Dental offers implants, veneers and cosmetic dentistry for patients from the USA and Canada.",
   },
   es: {
     title: "Dentista en Playa del Carmen | Clínica Dental de Confianza",
@@ -32,12 +34,47 @@ const seoData = {
 };
 
 const currentSeo = seoData[lang];
+
+const schemas = {
+  en: {
+    "@context": "https://schema.org",
+    "@type": "Dentist",
+    "@id": "https://www.steticdental.com.mx/en/#dentist",
+    "url": "https://www.steticdental.com.mx/en/",
+    "telephone": "+52 984 188 0338",
+    "openingHoursSpecification": [
+      { "@type": "OpeningHoursSpecification", "dayOfWeek": "Friday", "opens": "10:00", "closes": "17:00" },
+      { "@type": "OpeningHoursSpecification", "dayOfWeek": "Saturday", "opens": "10:00", "closes": "14:00" },
+      { "@type": "OpeningHoursSpecification", "dayOfWeek": "Monday", "opens": "10:00", "closes": "14:00" },
+      { "@type": "OpeningHoursSpecification", "dayOfWeek": "Monday", "opens": "15:00", "closes": "19:00" }
+    ]
+  },
+  es: {
+    "@context": "https://schema.org",
+    "@type": "Dentist",
+    "@id": "https://www.steticdental.com.mx/es/#dentist",
+    "url": "https://www.steticdental.com.mx/es/",
+    "telephone": "+52 984 188 0338",
+    "openingHoursSpecification": [
+      { "@type": "OpeningHoursSpecification", "dayOfWeek": "Friday", "opens": "10:00", "closes": "17:00" },
+      { "@type": "OpeningHoursSpecification", "dayOfWeek": "Saturday", "opens": "10:00", "closes": "14:00" },
+      { "@type": "OpeningHoursSpecification", "dayOfWeek": "Monday", "opens": "10:00", "closes": "14:00" },
+      { "@type": "OpeningHoursSpecification", "dayOfWeek": "Monday", "opens": "15:00", "closes": "19:00" }
+    ]
+  }
+};
+
+const currentSchema = schemas[lang];
+
 ---
 
 <Layout 
   title={currentSeo.title} 
   description={currentSeo.description} 
   lang={lang}
+  enPath={enPath}
+  esPath={esPath}
+  schema={currentSchema}
 >
     <HeaderHome lang={lang} />
 

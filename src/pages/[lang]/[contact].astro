@@ -9,6 +9,9 @@ const { lang } = Astro.params as { lang: 'en' | 'es' };
 import Layout from "../../layouts/Layout.astro";
 import ContactForm from "../../components/shared/ContactForm.astro";
 
+const enPath = "/en/contact";
+const esPath = "/es/contacto";
+
 const titles = {
   en: "Dentist in Veracruz & Playa del Carmen | Stetic Dental Clinic",
   es: "Dentista en Veracruz & Playa del Carmen | Stetic Dental Clinic"
@@ -16,6 +19,6 @@ const titles = {
 
 ---
 
-<Layout title={titles[lang]} lang={lang}>
+<Layout title={titles[lang]} lang={lang} enPath={enPath} esPath={esPath}>
     <ContactForm lang={lang} />
 </Layout>

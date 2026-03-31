@@ -7,11 +7,13 @@ export function getStaticPaths() {
 }
 
 const { lang } = Astro.params as { lang: 'en' | 'es' };
+const enPath = "/en/terms-and-conditions";
+const esPath = "/es/terminos-condiciones";
 // TerminosCondiciones.astro
 import Layout from "../../layouts/Layout.astro";
 ---
 
-<Layout title={lang === 'es' ? "Términos y Condiciones" : "Terms and Conditions"} lang={lang}>
+<Layout title={lang === 'es' ? "Términos y Condiciones" : "Terms and Conditions"} lang={lang} enPath={enPath} esPath={esPath}>
   <section class="terminos">
     <div class="terminos__container">
       <h1 class="terminos__title">TÉRMINOS Y CONDICIONES</h1>

@@ -9,38 +9,32 @@ const { lang = "en" } = Astro.props;
 
 const translations = {
   en: {
-    // Requisito: H2 y párrafos exactos
-    title: "Looking for a Dentist in Playa del Carmen You Can Trust?",
-    descriptionTop: "Finding the right dentist in Playa del Carmen is essential when you are considering dental treatment abroad. Our dental clinic in Playa del Carmen, Mexico specializes in providing high-quality dental care for Americans who want professional treatment, transparent pricing, and a safe experience.",
-    descriptionBottom: "We combine modern dental technology, certified specialists, and personalized care to help international patients feel confident choosing Mexico for their dental needs. From cosmetic dentistry to advanced procedures, our clinic is designed to meet the expectations of patients traveling from the United States.",
-    features: [
-      "English-speaking dentists",
-      "Certified specialists",
-      "Modern dental clinic in Playa del Carmen",
-      "Affordable dental care vs USA"
-    ],
+    title: "DENTAL CLINIC IN PLAYA DEL CARMEN FOR INTERNATIONAL PATIENTS",
+    descriptionTop: "Finding the right dentist in Playa del Carmen is essential when considering dental treatment abroad. Our dental clinic specializes in providing high-quality care, including dental implants, veneers and smile design, for patients seeking safe and affordable dental treatment in Mexico.",
+    descriptionBottom: "We combine modern dental technology, certified specialists and personalized care to deliver reliable results. Our clinic is designed to meet the expectations of international patients looking for a trusted dental experience in Playa del Carmen.",
+    btnText: "GET A FREE QUOTE ON WHATSAPP",
+    whatsappMsg: "Hello! I'm interested in a free quote for my dental treatment."
   },
   es: {
     title: "¿Busca un dentista de confianza en Playa del Carmen?",
-    descriptionTop: "Encontrar al dentista adecuado en Playa del Carmen es esencial cuando se considera un tratamiento dental en el extranjero. Nuestra clínica dental en Playa del Carmen, México, se especializa en brindar atención dental de alta calidad para pacientes que desean un tratamiento profesional, precios transparentes y una experiencia segura.",
-    descriptionBottom: "Combinamos tecnología dental moderna, especialistas certificados y atención personalizada para ayudar a los pacientes internacionales a sentirse seguros al elegir México para sus necesidades dentales. Desde odontología estética hasta procedimientos avanzados, nuestra clínica está diseñada para cumplir con las expectativas de los pacientes.",
-    features: [
-      "Dentistas que hablan inglés",
-      "Especialistas certificados",
-      "Clínica moderna en Playa del Carmen",
-      "Precios accesibles vs USA/Canadá"
-    ],
+    descriptionTop: "Encontrar al dentista adecuado en Playa del Carmen es esencial cuando se considera un tratamiento dental en el extranjero. Nuestra clínica dental en Playa del Carmen, México, se especializa en brindar atención dental de alta calidad.",
+    descriptionBottom: "Combinamos tecnología dental moderna, especialistas certificados y atención personalizada para ayudar a los pacientes internacionales a sentirse seguros al elegir México para sus necesidades dentales.",
+    btnText: "OBTÉN UNA COTIZACIÓN GRATIS",
+    whatsappMsg: "¡Hola! Me gustaría una cotización sin compromiso para mi tratamiento dental."
   }
 };
+
 const imgPath = "/home/";
 const t = translations[lang];
+const phoneNumber = "5219844634150";
+const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(t.whatsappMsg)}`;
 ---
 
 <section class="about-lux">
   <div class="container about-lux__grid">
     <div class="about-lux__image-container">
       <div class="about-lux__border-decorator"></div>
-      <img src={imgPath+"IMG-1.webp"} alt="Trusted Dentist in Playa del Carmen - Stetic Dental Clinic" class="about-lux__image" />
+      <img src={imgPath+"IMG-1.webp"} alt="Dental clinic in Playa del Carmen with modern equipment" class="about-lux__image" />
     </div>
 
     <div class="about-lux__content">
@@ -49,14 +43,10 @@ const t = translations[lang];
       <p class="about-lux__description">{t.descriptionTop}</p>
       <p class="about-lux__description">{t.descriptionBottom}</p>
 
-      <ul class="about-lux__features">
-        {t.features.map((feature) => (
-          <li>
-            <Icon name="star" class="feature-icon" size={18} />
-            <span>{feature}</span>
-          </li>
-        ))}
-      </ul>
+      <a href={whatsappUrl} target="_blank" rel="noopener noreferrer" class="about-lux__cta">
+        <Icon name="whatsapp" size={24} />
+        <span>{t.btnText}</span>
+      </a>
     </div>
   </div>
 </section>
@@ -171,5 +161,33 @@ const t = translations[lang];
     .about-lux__grid {
       gap: 2.5rem;
     }
+  }
+  .about-lux__cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 1rem;
+    background-color: var(--gold);
+    color: var(--black);
+    padding: 1.2rem 2rem;
+    text-decoration: none;
+    font-weight: 800;
+    font-size: 1rem;
+    margin-top: 1.5rem;
+    transition: all 0.3s ease;
+    border-radius: 4px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  .about-lux__cta:hover {
+    background-color: var(--white);
+    transform: translateY(-3px);
+    box-shadow: 0 10px 20px rgba(212, 175, 55, 0.2);
+  }
+
+  @media (max-width: 768px) {
+    .about-lux__title { font-size: 1.8rem; }
+    .about-lux__image { height: 350px; }
+    .about-lux__cta { width: 100%; justify-content: center; }
   }
 </style>

@@ -1,6 +1,4 @@
 ---
-import { Icon } from "astro-icon/components";
-
 interface Props {
   lang?: 'en' | 'es';
 }
@@ -9,53 +7,71 @@ const { lang = "en" } = Astro.props;
 
 const translations = {
   en: {
-    // 8. FAQ (captura long-tail + rich results)
-    title: "Frequently Asked Questions About Dental Care in Mexico",
+    title: "FREQUENTLY ASKED QUESTIONS ABOUT DENTAL CARE IN PLAYA DEL CARMEN",
     faqs: [
       {
         question: "Is it safe to get dental work in Mexico?",
-        answer: "Yes. Many dental clinics in Playa del Carmen follow international standards and use modern technology comparable to clinics in the USA."
+        answer: "Yes. Many dental clinics in Playa del Carmen follow strict international standards and use advanced technology comparable to clinics in the United States and Canada. Choosing a qualified and experienced dentist in Playa del Carmen helps ensure safe, reliable, and high-quality results."
       },
       {
         question: "Do you speak English?",
-        answer: "Yes. Our dental team speaks English and works daily with American patients."
+        answer: "Yes. Our dental team speaks fluent English and works daily with international patients. We make sure every step of your treatment is clearly explained so you feel comfortable and confident throughout your experience."
       },
       {
-        question: "How much can I save compared to the USA?",
-        answer: "Patients often save between 50% and 70% on dental treatments compared to U.S. prices."
+        question: "How much can I save compared to the USA or Canada?",
+        answer: "Patients can typically save between 50% and 70% on dental treatments compared to prices in the United States and Canada. Dental tourism in Mexico allows you to access high-quality care at a significantly lower cost without compromising results."
       },
       {
-        question: "How long do treatments take?",
-        answer: "Treatment time depends on the procedure. We provide clear timelines before you travel."
+        question: "How long do dental treatments take?",
+        answer: "Treatment time depends on the procedure. Simple treatments may take one visit, while more advanced procedures like dental implants or veneers may require multiple appointments. Our team provides a clear treatment plan and timeline before you travel."
+      },
+      {
+        question: "Can I travel and get dental treatment at the same time?",
+        answer: "Yes. Many patients visit Playa del Carmen for dental tourism in Mexico, combining their treatment with a vacation. Our clinic helps coordinate your schedule so you can receive care while enjoying your stay."
       }
-    ]
+    ],
+    footerTitle: "Still have questions about your treatment?",
+    footerText: "Contact our team and get personalized guidance.",
+    btnText: "Chat on WhatsApp",
+    whatsappMsg: "Hello! I have some questions about the dental treatments."
   },
   es: {
-    title: "Preguntas Frecuentes sobre el Cuidado Dental en México",
+    title: "PREGUNTAS FRECUENTES SOBRE EL CUIDADO DENTAL EN PLAYA DEL CARMEN",
     faqs: [
       {
         question: "¿Es seguro realizarse trabajos dentales en México?",
-        answer: "Sí. Muchas clínicas dentales en Playa del Carmen siguen estándares internacionales y utilizan tecnología moderna comparable a la de EE. UU."
+        answer: "Sí. Muchas clínicas dentales en Playa del Carmen siguen estrictos estándares internacionales y utilizan tecnología avanzada comparable a las clínicas de Estados Unidos y Canadá. Elegir un dentista calificado y con experiencia en Playa del Carmen ayuda a garantizar resultados seguros, confiables y de alta calidad."
       },
       {
         question: "¿Hablan inglés?",
-        answer: "Sí. Nuestro equipo dental habla inglés y trabaja diariamente con pacientes estadounidenses."
+        answer: "Sí. Nuestro equipo dental habla inglés fluido y trabaja diariamente con pacientes internacionales, asegurando que cada paso de su tratamiento se explique claramente para que se sienta cómodo y seguro."
       },
       {
-        question: "¿Cuánto puedo ahorrar en comparación con EE. UU.?",
-        answer: "Los pacientes suelen ahorrar entre un 50% y un 70% en tratamientos dentales en comparación con los precios de EE. UU."
+        question: "¿Cuánto puedo ahorrar en comparación con EE. UU. o Canadá?",
+        answer: "Los pacientes suelen ahorrar entre un 50% y un 70% en tratamientos dentales. El turismo dental en México le permite acceder a una atención de alta calidad a un costo significativamente menor sin comprometer los resultados."
       },
       {
-        question: "¿Cuánto tiempo duran los tratamientos?",
-        answer: "El tiempo del tratamiento depende del procedimiento. Proporcionamos cronogramas claros antes de que viaje."
+        question: "¿Cuánto tiempo duran los tratamientos dentales?",
+        answer: "El tiempo depende del procedimiento. Los tratamientos simples pueden tomar una visita, mientras que los procedimientos avanzados como implantes o carillas pueden requerir varias citas. Nuestro equipo proporciona un plan y cronograma claro antes de que viaje."
+      },
+      {
+        question: "¿Puedo viajar y recibir tratamiento dental al mismo tiempo?",
+        answer: "Sí. Muchos pacientes visitan Playa del Carmen para hacer turismo dental, combinando su tratamiento con vacaciones. Nuestra clínica ayuda a coordinar su agenda para que pueda recibir atención mientras disfruta de su estancia."
       }
-    ]
+    ],
+    footerTitle: "¿Aún tienes preguntas sobre tu tratamiento?",
+    footerText: "Contacta a nuestro equipo y obtén orientación personalizada.",
+    btnText: "Chatea por WhatsApp",
+    whatsappMsg: "¡Hola! Tengo algunas dudas sobre los tratamientos dentales."
   }
 };
 
 const t = translations[lang];
 
-// FAQ Schema para SEO
+const phoneNumber = "5219844634150";
+const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(t.whatsappMsg)}`;
+
+// FAQ Schema optimizado para SEO (Rich Results)
 const faqSchema = {
   "@context": "https://schema.org",
   "@type": "FAQPage",
@@ -83,13 +99,21 @@ const faqSchema = {
         <details class="faq__item">
           <summary class="faq__question">
             <span>{faq.question}</span>
-            <Icon name="arrow-down" class="faq__icon" size={20} />
+            <span class="faq__arrow"></span>
           </summary>
           <div class="faq__answer">
             <p>{faq.answer}</p>
           </div>
         </details>
       ))}
+    </div>
+
+    <div class="faq__footer">
+      <h3>{t.footerTitle}</h3>
+      <p>{t.footerText}</p>
+      <a href={whatsappUrl} target="_blank" rel="noopener noreferrer" class="btn-faq-whatsapp">
+        <span class="emoji">👉</span> {t.btnText}
+      </a>
     </div>
   </div>
 </section>
@@ -109,7 +133,7 @@ const faqSchema = {
 
   .faq__header {
     text-align: center;
-    max-width: 800px;
+    max-width: 900px;
     margin: 0 auto 4rem;
   }
 
@@ -131,6 +155,7 @@ const faqSchema = {
     background-color: #fafafa;
     margin-bottom: 1rem;
     transition: all 0.3s ease;
+    border-radius: 4px;
   }
 
   .faq__item[open] {
@@ -157,13 +182,20 @@ const faqSchema = {
     display: none;
   }
 
-  .faq__icon {
-    color: var(--gold);
+  .faq__arrow {
+    width: 10px;
+    height: 10px;
+    border-right: 3px solid var(--gold);
+    border-bottom: 3px solid var(--gold);
+    transform: rotate(45deg);
     transition: transform 0.3s ease;
+    margin-left: 15px;
+    flex-shrink: 0;
   }
 
-  .faq__item[open] .faq__icon {
-    transform: rotate(180deg);
+  .faq__item[open] .faq__arrow {
+    transform: rotate(-135deg);
+    margin-top: 5px;
   }
 
   .faq__answer {
@@ -171,6 +203,48 @@ const faqSchema = {
     color: #444;
     line-height: 1.7;
     font-size: 1.1rem;
+  }
+
+  .faq__footer {
+    margin-top: 5rem;
+    text-align: center;
+    padding: 3rem;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    border: 1px solid #eee;
+  }
+
+  .faq__footer h3 {
+    font-weight: 800;
+    font-size: 1.3rem;
+    margin-bottom: 0.5rem;
+    text-transform: uppercase;
+  }
+
+  .faq__footer p {
+    color: #666;
+    margin-bottom: 2rem;
+    font-size: 1.1rem;
+  }
+
+  .btn-faq-whatsapp {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background-color: #25d366;
+    color: white;
+    padding: 1.2rem 2.5rem;
+    text-decoration: none;
+    font-weight: 800;
+    border-radius: 4px;
+    text-transform: uppercase;
+    transition: all 0.3s ease;
+  }
+
+  .btn-faq-whatsapp:hover {
+    background-color: #128c7e;
+    transform: translateY(-3px);
+    box-shadow: 0 10px 20px rgba(37, 211, 102, 0.2);
   }
 
   .container {
@@ -182,10 +256,8 @@ const faqSchema = {
   @media (max-width: 768px) {
     .faq { padding: 4rem 0; }
     .faq__title { font-size: 1.8rem; }
-    .faq__question {
-      font-size: 0.95rem;
-      padding: 1.2rem;
-    }
-    .faq__answer { font-size: 1rem; }
+    .faq__question { font-size: 0.95rem; padding: 1.2rem; }
+    .faq__footer { padding: 2rem 1rem; margin-top: 3rem; }
+    .btn-faq-whatsapp { width: 100%; justify-content: center; font-size: 0.9rem; }
   }
 </style>

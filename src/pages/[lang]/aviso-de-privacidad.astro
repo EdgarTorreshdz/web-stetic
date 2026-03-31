@@ -6,6 +6,8 @@ export function getStaticPaths() {
   ];
 }
 const { lang } = Astro.params as { lang: 'en' | 'es' };
+const enPath = "/en/privacy-policy";
+const esPath = "/es/aviso-de-privacidad";
 // AvisoPrivacidad.astro
 import Layout from "../../layouts/Layout.astro";
 const titles = {
@@ -14,7 +16,7 @@ const titles = {
 };
 ---
 
-<Layout title={titles[lang]} lang={lang}>
+<Layout title={titles[lang]} lang={lang} enPath={enPath} esPath={esPath}>
   <section class="aviso">
     <div class="aviso__container">
       <h1 class="aviso__title">Aviso de Privacidad Integral</h1>

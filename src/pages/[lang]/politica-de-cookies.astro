@@ -7,11 +7,12 @@ export function getStaticPaths() {
 }
 
 const { lang } = Astro.params as { lang: 'en' | 'es' };
-// PoliticaCookies.astro
+const enPath = "/en/cookie-policy";
+const esPath = "/es/politica-de-cookies";
 import Layout from "../../layouts/Layout.astro";
 ---
 
-<Layout title={lang === 'es' ? "Política de Cookies" : "Cookie Policy"} lang={lang}>
+<Layout title={lang === 'es' ? "Política de Cookies" : "Cookie Policy"} lang={lang} enPath={enPath} esPath={esPath}>
   <section class="cookies">
     <div class="cookies__container">
       <h1 class="cookies__title">Política de Cookies</h1>

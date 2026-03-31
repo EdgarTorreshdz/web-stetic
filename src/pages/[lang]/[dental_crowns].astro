@@ -19,6 +19,8 @@ export async function getStaticPaths() {
 }
 
 const { lang } = Astro.params as { lang: 'en' | 'es' };
+const enPath = "/en/dental-crowns-playa-del-carmen";
+const esPath = "/es/coronas-dentales";
 
 import Layout from "../../layouts/Layout.astro";
 import HeaderSpeciality from "../../components/shared/HeaderSpeciality.astro";
@@ -261,6 +263,8 @@ const t = pageContent[lang];
   title={t.seo.title} 
   description={t.seo.description} 
   lang={lang}
+  enPath={enPath}
+  esPath={esPath}
 >
   <HeaderSpeciality 
       lang={lang}

@@ -10,57 +10,69 @@ const { lang = "en" } = Astro.props;
 const translations = {
   en: {
     subtitle: "STETIC DENTAL QUALITY",
-    title: "Why International Patients Choose Our Dental Clinic",
+    title: "WHY INTERNATIONAL PATIENTS CHOOSE OUR DENTAL CLINIC IN PLAYA DEL CARMEN",
+    introText: "We understand that choosing a dentist in another country can feel overwhelming. That’s why our dental clinic in Playa del Carmen is designed specifically for international patients looking for safe, high-quality, and reliable care.",
     benefits: [
       { 
-        text: "Certified and experienced dental specialists", 
+        title: "Certified and experienced dental specialists",
+        text: "Our team is trained in advanced procedures and follows international standards to ensure safe and predictable results.", 
         img: "/home/Iconos/certified-and-experienced-dental-specialist.png" 
       },
       { 
-        text: "English-speaking team for clear communication", 
+        title: "English-speaking team for clear communication",
+        text: "We guide you through every step of your treatment in English, so you always feel informed and confident.", 
         img: "/home/Iconos/English-speaking-team-for-clear-communication.png" 
       },
       { 
-        text: "Advanced dental technology and materials", 
+        title: "Modern dental technology and materials",
+        text: "We use advanced equipment and high-quality materials to deliver precise, long-lasting results.", 
         img: "/home/Iconos/Advanced-dental-technology-and-materials.png" 
       },
       { 
-        text: "Transparent treatment plans and pricing", 
+        title: "Transparent treatment plans and pricing",
+        text: "You receive clear diagnostics and upfront pricing with no hidden costs.", 
         img: "/home/Iconos/Transparent-treatment-plans-and-pricing.png" 
       },
       { 
-        text: "Personalized care for international patients", 
+        title: "Personalized care for international patients",
+        text: "From your first consultation to your follow-up, we provide a smooth and well-organized experience tailored to your needs.", 
         img: "/home/Iconos/Personalized-care-for-international-patients.png" 
       }
     ],
-    footerText: "We understand the concerns of patients traveling from abroad and focus on providing a professional, safe, and comfortable dental experience in Playa del Carmen."
+    footerText: "Thousands of patients trust us every year for their dental care in Playa del Carmen."
   },
   es: {
     subtitle: "CALIDAD STETIC DENTAL",
-    title: "¿Por qué los pacientes internacionales eligen nuestra clínica?",
+    title: "¿POR QUÉ LOS PACIENTES INTERNACIONALES ELIGEN NUESTRA CLÍNICA EN PLAYA DEL CARMEN?",
+    introText: "Entendemos que elegir un dentista en otro país puede ser abrumador. Nuestra clínica en Playa del Carmen está diseñada específicamente para pacientes que buscan atención segura y confiable.",
     benefits: [
       { 
-        text: "Especialistas dentales certificados y experimentados", 
+        title: "Especialistas certificados y experimentados",
+        text: "Nuestro equipo está capacitado en procedimientos avanzados y sigue estándares internacionales para resultados seguros.", 
         img: "/home/Iconos/certified-and-experienced-dental-specialist.png" 
       },
       { 
-        text: "Equipo de habla inglesa para una comunicación clara", 
+        title: "Equipo bilingüe para una comunicación clara",
+        text: "Te guiamos en cada paso de tu tratamiento en inglés o español, para que siempre te sientas informado.", 
         img: "/home/Iconos/English-speaking-team-for-clear-communication.png" 
       },
       { 
-        text: "Tecnología y materiales dentales avanzados", 
+        title: "Tecnología y materiales avanzados",
+        text: "Utilizamos equipos modernos y materiales de alta calidad para resultados precisos y duraderos.", 
         img: "/home/Iconos/Advanced-dental-technology-and-materials.png" 
       },
       { 
-        text: "Planes de tratamiento y precios transparentes", 
+        title: "Planes y precios transparentes",
+        text: "Recibes diagnósticos claros y precios honestos sin costos ocultos.", 
         img: "/home/Iconos/Transparent-treatment-plans-and-pricing.png" 
       },
       { 
-        text: "Atención personalizada para pacientes internacionales", 
+        title: "Atención personalizada",
+        text: "Desde tu primera consulta hasta el seguimiento, brindamos una experiencia organizada y adaptada a tus necesidades.", 
         img: "/home/Iconos/Personalized-care-for-international-patients.png" 
       }
     ],
-    footerText: "Entendemos las preocupaciones de los pacientes que viajan desde el extranjero y nos enfocamos en brindar una experiencia dental profesional, segura y cómoda en Playa del Carmen."
+    footerText: "Miles de pacientes confían en nosotros cada año para su cuidado dental en Playa del Carmen."
   }
 };
 
@@ -72,15 +84,17 @@ const t = translations[lang];
     <div class="why-choose__header">
       <span class="why-choose__subtitle">{t.subtitle}</span>
       <h2 class="why-choose__title">{t.title}</h2>
+      <p class="why-choose__intro">{t.introText}</p>
     </div>
 
     <div class="why-choose__grid">
       {t.benefits.map((benefit) => (
         <div class="benefit-item">
           <div class="benefit-item__icon-wrapper">
-            <img src={benefit.img} alt={benefit.text} class="benefit-image" />
+            <img src={benefit.img} alt={benefit.title} class="benefit-image" />
           </div>
-          <p class="benefit-item__text">{benefit.text}</p>
+          <h3 class="benefit-item__title">{benefit.title}</h3>
+          <p class="benefit-item__description">{benefit.text}</p>
           <div class="benefit-item__line"></div>
         </div>
       ))}
@@ -113,7 +127,7 @@ const t = translations[lang];
   .why-choose__header {
     text-align: center;
     margin-bottom: 5rem;
-    max-width: 850px;
+    max-width: 900px;
     margin-left: auto;
     margin-right: auto;
     padding: 0 1rem;
@@ -130,12 +144,20 @@ const t = translations[lang];
   }
 
   .why-choose__title {
-    font-size: 2.3rem;
+    font-size: 2.1rem;
     font-weight: 800;
     color: var(--white);
-    line-height: 1.1;
+    line-height: 1.2;
     text-transform: uppercase;
-    letter-spacing: -0.5px;
+    margin-bottom: 1.5rem;
+  }
+
+  .why-choose__intro {
+    font-size: 1.1rem;
+    color: #999;
+    line-height: 1.6;
+    max-width: 800px;
+    margin: 0 auto;
   }
 
   .why-choose__grid {
@@ -171,8 +193,7 @@ const t = translations[lang];
     text-align: center;
     position: relative;
     transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
-    min-height: 300px;
-    justify-content: center;
+    min-height: 320px;
   }
 
   .benefit-item:hover {
@@ -183,37 +204,40 @@ const t = translations[lang];
   }
 
   .benefit-item__icon-wrapper {
-    width: 70px;
-    height: 70px;
+    width: 60px;
+    height: 60px;
     display: flex;
     align-items: center;
     justify-content: center;
     margin-bottom: 1.5rem;
-    transition: all 0.3s ease;
   }
 
   .benefit-image {
     width: 100%;
     height: 100%;
     object-fit: contain;
-    /* Invertimos el color a blanco para que resalte en el fondo negro */
     filter: brightness(0) invert(1);
     transition: all 0.3s ease;
   }
 
   .benefit-item:hover .benefit-image {
-    transform: scale(1.1) rotate(5deg);
-    /* Al pasar el mouse, el icono se vuelve dorado */
     filter: sepia(1) saturate(5) hue-rotate(10deg);
   }
 
-  .benefit-item__text {
-    font-size: 0.85rem;
-    font-weight: 600;
-    color: var(--white);
-    line-height: 1.4;
+  .benefit-item__title {
+    font-size: 0.9rem;
+    font-weight: 700;
+    color: var(--gold);
+    line-height: 1.3;
     text-transform: uppercase;
+    margin-bottom: 0.8rem;
     letter-spacing: 0.5px;
+  }
+
+  .benefit-item__description {
+    font-size: 0.85rem;
+    color: #ccc;
+    line-height: 1.5;
   }
 
   .benefit-item__line {
@@ -241,7 +265,7 @@ const t = translations[lang];
   .why-choose__footer-content {
     display: flex;
     align-items: center;
-    gap: 2.5rem;
+    gap: 2rem;
     text-align: left;
     padding: 0 1rem;
   }
@@ -252,10 +276,11 @@ const t = translations[lang];
   }
 
   .footer-text {
-    font-size: 1.15rem;
-    color: #cccccc;
-    line-height: 1.7;
-    font-weight: 300;
+    font-size: 1.2rem;
+    color: var(--white);
+    line-height: 1.6;
+    font-weight: 600;
+    font-style: italic;
   }
 
   .container-fluid {
@@ -265,7 +290,7 @@ const t = translations[lang];
   }
 
   @media (max-width: 768px) {
-    .why-choose__title { font-size: 1.8rem; }
+    .why-choose__title { font-size: 1.7rem; }
     .why-choose__footer-content {
       flex-direction: column;
       text-align: center;

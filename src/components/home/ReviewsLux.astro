@@ -7,17 +7,20 @@ const { lang = "en" } = Astro.props;
 
 const translations = {
   en: {
-    // 6. Prueba social (reviews + resultados)
-    title: "Real Reviews from Our International Patients",
-    descriptionTop: "Patients from the United States and other countries trust our dental clinic in Playa del Carmen for quality care and reliable results. Our reviews reflect real experiences from international patients who chose Mexico for their dental treatment.",
-    descriptionBottom: "From dental implants to cosmetic procedures, our patients highlight professionalism, attention to detail, and outstanding results.",
-    badge: "Google Reviews"
+    badge: "Google Reviews",
+    title: "WHAT OUR PATIENTS SAY ABOUT OUR DENTAL CLINIC IN PLAYA DEL CARMEN",
+    description1: "Real experiences from international patients who trusted our dental clinic in Playa del Carmen for their treatment. Their feedback reflects our commitment to quality, safety, and personalized care.",
+    description2: "From dental implants to veneers and full smile makeovers, our patients consistently highlight professionalism, clear communication, and outstanding results.",
+    description3: "You can find more verified reviews on Google from patients who have completed their treatment with us.",
+    rating: "5.0 Star Rating"
   },
   es: {
-    title: "Opiniones Reales de Nuestros Pacientes Internacionales",
-    descriptionTop: "Pacientes de los Estados Unidos y otros países confían en nuestra clínica dental en Playa del Carmen por su atención de calidad y resultados confiables. Nuestras reseñas reflejan experiencias reales de pacientes internacionales que eligieron México.",
-    descriptionBottom: "Desde implantes dentales hasta procedimientos estéticos, nuestros pacientes destacan el profesionalismo, la atención al detalle y los resultados sobresalientes.",
-    badge: "Reseñas de Google"
+    badge: "Reseñas de Google",
+    title: "LO QUE NUESTROS PACIENTES DICEN DE NUESTRA CLÍNICA DENTAL EN PLAYA DEL CARMEN",
+    description1: "Experiencias reales de pacientes internacionales que confiaron en nuestra clínica dental en Playa del Carmen para su tratamiento. Sus comentarios reflejan nuestro compromiso con la calidad, la seguridad y la atención personalizada.",
+    description2: "Desde implantes dentales hasta carillas y cambios de imagen total de la sonrisa, nuestros pacientes destacan constantemente el profesionalismo, la comunicación clara y los resultados sobresalientes.",
+    description3: "Puedes encontrar más reseñas verificadas en Google de pacientes que han completado su tratamiento con nosotros.",
+    rating: "Calificación 5.0 Estrellas"
   }
 };
 
@@ -31,8 +34,9 @@ const t = translations[lang];
       <h2 class="reviews-lux__title">{t.title}</h2>
       
       <div class="reviews-lux__text-block">
-        <p class="reviews-lux__description">{t.descriptionTop}</p>
-        <p class="reviews-lux__description">{t.descriptionBottom}</p>
+        <p class="reviews-lux__description">{t.description1}</p>
+        <p class="reviews-lux__description">{t.description2}</p>
+        <p class="reviews-lux__description reviews-lux__description--highlight">{t.description3}</p>
       </div>
     </div>
 
@@ -43,7 +47,7 @@ const t = translations[lang];
       <div class="reviews-lux__footer">
         <div class="google-stars">
           {"★".repeat(5)}
-          <span class="rating-text">5.0 Star Rating</span>
+          <span class="rating-text">{t.rating}</span>
         </div>
       </div>
     </div>
@@ -66,7 +70,7 @@ const t = translations[lang];
 
   .reviews-lux__header {
     text-align: center;
-    max-width: 850px;
+    max-width: 900px;
     margin: 0 auto 4rem auto;
   }
 
@@ -76,17 +80,18 @@ const t = translations[lang];
     font-weight: 700;
     letter-spacing: 3px;
     text-transform: uppercase;
-    margin-bottom: 1rem;
+    margin-bottom: 1.2rem;
     display: block;
   }
 
   .reviews-lux__title {
-    font-size: 2.2rem;
+    font-size: 2.1rem;
     font-weight: 800;
     color: var(--black);
     text-transform: uppercase;
-    margin-bottom: 2rem;
-    line-height: 1.1;
+    margin-bottom: 2.5rem;
+    line-height: 1.2;
+    letter-spacing: -0.5px;
   }
 
   .reviews-lux__text-block {
@@ -98,29 +103,38 @@ const t = translations[lang];
   .reviews-lux__description {
     font-size: 1.1rem;
     color: #555;
-    line-height: 1.6;
+    line-height: 1.7;
     font-weight: 400;
+    max-width: 800px;
+    margin: 0 auto;
+  }
+
+  /* Estilo opcional para destacar el párrafo de Google */
+  .reviews-lux__description--highlight {
+    color: var(--gold);
+    font-weight: 600;
+    margin-top: 0.5rem;
   }
 
   .reviews-lux__widget-container {
     background: var(--white);
     border-radius: 4px;
-    padding: 2rem;
-    box-shadow: 0 15px 40px rgba(0,0,0,0.05);
+    padding: 2.5rem;
+    box-shadow: 0 20px 50px rgba(0,0,0,0.05);
     border: 1px solid rgba(165, 142, 85, 0.1);
     position: relative;
   }
 
   .reviews-lux__footer {
-    margin-top: 2rem;
+    margin-top: 2.5rem;
     padding-top: 2rem;
     border-top: 1px solid #eee;
     text-align: center;
   }
 
   .google-stars {
-    color: #fbbc04; /* Color oficial de estrellas de Google */
-    font-size: 1.4rem;
+    color: #fbbc04;
+    font-size: 1.5rem;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -129,9 +143,9 @@ const t = translations[lang];
 
   .rating-text {
     color: var(--black);
-    font-size: 0.9rem;
-    font-weight: 700;
-    margin-left: 10px;
+    font-size: 0.95rem;
+    font-weight: 800;
+    margin-left: 12px;
     text-transform: uppercase;
     letter-spacing: 1px;
   }
@@ -144,8 +158,8 @@ const t = translations[lang];
 
   @media (max-width: 768px) {
     .reviews-lux { padding: 4rem 0; }
-    .reviews-lux__title { font-size: 1.7rem; }
+    .reviews-lux__title { font-size: 1.6rem; }
     .reviews-lux__description { font-size: 1rem; }
-    .reviews-lux__widget-container { padding: 1rem; }
+    .reviews-lux__widget-container { padding: 1.5rem 1rem; }
   }
 </style>
