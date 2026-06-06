@@ -1,24 +1,46 @@
 ---
+// src/pages/[lang]/[contact].astro
+
 export async function getStaticPaths() {
   return [
     { params: { lang: 'en', contact: 'contact' } },
     { params: { lang: 'es', contact: 'contacto' } },
   ];
 }
+
 const { lang } = Astro.params as { lang: 'en' | 'es' };
+
+// Rutas consistentes con trailing slash
+const enPath = "/en/contact/";
+const esPath = "/es/contacto/";
+
 import Layout from "../../layouts/Layout.astro";
 import ContactForm from "../../components/shared/ContactForm.astro";
 
-const enPath = "/en/contact";
-const esPath = "/es/contacto";
-
-const titles = {
-  en: "Dentist in Veracruz & Playa del Carmen | Stetic Dental Clinic",
-  es: "Dentista en Veracruz & Playa del Carmen | Stetic Dental Clinic"
+const pageContent = {
+  en: {
+    seo: {
+      title: "Contact Us | Stetic Dental Clinic Playa del Carmen",
+      description: "Contact Stetic Dental Clinic in Playa del Carmen. Schedule your appointment, ask about our treatments, or get a quote for your dental travel to Mexico."
+    }
+  },
+  es: {
+    seo: {
+      title: "Contacto | Clínica Stetic Dental Playa del Carmen",
+      description: "Contacta a Clínica Stetic Dental en Playa del Carmen. Agenda tu cita, consulta nuestros tratamientos o solicita una cotización para tu tratamiento dental."
+    }
+  }
 };
 
+const t = pageContent[lang];
 ---
 
-<Layout title={titles[lang]} lang={lang} enPath={enPath} esPath={esPath}>
-    <ContactForm lang={lang} />
+<Layout 
+  title={t.seo.title} 
+  description={t.seo.description} 
+  lang={lang} 
+  enPath={enPath} 
+  esPath={esPath}
+>
+  <ContactForm lang={lang} />
 </Layout>

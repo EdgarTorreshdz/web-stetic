@@ -19,28 +19,62 @@ export async function getStaticPaths() {
 }
 
 const { lang } = Astro.params as { lang: 'en' | 'es' };
-const enPath = "/en/dental-tourism-mexico";
-const esPath = "/es/turismo-dental";
+
+const enPath = "/en/dental-tourism-mexico/";
+const esPath = "/es/turismo-dental/";
+const imgPath = '/dental_tourism/';
+const ogImage = `${imgPath}Dental-Tourism-IMG-1.webp`;
+
 import Layout from "../../layouts/Layout.astro";
 import HeaderSpeciality from "../../components/shared/HeaderSpeciality.astro";
 import AboutSpeciality from "../../components/shared/AboutSpeciality.astro";
 import WhatIsSpeciality from "../../components/shared/WhatIsSpeciality.astro";
-import OptionsSpeciality from "../../components/shared/OptionsSpeciality.astro";
-import BenefitsSpeciality from "../../components/shared/BenefitsSpeciality.astro";
-import WhyChooseSpeciality from "../../components/shared/WhyChooseSpeciality.astro";
-import CostSpeciality from "../../components/shared/CostSpeciality.astro";
+import TourismPackages from "../../components/shared/TourismPackages.astro";
+import PopularTreatments from "../../components/shared/PopularTreatments.astro";
 import LocationSpeciality from "../../components/shared/LocationSpeciality.astro";
+import CostSpeciality from "../../components/shared/CostSpeciality.astro";
+import PlanningTourism from "../../components/shared/PlanningTourism.astro";
+import WhyChooseSpeciality from "../../components/shared/WhyChooseSpeciality.astro";
 import FaqSpeciality from "../../components/shared/FaqSpeciality.astro";
 import CtaSpeciality from "../../components/shared/CtaSpeciality.astro";
-import PopularTreatments from "../../components/shared/PopularTreatments.astro";
-import TourismPackages from "../../components/shared/TourismPackages.astro";
-import PlanningTourism from "../../components/shared/PlanningTourism.astro";
-const imgPath = '/dental_tourism/';
+
 const pageContent = {
   en: {
+    schema: {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "Dentist",
+          "@id": `https://www.steticdental.com.mx${enPath}#dentist`,
+          "name": "Stetic Dental Clinic",
+          "url": `https://www.steticdental.com.mx${enPath}`,
+          "telephone": "+52 984 188 0338",
+          "address": {
+            "@type": "PostalAddress",
+            "streetAddress": "Avenida 10 Nte, Calle 38 Nte Con, Zazil-ha",
+            "addressLocality": "Playa del Carmen",
+            "addressRegion": "Quintana Roo",
+            "addressCountry": "MX"
+          }
+        },
+        {
+          "@type": "Service",
+          "@id": `https://www.steticdental.com.mx${enPath}#service`,
+          "name": "Dental Tourism in Mexico",
+          "serviceType": "Dental tourism packages and treatment coordination",
+          "description": "Dental tourism in Mexico with affordable dental treatment in Playa del Carmen, personalized treatment planning, and support for international patients seeking high-quality dental care abroad.",
+          "url": `https://www.steticdental.com.mx${enPath}`,
+          "provider": { "@id": `https://www.steticdental.com.mx${enPath}#dentist` },
+          "areaServed": [
+            { "@type": "City", "name": "Playa del Carmen" },
+            { "@type": "Country", "name": "Mexico" }
+          ]
+        }
+      ]
+    },
     seo: {
-      title: "Dental Tourism in Mexico | Safe, Affordable Care for Americans",
-      description: "Explore dental tourism in Mexico with safe, high-quality care and significant savings. Learn about dental tourism packages and plan your treatment with confidence."
+      title: "Dental Tourism Mexico | Save on Dental Treatment",
+      description: "Dental tourism Mexico with affordable care in Playa del Carmen. Personalized treatments, dental tourism packages, and expert dentists."
     },
     header: {
       title: "Dental Tourism in Mexico",
@@ -52,7 +86,7 @@ const pageContent = {
         "Significant savings compared to the USA"
       ],
       button: "Plan Your Dental Trip to Mexico",
-      imageSrc: imgPath + "Dental-Tourism-IMG-1.webp",
+      imageSrc: ogImage,
       imageAlt: "Dental Tourism in Mexico"
     },
     about: {
@@ -67,7 +101,6 @@ const pageContent = {
       text1: "Yes. Dental tourism in Mexico is safe when you choose established clinics that follow international standards. Modern dental tourism clinics in Mexico operate with strict sterilization protocols, advanced diagnostic tools, and licensed dental specialists.",
       text2: "Safety, transparency, and patient comfort are central to the dental tourism experience in Mexico, especially for international visitors.",
       imageSrc: imgPath + "Dental-Tourism-IMG-3.webp",
-      bgImage: imgPath + "Dental-Tourism-IMG-3.webp",
       imgAlt: "Safe dental procedures in Mexico"
     },
     americans: {
@@ -79,7 +112,7 @@ const pageContent = {
     },
     packages: {
       title: "Dental Tourism Packages in Mexico",
-      description: "Dental tourism packages in Mexico are designed to simplify the treatment process for international patients by coordinating both dental care and essential travel logistics. Rather than offering rigid, one-size-fits-all options, reputable clinics create personalized dental tourism packages based on your treatment needs, timeline, and travel preferences. A customized dental tourism package may include:",
+      description: "Dental tourism packages in Mexico are designed to simplify the treatment process for international patients by coordinating both dental care and essential travel logistics. Reputable clinics create personalized dental tourism packages based on your treatment needs, timeline, and travel preferences. A customized dental tourism package may include:",
       items: [
         "Initial dental evaluation and diagnosis",
         "Personalized treatment planning and coordination",
@@ -88,183 +121,187 @@ const pageContent = {
         "Airport pickup and local transportation coordination",
         "Post-treatment follow-up guidance"
       ],
-      footer: "By combining professional dental care with optional support for accommodation and transportation support is coordinated based on availability and patient preferences and may vary depending on treatment requirements and travel dates."
+      footer: "Logistics are coordinated based on availability and patient preferences and may vary depending on treatment requirements and travel dates."
     },
     popular: {
       title: "Popular Dental Treatments for Dental Tourists",
-      description: "Dental tourism in Mexico is especially popular for treatments that require advanced expertise and offer high value for international patients.Below are some of the most requested dental treatments among international patients traveling to Mexico.",
+      description: "Below are some of the most requested dental treatments among international patients traveling to Mexico.",
       footer: "These treatments are performed by experienced specialists and are commonly requested by dental tourists seeking long-term solutions.",
       items: [
-        { title: "Dental Implants in Playa del Carmen", url: "/en/dental-implants-playa-del-carmen", image: imgPath + "Dental-Tourism-IMG-5.webp" },
-        { title: "Smile Makeover in Playa del Carmen", url: "/en/smile-design-playa-del-carmen", image: imgPath + "Dental-Tourism-IMG-6.webp" },
-        { title: "Full-Arch Dental Implants in Mexico", url: "/en/dental-implants-playa-del-carmen", image: imgPath + "Dental-Tourism-IMG-7.webp" },
+        { title: "Dental Implants in Playa del Carmen", url: "/en/dental-implants-playa-del-carmen/", image: imgPath + "Dental-Tourism-IMG-5.webp" },
+        { title: "Smile Makeover in Playa del Carmen", url: "/en/smile-design-playa-del-carmen/", image: imgPath + "Dental-Tourism-IMG-6.webp" },
+        { title: "Full-Arch Dental Implants in Mexico", url: "/en/dental-implants-playa-del-carmen/", image: imgPath + "Dental-Tourism-IMG-7.webp" },
       ]
     },
     planningTourism: {
       title: "Planning Your Dental Tourism Trip to Mexico",
-      description: "Planning a dental tourism trip to Mexico involves coordinating treatment schedules, travel dates, and recovery time. Most clinics assist patients with treatment planning to ensure efficient visits and smooth coordination.",
-      highlightText: "Dental tourism travel Mexico is designed to be straightforward, allowing patients to focus on their treatment and overall experience."
+      description: "Planning involves coordinating treatment schedules, travel dates, and recovery time. Most clinics assist patients with treatment planning to ensure efficient visits.",
+      highlightText: "Dental tourism travel Mexico is designed to be straightforward, allowing patients to focus on their treatment."
     },
     whyChooseTourism: {
       title: "Why Choose Stetic Dental Clinic for Dental Tourism",
-      description: "Our clinic specializes in treating international patients seeking dental tourism in Mexico. We focus on clear communication, personalized treatment planning, and professional care from start to finish.",
-      subTitle: "Patients benefit from:",
+      description: "Our clinic specializes in treating international patients. We focus on clear communication and professional care from start to finish.",
       items: [
         "Experience with international dental tourism",
         "English-speaking coordination",
         "Customized treatment plans",
         "Comprehensive follow-up care"
       ],
-      reelId: "DPCjErMDkTc" // Puedes cambiarlo por el Reel específico de turismo
+      reelId: "DPCjErMDkTc"
     },
     cost: {
       title: "Dental Tourism Cost in Mexico",
-      text1: "Dental tourism cost in Mexico is typically much lower than in the United States, even when using high-quality materials and advanced techniques. Savings depend on the type of treatment, complexity, and duration, but many patients experience substantial cost reductions without sacrificing care quality.",
+      text1: "Dental tourism cost in Mexico is typically much lower than in the United States, even when using high-quality materials. Many patients experience substantial cost reductions without sacrificing care quality.",
       text2: "Mexico dental tourism cost advantages make treatment more accessible for international patients.",
     },
     location: {
       title: "Dental Tourism in Playa del Carmen",
-      text1: "Playa del Carmen is one of the most popular destinations for dental tourism in Mexico. Its modern infrastructure, accessibility, and high concentration of professional dental clinics make it an ideal location for international patients.Dental tourism in Playa del Carmen combines professional care with a comfortable travel experience in a well-developed destination.",
+      text1: "Playa del Carmen is one of the most popular destinations for dental tourism in Mexico. Its modern infrastructure and accessibility make it an ideal location.",
       mapUrl: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3762.5122636431384!2d-87.0735534856232!3d20.629558486253736!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8f4c2995d1f3b6b7%3A0x6f5e8a1e6f4e4c5a!2sCl%C3%ADnica%20Dental%20Stetic%20Playa%20del%20Carmen!5e0!3m2!1sen!2smx!4v1697041234567!5m2!1sen!2smx"
-
     },
     faq: {
       title: "Dental Tourism in Mexico FAQ",
       items: [
-        { 
-          question: "Is dental tourism in Mexico safe?", 
-          answer: "Yes. Dental tourism in Mexico is safe when treatments are performed by licensed professionals following proper clinical protocols." 
-        },
-        { 
-          question: "How much can I save with dental tourism in Mexico?", 
-          answer: "Savings vary by treatment, but many patients experience significant cost reductions compared to the USA." 
-        },
-        { 
-          question: "Are dental tourism packages worth it?", 
-          answer: "Dental tourism packages are beneficial when they are customized to individual treatment needs rather than fixed offers." 
-        },
-        { 
-          question: "How long should I stay in Mexico for dental treatment?", 
-          answer: "The length of stay depends on the treatment type and complexity and will be determined during the planning process." 
-        }
+        { question: "Is dental tourism in Mexico safe?", answer: "Yes. Dental tourism in Mexico is safe when treatments are performed by licensed professionals following proper clinical protocols." },
+        { question: "How much can I save with dental tourism in Mexico?", answer: "Savings vary by treatment, but many patients experience significant cost reductions compared to the USA." },
+        { question: "Are dental tourism packages worth it?", answer: "Dental tourism packages are beneficial when they are customized to individual treatment needs rather than fixed offers." },
+        { question: "How long should I stay in Mexico for dental treatment?", answer: "The length of stay depends on the treatment type and complexity." }
       ]
     },
     cta: {
       title: "Start Planning Your Dental Tourism Experience",
-      description: "If you are considering dental tourism in Mexico, our team is ready to guide you through every step of the process. Contact us today to plan your dental treatment with confidence and professional support.",
+      description: "Contact us today to receive expert support for your dental treatment in Mexico.",
       button: "Contact Our Dental Tourism Team",
       note: "Professional support for international patients"
     }
   },
   es: {
+    schema: {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "Dentist",
+          "@id": `https://www.steticdental.com.mx${esPath}#dentist`,
+          "name": "Clínica Stetic Dental",
+          "url": `https://www.steticdental.com.mx${esPath}`,
+          "telephone": "+52 984 188 0338",
+          "address": {
+            "@type": "PostalAddress",
+            "streetAddress": "Avenida 10 Nte, Calle 38 Nte Con, Zazil-ha",
+            "addressLocality": "Playa del Carmen",
+            "addressRegion": "Quintana Roo",
+            "addressCountry": "MX"
+          }
+        },
+        {
+          "@type": "Service",
+          "@id": `https://www.steticdental.com.mx${esPath}#service`,
+          "name": "Turismo Dental en México",
+          "serviceType": "Paquetes de turismo dental y coordinación de tratamiento",
+          "description": "Turismo dental en México con tratamientos asequibles en Playa del Carmen y apoyo para pacientes internacionales.",
+          "url": `https://www.steticdental.com.mx${esPath}`,
+          "provider": { "@id": `https://www.steticdental.com.mx${esPath}#dentist` },
+          "areaServed": [
+            { "@type": "City", "name": "Playa del Carmen" },
+            { "@type": "Country", "name": "Mexico" }
+          ]
+        }
+      ]
+    },
     seo: {
-      title: "Turismo Dental en México | Cuidado Seguro y Asequible para Extranjeros",
-      description: "Explore el turismo dental en México con atención de alta calidad y ahorros significativos."
+      title: "Turismo Dental en México | Ahorra en tu Tratamiento Dental",
+      description: "Turismo dental en México con atención asequible en Playa del Carmen. Tratamientos personalizados, paquetes de turismo dental y dentistas expertos."
     },
     header: {
       title: "Turismo Dental en México",
-      subheadline: "Atención dental de alta calidad en México para pacientes internacionales.",
+      subheadline: "Atención dental de alta calidad en México para pacientes internacionales que buscan un tratamiento seguro y profesional.",
       features: ["Especialistas experimentados", "Tecnología moderna", "Equipos bilingües", "Ahorros significativos"],
       button: "Planifique su Viaje Dental a México",
-      imageSrc: imgPath + "Dental-Tourism-IMG-1.webp",
+      imageSrc: ogImage,
       imageAlt: "Turismo Dental en México"
     },
     about: {
-      title: "Por Qué Elegir Stetic Dental Clinic",
-      text1: "Tenemos experiencia en el tratamiento de pacientes internacionales que viajan a México.",
+      title: "Por Qué Elegir Stetic Dental Clinic para Turismo Dental",
+      text1: "Tenemos amplia experiencia en el tratamiento de pacientes internacionales que viajan a México para recibir atención dental de alta calidad.",
       text2: "Hacemos que su experiencia sea segura, confiable y cómoda.",
       imageSrc: imgPath + "Dental-Tourism-IMG-2.webp",
       imgAlt: "Equipo de Stetic Dental Clinic"
     },
     safety: {
       title: "¿Es Seguro el Turismo Dental en México?",
-      text1: "Sí. Es seguro cuando elige clínicas establecidas que siguen estándares internacionales.",
+      text1: "Sí. Es seguro cuando elige clínicas establecidas que siguen estándares internacionales y protocolos estrictos de esterilización.",
       text2: "La seguridad y la transparencia son fundamentales para nosotros.",
     },
     americans: {
       title: "Turismo Dental para Estadounidenses",
-      text1: "Muchos pacientes eligen México para recibir el mismo nivel de atención a un costo menor.",
-      text2: "Ofrecemos equipos bilingües y planeación adaptada a su calendario.",
+      text1: "Muchos pacientes de EE. UU. eligen México para recibir el mismo nivel de atención a un costo significativamente menor.",
+      text2: "Ofrecemos equipos bilingües y planeación adaptada a su calendario de viaje.",
       imageSrc: imgPath + "Dental-Tourism-IMG-8.webp",
       imgAlt: "Atención para pacientes de EE. UU."
     },
     packages: {
       title: "Paquetes de Turismo Dental en México",
-      description: "Los paquetes de turismo dental en México están diseñados para simplificar el proceso de tratamiento para pacientes internacionales mediante la coordinación tanto de la atención dental como de la logística esencial del viaje. En lugar de ofrecer opciones rígidas y genéricas, las clínicas de prestigio crean paquetes personalizados basados en sus necesidades de tratamiento, tiempos y preferencias de viaje. Un paquete de turismo dental personalizado puede incluir:",
+      description: "Nuestros paquetes personalizados se adaptan a sus necesidades, tiempos y preferencias de viaje. Pueden incluir:",
       items: [
         "Evaluación y diagnóstico dental inicial",
-        "Planificación y coordinación de tratamiento personalizado",
-        "Programación de citas basada en sus fechas de viaje",
-        "Asistencia con alojamiento en hoteles o Airbnb cerca de la clínica",
-        "Recogida en el aeropuerto y coordinación de transporte local",
+        "Planificación personalizada de tratamiento",
+        "Programación de citas según sus fechas",
+        "Asistencia con alojamiento (Hotel/Airbnb)",
+        "Coordinación de transporte local",
         "Guía de seguimiento post-tratamiento"
       ],
-      footer: "Al combinar la atención dental profesional con el apoyo opcional para el alojamiento y el transporte, la logística se coordina en función de la disponibilidad y las preferencias del paciente, y puede variar según los requisitos del tratamiento y las fechas del viaje."
+      footer: "La logística se coordina en función de la disponibilidad y las preferencias del paciente."
     },
     popular: {
-      title: "Tratamientos Populares para Turistas",
-      description: "Tratamientos que requieren experiencia avanzada y ofrecen alto valor.",
-      footer: "Realizados por especialistas para soluciones a largo plazo.",
+      title: "Tratamientos Populares para Turistas Dentales",
+      description: "Tratamientos que ofrecen alto valor y resultados a largo plazo.",
+      footer: "Realizados por especialistas para pacientes internacionales.",
       items: [
-        { title: "Implantes Dentales", url: "/es/implantes-dentales", image: imgPath + "Dental-Tourism-IMG-5.webp" },
-        { title: "Diseño de Sonrisa", url: "/es/diseno-de-sonrisa", image: imgPath + "Dental-Tourism-IMG-6.webp" },
-        { title: "Implantes de Arcada Completa", url: "/es/implantes-dentales", image: imgPath + "Dental-Tourism-IMG-7.webp" },
+        { title: "Implantes Dentales", url: "/es/implantes-dentales/", image: imgPath + "Dental-Tourism-IMG-5.webp" },
+        { title: "Diseño de Sonrisa", url: "/es/diseno-de-sonrisa/", image: imgPath + "Dental-Tourism-IMG-6.webp" },
+        { title: "Implantes de Arcada Completa", url: "/es/implantes-dentales/", image: imgPath + "Dental-Tourism-IMG-7.webp" },
       ]
     },
     planningTourism: {
-      title: "Planificación de su Viaje de Turismo Dental a México",
-      description: "Planificar un viaje de turismo dental a México implica coordinar los horarios de tratamiento, las fechas de viaje y el tiempo de recuperación. La mayoría de las clínicas asisten a los pacientes con la planificación del tratamiento para asegurar visitas eficientes y una coordinación fluida.",
-      highlightText: "El viaje de turismo dental a México está diseñado para ser sencillo, permitiendo que los pacientes se concentren en su tratamiento y en su experiencia general."
+      title: "Planificación de su Viaje de Turismo Dental",
+      description: "Ayudamos a coordinar los horarios de tratamiento, las fechas de viaje y el tiempo de recuperación.",
+      highlightText: "Diseñado para ser sencillo, permitiendo que se concentre en su salud dental."
     },
     whyChooseTourism: {
-      title: "¿Por qué elegir Stetic Dental Clinic para Turismo Dental?",
-      description: "Nuestra clínica se especializa en la atención de pacientes internacionales que buscan turismo dental en México. Nos enfocamos en una comunicación clara, planificación de tratamiento personalizada y atención profesional de principio a fin.",
-      subTitle: "Los pacientes se benefician de:",
+      title: "¿Por qué elegir Stetic Dental Clinic?",
+      description: "Nos especializamos en la atención de pacientes internacionales con un enfoque en comunicación clara.",
       items: [
-        "Experiencia en turismo dental internacional",
-        "Coordinación de habla inglesa",
-        "Planes de tratamiento personalizados",
-        "Atención de seguimiento integral"
+        "Experiencia en turismo dental",
+        "Coordinación bilingüe",
+        "Planes personalizados",
+        "Seguimiento integral"
       ],
       reelId: "DPCjErMDkTc"
     },
     cost: {
       title: "Costo del Turismo Dental en México",
-      text1: "El costo suele ser mucho más bajo que en los Estados Unidos.",
-      text2: "Tratamientos accesibles sin sacrificar la calidad.",
+      text1: "El costo es típicamente mucho más bajo que en los Estados Unidos, incluso con materiales de alta gama.",
+      text2: "Ahorros sustanciales sin sacrificar la calidad de la atención.",
     },
     location: {
       title: "Turismo Dental en Playa del Carmen",
-      text1: "Playa del Carmen es uno de los destinos más populares gracias a su infraestructura moderna.",
+      text1: "Playa del Carmen es un destino seguro y accesible para el turismo dental internacional.",
       mapUrl: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3762.5122636431384!2d-87.0735534856232!3d20.629558486253736!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8f4c2995d1f3b6b7%3A0x6f5e8a1e6f4e4c5a!2sCl%C3%ADnica%20Dental%20Stetic%20Playa%20del%20Carmen!5e0!3m2!1sen!2smx!4v1697041234567!5m2!1sen!2smx"
-      
     },
     faq: {
-      title: "Preguntas Frecuentes sobre Turismo Dental en México",
+      title: "Preguntas Frecuentes",
       items: [
-        { 
-          question: "¿Es seguro el turismo dental en México?", 
-          answer: "Sí. El turismo dental en México es seguro cuando los tratamientos son realizados por profesionales licenciados que siguen los protocolos clínicos adecuados." 
-        },
-        { 
-          question: "¿Cuánto puedo ahorrar con el turismo dental en México?", 
-          answer: "Los ahorros varían según el tratamiento, pero muchos pacientes experimentan reducciones de costos significativas en comparación con los EE. UU." 
-        },
-        { 
-          question: "¿Valen la pena los paquetes de turismo dental?", 
-          answer: "Los paquetes de turismo dental son beneficiosos cuando se personalizan según las necesidades de tratamiento individuales en lugar de ser ofertas fijas." 
-        },
-        { 
-          question: "¿Cuánto tiempo debo permanecer en México para el tratamiento dental?", 
-          answer: "La duración de la estancia depende del tipo de tratamiento y su complejidad, y se determinará durante el proceso de planificación." 
-        }
+        { question: "¿Es seguro el turismo dental en México?", answer: "Sí. Es seguro cuando es realizado por profesionales licenciados siguiendo protocolos adecuados." },
+        { question: "¿Cuánto puedo ahorrar?", answer: "Muchos pacientes experimentan reducciones de costos significativas en comparación con los EE. UU." },
+        { question: "¿Valen la pena los paquetes?", answer: "Son beneficiosos cuando se personalizan según las necesidades individuales." },
+        { question: "¿Cuánto tiempo debo permanecer?", answer: "La duración de la estancia depende del tipo de tratamiento y complejidad." }
       ]
     },
     cta: {
       title: "Comience a Planificar su Experiencia",
-      description: "Si está considerando el turismo dental en México, nuestro equipo está listo para guiarlo en cada paso del proceso. Contáctenos hoy para planificar su tratamiento dental con confianza y apoyo profesional.",
+      description: "Contáctenos hoy para planificar su tratamiento dental con confianza y apoyo profesional.",
       button: "Contacte a Nuestro Equipo",
-      note: "Soporte profesional"
+      note: "Soporte profesional para pacientes internacionales"
     }
   }
 };
@@ -278,6 +315,8 @@ const t = pageContent[lang];
   lang={lang}
   enPath={enPath}
   esPath={esPath}
+  schema={t.schema}
+  ogImage={ogImage}
 >
   <HeaderSpeciality 
       lang={lang}
@@ -324,6 +363,7 @@ const t = pageContent[lang];
     footerText={t.popular.footer}
     treatments={t.popular.items}
   />
+
   <LocationSpeciality 
       title={t.location.title}
       text1={t.location.text1}
@@ -341,13 +381,13 @@ const t = pageContent[lang];
     description={t.planningTourism.description}
     highlightText={t.planningTourism.highlightText}
   />
+
   <WhyChooseSpeciality 
       title={t.whyChooseTourism.title}
       description={t.whyChooseTourism.description}
       items={t.whyChooseTourism.items}
       reelId={t.whyChooseTourism.reelId}
     />
-
 
   <FaqSpeciality 
       title={t.faq.title}

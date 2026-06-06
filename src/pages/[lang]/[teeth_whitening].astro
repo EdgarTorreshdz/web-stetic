@@ -6,21 +6,25 @@ export async function getStaticPaths() {
     { 
       params: { 
         lang: 'en', 
-        teeth_whitening: 'teeth-whitening-playa-del-carmen' // La llave DEBE ser teeth_whitening
+        teeth_whitening: 'teeth-whitening-playa-del-carmen' 
       } 
     },
     { 
       params: { 
         lang: 'es', 
-        teeth_whitening: 'blanqueamiento-dental' // La llave DEBE ser teeth_whitening
+        teeth_whitening: 'blanqueamiento-dental' 
       } 
     },
   ];
 }
 
 const { lang } = Astro.params as { lang: 'en' | 'es' };
-const enPath = "/en/teeth-whitening-playa-del-carmen";
-const esPath = "/es/blanqueamiento-dental";
+
+const enPath = "/en/teeth-whitening-playa-del-carmen/";
+const esPath = "/es/blanqueamiento-dental/";
+const imgPath = "/teeth_whitening/";
+const ogImage = `${imgPath}Teeth-whitening-IMG-1.webp`;
+
 import Layout from "../../layouts/Layout.astro";
 import HeaderSpeciality from "../../components/shared/HeaderSpeciality.astro";
 import AboutSpeciality from "../../components/shared/AboutSpeciality.astro";
@@ -33,52 +37,75 @@ import ProcessSpeciality from "../../components/shared/ProcessSpeciality.astro";
 import LocationSpeciality from "../../components/shared/LocationSpeciality.astro";
 import FaqSpeciality from "../../components/shared/FaqSpeciality.astro";
 import CtaSpeciality from "../../components/shared/CtaSpeciality.astro";
-const imgPath = "/teeth_whitening/"; 
+
 const pageContent = {
   en: {
+    schema: {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "Dentist",
+          "@id": `https://www.steticdental.com.mx${enPath}#dentist`,
+          "name": "Stetic Dental Clinic",
+          "url": `https://www.steticdental.com.mx${enPath}`,
+          "telephone": "+52 984 188 0338",
+          "address": {
+            "@type": "PostalAddress",
+            "streetAddress": "Avenida 10 Nte, Calle 38 Nte Con, Zazil-ha",
+            "addressLocality": "Playa del Carmen",
+            "addressRegion": "Quintana Roo",
+            "addressCountry": "MX"
+          }
+        },
+        {
+          "@type": "Service",
+          "@id": `https://www.steticdental.com.mx${enPath}#service`,
+          "name": "Teeth Whitening in Playa del Carmen",
+          "serviceType": "Professional teeth whitening treatment",
+          "description": "Professional teeth whitening in Playa del Carmen, Mexico focused on safe, visible, and fast smile enhancement using modern whitening systems.",
+          "url": `https://www.steticdental.com.mx${enPath}`,
+          "provider": { "@id": `https://www.steticdental.com.mx${enPath}#dentist` },
+          "areaServed": [
+            { "@type": "City", "name": "Playa del Carmen" },
+            { "@type": "Country", "name": "Mexico" }
+          ]
+        }
+      ]
+    },
     seo: {
-      title: "Teeth Whitening in Playa del Carmen | Fast & Professional Whitening",
-      description: "Get professional teeth whitening in Playa del Carmen. Safe, fast whitening treatments in Mexico with visible results and affordable cost. Book today."
+      title: "Teeth Whitening Playa del Carmen | Brighter Smile in One Visit",
+      description: "Safe, fast, and affordable treatments including laser teeth whitening with visible results in one visit. Get professional teeth whitening in Playa del Carmen."
     },
     header: {
       title: "Teeth Whitening in Playa del Carmen, Mexico",
       subheadline: "Professional teeth whitening treatments for Americans seeking fast, safe, and visible results in Mexico.",
       features: [
-        "Trust bullets",
-        "Teeth whitening professional treatment",
-        "Whitening treatment clinic",
+        "Professional whitening systems",
+        "Safe for tooth enamel",
         "English-speaking dental team",
         "Affordable cosmetic dental care vs USA"
       ],
       button: "Schedule Your Teeth Whitening Appointment",
-      imageSrc: imgPath + "Teeth-whitening-IMG-1.webp",
+      imageSrc: ogImage,
       imageAlt: "Professional teeth whitening treatment"
     },
     about: {
       title: "Looking for Teeth Whitening in Playa del Carmen You Can Trust?",
-      text1: "Professional teeth whitening is one of the fastest and most effective ways to improve your smile. Our clinic offers teeth whitening in Playa del Carmen for American patients and international visitors looking for safe, reliable, and professional cosmetic dental care in Mexico.",
-      text2: "Whether you are visiting Playa del Carmen or planning your trip, our whitening treatments are designed to deliver noticeable results in a short amount of time, under the supervision of an experienced dentist for teeth whitening.",
+      text1: "Professional teeth whitening is one of the fastest ways to improve your smile. Our clinic offers whitening for American patients looking for safe and reliable cosmetic dental care in Mexico.",
+      text2: "Our treatments are designed to deliver noticeable results in a short amount of time, under the supervision of an experienced dentist.",
       imageSrc: imgPath + "Teeth-whitening-IMG-2.webp",
       imgAlt: "Teeth whitening consultation"
     },
     whatIs: {
       title: "What Is Professional Teeth Whitening?",
-      text1: "Professional teeth whitening is a cosmetic dental procedure that safely lightens the color of your teeth by removing stains caused by food, drinks, smoking, or aging. Unlike over-the-counter products, a professional treatment is performed under dental supervision, ensuring safety and predictable results.",
-      text2: "This approach helps protect your enamel while achieving a brighter, more even smile without the sensitivity often associated with home kits.",
+      text1: "It is a cosmetic procedure that lightens the color of your teeth by removing stains from food, aging, or lifestyle. Unlike home kits, professional treatment is supervised, ensuring enamel protection.",
+      text2: "Achieve a brighter, more even smile without the sensitivity often associated with over-the-counter products.",
     },
     options: {
       title: "Types of Teeth Whitening Treatments",
       items: [
-        { 
-          title: "In-Office Teeth Whitening", 
-          description: "An in-office whitening treatment provides fast and visible results, often in a single visit, using professional-grade whitening systems.", 
-          subtext: "Immediate transformation." 
-        },
-        { 
-          title: "Laser Teeth Whitening", 
-          description: "Laser teeth whitening is an advanced option that accelerates the whitening process under professional supervision, delivering quick and controlled results. (Available if recommended after evaluation.)",
-          subtext: "Cutting-edge technology." 
-        }
+        { title: "In-Office Whitening", description: "Fast and visible results in a single visit using professional-grade whitening systems.", subtext: "Immediate transformation." },
+        { title: "Laser Teeth Whitening", description: "Advanced option that accelerates the process under professional supervision for quick results.", subtext: "Cutting-edge technology." }
       ]
     },
     benefits: {
@@ -90,14 +117,14 @@ const pageContent = {
         "Boosts confidence and overall appearance",
         "Performed by a qualified cosmetic dentist"
       ],
-      footer: "Professional teeth whitening is ideal for patients seeking immediate aesthetic improvement during their stay.",
+      footer: "Ideal for patients seeking immediate aesthetic improvement during their stay.",
       imageSrc: imgPath + "Teeth-whitening-IMG-3.webp",
       imgAlt: "Patient with white smile"
     },
     cost: {
       title: "Teeth Whitening Cost in Mexico",
-      text1: "Teeth whitening cost in Mexico is significantly lower than in the United States, while still offering professional care and high-quality whitening systems. The final cost depends on the type of whitening treatment selected and your individual dental condition.",
-      text2: "After a brief evaluation, our team will recommend the most appropriate option and provide clear information about the cost, with no hidden fees.",
+      text1: "Cost in Mexico is significantly lower than in the USA, while still offering high-quality whitening systems.",
+      text2: "We recommend the best option after a brief evaluation and provide clear pricing with no hidden fees.",
     },
     whyChoose: {
       title: "Why Choose Our Whitening Treatment Clinic",
@@ -108,154 +135,183 @@ const pageContent = {
         "Clear communication in English",
         "Experience treating international patients"
       ],
-      footerText: "As a whitening treatment clinic, our priority is delivering safe, effective, and natural-looking whitening results.",
+      footerText: "Our priority is delivering safe, effective, and natural-looking whitening results.",
       reelId: "DPCjErMDkTc"
     },
     process: {
       title: "Teeth Whitening Treatment Process",
-      footer: "The process is quick, comfortable, and designed to fit easily into your travel plans.",
+      footer: "The process is quick, comfortable, and fits easily into your travel plans.",
       steps: [
         { title: "Dental evaluation" },
-          { title: "Selection of treatment", img: "/especialidad-about.avif" },
-          { title: "Professional procedure", img: "/sonrisa1.jpg" },
-          { title: "Post-treatment care", img: "/sonrisa2.jpg" }
+        { title: "Selection of treatment" },
+        { title: "Professional procedure" },
+        { title: "Post-treatment care" }
       ]
     },
     location: {
       title: "Teeth Whitening in Playa del Carmen, Mexico",
-      text1: "Our dental clinic is conveniently located in Playa del Carmen, making it easy for travelers to receive professional teeth whitening during their stay. Whitening treatments are quick and effective, allowing you to enjoy your trip with a brighter smile.",
+      text1: "Our clinic is conveniently located, making it easy for travelers to receive professional whitening while enjoying their trip.",
       mapUrl: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3762.8236434869563!2d-87.0736590249982!3d20.629600986253736!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8f4c299c6e6f3d5b%3A0x6d5a7b4e4f4e4b6a!2sLux%20Dental%20Clinic!5e0!3m2!1ses!2smx!4v1696548765432!5m2!1ses!2smx",
     },
     faq: {
       title: "Teeth Whitening FAQ",
       items: [
-        { question: "How long do teeth whitening results last?", answer: "Results vary depending on habits, but professional whitening can last several months or longer with proper care." },
-        { question: "Is teeth whitening safe in Mexico?", answer: "Yes. It is safe when performed by qualified dental professionals using approved, high-quality systems." },
-        { question: "How much does teeth whitening cost in Mexico?", answer: "It is generally much more affordable than in the USA, depending on the specific treatment selected." },
-        { question: "Who is a good candidate for teeth whitening?", answer: "Most patients with healthy teeth and gums are excellent candidates for professional whitening." }
+        { question: "How long do results last?", answer: "Results can last several months or longer with proper care and habits." },
+        { question: "Is it safe in Mexico?", answer: "Yes. It is safe when performed by qualified professionals using high-quality systems." },
+        { question: "How much can I save?", answer: "Patients typically save up to 70% compared to US dental prices." },
+        { question: "Who is a candidate?", answer: "Most patients with healthy teeth and gums are excellent candidates." }
       ]
     },
     cta: {
       title: "Schedule Your Teeth Whitening Appointment",
-      description: "If you are looking for professional teeth whitening in Playa del Carmen, our dental team is ready to help you achieve a brighter smile quickly and safely.",
-      button: "Book Your Teeth Whitening Appointment",
+      description: "Achieve a brighter smile quickly and safely. Our team is ready to help you.",
+      button: "Book Your Appointment Now",
       note: "Visible results in a single visit"
     },
     cosmeticContext: {
-      title: "Teeth Whitening as Part of Cosmetic Dental Care",
-      text1: "Teeth whitening is often combined with other cosmetic dental treatments such as porcelain veneers or smile design. In many cases, whitening is recommended before or after aesthetic procedures to enhance overall results.",
-      text2: "Maintaining good oral hygiene helps ensure better results for future procedures and a more harmonious smile.",
+      title: "Teeth Whitening as Part of Cosmetic Care",
+      text1: "Whitening is often combined with porcelain veneers or smile design to enhance overall aesthetic results.",
+      text2: "Maintaining hygiene ensures a more harmonious and long-lasting smile.",
       imageSrc: imgPath + "Teeth-whitening-IMG-4.webp",
-      imgAlt: "Teeth whitening combined with other cosmetic treatments"
+      imgAlt: "Teeth whitening combined with other treatments"
     },
-
   },
   es: {
+    schema: {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "Dentist",
+          "@id": `https://www.steticdental.com.mx${esPath}#dentist`,
+          "name": "Clínica Stetic Dental",
+          "url": `https://www.steticdental.com.mx${esPath}`,
+          "telephone": "+52 984 188 0338",
+          "address": {
+            "@type": "PostalAddress",
+            "streetAddress": "Avenida 10 Nte, Calle 38 Nte Con, Zazil-ha",
+            "addressLocality": "Playa del Carmen",
+            "addressRegion": "Quintana Roo",
+            "addressCountry": "MX"
+          }
+        },
+        {
+          "@type": "Service",
+          "@id": `https://www.steticdental.com.mx${esPath}#service`,
+          "name": "Blanqueamiento Dental en Playa del Carmen",
+          "serviceType": "Tratamiento de blanqueamiento dental profesional",
+          "description": "Blanqueamiento dental profesional en Playa del Carmen enfocado en resultados rápidos, seguros y visibles.",
+          "url": `https://www.steticdental.com.mx${esPath}`,
+          "provider": { "@id": `https://www.steticdental.com.mx${esPath}#dentist` },
+          "areaServed": [
+            { "@type": "City", "name": "Playa del Carmen" },
+            { "@type": "Country", "name": "Mexico" }
+          ]
+        }
+      ]
+    },
     seo: {
-      title: "Blanqueamiento Dental en Playa del Carmen | Rápido y Profesional",
-      description: "Obtén un blanqueamiento dental profesional en Playa del Carmen. Tratamientos seguros y rápidos en México con resultados visibles y costos asequibles."
+      title: "Blanqueamiento Dental Playa del Carmen | Sonrisa Brillante en Una Visita",
+      description: "Tratamientos seguros, rápidos y asequibles que incluyen blanqueamiento dental láser con resultados visibles en una visita."
     },
     header: {
       title: "Blanqueamiento Dental en Playa del Carmen, México",
-      subheadline: "Tratamientos de blanqueamiento profesional para quienes buscan resultados rápidos, seguros y visibles en México.",
+      subheadline: "Tratamientos profesionales para quienes buscan resultados rápidos, seguros y visibles en México.",
       features: [
-        "Puntos de confianza",
-        "Tratamiento profesional de blanqueamiento",
-        "Clínica especializada en estética",
-        "Equipo dental bilingüe",
-        "Cuidado dental cosmético asequible"
+        "Sistemas de grado profesional",
+        "Seguridad para el esmalte",
+        "Atención bilingüe",
+        "Ahorros significativos vs EE. UU."
       ],
       button: "Agenda tu Cita de Blanqueamiento",
-      imageSrc: imgPath + "Teeth-whitening-IMG-1.webp",
+      imageSrc: ogImage,
       imageAlt: "Tratamiento de blanqueamiento dental"
     },
     about: {
-      title: "¿Buscas un Blanqueamiento Dental Confiable en Playa del Carmen?",
-      text1: "El blanqueamiento dental profesional es una de las formas más rápidas y efectivas de mejorar tu sonrisa. Nuestra clínica ofrece blanqueamiento dental en Playa del Carmen para pacientes estadounidenses y visitantes internacionales que buscan atención dental cosmética segura, confiable y profesional en México.",
-      text2: "Ya sea que estés visitando Playa del Carmen o planeando tu viaje, nuestros tratamientos de blanqueamiento están diseñados para ofrecer resultados visibles en poco tiempo, bajo la supervisión de un dentista experimentado en blanqueamiento dental.",
+      title: "¿Buscas un Blanqueamiento Dental Confiable?",
+      text1: "Mejora tu sonrisa de forma rápida y efectiva. Ofrecemos blanqueamiento dental seguro y profesional para pacientes internacionales en México.",
+      text2: "Diseñado para ofrecer resultados en poco tiempo bajo supervisión experta.",
       imageSrc: imgPath + "Teeth-whitening-IMG-2.webp",
       imgAlt: "Consulta de blanqueamiento dental"
     },
     whatIs: {
-      title: "¿Qué es el Blanqueamiento Dental Profesional?",
-      text1: "Es un procedimiento cosmético que aclara de forma segura el color de tus dientes eliminando manchas causadas por alimentos, bebidas o el tiempo. A diferencia de los productos comerciales, el tratamiento profesional garantiza la seguridad del esmalte.",
-      text2: "Este enfoque protege tus dientes mientras logra una sonrisa más brillante y uniforme.",
+      title: "¿Qué es el Blanqueamiento Profesional?",
+      text1: "Procedimiento cosmético que aclara el color de los dientes eliminando manchas de café, comida o tabaco de forma segura.",
+      text2: "Protege el esmalte mientras logra una sonrisa brillante sin la sensibilidad de los kits caseros.",
     },
     options: {
-      title: "Tipos de Tratamientos de Blanqueamiento",
+      title: "Nuestras Opciones",
       items: [
-        { title: "Blanqueamiento en Consultorio", description: "Resultados rápidos en una sola visita usando sistemas de grado profesional.", subtext: "Transformación inmediata." },
-        { title: "Blanqueamiento Láser", description: "Opción avanzada que acelera el proceso bajo supervisión profesional.", subtext: "Tecnología de punta." }
+        { title: "Blanqueamiento en Consultorio", description: "Resultados visibles en una sola visita con sistemas profesionales.", subtext: "Transformación inmediata." },
+        { title: "Blanqueamiento Láser", description: "Tecnología que acelera el proceso para resultados rápidos y controlados.", subtext: "Tecnología de punta." }
       ]
     },
     benefits: {
-      title: "Beneficios del Blanqueamiento Profesional",
+      title: "Beneficios Clave",
       items: [
-        "Dientes notablemente más blancos en una sesión",
-        "Procedimiento seguro y controlado que protege el esmalte",
-        "Tratamiento rápido con resultados duraderos",
-        "Mejora la confianza y la apariencia general",
-        "Realizado por dentistas cosméticos calificados"
+        "Dientes más blancos en una sesión",
+        "Protección total del esmalte dental",
+        "Resultados visibles y duraderos",
+        "Mejora estética inmediata",
+        "Realizado por especialistas certificados"
       ],
-      footer: "Ideal para pacientes que buscan una mejora estética inmediata durante su estancia.",
+      footer: "Ideal para una mejora estética rápida durante tu estancia.",
       imageSrc: imgPath + "Teeth-whitening-IMG-3.webp",
       imgAlt: "Sonrisa blanca y saludable"
     },
     cost: {
-      title: "Costo del Blanqueamiento Dental en México",
-      text1: "El costo del blanqueamiento dental en México es significativamente más bajo que en Estados Unidos, ofreciendo atención profesional y sistemas de alta calidad. El costo final depende del tipo de tratamiento seleccionado y tu condición dental individual.",
-      text2: "Tras una breve evaluación, recomendaremos la mejor opción y daremos información clara sobre el costo, sin cargos ocultos.",
+      title: "Costo del Blanqueamiento en México",
+      text1: "El costo es mucho más bajo que en EE. UU., manteniendo la alta calidad en los sistemas utilizados.",
+      text2: "Brindamos precios transparentes tras una breve evaluación.",
     },
     whyChoose: {
-      title: "¿Por qué elegir nuestra clínica de blanqueamiento?",
+      title: "¿Por qué elegir nuestra clínica?",
       items: [
-        "Dentista experimentado en blanqueamiento dental",
-        "Sistemas de blanqueamiento profesionales y seguros",
-        "Recomendaciones de tratamiento personalizadas",
+        "Expertos en estética dental",
+        "Sistemas seguros y de vanguardia",
+        "Atención personalizada",
         "Comunicación clara en inglés",
-        "Experiencia atendiendo a pacientes internacionales"
+        "Experiencia con turismo dental"
       ],
-      footerText: "Como clínica de blanqueamiento dental, nuestra prioridad es ofrecer resultados seguros, efectivos y de aspecto natural.",
+      footerText: "Nuestra prioridad es tu seguridad y una sonrisa natural.",
       reelId: "DPCjErMDkTc"
     },
     process: {
       title: "Proceso del Tratamiento",
-      footer: "El proceso es rápido, cómodo y diseñado para encajar en tus planes de viaje.",
+      footer: "Rápido, cómodo y diseñado para encajar en tus vacaciones.",
       steps: [
         { title: "Evaluación dental" },
-        { title: "Selección del tratamiento" },
+        { title: "Selección del sistema" },
         { title: "Procedimiento profesional" },
-        { title: "Cuidados post-tratamiento" }
+        { title: "Cuidados posteriores" }
       ]
     },
     location: {
-      title: "Blanqueamiento Dental en Playa del Carmen, México",
-      text1: "Nuestra clínica está convenientemente ubicada, facilitando el acceso a un blanqueamiento profesional durante tu viaje.",
+      title: "Blanqueamiento en Playa del Carmen",
+      text1: "Ubicación céntrica para que aproveches tu viaje y renueves tu sonrisa.",
       mapUrl: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3762.8236434869563!2d-87.0736590249982!3d20.629600986253736!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8f4c299c6e6f3d5b%3A0x6d5a7b4e4f4e4b6a!2sLux%20Dental%20Clinic!5e0!3m2!1ses!2smx!4v1696548765432!5m2!1ses!2smx",
     },
     faq: {
       title: "Preguntas Frecuentes",
       items: [
-        { question: "¿Cuánto duran los resultados?", answer: "Varía según los hábitos, pero puede durar varios meses o más con el cuidado adecuado." },
-        { question: "¿Es seguro el blanqueamiento en México?", answer: "Sí, siempre que sea realizado por profesionales calificados usando sistemas aprobados." },
-        { question: "¿Cuánto cuesta?", answer: "Generalmente es mucho más asequible que en EE. UU. y depende del tipo de tratamiento." },
-        { question: "¿Soy un buen candidato?", answer: "La mayoría con dientes y encías sanas son excelentes candidatos." }
+        { question: "¿Cuánto duran los resultados?", answer: "Varios meses, dependiendo del cuidado posterior y hábitos alimenticios." },
+        { question: "¿Es seguro en México?", answer: "Totalmente seguro con dentistas certificados y materiales aprobados." },
+        { question: "¿Cuál es el ahorro?", answer: "Aproximadamente un 60-70% comparado con precios en EE. UU. o Canadá." },
+        { question: "¿Causa sensibilidad?", answer: "Nuestros sistemas profesionales minimizan la sensibilidad dental." }
       ]
     },
     cta: {
-      title: "Agenda tu Cita de Blanqueamiento Dental",
-      description: "Si buscas un blanqueamiento profesional en Playa del Carmen, nuestro equipo está listo para ayudarte.",
-      button: "Reserva tu Cita de Blanqueamiento",
+      title: "Agenda tu Cita de Blanqueamiento",
+      description: "Logra una sonrisa radiante de forma rápida y segura. Estamos listos para ayudarte.",
+      button: "Reserva tu Cita Ahora",
       note: "Resultados visibles en una sola visita"
     },
     cosmeticContext: {
-      title: "El Blanqueamiento como parte del Cuidado Dental Cosmético",
-      text1: "El blanqueamiento dental a menudo se combina con otros tratamientos cosméticos como carillas de porcelana o diseño de sonrisa. En muchos casos, se recomienda antes o después de procedimientos estéticos para mejorar los resultados finales.",
-      text2: "Mantener una buena higiene bucal ayuda a garantizar mejores resultados para futuros procedimientos y una sonrisa más armoniosa.",
+      title: "Blanqueamiento y Estética Dental",
+      text1: "Se combina frecuentemente con carillas o diseño de sonrisa para optimizar el resultado final.",
+      text2: "Una base blanca ayuda a lograr una sonrisa más armónica en tratamientos complejos.",
       imageSrc: imgPath + "Teeth-whitening-IMG-4.webp",
       imgAlt: "Blanqueamiento dental combinado con otros tratamientos"
     },
-    
   }
 };
 
@@ -268,6 +324,8 @@ const t = pageContent[lang];
   lang={lang}
   enPath={enPath}
   esPath={esPath}
+  schema={t.schema}
+  ogImage={ogImage}
 >
   <HeaderSpeciality 
       lang={lang}
@@ -325,7 +383,7 @@ const t = pageContent[lang];
       steps={t.process.steps}
     />
 
-    <AboutSpeciality 
+  <AboutSpeciality 
       title={t.cosmeticContext.title}
       text1={t.cosmeticContext.text1}
       text2={t.cosmeticContext.text2}

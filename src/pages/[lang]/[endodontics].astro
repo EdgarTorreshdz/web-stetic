@@ -1,4 +1,6 @@
 ---
+// src/pages/[lang]/[endodontics].astro
+
 export async function getStaticPaths() {
   return [
     { 
@@ -17,8 +19,12 @@ export async function getStaticPaths() {
 }
 
 const { lang } = Astro.params as { lang: 'en' | 'es' };
-const enPath = "/en/root-canal-treatment-playa-del-carmen";
-const esPath = "/es/endodoncia";
+
+const enPath = "/en/root-canal-treatment-playa-del-carmen/";
+const esPath = "/es/endodoncia/";
+const imgPath = "/root_canal_treatment/";
+const ogImage = `${imgPath}Root-canal-IMG-4.webp`;
+
 import Layout from "../../layouts/Layout.astro"
 import HeaderSpeciality from "../../components/shared/HeaderSpeciality.astro";
 import AboutSpeciality from "../../components/shared/AboutSpeciality.astro";
@@ -33,12 +39,44 @@ import AmericansSpeciality from "../../components/shared/AmericansSpeciality.ast
 import LocationSpeciality from "../../components/shared/LocationSpeciality.astro";
 import FaqSpeciality from "../../components/shared/FaqSpeciality.astro";
 import CtaSpeciality from "../../components/shared/CtaSpeciality.astro";
-const imgPath = "/root_canal_treatment/";
+
 const pageContent = {
   en: {
+    schema: {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "Dentist",
+          "@id": `https://www.steticdental.com.mx${enPath}#dentist`,
+          "name": "Stetic Dental Clinic",
+          "url": `https://www.steticdental.com.mx${enPath}`,
+          "telephone": "+52 984 188 0338",
+          "address": {
+            "@type": "PostalAddress",
+            "streetAddress": "Avenida 10 Nte, Calle 38 Nte Con, Zazil-ha",
+            "addressLocality": "Playa del Carmen",
+            "addressRegion": "Quintana Roo",
+            "addressCountry": "MX"
+          }
+        },
+        {
+          "@type": "Service",
+          "@id": `https://www.steticdental.com.mx${enPath}#service`,
+          "name": "Root Canal in Mexico",
+          "serviceType": "Endodontic treatment",
+          "description": "Root canal treatment in Playa del Carmen, Mexico focused on relieving pain, eliminating infection, and preserving the natural tooth.",
+          "url": `https://www.steticdental.com.mx${enPath}`,
+          "provider": { "@id": `https://www.steticdental.com.mx${enPath}#dentist` },
+          "areaServed": [
+            { "@type": "City", "name": "Playa del Carmen" },
+            { "@type": "Country", "name": "Mexico" }
+          ]
+        }
+      ]
+    },
     seo: {
-      title: "Root Canal Treatment in Playa del Carmen | Pain Relief & Expert Care",
-      description: "Get pain-relief focused root canal treatment in Playa del Carmen. Safe endodontic care in Mexico by experienced specialists. Book now."
+      title: "Root Canal in Playa del Carmen – Pain Relief Treatment",
+      description: "Get a root canal in Mexico with expert care in Playa del Carmen. Safe, effective endodontic treatment focused on fast pain relief."
     },
     header: {
       title: "Root Canal Treatment in Playa del Carmen, Mexico",
@@ -55,15 +93,15 @@ const pageContent = {
     },
     about: {
       title: "Need a Root Canal in Playa del Carmen? We’re Ready to Help",
-      text1: "Tooth pain, infection, or swelling can be overwhelming—especially while traveling. Our clinic provides professional root canal treatment in Playa del Carmen for American patients and international visitors seeking fast, safe, and effective dental care in Mexico.",
-      text2: "If you are searching for a root canal near me while visiting Playa del Carmen, our experienced team is prepared to diagnose the issue and relieve pain as quickly as possible.",
+      text1: "Tooth pain or infection can be overwhelming—especially while traveling. Our clinic provides professional root canal treatment for American patients seeking fast, safe, and effective dental care in Mexico.",
+      text2: "If you are searching for a root canal near me while visiting Playa del Carmen, our team is prepared to diagnose and relieve pain as quickly as possible.",
       imageSrc: imgPath + "Root-canal-IMG-2.webp",
       imgAlt: "Root Canal Specialist examining a patient"
     },
     whatIs: {
       title: "What Is Root Canal Treatment?",
-      text1: "Root canal treatment, also known as endodontic treatment, is a procedure that removes infected or damaged tissue from inside the tooth. The goal is to eliminate pain, stop infection, and preserve the natural tooth.",
-      text2: "This type of endodontic treatment in Playa del Carmen allows patients to avoid tooth extraction while restoring comfort and oral health.",
+      text1: "Root canal treatment, also known as endodontic treatment, removes infected or damaged tissue from inside the tooth. The goal is to eliminate pain, stop infection, and preserve the natural tooth.",
+      text2: "This treatment allows patients to avoid tooth extraction while restoring comfort and oral health.",
     },
     indications: {
       title: "When Is a Root Canal Needed?",
@@ -79,7 +117,7 @@ const pageContent = {
     },
     specialist: {
       title: "Root Canal Treatment by an Endodontist",
-      text1: "Root canal procedures are performed by a trained endodontist in Playa del Carmen, a specialist focused on treating infections inside the tooth. Working with a root canal specialist ensures precision, comfort, and long-term success.",
+      text1: "Procedures are performed by a trained endodontist in Playa del Carmen. Working with a root canal specialist ensures precision, comfort, and long-term success.",
       text2: "Our clinic uses modern techniques and equipment to deliver safe and predictable endodontic care.",
       imageSrc: imgPath + "Root-canal-IMG-3.webp",
       imgAlt: "Endodontist specialist working in Playa del Carmen clinic"
@@ -94,12 +132,12 @@ const pageContent = {
         "Restores normal chewing function"
       ],
       footer: "Root canal treatment dentist-led care focuses on comfort and long-term oral health.",
-      imageSrc: imgPath + "Root-canal-IMG-4.webp",
+      imageSrc: ogImage,
       imgAlt: "Healthy smile after successful root canal treatment"
     },
     cost: {
       title: "Root Canal Cost in Mexico",
-      text1: "Root canal cost in Mexico is typically much lower than in the United States while maintaining professional standards and modern techniques. The final root canal price depends on the tooth involved, the severity of infection, and whether additional restoration is needed.",
+      text1: "Root canal cost in Mexico is typically much lower than in the USA while maintaining professional standards. The price depends on the tooth involved and the severity of infection.",
       text2: "After evaluation, we provide clear information about treatment options and cost with no hidden fees.",
     },
     process: {
@@ -107,63 +145,83 @@ const pageContent = {
       footer: "The procedure is designed to relieve pain and stabilize the tooth efficiently.",
       steps: [
         { title: "Dental examination and X-rays" },
-          { title: "Removal of infected tissue", img: "/especialidad-about.avif" },
-          { title: "Cleaning and sealing of the root canal", img: "/sonrisa1.jpg" },
-        { title: "Temporary or permanent restoration", img: "/sonrisa2.jpg" }
+        { title: "Removal of infected tissue" },
+        { title: "Cleaning and sealing of the canal" },
+        { title: "Temporary or permanent restoration" }
       ]
     },
     after: {
       title: "After Root Canal Treatment: What to Expect",
-      text1: "After treatment, most patients experience significant pain relief. In many cases, a dental crown is recommended to protect the treated tooth and restore full function.",
-      text2: "Our team will explain the next steps clearly and guide you through recovery and follow-up care.",
+      text1: "After treatment, most patients experience significant pain relief. In many cases, a dental crown is recommended to protect the treated tooth.",
+      text2: "Our team will guide you through recovery and follow-up care.",
       imageSrc: "/sonrisa3.jpg",
       imgAlt: "Patient recovery and dental care after root canal"
     },
     americans: {
       title: "Root Canal Treatment for Americans in Mexico",
-      text1: "Many patients choose root canal treatment in Mexico because they receive professional care, English-speaking support, and significant savings. Our clinic has extensive experience treating American patients who need urgent dental care while traveling.",
+      text1: "Many patients choose Mexico because they receive professional care, English-speaking support, and significant savings (often 50% to 70%).",
     },
     location: {
       title: "Root Canal Treatment in Playa del Carmen, Mexico",
-      text1: "Our dental clinic is conveniently located in Playa del Carmen, making it easy for travelers and residents to access immediate endodontic care. We prioritize urgent cases and provide timely treatment when pain cannot wait.",
+      text1: "Our clinic is conveniently located, making it easy for travelers to access immediate care. We prioritize urgent cases.",
       mapUrl: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3762.8236434869563!2d-87.0736590249982!3d20.629600986253736!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8f4c299c6e6f3d5b%3A0x6d5a7b4e4f4e4b6a!2sLux%20Dental%20Clinic!5e0!3m2!1sen!2smx!4v1696548765432!5m2!1sen!2smx",
     },
     faq: {
       title: "Root Canal FAQ",
       items: [
-        {
-          question: "Is root canal treatment painful?",
-          answer: "Modern techniques allow root canal treatment to be performed with minimal discomfort. Our priority is your peace of mind and pain relief."
-        },
-        {
-          question: "How much does a root canal cost in Mexico?",
-          answer: "Root canal cost varies by case but is generally more affordable than in the USA, often representing savings of 50% to 70%."
-        },
-        {
-          question: "Is root canal treatment safe in Mexico?",
-          answer: "Yes. Root canal treatment in Mexico is safe when performed by experienced specialists using proper protocols and modern technology."
-        },
-        {
-          question: "How long does a root canal procedure take?",
-          answer: "Most procedures are completed in one or two visits, depending on the complexity of the tooth and the severity of the infection."
-        }
+        { question: "Is root canal treatment painful?", answer: "Modern techniques allow the procedure to be performed with minimal discomfort." },
+        { question: "How much does a root canal cost in Mexico?", answer: "It is generally more affordable than in the USA, representing significant savings." },
+        { question: "Is it safe in Mexico?", answer: "Yes, when performed by experienced specialists using modern protocols." },
+        { question: "How long does it take?", answer: "Most procedures are completed in one or two visits." }
       ]
     },
     cta: {
       title: "Schedule Your Root Canal Treatment",
-      description: "If you are experiencing dental pain and need immediate care, our team is ready to help. Contact us today to get relief as soon as possible.",
+      description: "If you are experiencing pain and need immediate care, our team is ready to help.",
       button: "Book Your Root Canal Appointment Now",
       note: "Personalized care for every patient"
     }
   },
   es: {
+    schema: {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "Dentist",
+          "@id": `https://www.steticdental.com.mx${esPath}#dentist`,
+          "name": "Clínica Stetic Dental",
+          "url": `https://www.steticdental.com.mx${esPath}`,
+          "telephone": "+52 984 188 0338",
+          "address": {
+            "@type": "PostalAddress",
+            "streetAddress": "Avenida 10 Nte, Calle 38 Nte Con, Zazil-ha",
+            "addressLocality": "Playa del Carmen",
+            "addressRegion": "Quintana Roo",
+            "addressCountry": "MX"
+          }
+        },
+        {
+          "@type": "Service",
+          "@id": `https://www.steticdental.com.mx${esPath}#service`,
+          "name": "Endodoncia en Playa del Carmen",
+          "serviceType": "Tratamiento de conducto",
+          "description": "Tratamiento de endodoncia en Playa del Carmen enfocado en el alivio del dolor y la preservación del diente natural.",
+          "url": `https://www.steticdental.com.mx${esPath}`,
+          "provider": { "@id": `https://www.steticdental.com.mx${esPath}#dentist` },
+          "areaServed": [
+            { "@type": "City", "name": "Playa del Carmen" },
+            { "@type": "Country", "name": "Mexico" }
+          ]
+        }
+      ]
+    },
     seo: {
       title: "Endodoncia en Playa del Carmen | Alivio del Dolor y Cuidado Experto",
-      description: "Obtén tratamiento de endodoncia enfocado en el alivio del dolor en Playa del Carmen. Cuidado dental seguro por especialistas experimentados."
+      description: "Obtén tratamiento de endodoncia enfocado en el alivio del dolor en Playa del Carmen. Cuidado dental seguro por especialistas experimentados en México."
     },
     header: {
       title: "Tratamiento de Endodoncia en Playa del Carmen, México",
-      subheadline: "Tratamiento de conducto enfocado en el alivio del dolor realizado por endodoncistas expertos para pacientes internacionales.",
+      subheadline: "Tratamiento de conducto enfocado en el alivio del dolor realizado por endodoncistas expertos.",
       features: [
         "Dentista experto en endodoncia",
         "Endodoncista en Playa del Carmen",
@@ -175,106 +233,94 @@ const pageContent = {
       imageAlt: "Clínica dental moderna para tratamientos de endodoncia"
     },
     about: {
-      title: "¿Necesitas una Endodoncia en Playa del Carmen? Estamos Listos para Ayudarte",
-      text1: "El dolor de muelas, la infección o la inflamación pueden ser abrumadores, especialmente cuando viajas. Nuestra clínica ofrece tratamiento de endodoncia profesional en Playa del Carmen para pacientes internacionales que buscan atención dental rápida, segura y eficaz en México.",
-      text2: "Si estás buscando un especialista en endodoncia cerca de ti mientras visitas Playa del Carmen, nuestro equipo experimentado está preparado para diagnosticar el problema y aliviar el dolor lo antes posible.",
+      title: "¿Necesitas una Endodoncia? Estamos Listos para Ayudarte",
+      text1: "El dolor de muelas o la infección pueden ser abrumadores. Nuestra clínica ofrece endodoncia profesional para pacientes internacionales que buscan atención rápida y segura en México.",
+      text2: "Si buscas un especialista cerca de ti mientras visitas Playa del Carmen, nuestro equipo está preparado para aliviar el dolor lo antes posible.",
       imageSrc: imgPath + "Root-canal-IMG-2.webp",
       imgAlt: "Especialista en Endodoncia examinando a un paciente"
     },
     whatIs: {
-      title: "¿Qué es el Tratamiento de Endodoncia?",
-      text1: "El tratamiento de conducto, también conocido como tratamiento de endodoncia, es un procedimiento que elimina el tejido infectado o dañado del interior del diente. El objetivo es eliminar el dolor, detener la infección y preservar el diente natural.",
-      text2: "Este tipo de tratamiento de endodoncia en Playa del Carmen permite a los pacientes evitar la extracción dental mientras restauran la comodidad y la salud bucal.",
+      title: "¿Qué es la Endodoncia?",
+      text1: "Elimina el tejido infectado o dañado del interior del diente para detener la infección y preservar la pieza dental natural.",
+      text2: "Permite evitar la extracción dental mientras restauras tu comodidad y salud bucal.",
     },
     indications: {
       title: "¿Cuándo se necesita una endodoncia?",
-      subtitle: "Es posible que necesites un tratamiento de conducto si experimentas:",
+      subtitle: "Es posible que necesites este tratamiento si experimentas:",
       features: [
         "Dolor de muelas persistente",
-        "Sensibilidad al frío o al calor",
-        "Hinchazón o infección",
-        "Dolor al masticar",
-        "Un diente agrietado o con caries profunda"
+        "Sensibilidad extrema al frío o calor",
+        "Hinchazón evidente en la encía",
+        "Dolor agudo al masticar",
+        "Diente agrietado o con caries profunda"
       ],
-      footerText: "Una evaluación por un dentista especialista es esencial para determinar el tratamiento correcto."
+      footerText: "Una evaluación profesional es esencial para el diagnóstico correcto."
     },
     specialist: {
-      title: "Tratamiento de Endodoncia por un Especialista",
-      text1: "Los procedimientos de conducto son realizados por un endodoncista capacitado en Playa del Carmen, un especialista enfocado en tratar infecciones dentro del diente. Trabajar con un especialista en endodoncia garantiza precisión, comodidad y éxito a largo plazo.",
-      text2: "Nuestra clínica utiliza técnicas y equipos modernos para brindar una atención endodóntica segura y predecible.",
+      title: "Tratamiento por Especialista",
+      text1: "Los procedimientos son realizados por un endodoncista certificado, garantizando precisión y éxito a largo plazo.",
+      text2: "Usamos tecnología moderna para una atención segura y predecible.",
       imageSrc: imgPath + "Root-canal-IMG-3.webp",
       imgAlt: "Especialista en endodoncia trabajando en Playa del Carmen"
     },
     benefits: {
-      title: "Beneficios del Tratamiento de Endodoncia",
+      title: "Beneficios de la Endodoncia",
       items: [
-        "Alivia el dolor dental",
+        "Alivia el dolor dental de inmediato",
         "Detiene la propagación de la infección",
         "Salva el diente natural",
-        "Previene la extracción dental",
-        "Restaura la función masticatoria normal"
+        "Evita la necesidad de extracción",
+        "Restaura la función masticatoria"
       ],
-      footer: "El cuidado dirigido por dentistas especialistas en endodoncia se enfoca en la comodidad y la salud bucal a largo plazo.",
-      imageSrc: imgPath + "Root-canal-IMG-4.webp",
+      footer: "Nuestro enfoque se centra en tu comodidad y salud bucal duradera.",
+      imageSrc: ogImage,
       imgAlt: "Sonrisa saludable después de una endodoncia exitosa"
     },
     cost: {
       title: "Costo de Endodoncia en México",
-      text1: "El costo de una endodoncia en México suele ser mucho más bajo que en los Estados Unidos, manteniendo estándares profesionales y técnicas modernas. El precio final depende del diente involucrado, la gravedad de la infección y si se requiere restauración adicional.",
-      text2: "Después de la evaluación, brindamos información clara sobre las opciones de tratamiento y el costo, sin cargos ocultos.",
+      text1: "El costo es mucho más accesible que en EE. UU. o Canadá. El precio final depende de la complejidad y el diente afectado.",
+      text2: "Brindamos información clara y planes de tratamiento sin cargos ocultos.",
     },
     process: {
-      title: "Proceso del Tratamiento de Endodoncia",
-      footer: "El procedimiento está diseñado para aliviar el dolor y estabilizar el diente de manera eficiente.",
+      title: "Proceso del Tratamiento",
+      footer: "Diseñado para eliminar el dolor de manera eficiente.",
       steps: [
         { title: "Examen dental y radiografías" },
         { title: "Eliminación del tejido infectado" },
         { title: "Limpieza y sellado del conducto" },
-        { title: "Restauración temporal o permanente" }
+        { title: "Restauración de la pieza" }
       ]
     },
     after: {
-      title: "Después de la Endodoncia: Qué Esperar",
-      text1: "Después del tratamiento, la mayoría de los pacientes experimentan un alivio significativo del dolor. En muchos casos, se recomienda una corona dental para proteger el diente tratado y restaurar su función completa.",
-      text2: "Nuestro equipo explicará los siguientes pasos claramente y lo guiará a través de la recuperación y el cuidado posterior.",
+      title: "Después del Tratamiento",
+      text1: "La mayoría de los pacientes sienten alivio inmediato. A menudo se recomienda una corona para proteger el diente.",
+      text2: "Te guiaremos paso a paso en tu recuperación.",
       imageSrc: "/sonrisa3.jpg",
-      imgAlt: "Recuperación del paciente y cuidado posterior a la endodoncia"
+      imgAlt: "Recuperación del paciente"
     },
     americans: {
-      title: "Endodoncia para Estadounidenses en México",
-      text1: "Muchos pacientes eligen el tratamiento de endodoncia en México porque reciben atención profesional, apoyo en inglés y ahorros significativos. Nuestra clínica tiene amplia experiencia en el tratamiento de pacientes estadounidenses que necesitan atención dental urgente mientras viajan.",
+      title: "Atención para Pacientes Internacionales",
+      text1: "Ofrecemos atención profesional con apoyo bilingüe y ahorros de hasta el 70% comparado con precios en el extranjero.",
     },
     location: {
-      title: "Endodoncia en Playa del Carmen, México",
-      text1: "Nuestra clínica dental está convenientemente ubicada en Playa del Carmen, lo que facilita el acceso a atención endodóntica inmediata para viajeros y residentes. Priorizamos los casos urgentes y brindamos tratamiento oportuno cuando el dolor no puede esperar.",
+      title: "Endodoncia en Playa del Carmen",
+      text1: "Ubicados estratégicamente para atender casos de urgencia de manera oportuna.",
       mapUrl: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3762.8236434869563!2d-87.0736590249982!3d20.629600986253736!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8f4c299c6e6f3d5b%3A0x6d5a7b4e4f4e4b6a!2sLux%20Dental%20Clinic!5e0!3m2!1ses!2smx!4v1696548765432!5m2!1ses!2smx",
     },
     faq: {
-      title: "Preguntas Frecuentes sobre Endodoncia",
+      title: "Preguntas Frecuentes",
       items: [
-        {
-          question: "¿Es doloroso el tratamiento?",
-          answer: "Las técnicas modernas permiten que el tratamiento se realice con las mínimas molestias. Nuestra prioridad es el alivio del dolor."
-        },
-        {
-          question: "¿Cuánto cuesta una endodoncia en México?",
-          answer: "El costo varía según el caso, pero generalmente es mucho más accesible que en los EE. UU., con ahorros de hasta el 70%."
-        },
-        {
-          question: "¿Es seguro el tratamiento en México?",
-          answer: "Sí. El tratamiento es seguro cuando lo realizan especialistas experimentados que utilizan tecnología moderna y protocolos internacionales."
-        },
-        {
-          question: "¿Cuánto tiempo toma el procedimiento?",
-          answer: "La mayoría se completa en una o dos visitas, dependiendo de la complejidad y gravedad de la infección."
-        }
+        { question: "¿Duele la endodoncia?", answer: "Con anestesia local y técnicas modernas, el procedimiento es prácticamente indoloro." },
+        { question: "¿Cuánto cuesta en México?", answer: "Es significativamente más barato que en el extranjero, con ahorros de más de la mitad." },
+        { question: "¿Es seguro?", answer: "Totalmente seguro con especialistas certificados y tecnología avanzada." },
+        { question: "¿Cuántas sesiones son?", answer: "Generalmente una o dos visitas son suficientes." }
       ]
     },
     cta: {
-      title: "Reserva tu Tratamiento de Endodoncia",
-      description: "Si experimentas dolor dental y necesitas atención inmediata, nuestro equipo está listo para ayudarte. Contáctanos hoy para obtener alivio lo antes posible.",
-      button: "Reserva tu Cita de Endodoncia Ahora",
-      note: "Atención personalizada para cada paciente"
+      title: "Reserva tu Tratamiento",
+      description: "Si tienes dolor dental, no esperes más. Nuestro equipo está listo para ayudarte.",
+      button: "Reserva tu Cita Ahora",
+      note: "Atención personalizada de emergencia"
     }
   }
 };
@@ -288,6 +334,8 @@ const t = pageContent[lang];
   lang={lang}
   enPath={enPath}
   esPath={esPath}
+  schema={t.schema}
+  ogImage={ogImage}
 >
     <HeaderSpeciality 
       lang={lang}
@@ -306,18 +354,20 @@ const t = pageContent[lang];
       imageSrc={t.about.imageSrc}
       imageAlt={t.about.imgAlt}
     />
+
     <WhatIsSpeciality 
       title={t.whatIs.title}
       text1={t.whatIs.text1}
       text2={t.whatIs.text2}
-      
     />
+
     <IndicationsSpeciality 
       title={t.indications.title}
       subtitle={t.indications.subtitle}
       features={t.indications.features}
       footerText={t.indications.footerText}
     />    
+
     <SpecialistSpeciality 
       title={t.specialist.title}
       text1={t.specialist.text1}
@@ -325,6 +375,7 @@ const t = pageContent[lang];
       imageSrc={t.specialist.imageSrc}
       imageAlt={t.specialist.imgAlt}
     />
+
     <BenefitsSpeciality 
       title={t.benefits.title}
       benefits={t.benefits.items}
@@ -332,17 +383,19 @@ const t = pageContent[lang];
       imageSrc={t.benefits.imageSrc}
       imageAlt={t.benefits.imgAlt}
     />
+
     <CostSpeciality 
       title={t.cost.title}
       text1={t.cost.text1}
       text2={t.cost.text2}
-      
     />
+
     <ProcessSpeciality 
       title={t.process.title}
       footer={t.process.footer}
       steps={t.process.steps}
     />
+
     <AfterSpeciality 
       title={t.after.title}
       text1={t.after.text1}
@@ -350,19 +403,23 @@ const t = pageContent[lang];
       imageSrc={t.after.imageSrc}
       imageAlt={t.after.imgAlt}
     />
+
     <AmericansSpeciality 
       title={t.americans.title}
       text1={t.americans.text1}
     />
+
     <LocationSpeciality 
       title={t.location.title}
       text1={t.location.text1}
       mapUrl={t.location.mapUrl}
     />
+
     <FaqSpeciality 
       title={t.faq.title}
       faqs={t.faq.items}
     />
+
     <CtaSpeciality 
       lang={lang}
       title={t.cta.title}

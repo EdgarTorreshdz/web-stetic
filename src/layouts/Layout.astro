@@ -2,9 +2,9 @@
 import Navbar from "../components/react/Navbar";
 import Footer from "../components/Footer.astro";
 import NavbarMobile from "../components/react/NavbarMobile";
-import { Icon } from "astro-icon/components";
 import LanguagePicker from '../components/react/LanguagePicker.jsx';
 import WhatsappButton from '../components/shared/WhatsappButton.astro';
+
 interface Props {
   title?: string;
   description?: string;
@@ -12,12 +12,28 @@ interface Props {
   enPath?: string;
   esPath?: string;
   schema?: object;
+  ogImage?: string;
+  ogType?: 'website' | 'article';
 }
-const { title, description, lang = 'en', enPath, esPath, schema } = Astro.props;
+
+const { 
+  title, 
+  description, 
+  lang = 'en', 
+  enPath, 
+  esPath, 
+  schema,
+  ogImage = "/logo.png",
+  ogType = "website"
+} = Astro.props;
+
 const siteUrl = "https://www.steticdental.com.mx";
-const finalEnUrl = enPath ? `${siteUrl}${enPath}` : `${siteUrl}/en/`;
-const finalEsUrl = esPath ? `${siteUrl}${esPath}` : `${siteUrl}/es/`;
+const currentPath = Astro.url.pathname;
+const finalEnUrl = enPath ? `${siteUrl}${enPath}` : `${siteUrl}${currentPath.replace(/^\/es\//, '/en/')}`;
+const finalEsUrl = esPath ? `${siteUrl}${esPath}` : `${siteUrl}${currentPath.replace(/^\/en\//, '/es/')}`;
 const canonicalURL = lang === 'es' ? finalEsUrl : finalEnUrl;
+const ogLocale = lang === 'es' ? 'es_MX' : 'en_US';
+const finalOgImage = ogImage.startsWith('http') ? ogImage : `${siteUrl}${ogImage}`;
 ---
 
 <!doctype html>
@@ -54,11 +70,20 @@ const canonicalURL = lang === 'es' ? finalEsUrl : finalEnUrl;
     <link rel="alternate" hreflang="x-default" href={finalEnUrl} />
     <meta name="robots" content="index, follow" />
 
-    <meta property="og:type" content="website" />
+    <meta property="og:type" content={ogType} />
     <meta property="og:url" content={canonicalURL} />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
-    <meta property="og:image" content="/logo.png" />
+    <meta property="og:site_name" content="Stetic Dental Clinic" />
+    <meta property="og:locale" content={ogLocale} />
+    <meta property="og:image" content={finalOgImage} />
+    <meta property="og:image:secure_url" content={finalOgImage} />
+    <meta property="og:image:alt" content={title} />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={finalOgImage} />
 
     <link rel="icon" type="image/png" href="/logo.png" />
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet" />
@@ -72,7 +97,6 @@ const canonicalURL = lang === 'es' ? finalEsUrl : finalEnUrl;
         scroll-behavior:smooth; 
         background-color: #ffffff;
       }
-      
       .main-header {
         background-color: #ffffff;
         display: none;
@@ -82,7 +106,6 @@ const canonicalURL = lang === 'es' ? finalEsUrl : finalEnUrl;
         z-index: 1000;
         width: 100%;
       }
-
       .header-container {
         margin: 0 auto;
         width: 85%;
@@ -91,16 +114,13 @@ const canonicalURL = lang === 'es' ? finalEsUrl : finalEnUrl;
         align-items: center;
         padding: 5px 0;
       }
-      
       @media(min-width:768px){
         .main-header { display: block; }
       }
-
       .logo-desktop {
         width: 140px;
         height: auto;
       }
-
       .navbar-mobile-container {
         display: flex;
         justify-content: space-between;
@@ -119,7 +139,6 @@ const canonicalURL = lang === 'es' ? finalEsUrl : finalEnUrl;
       <script type="application/ld+json" is:inline set:html={JSON.stringify(schema)} />
     )}
   </head>
-  
   <body>
     <noscript>
       <iframe src="https://www.googletagmanager.com/ns.html?id=GTM-MRMX2GHT"
@@ -150,7 +169,6 @@ const canonicalURL = lang === 'es' ? finalEsUrl : finalEnUrl;
     </main>
 
     <Footer lang={lang} />
-
     <WhatsappButton lang={lang}/> 
   </body>
 </html>

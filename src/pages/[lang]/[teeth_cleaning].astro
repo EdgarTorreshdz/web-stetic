@@ -19,8 +19,12 @@ export async function getStaticPaths() {
 }
 
 const { lang } = Astro.params as { lang: 'en' | 'es' };
-const enPath = "/en/teeth-cleaning-playa-del-carmen";
-const esPath = "/es/limpieza-dental";
+
+const enPath = "/en/teeth-cleaning-playa-del-carmen/";
+const esPath = "/es/limpieza-dental/";
+const imgPath = "/teeth_cleaning/";
+const ogImage = `${imgPath}Theeth-cleaning-IMG-2.webp`;
+
 import Layout from "../../layouts/Layout.astro";
 import HeaderSpeciality from "../../components/shared/HeaderSpeciality.astro";
 import AboutSpeciality from "../../components/shared/AboutSpeciality.astro";
@@ -33,12 +37,44 @@ import ProcessSpeciality from "../../components/shared/ProcessSpeciality.astro";
 import LocationSpeciality from "../../components/shared/LocationSpeciality.astro";
 import FaqSpeciality from "../../components/shared/FaqSpeciality.astro";
 import CtaSpeciality from "../../components/shared/CtaSpeciality.astro";
-const imgPath = "/teeth_cleaning/";
+
 const pageContent = {
   en: {
+    schema: {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "Dentist",
+          "@id": `https://www.steticdental.com.mx${enPath}#dentist`,
+          "name": "Stetic Dental Clinic",
+          "url": `https://www.steticdental.com.mx${enPath}`,
+          "telephone": "+52 984 188 0338",
+          "address": {
+            "@type": "PostalAddress",
+            "streetAddress": "Avenida 10 Nte, Calle 38 Nte Con, Zazil-ha",
+            "addressLocality": "Playa del Carmen",
+            "addressRegion": "Quintana Roo",
+            "addressCountry": "MX"
+          }
+        },
+        {
+          "@type": "Service",
+          "@id": `https://www.steticdental.com.mx${enPath}#service`,
+          "name": "Dental Cleaning in Playa del Carmen",
+          "serviceType": "Professional teeth cleaning",
+          "description": "Professional dental cleaning in Playa del Carmen, Mexico focused on removing plaque and tartar, improving oral hygiene, and supporting long-term preventive dental care.",
+          "url": `https://www.steticdental.com.mx${enPath}`,
+          "provider": { "@id": `https://www.steticdental.com.mx${enPath}#dentist` },
+          "areaServed": [
+            { "@type": "City", "name": "Playa del Carmen" },
+            { "@type": "Country", "name": "Mexico" }
+          ]
+        }
+      ]
+    },
     seo: {
-      title: "Teeth Cleaning in Playa del Carmen | Professional & Affordable Dental Care",
-      description: "Get professional teeth cleaning in Playa del Carmen. Safe, affordable dental cleaning in Mexico for Americans and international patients. Book today."
+      title: "Dental Cleaning Playa del Carmen | Professional Teeth Cleaning",
+      description: "Remove plaque, improve oral health, and get affordable teeth cleaning in Playa del Carmen with experienced dentists."
     },
     header: {
       title: "Teeth Cleaning in Playa del Carmen, Mexico",
@@ -55,29 +91,21 @@ const pageContent = {
     },
     about: {
       title: "Looking for Teeth Cleaning in Playa del Carmen You Can Trust?",
-      text1: "Professional teeth cleaning is essential for maintaining good oral health and preventing future dental problems. Our clinic provides teeth cleaning in Playa del Carmen for American patients and international visitors who want reliable, hygienic, and affordable dental care in Mexico.",
-      text2: "Whether you are visiting Playa del Carmen or planning your trip, our team offers a safe and comfortable environment for preventive dental care performed by experienced professionals.",
-      imageSrc: imgPath + "Theeth-cleaning-IMG-2.webp",
+      text1: "Professional teeth cleaning is essential for maintaining good oral health. Our clinic provides teeth cleaning in Playa del Carmen for American patients and international visitors who want reliable, hygienic, and affordable dental care.",
+      text2: "Our team offers a safe and comfortable environment for preventive dental care performed by experienced professionals.",
+      imageSrc: ogImage,
       imgAlt: "Dental hygiene consultation in Mexico"
     },
     whatIs: {
       title: "What Is Professional Teeth Cleaning?",
-      text1: "Professional teeth cleaning is a preventive dental procedure that removes plaque, tartar, and surface stains that regular brushing and flossing cannot eliminate. This treatment helps protect your teeth and gums while improving overall oral health.",
-      text2: "A professional teeth cleaning also allows the dentist to detect early signs of cavities or gum disease, helping prevent more complex treatments in the future.",
+      text1: "Professional teeth cleaning is a preventive dental procedure that removes plaque, tartar, and surface stains that regular brushing and flossing cannot eliminate.",
+      text2: "A professional cleaning also allows the dentist to detect early signs of cavities or gum disease, helping prevent more complex treatments in the future.",
     },
     options: {
       title: "Types of Dental Cleaning",
       items: [
-        { 
-          title: "Regular Teeth Cleaning", 
-          description: "Recommended for routine preventive care, regular teeth cleaning helps maintain healthy teeth and gums and keeps your smile fresh.", 
-          subtext: "Preventive maintenance." 
-        },
-        { 
-          title: "Deep Dental Cleaning", 
-          description: "For bacteria below the gum line or signs of inflammation. This focuses on treating the gums and preventing periodontal issues.", 
-          subtext: "Periodontal protection." 
-        }
+        { title: "Regular Teeth Cleaning", description: "Recommended for routine preventive care, regular teeth cleaning helps maintain healthy teeth and gums.", subtext: "Preventive maintenance." },
+        { title: "Deep Dental Cleaning", description: "For bacteria below the gum line or signs of inflammation. This focuses on treating the gums.", subtext: "Periodontal protection." }
       ]
     },
     benefits: {
@@ -95,8 +123,8 @@ const pageContent = {
     },
     cost: {
       title: "Teeth Cleaning Cost in Playa del Carmen",
-      text1: "Teeth cleaning cost in Playa del Carmen is generally much lower than in the United States, making it an affordable option for preventive dental care. Costs may vary depending on the type of cleaning required and the condition of your teeth and gums",
-      text2: "After a brief evaluation, our team will explain the recommended treatment and provide clear information about the cost, with no hidden fees.",
+      text1: "Teeth cleaning cost in Playa del Carmen is generally much lower than in the United States, making it an affordable option for preventive dental care.",
+      text2: "After a brief evaluation, our team will explain the recommended treatment and provide clear information about the cost.",
     },
     whyChoose: {
       title: "Why Choose Our Dental Clinic for Teeth Cleaning",
@@ -122,13 +150,13 @@ const pageContent = {
     },
     preventiveContext: {
       title: "Teeth Cleaning as Part of Preventive Dental Care",
-      text1: "Teeth cleaning is often the first step before cosmetic or restorative dental treatments such as teeth whitening, porcelain veneers, or smile design. Maintaining good oral hygiene helps ensure better results for future procedures.",
+      text1: "Teeth cleaning is often the first step before cosmetic or restorative dental treatments. Maintaining good oral hygiene helps ensure better results for future procedures.",
       imageSrc: imgPath + "Theeth-cleaning-IMG-4.webp",
       imgAlt: "Teeth cleaning as a foundation for dental health"
     },
     location: {
       title: "Teeth Cleaning in Playa del Carmen, Mexico",
-      text1: "Our dental clinic is conveniently located in Playa del Carmen, making it easy for travelers and visitors to receive professional dental care during their stay. Teeth cleaning is a quick and effective service that fits perfectly into your travel plans.",
+      text1: "Our dental clinic is conveniently located, making it easy for travelers to receive professional dental care during their stay.",
       mapUrl: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3762.8236434869563!2d-87.0736590249982!3d20.629600986253736!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8f4c299c6e6f3d5b%3A0x6d5a7b4e4f4e4b6a!2sLux%20Dental%20Clinic!5e0!3m2!1ses!2smx!4v1696548765432!5m2!1ses!2smx",
     },
     faq: {
@@ -137,7 +165,7 @@ const pageContent = {
         { question: "How often should I get a teeth cleaning?", answer: "Most patients benefit from professional teeth cleaning every six months." },
         { question: "Is teeth cleaning safe in Mexico?", answer: "Yes. It is safe when performed by qualified professionals following proper hygiene standards." },
         { question: "How much does teeth cleaning cost in Playa del Carmen?", answer: "The cost is generally lower than in the USA and varies based on the type of cleaning needed." },
-        { question: "Do I need an appointment?", answer: "An appointment is recommended to ensure availability and personalized care." }
+        { question: "Do I need an appointment?", answer: "An appointment is recommended to ensure availability." }
       ]
     },
     cta: {
@@ -148,9 +176,41 @@ const pageContent = {
     }
   },
   es: {
+    schema: {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "Dentist",
+          "@id": `https://www.steticdental.com.mx${esPath}#dentist`,
+          "name": "Clínica Stetic Dental",
+          "url": `https://www.steticdental.com.mx${esPath}`,
+          "telephone": "+52 984 188 0338",
+          "address": {
+            "@type": "PostalAddress",
+            "streetAddress": "Avenida 10 Nte, Calle 38 Nte Con, Zazil-ha",
+            "addressLocality": "Playa del Carmen",
+            "addressRegion": "Quintana Roo",
+            "addressCountry": "MX"
+          }
+        },
+        {
+          "@type": "Service",
+          "@id": `https://www.steticdental.com.mx${esPath}#service`,
+          "name": "Limpieza Dental en Playa del Carmen",
+          "serviceType": "Limpieza dental profesional",
+          "description": "Limpieza dental profesional en Playa del Carmen enfocada en eliminar placa y sarro para mejorar la higiene bucal.",
+          "url": `https://www.steticdental.com.mx${esPath}`,
+          "provider": { "@id": `https://www.steticdental.com.mx${esPath}#dentist` },
+          "areaServed": [
+            { "@type": "City", "name": "Playa del Carmen" },
+            { "@type": "Country", "name": "Mexico" }
+          ]
+        }
+      ]
+    },
     seo: {
-      title: "Limpieza Dental en Playa del Carmen | Cuidado Profesional y Asequible",
-      description: "Obtén una limpieza dental profesional en Playa del Carmen. Limpieza dental segura y asequible en México para pacientes internacionales. Agenda hoy."
+      title: "Limpieza Dental Playa del Carmen | Limpieza Dental Profesional",
+      description: "Elimina la placa, mejora la salud bucal y obtén una limpieza dental asequible en Playa del Carmen con dentistas experimentados."
     },
     header: {
       title: "Limpieza Dental en Playa del Carmen, México",
@@ -166,34 +226,26 @@ const pageContent = {
       imageAlt: "Limpieza dental profesional en Playa del Carmen"
     },
     about: {
-      title: "¿Buscas una Limpieza Dental de Confianza en Playa del Carmen?",
-      text1: "La limpieza dental profesional es esencial para mantener una buena salud bucal y prevenir problemas dentales futuros. Nuestra clínica ofrece este servicio para visitantes internacionales que buscan atención higiénica y confiable.",
-      text2: "Ya sea que estés de visita o planeando tu viaje, nuestro equipo ofrece un entorno seguro para tu cuidado preventivo realizado por expertos.",
-      imageSrc: imgPath + "Theeth-cleaning-IMG-2.webp",
+      title: "¿Buscas una Limpieza Dental de Confianza?",
+      text1: "La limpieza dental profesional es esencial para mantener una buena salud bucal. Nuestra clínica ofrece este servicio para visitantes internacionales que buscan atención higiénica y confiable.",
+      text2: "Nuestro equipo ofrece un entorno seguro para tu cuidado preventivo realizado por expertos.",
+      imageSrc: ogImage,
       imgAlt: "Consulta de higiene dental"
     },
     whatIs: {
       title: "¿Qué es una Limpieza Dental Profesional?",
-      text1: "Es un procedimiento preventivo que elimina la placa, el sarro y las manchas superficiales que el cepillado normal no puede quitar. Protege tus dientes y encías mejorando la salud bucal general.",
-      text2: "También permite detectar signos tempranos de caries o enfermedades de las encías, evitando tratamientos más complejos en el futuro.",
+      text1: "Es un procedimiento preventivo que elimina la placa, el sarro y las manchas que el cepillado normal no puede quitar.",
+      text2: "También permite detectar signos tempranos de caries, evitando tratamientos más complejos en el futuro.",
     },
     options: {
       title: "Tipos de Limpieza Dental",
       items: [
-        { 
-          title: "Limpieza Dental Regular", 
-          description: "Recomendada para el cuidado preventivo de rutina, ayuda a mantener dientes y encías sanas.", 
-          subtext: "Mantenimiento preventivo." 
-        },
-        { 
-          title: "Limpieza Dental Profunda", 
-          description: "Para casos con acumulación debajo de la encía. Se enfoca en tratar las encías y prevenir problemas periodontales.", 
-          subtext: "Protección periodontal." 
-        }
+        { title: "Limpieza Dental Regular", description: "Recomendada para el cuidado preventivo de rutina, ayuda a mantener dientes y encías sanas.", subtext: "Mantenimiento preventivo." },
+        { title: "Limpieza Dental Profunda", description: "Para casos con acumulación debajo de la encía. Se enfoca en tratar las encías.", subtext: "Protección periodontal." }
       ]
     },
     benefits: {
-      title: "Beneficios de la Limpieza Dental Regular",
+      title: "Beneficios de la Limpieza Dental",
       items: [
         "Ayuda a prevenir caries y enfermedades de las encías",
         "Elimina la acumulación de placa y sarro",
@@ -207,24 +259,24 @@ const pageContent = {
     },
     cost: {
       title: "Costo de Limpieza Dental en Playa del Carmen",
-      text1: "El costo de la limpieza dental en Playa del Carmen es generalmente mucho más bajo que en Estados Unidos, lo que la convierte en una opción asequible para el cuidado dental preventivo. Los costos pueden variar según el tipo de limpieza requerida y la condición de tus dientes y encías.",
-      text2: "Tras una breve evaluación, nuestro equipo explicará el tratamiento recomendado y proporcionará información clara sobre el costo, sin cargos ocultos.",
+      text1: "El costo es generalmente mucho más bajo que en Estados Unidos, lo que la convierte en una opción asequible para el cuidado preventivo.",
+      text2: "Tras una breve evaluación, nuestro equipo explicará el tratamiento y proporcionará información clara sobre el costo.",
     },
     whyChoose: {
-      title: "¿Por qué elegir nuestra clínica dental para limpieza dental?",
+      title: "¿Por qué elegir nuestra clínica?",
       items: [
-        "Protocolos estrictos de higiene y seguridad",
+        "Protocolos estrictos de higiene",
         "Profesionales dentales experimentados",
         "Comunicación clara en inglés",
         "Instalaciones cómodas y modernas",
-        "Experiencia atendiendo a pacientes internacionales"
+        "Experiencia con pacientes internacionales"
       ],
-      footerText: "Nuestro objetivo es proporcionar una limpieza dental segura y profesional para los pacientes que visitan Playa del Carmen.",
+      footerText: "Nuestro objetivo es proporcionar una limpieza dental segura y profesional.",
       reelId: "DPCjErMDkTc"
     },
     process: {
       title: "Proceso de la Limpieza Dental",
-      footer: "El procedimiento es simple, efectivo y típicamente se completa en una sola visita.",
+      footer: "El procedimiento es simple, efectivo y se completa en una sola visita.",
       steps: [
         { title: "Examen oral" },
         { title: "Limpieza dental profesional" },
@@ -233,29 +285,29 @@ const pageContent = {
       ]
     },
     preventiveContext: {
-      title: "La Limpieza como parte del Cuidado Dental Preventivo",
-      text1: "La limpieza dental suele ser el primer paso antes de tratamientos cosméticos o restauradores como el blanqueamiento, las carillas de porcelana o el diseño de sonrisa. Mantener una buena higiene bucal ayuda a garantizar mejores resultados.",
+      title: "La Limpieza como Base de la Salud",
+      text1: "Suele ser el primer paso antes de tratamientos cosméticos. Mantener una buena higiene bucal garantiza mejores resultados a largo plazo.",
       imageSrc: imgPath + "Theeth-cleaning-IMG-4.webp",
       imgAlt: "Limpieza dental como base de la salud oral"
     },
     location: {
-      title: "Limpieza Dental en Playa del Carmen, México",
-      text1: "Nuestra clínica está convenientemente ubicada, facilitando el acceso a cuidado dental profesional durante tu estancia.",
+      title: "Limpieza Dental en Playa del Carmen",
+      text1: "Nuestra clínica está convenientemente ubicada, facilitando el acceso a cuidado profesional durante tu estancia.",
       mapUrl: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3762.8236434869563!2d-87.0736590249982!3d20.629600986253736!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8f4c299c6e6f3d5b%3A0x6d5a7b4e4f4e4b6a!2sLux%20Dental%20Clinic!5e0!3m2!1ses!2smx!4v1696548765432!5m2!1ses!2smx",
     },
     faq: {
       title: "Preguntas Frecuentes",
       items: [
-        { question: "¿Con qué frecuencia debo hacerme una limpieza?", answer: "La mayoría se beneficia de una limpieza cada seis meses." },
-        { question: "¿Es segura la limpieza dental en México?", answer: "Sí, siempre que sea realizada por profesionales calificados bajo estándares de higiene." },
-        { question: "¿Cuánto cuesta?", answer: "Generalmente es más bajo que en EE. UU. y varía según el tipo de limpieza necesaria." },
-        { question: "¿Necesito una cita?", answer: "Se recomienda para garantizar disponibilidad y atención personalizada." }
+        { question: "¿Con qué frecuencia debo hacerme una limpieza?", answer: "Se recomienda cada seis meses para la mayoría de los pacientes." },
+        { question: "¿Es segura en México?", answer: "Sí, siempre que sea realizada por profesionales bajo estándares de higiene." },
+        { question: "¿Cuánto cuesta?", answer: "Es considerablemente más bajo que en EE. UU. o Canadá." },
+        { question: "¿Necesito cita?", answer: "Se recomienda para asegurar disponibilidad." }
       ]
     },
     cta: {
       title: "Agenda tu Cita de Limpieza Dental",
-      description: "Si buscas una limpieza dental profesional en Playa del Carmen, nuestro equipo está listo para ayudarte.",
-      button: "Reserva tu Cita de Limpieza",
+      description: "Si buscas una limpieza dental profesional en Playa del Carmen, estamos listos para ayudarte.",
+      button: "Reserva tu Cita Ahora",
       note: "Cuida tu salud bucal mientras visitas México"
     }
   }
@@ -270,6 +322,8 @@ const t = pageContent[lang];
   lang={lang}
   enPath={enPath}
   esPath={esPath}
+  schema={t.schema}
+  ogImage={ogImage}
 >
   <HeaderSpeciality 
       lang={lang}
@@ -293,7 +347,6 @@ const t = pageContent[lang];
       title={t.whatIs.title}
       text1={t.whatIs.text1}
       text2={t.whatIs.text2}
-      
     />
 
   <OptionsSpeciality 
@@ -328,7 +381,7 @@ const t = pageContent[lang];
       steps={t.process.steps}
     />
 
-    <AboutSpeciality 
+  <AboutSpeciality 
       title={t.preventiveContext.title}
       text1={t.preventiveContext.text1}
       imageSrc={t.preventiveContext.imageSrc}
