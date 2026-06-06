@@ -1,18 +1,20 @@
 ---
 // src/pages/[lang]/[endodontics].astro
+import { routes } from "../../i18n/ui";
+import Layout from "../../layouts/Layout.astro";
 
 export async function getStaticPaths() {
   return [
     { 
       params: { 
         lang: 'en', 
-        endodontics: 'root-canal-treatment-playa-del-carmen' 
+        endodontics: routes.en.endodontics 
       } 
     },
     { 
       params: { 
         lang: 'es', 
-        endodontics: 'endodoncia' 
+        endodontics: routes.es.endodontics 
       } 
     },
   ];
@@ -20,12 +22,11 @@ export async function getStaticPaths() {
 
 const { lang } = Astro.params as { lang: 'en' | 'es' };
 
-const enPath = "/en/root-canal-treatment-playa-del-carmen/";
-const esPath = "/es/endodoncia/";
-const imgPath = "/root_canal_treatment/";
+const enPath = `/en/${routes.en.endodontics}/`;
+const esPath = `/es/${routes.es.endodontics}/`;
+const imgPath = `/root_canal_treatment/`;
 const ogImage = `${imgPath}Root-canal-IMG-4.webp`;
 
-import Layout from "../../layouts/Layout.astro"
 import HeaderSpeciality from "../../components/shared/HeaderSpeciality.astro";
 import AboutSpeciality from "../../components/shared/AboutSpeciality.astro";
 import WhatIsSpeciality from "../../components/shared/WhatIsSpeciality.astro";

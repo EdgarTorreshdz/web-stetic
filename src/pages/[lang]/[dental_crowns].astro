@@ -1,18 +1,19 @@
 ---
 // src/pages/[lang]/[dental_crowns].astro
-
+import { routes } from "../../i18n/ui";
+import Layout from "../../layouts/Layout.astro";
 export async function getStaticPaths() {
   return [
     { 
       params: { 
         lang: 'en', 
-        dental_crowns: 'dental-crowns-playa-del-carmen' 
+        dental_crowns: routes.en.dental_crowns 
       } 
     },
     { 
       params: { 
         lang: 'es', 
-        dental_crowns: 'coronas-dentales' 
+        dental_crowns: routes.es.dental_crowns
       } 
     },
   ];
@@ -20,12 +21,11 @@ export async function getStaticPaths() {
 
 const { lang } = Astro.params as { lang: 'en' | 'es' };
 
-const enPath = "/en/dental-crowns-playa-del-carmen/";
-const esPath = "/es/coronas-dentales/";
+const enPath = `/en/${routes.en.dental_crowns}/`;
+const esPath = `/es/${routes.es.dental_crowns}/`;
 const imgPath = '/dental_crowns/';
 const ogImage = `${imgPath}Crown-IMG-1.webp`;
 
-import Layout from "../../layouts/Layout.astro";
 import HeaderSpeciality from "../../components/shared/HeaderSpeciality.astro";
 import AboutSpeciality from "../../components/shared/AboutSpeciality.astro";
 import WhatIsSpeciality from "../../components/shared/WhatIsSpeciality.astro";

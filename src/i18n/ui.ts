@@ -51,7 +51,10 @@ export const routes = {
     'dental_crowns': 'dental-crowns-playa-del-carmen',
     'teeth_whitening': 'teeth-whitening-playa-del-carmen',
     'invisalign': 'invisalign-playa-del-carmen',
-    'dental_tourism': 'dental-tourism-mexico'
+    'dental_tourism': 'dental-tourism-mexico',
+    'privacy_policy': 'privacy-policy',
+    'terms_conditions': 'terms-and-conditions',
+    'cookie_policy': 'cookie-policy'
   },
   es: {
     'about': 'nosotros',
@@ -72,6 +75,9 @@ export const routes = {
     'dental_crowns': 'coronas-dentales',
     'teeth_whitening': 'blanqueamiento-dental',
     'invisalign': 'invisalign',
-    'dental_tourism': 'turismo-dental'
+    'dental_tourism': 'turismo-dental',
+    'privacy_policy': 'aviso-de-privacidad',
+    'terms_conditions': 'terminos-condiciones',
+    'cookie_policy': 'politica-de-cookies'
   },
 };

@@ -1,18 +1,20 @@
 ---
 // src/pages/[lang]/[invisalign].astro
+import { routes } from "../../i18n/ui";
+import Layout from "../../layouts/Layout.astro";
 
 export async function getStaticPaths() {
   return [
     { 
       params: { 
         lang: 'en', 
-        invisalign: 'invisalign-playa-del-carmen' 
+        invisalign: routes.en.invisalign 
       } 
     },
     { 
       params: { 
         lang: 'es', 
-        invisalign: 'invisalign' 
+        invisalign: routes.es.invisalign 
       } 
     },
   ];
@@ -20,12 +22,11 @@ export async function getStaticPaths() {
 
 const { lang } = Astro.params as { lang: 'en' | 'es' };
 
-const enPath = "/en/invisalign-playa-del-carmen/";
-const esPath = "/es/invisalign/";
-const imgPath = "/invisalign/";
+const enPath = `/en/${routes.en.invisalign}/`;
+const esPath = `/es/${routes.es.invisalign}/`;
+const imgPath = `/invisalign/`;
 const ogImage = `${imgPath}Invisalign-IMG-1.webp`;
 
-import Layout from "../../layouts/Layout.astro";
 import HeaderSpeciality from "../../components/shared/HeaderSpeciality.astro";
 import AboutSpeciality from "../../components/shared/AboutSpeciality.astro";
 import WhatIsSpeciality from "../../components/shared/WhatIsSpeciality.astro";

@@ -1,20 +1,21 @@
 ---
 // src/pages/[lang]/[contact].astro
+import { routes } from "../../i18n/ui";
+import Layout from "../../layouts/Layout.astro";
 
 export async function getStaticPaths() {
   return [
-    { params: { lang: 'en', contact: 'contact' } },
-    { params: { lang: 'es', contact: 'contacto' } },
+    { params: { lang: 'en', contact: routes.en.contact } },
+    { params: { lang: 'es', contact: routes.es.contact } },
   ];
 }
 
 const { lang } = Astro.params as { lang: 'en' | 'es' };
 
 // Rutas consistentes con trailing slash
-const enPath = "/en/contact/";
-const esPath = "/es/contacto/";
+const enPath = `/en/${routes.en.contact}/`;
+const esPath = `/es/${routes.es.contact}/`;
 
-import Layout from "../../layouts/Layout.astro";
 import ContactForm from "../../components/shared/ContactForm.astro";
 
 const pageContent = {

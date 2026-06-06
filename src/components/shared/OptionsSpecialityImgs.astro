@@ -1,0 +1,176 @@
+---
+interface Option {
+  title: string;
+  description: string;
+  subtext?: string;
+  imgSrc?: string; // Ruta de la imagen (opcional)
+  alt?: string;   // Texto alternativo (opcional pero recomendado para SEO)
+}
+
+interface Props {
+  title: string;
+  description?: string;
+  options: Option[];
+}
+
+const { title, description, options } = Astro.props;
+---
+
+<section class="options-section">
+  <div class="container">
+    <div class="options__header">
+      <h2 class="options__title">{title}</h2>
+      <div class="options__accent-line"></div>
+      {description && <p class="options__description">{description}</p>}
+    </div>
+
+    <div class="options__grid">
+      {options.map((option) => (
+        <div class="options__item">
+          {/* Renderiza la imagen solo si se pasa la propiedad */}
+          {option.imgSrc && (
+            <img 
+              src={option.imgSrc} 
+              alt={option.alt || option.title} 
+              class="options__item-image" 
+            />
+          )}
+          
+          <div class="options__item-content">
+            <h3 class="options__item-title">{option.title}</h3>
+            <p class="options__item-description">{option.description}</p>
+            {option.subtext && <p class="options__item-subtext">{option.subtext}</p>}
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  :root {
+    --gold: #A58E55;
+    --black: #000000;
+    --white: #ffffff;
+    --soft-grey: #f9f9f9;
+  }
+
+  .options-section {
+    padding: 100px 0;
+    background-color: var(--white);
+    color: var(--black);
+  }
+
+  .container { margin: 0 auto; width: 85%; }
+  
+  .options__header {
+    text-align: center;
+    max-width: 800px;
+    margin: 0 auto 60px auto;
+  }
+
+  .options__title {
+    font-size: 2.2rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 20px;
+  }
+
+  @media (min-width: 768px) {
+    .options__title { font-size: 3rem; }
+  }
+
+  .options__accent-line {
+    width: 80px;
+    height: 3px;
+    background-color: var(--gold);
+    margin: 0 auto 30px auto;
+  }
+
+  .options__description {
+    font-size: 1.15rem;
+    line-height: 1.7;
+    color: #444;
+  }
+
+  .options__grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 30px;
+  }
+
+  @media (min-width: 768px) {
+    .options__grid {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+
+  .options__item {
+    background-color: var(--soft-grey);
+    border-top: 4px solid var(--gold);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    /* overflow: hidden asegura que la imagen no se salga de las esquinas de la tarjeta */
+    overflow: hidden; 
+  }
+
+  .options__item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+  }
+
+  /* === Estilos de la imagen === */
+  .options__item-image {
+    width: 100%;
+    height: 350px; /* Fija una altura para que todas las tarjetas se vean alineadas */
+    object-fit: cover; /* Evita que la imagen se estire o se deforme */
+    display: block;
+  }
+
+  /* === Contenedor del texto === */
+  .options__item-content {
+    padding: 30px 40px 40px 40px;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1; /* Permite que el contenido ocupe el espacio restante si las tarjetas tienen alturas distintas */
+  }
+
+  .options__item-title {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--gold);
+    margin-bottom: 20px;
+    text-transform: uppercase;
+  }
+
+  .options__item-description {
+    font-size: 1.05rem;
+    line-height: 1.7;
+    color: var(--black);
+    margin-bottom: 15px;
+    flex-grow: 1; /* Empuja el subtext siempre hacia el fondo */
+  }
+
+  .options__item-subtext {
+    font-size: 1rem;
+    line-height: 1.6;
+    color: #666;
+    font-style: italic;
+    border-top: 1px solid #ddd;
+    padding-top: 15px;
+    margin-top: auto;
+  }
+  
+  @media (max-width: 768px) {
+    .options__item-content {
+      padding: 25px; /* Un poco menos de padding en móviles */
+    }
+
+    .options__item-image {
+      height: 250px; /* Altura menor para móviles */
+    }
+  }
+</style>

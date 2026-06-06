@@ -1,0 +1,96 @@
+---
+// src/pages/[lang]/cookies.astro (o el nombre que tenga tu archivo)
+
+import { routes } from "../../i18n/ui";
+import Layout from "../../layouts/Layout.astro";
+
+export function getStaticPaths() {
+  return [
+    { params: { lang: 'en', cookie_policy: routes.en.cookie_policy } },
+    { params: { lang: 'es', cookie_policy: routes.es.cookie_policy } },
+  ];
+}
+
+const { lang } = Astro.params as { lang: 'en' | 'es' };
+
+// Generamos los paths dinámicamente desde tu ui.ts para evitar escribirlos a mano
+const enPath = `/en/${routes.en.cookie_policy}`;
+const esPath = `/es/${routes.es.cookie_policy}`;
+
+
+const pageContent = {
+  en: {
+    title: "Cookie Policy",
+    paragraphs: [
+      "This <strong>Stetic Dental Clinic</strong> website uses its own and third-party cookies to improve the efficiency of its websites and create profiles based on the user's browsing habits to offer content adapted to their interests.",
+      "Cookies are data files that are stored on the hard drive of a user's computer or electronic communications device when browsing a specific website, which allows the exchange of state information between said site and the user's browser. The state information can reveal means of session identification, authentication, or user preferences, as well as any data stored by the browser regarding the website.",
+      "<strong>Stetic Dental Clinic</strong> uses cookies to facilitate navigation through its portal, for security reasons, and to obtain greater efficiency and personalization of the services offered to Users through browsing analysis.",
+      "If you wish to withdraw your consent related to this Cookie Policy at any time, you must delete the stored cookies through the adjustments and configurations of your Internet browser."
+    ]
+  },
+  es: {
+    title: "Política de Cookies",
+    paragraphs: [
+      "Esta web de <strong>Stetic Dental Clinic</strong> utiliza cookies propias y de terceros para mejorar la eficiencia de sus sitios web y elaboración de perfiles basados en los hábitos de navegación del usuario y ofrecer contenidos adaptados a sus intereses.",
+      "Las cookies son el Archivo de datos que se almacena en el disco duro del equipo de cómputo o del dispositivo de comunicaciones electrónicas de un usuario al navegar en un sitio de internet específico, el cual permite intercambiar información de estado entre dicho sitio y el navegador del usuario. La información de estado puede revelar medios de identificación de sesión, autenticación o preferencias del usuario, así como cualquier dato almacenado por el navegador respecto al sitio de internet.",
+      "<strong>Stetic Dental Clinic</strong> utiliza cookies para facilitar la navegación por su portal, por motivos de seguridad y para obtener una mayor eficacia y personalización de los servicios ofrecidos a los Usuarios mediante el análisis de navegación.",
+      "Si quisiese retirar en cualquier momento su consentimiento relacionado con la presente Política de Cookies, deberá eliminar las cookies almacenadas a través de los ajustes y configuraciones de su navegador de Internet."
+    ]
+  }
+};
+
+const t = pageContent[lang];
+---
+
+<Layout title={t.title} lang={lang} enPath={enPath} esPath={esPath}>
+  <section class="cookies">
+    <div class="cookies__container">
+      <h1 class="cookies__title">{t.title}</h1>
+
+      <p set:html={t.paragraphs[0]} />
+      <p set:html={t.paragraphs[1]} />
+      <p set:html={t.paragraphs[2]} />
+      <p set:html={t.paragraphs[3]} />
+      
+    </div>
+  </section>
+</Layout>
+
+<style>
+  /* === Estilos móviles primero === */
+  .cookies {
+    background: #fafafa;
+    padding: 2rem 1rem;
+    font-family: "Montserrat", sans-serif;
+    color: #333;
+    line-height: 1.6;
+  }
+
+  .cookies__container {
+    max-width: 880px;
+    margin: 0 auto;
+  }
+
+  .cookies__title {
+    font-size: 1.75rem;
+    margin-bottom: 1rem;
+    color: #0e4675;
+    text-align: center;
+  }
+
+  .cookies p {
+    margin-bottom: 1rem;
+  }
+
+  /* === Desktop === */
+  @media (min-width: 768px) {
+    .cookies {
+      padding: 3rem 2rem;
+    }
+
+    .cookies__title {
+      font-size: 2.25rem;
+      text-align: left;
+    }
+  }
+</style>

@@ -1,18 +1,20 @@
 ---
 // src/pages/[lang]/[smile_design].astro
+import { routes } from "../../i18n/ui";
+import Layout from "../../layouts/Layout.astro";
 
 export async function getStaticPaths() {
   return [
     { 
       params: { 
         lang: 'en', 
-        smile_design: 'smile-design-playa-del-carmen' 
+        smile_design: routes.en.smile_design 
       } 
     },
     { 
       params: { 
         lang: 'es', 
-        smile_design: 'diseno-de-sonrisa' 
+        smile_design: routes.es.smile_design 
       } 
     },
   ];
@@ -20,12 +22,11 @@ export async function getStaticPaths() {
 
 const { lang } = Astro.params as { lang: 'en' | 'es' };
 
-const enPath = "/en/smile-design-playa-del-carmen/";
-const esPath = "/es/diseno-de-sonrisa/";
-const imgPath = "/smile_design/";
+const enPath = `/en/${routes.en.smile_design}/`;
+const esPath = `/es/${routes.es.smile_design}/`;
+const imgPath = `/smile_design/`;
 const ogImage = `${imgPath}Smile-design-IMG-1.webp`;
 
-import Layout from "../../layouts/Layout.astro";
 import HeaderSpeciality from "../../components/shared/HeaderSpeciality.astro";
 import AboutSpeciality from "../../components/shared/AboutSpeciality.astro";
 import WhatIsSpeciality from "../../components/shared/WhatIsSpeciality.astro";

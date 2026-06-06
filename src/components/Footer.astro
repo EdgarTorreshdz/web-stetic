@@ -36,7 +36,7 @@ const translations = {
 
 const t = translations[lang];
 
-const phoneNumber = "5219844634150";
+const phoneNumber = "5219844922549";
 const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(t.whatsappMsg)}`;
 ---
 
@@ -56,11 +56,11 @@ const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(t.wh
       </div>
 
       <nav class="footer__legal">
-        <a href={getUrl('aviso-de-privacidad')}>{t.privacy}</a>
+        <a href={getUrl('privacy_policy')}>{t.privacy}</a>
         <span class="separator">|</span>
-        <a href={getUrl('terminos-condiciones')}>{t.terms}</a>
+        <a href={getUrl('terms_conditions')}>{t.terms}</a>
         <span class="separator">|</span>
-        <a href={getUrl('politica-de-cookies')}>{t.cookies}</a>
+        <a href={getUrl('cookie_policy')}>{t.cookies}</a>
       </nav>
 
       <div class="footer__bottom">

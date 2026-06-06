@@ -1,22 +1,23 @@
 ---
 // src/pages/[lang]/[orthodontics].astro
+import { routes } from "../../i18n/ui";
+import Layout from "../../layouts/Layout.astro";
 
 export async function getStaticPaths() {
   return [
-    { params: { lang: 'en', orthodontics: 'orthodontist-playa-del-carmen' } },
-    { params: { lang: 'es', orthodontics: 'ortodoncia' } },
+    { params: { lang: 'en', orthodontics: routes.en.orthodontics } },
+    { params: { lang: 'es', orthodontics: routes.es.orthodontics } },
   ];
 }
 
 const { lang } = Astro.params as { lang: 'en' | 'es' };
 
 // Rutas base con trailing slash
-const enPath = "/en/orthodontist-playa-del-carmen/";
-const esPath = "/es/ortodoncia/";
-const imgPath = '/orthodontists/';
+const enPath = `/en/${routes.en.orthodontics}/`;
+const esPath = `/es/${routes.es.orthodontics}/`;
+const imgPath = `/orthodontists/`;
 const ogImage = `${imgPath}Orthodontist-IMG-1.webp`;
 
-import Layout from "../../layouts/Layout.astro";
 import HeaderSpeciality from "../../components/shared/HeaderSpeciality.astro";
 import AboutSpeciality from "../../components/shared/AboutSpeciality.astro";
 import WhatIsSpeciality from "../../components/shared/WhatIsSpeciality.astro";

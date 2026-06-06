@@ -1,18 +1,20 @@
 ---
 // src/pages/[lang]/[teeth_cleaning].astro
+import { routes } from "../../i18n/ui";
+import Layout from "../../layouts/Layout.astro";
 
 export async function getStaticPaths() {
   return [
     { 
       params: { 
         lang: 'en', 
-        teeth_cleaning: 'teeth-cleaning-playa-del-carmen' 
+        teeth_cleaning: routes.en.teeth_cleaning 
       } 
     },
     { 
       params: { 
         lang: 'es', 
-        teeth_cleaning: 'limpieza-dental' 
+        teeth_cleaning: routes.es.teeth_cleaning 
       } 
     },
   ];
@@ -20,12 +22,11 @@ export async function getStaticPaths() {
 
 const { lang } = Astro.params as { lang: 'en' | 'es' };
 
-const enPath = "/en/teeth-cleaning-playa-del-carmen/";
-const esPath = "/es/limpieza-dental/";
-const imgPath = "/teeth_cleaning/";
+const enPath = `/en/${routes.en.teeth_cleaning}/`;
+const esPath = `/es/${routes.es.teeth_cleaning}/`;
+const imgPath = `/teeth_cleaning/`;
 const ogImage = `${imgPath}Theeth-cleaning-IMG-2.webp`;
 
-import Layout from "../../layouts/Layout.astro";
 import HeaderSpeciality from "../../components/shared/HeaderSpeciality.astro";
 import AboutSpeciality from "../../components/shared/AboutSpeciality.astro";
 import WhatIsSpeciality from "../../components/shared/WhatIsSpeciality.astro";

@@ -1,18 +1,20 @@
 ---
 // src/pages/[lang]/[dental_tourism].astro
+import { routes } from "../../i18n/ui";
+import Layout from "../../layouts/Layout.astro";
 
 export async function getStaticPaths() {
   return [
     { 
       params: { 
         lang: 'en', 
-        dental_tourism: 'dental-tourism-mexico' 
+        dental_tourism: routes.en.dental_tourism 
       } 
     },
     { 
       params: { 
         lang: 'es', 
-        dental_tourism: 'turismo-dental' 
+        dental_tourism: routes.es.dental_tourism 
       } 
     },
   ];
@@ -20,12 +22,11 @@ export async function getStaticPaths() {
 
 const { lang } = Astro.params as { lang: 'en' | 'es' };
 
-const enPath = "/en/dental-tourism-mexico/";
-const esPath = "/es/turismo-dental/";
+const enPath = `/en/${routes.en.dental_tourism}/`;
+const esPath = `/es/${routes.es.dental_tourism}/`;
 const imgPath = '/dental_tourism/';
 const ogImage = `${imgPath}Dental-Tourism-IMG-1.webp`;
 
-import Layout from "../../layouts/Layout.astro";
 import HeaderSpeciality from "../../components/shared/HeaderSpeciality.astro";
 import AboutSpeciality from "../../components/shared/AboutSpeciality.astro";
 import WhatIsSpeciality from "../../components/shared/WhatIsSpeciality.astro";

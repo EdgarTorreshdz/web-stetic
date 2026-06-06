@@ -3,7 +3,7 @@ import { Icon } from "astro-icon/components";
 import { routes } from "../../i18n/ui"; // Importamos las rutas oficiales
 
 interface Props {
-  lang?: 'en' | 'es';
+  lang?: "en" | "es";
 }
 
 const { lang = "en" } = Astro.props;
@@ -18,46 +18,177 @@ const getUrl = (key: string) => {
   return `/${lang}/${slug}`;
 };
 
-const imgPathServicces = '/home/services/';
+const imgPathServicces = "/home/services/";
 
 const translations = {
   en: {
     title: "Our Dental Services in Playa del Carmen",
-    description: "We offer a complete range of treatments for patients looking for a trusted dentist in Playa del Carmen, from preventive care to advanced cosmetic and restorative procedures.",
+    description: `We offer a complete range of treatments for patients looking for a trusted dentist in Playa del Carmen, from preventive care to advanced cosmetic and restorative procedures.
+    Our clinic is equipped to provide high-quality results tailored to each patient, including dental implants, veneers, and full smile makeovers.
+    Whether you are visiting for dental tourism in Mexico or looking for a long-term dental solution, our services are designed to meet international standards with personalized care and modern technology.
+    `,
     viewMore: "View Details",
     services: [
-      { key: "dental_implants", title: "Dental implants", alt: "Dental implants in playa del carmen treatment", desc: "Permanent solutions to replace missing teeth with natural-looking results.", img: imgPathServicces + "Dental-implant.webp" },
-      { key: "veneers", title: "Veneers", alt: "veneers in playa del carmen smile", desc: "Custom porcelain veneers designed to enhance your smile with long-lasting aesthetics.", img: imgPathServicces + "VeneersVeeners.webp" },
-      { key: "dental_crowns", title: "Crowns", alt: "Dental crowns in playa del carmen restoration", desc: "Durable dental crowns that restore strength, function, and natural appearance.", img: imgPathServicces + "Crown.webp" },
-      { key: "invisalign", title: "Invisalign", alt: "Clear aligners in playa del carmen treatment", desc: "Discreet orthodontic solutions to straighten teeth comfortably and effectively.", img: imgPathServicces + "Clear-Aligners.webp" },
-      { key: "endodontics", title: "Root canal", alt: "Root canal treatment in playa del carmen", desc: "Modern procedures to relieve pain, save your tooth, and restore oral health.", img: imgPathServicces + "Root-canal.webp" },
-      { key: "smile_design", title: "Smile design", alt: "Smile design in playa del carmen results", desc: "Personalized treatments to create a balanced, natural and confident smile.", img: imgPathServicces + "Smile-design.webp" },
-      { key: "teeth_cleaning", title: "Teeth cleaning", alt: "Teeth cleaning in playa del carmen procedure", desc: "Professional cleanings to remove plaque, protect gums, and maintain oral health.", img: imgPathServicces + "Theet-cleaning.webp" },
-      { key: "teeth_whitening", title: "Teeth Whitening", alt: "Teeth whitening in playa del carmen results", desc: "Professional whitening treatments for a brighter, healthier-looking smile.", img: imgPathServicces + "Theet-whitening.webp" },
-      { key: "orthodontics", title: "Braces", alt: "Orthodontist in playa del carmen braces treatment", desc: "Traditional orthodontic treatments to align teeth and improve bite function.", img: imgPathServicces + "Braces.webp" },
-      { key: "dental_tourism", title: "Dental tourism", alt: "Dental tourism in mexico", desc: "Complete support for international patients seeking safe, affordable dental care.", img: imgPathServicces + "Dental-treatment.webp" }
-    ]
+      {
+        key: "dental_implants",
+        title: "Dental implants",
+        alt: "Dental implants in playa del carmen treatment",
+        desc: "Permanent solutions to replace missing teeth with natural-looking results.",
+        img: imgPathServicces + "Dental-implant.webp",
+      },
+      {
+        key: "veneers",
+        title: "Veneers",
+        alt: "veneers in playa del carmen smile",
+        desc: "Custom porcelain veneers designed to enhance your smile with long-lasting aesthetics.",
+        img: imgPathServicces + "VeneersVeeners.webp",
+      },
+      {
+        key: "dental_crowns",
+        title: "Crowns",
+        alt: "Dental crowns in playa del carmen restoration",
+        desc: "Durable dental crowns that restore strength, function, and natural appearance.",
+        img: imgPathServicces + "Crown.webp",
+      },
+      {
+        key: "invisalign",
+        title: "Invisalign",
+        alt: "Clear aligners in playa del carmen treatment",
+        desc: "Discreet orthodontic solutions to straighten teeth comfortably and effectively.",
+        img: imgPathServicces + "Clear-Aligners.webp",
+      },
+      {
+        key: "endodontics",
+        title: "Root canal",
+        alt: "Root canal treatment in playa del carmen",
+        desc: "Modern procedures to relieve pain, save your tooth, and restore oral health.",
+        img: imgPathServicces + "Root-canal.webp",
+      },
+      {
+        key: "smile_design",
+        title: "Smile design",
+        alt: "Smile design in playa del carmen results",
+        desc: "Personalized treatments to create a balanced, natural and confident smile.",
+        img: imgPathServicces + "Smile-design.webp",
+      },
+      {
+        key: "teeth_cleaning",
+        title: "Teeth cleaning",
+        alt: "Teeth cleaning in playa del carmen procedure",
+        desc: "Professional cleanings to remove plaque, protect gums, and maintain oral health.",
+        img: imgPathServicces + "Theet-cleaning.webp",
+      },
+      {
+        key: "teeth_whitening",
+        title: "Teeth Whitening",
+        alt: "Teeth whitening in playa del carmen results",
+        desc: "Professional whitening treatments for a brighter, healthier-looking smile.",
+        img: imgPathServicces + "Theet-whitening.webp",
+      },
+      {
+        key: "orthodontics",
+        title: "Braces",
+        alt: "Orthodontist in playa del carmen braces treatment",
+        desc: "Traditional orthodontic treatments to align teeth and improve bite function.",
+        img: imgPathServicces + "Braces.webp",
+      },
+      {
+        key: "dental_tourism",
+        title: "Dental tourism",
+        alt: "Dental tourism in mexico",
+        desc: "Complete support for international patients seeking safe, affordable dental care.",
+        img: imgPathServicces + "Dental-treatment.webp",
+      },
+    ],
+    btnText: "Book your consultation on Whatsapp",
+    whatsappMsg: "Hello! I'm interested in a free quote for my dental treatment."
   },
   es: {
     title: "Nuestros Servicios Dentales en Playa del Carmen",
-    description: "Ofrecemos una gama completa de servicios dentales adaptados para pacientes internacionales que buscan atención dental confiable en México:",
+    description:
+      "Ofrecemos una gama completa de servicios dentales adaptados para pacientes internacionales que buscan atención dental confiable en México:",
     viewMore: "Ver detalles",
     services: [
-      { key: "dental_implants", title: "Implantes Dentales", alt: "Dental implants in playa del carmen treatment", desc: "Soluciones permanentes para reemplazar dientes perdidos con resultados naturales.", img: imgPathServicces + "Dental-implant.webp" },
-      { key: "veneers", title: "Carillas", alt: "veneers in playa del carmen smile", desc: "Carillas de porcelana personalizadas diseñadas para mejorar su sonrisa.", img: imgPathServicces + "VeneersVeeners.webp" },
-      { key: "dental_crowns", title: "Coronas", alt: "Dental crowns in playa del carmen restoration", desc: "Coronas dentales duraderas que restauran la fuerza, función y apariencia natural.", img: imgPathServicces + "Crown.webp" },
-      { key: "invisalign", title: "Invisalign", alt: "Clear aligners in playa del carmen treatment", desc: "Soluciones de ortodoncia discretas para enderezar los dientes cómodamente.", img: imgPathServicces + "Clear-Aligners.webp" },
-      { key: "endodontics", title: "Endodoncia", alt: "Root canal treatment in playa del carmen", desc: "Procedimientos modernos para aliviar el dolor, salvar su diente y restaurar la salud.", img: imgPathServicces + "Root-canal.webp" },
-      { key: "smile_design", title: "Diseño de Sonrisa", alt: "Smile design in playa del carmen results", desc: "Tratamientos personalizados para crear una sonrisa equilibrada y natural.", img: imgPathServicces + "Smile-design.webp" },
-      { key: "teeth_cleaning", title: "Limpieza Dental", alt: "Teeth cleaning in playa del carmen procedure", desc: "Limpiezas profesionales para eliminar la placa, proteger las encías y mantener la salud.", img: imgPathServicces + "Theet-cleaning.webp" },
-      { key: "teeth_whitening", title: "Blanqueamiento", alt: "Teeth whitening in playa del carmen results", desc: "Tratamientos profesionales para una sonrisa más brillante y saludable.", img: imgPathServicces + "Theet-whitening.webp" },
-      { key: "orthodontics", title: "Brackets", alt: "Orthodontist in playa del carmen braces treatment", desc: "Tratamientos tradicionales de ortodoncia para alinear los dientes.", img: imgPathServicces + "Braces.webp" },
-      { key: "dental_tourism", title: "Turismo Dental", alt: "Dental tourism in mexico", desc: "Soporte completo para pacientes internacionales que buscan atención segura.", img: imgPathServicces + "Dental-treatment.webp" }
-    ]
-  }
+      {
+        key: "dental_implants",
+        title: "Implantes Dentales",
+        alt: "Dental implants in playa del carmen treatment",
+        desc: "Soluciones permanentes para reemplazar dientes perdidos con resultados naturales.",
+        img: imgPathServicces + "Dental-implant.webp",
+      },
+      {
+        key: "veneers",
+        title: "Carillas",
+        alt: "veneers in playa del carmen smile",
+        desc: "Carillas de porcelana personalizadas diseñadas para mejorar su sonrisa.",
+        img: imgPathServicces + "VeneersVeeners.webp",
+      },
+      {
+        key: "dental_crowns",
+        title: "Coronas",
+        alt: "Dental crowns in playa del carmen restoration",
+        desc: "Coronas dentales duraderas que restauran la fuerza, función y apariencia natural.",
+        img: imgPathServicces + "Crown.webp",
+      },
+      {
+        key: "invisalign",
+        title: "Invisalign",
+        alt: "Clear aligners in playa del carmen treatment",
+        desc: "Soluciones de ortodoncia discretas para enderezar los dientes cómodamente.",
+        img: imgPathServicces + "Clear-Aligners.webp",
+      },
+      {
+        key: "endodontics",
+        title: "Endodoncia",
+        alt: "Root canal treatment in playa del carmen",
+        desc: "Procedimientos modernos para aliviar el dolor, salvar su diente y restaurar la salud.",
+        img: imgPathServicces + "Root-canal.webp",
+      },
+      {
+        key: "smile_design",
+        title: "Diseño de Sonrisa",
+        alt: "Smile design in playa del carmen results",
+        desc: "Tratamientos personalizados para crear una sonrisa equilibrada y natural.",
+        img: imgPathServicces + "Smile-design.webp",
+      },
+      {
+        key: "teeth_cleaning",
+        title: "Limpieza Dental",
+        alt: "Teeth cleaning in playa del carmen procedure",
+        desc: "Limpiezas profesionales para eliminar la placa, proteger las encías y mantener la salud.",
+        img: imgPathServicces + "Theet-cleaning.webp",
+      },
+      {
+        key: "teeth_whitening",
+        title: "Blanqueamiento",
+        alt: "Teeth whitening in playa del carmen results",
+        desc: "Tratamientos profesionales para una sonrisa más brillante y saludable.",
+        img: imgPathServicces + "Theet-whitening.webp",
+      },
+      {
+        key: "orthodontics",
+        title: "Brackets",
+        alt: "Orthodontist in playa del carmen braces treatment",
+        desc: "Tratamientos tradicionales de ortodoncia para alinear los dientes.",
+        img: imgPathServicces + "Braces.webp",
+      },
+      {
+        key: "dental_tourism",
+        title: "Turismo Dental",
+        alt: "Dental tourism in mexico",
+        desc: "Soporte completo para pacientes internacionales que buscan atención segura.",
+        img: imgPathServicces + "Dental-treatment.webp",
+      },
+    ],
+    btnText: "OBTÉN UNA COTIZACIÓN GRATIS",
+    whatsappMsg: "¡Hola! Me gustaría una cotización sin compromiso para mi tratamiento dental."
+
+  },
 };
 
 const t = translations[lang as keyof typeof translations];
+const phoneNumber = "5219844922549";
+const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(t.whatsappMsg)}`;
 ---
 
 <section class="services-lux">
@@ -65,33 +196,40 @@ const t = translations[lang as keyof typeof translations];
     <div class="services-lux__header">
       <h2 class="services-lux__title">{t.title}</h2>
       <p class="services-lux__intro">{t.description}</p>
+      <a href={whatsappUrl} target="_blank" rel="noopener noreferrer" class="about-lux__cta">
+        <Icon name="whatsapp" size={24} />
+        <span>{t.btnText}</span>
+      </a>
     </div>
+    
 
     <div class="services-lux__grid">
-      {t.services.map((service) => (
-        <a href={getUrl(service.key)} class="service-card">
-          <img src={service.img} alt={service.alt} class="service-card__bg" />
-          <div class="service-card__overlay"></div>
-          
-          <div class="service-card__content">
-            <h3 class="service-card__title">{service.title}</h3>
-            <p class="service-card__description">{service.desc}</p>
-            <div class="service-card__action">
-              <span>{t.viewMore}</span>
-              <Icon name="right-arrow" size={18} />
+      {
+        t.services.map((service) => (
+          <a href={getUrl(service.key)} class="service-card">
+            <img src={service.img} alt={service.alt} class="service-card__bg" />
+            <div class="service-card__overlay" />
+
+            <div class="service-card__content">
+              <h3 class="service-card__title">{service.title}</h3>
+              <p class="service-card__description">{service.desc}</p>
+              <div class="service-card__action">
+                <span>{t.viewMore}</span>
+                <Icon name="right-arrow" size={18} />
+              </div>
             </div>
-          </div>
-          
-          <div class="service-card__border"></div>
-        </a>
-      ))}
+
+            <div class="service-card__border" />
+          </a>
+        ))
+      }
     </div>
   </div>
 </section>
 
 <style>
   :root {
-    --gold: #A58E55;
+    --gold: #a58e55;
     --black: #000000;
     --white: #ffffff;
   }
@@ -123,6 +261,7 @@ const t = translations[lang as keyof typeof translations];
     font-size: 1.1rem;
     color: #555;
     line-height: 1.6;
+    white-space: pre-line;
   }
 
   .services-lux__grid {
@@ -132,9 +271,22 @@ const t = translations[lang as keyof typeof translations];
     padding: 0 1rem;
   }
 
-  @media (min-width: 640px) { .services-lux__grid { grid-template-columns: repeat(2, 1fr); } }
-  @media (min-width: 1024px) { .services-lux__grid { grid-template-columns: repeat(3, 1fr); } }
-  @media (min-width: 1440px) { .services-lux__grid { grid-template-columns: repeat(5, 1fr); gap: 0.75rem; } }
+  @media (min-width: 640px) {
+    .services-lux__grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+  @media (min-width: 1024px) {
+    .services-lux__grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+  @media (min-width: 1440px) {
+    .services-lux__grid {
+      grid-template-columns: repeat(5, 1fr);
+      gap: 0.75rem;
+    }
+  }
 
   .service-card {
     position: relative;
@@ -146,7 +298,7 @@ const t = translations[lang as keyof typeof translations];
     overflow: hidden;
     border-radius: 2px;
     text-decoration: none;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
   }
 
   .service-card__bg {
@@ -161,8 +313,14 @@ const t = translations[lang as keyof typeof translations];
   }
 
   .service-card__overlay {
-    position: absolute;inset: 0;
-    background: linear-gradient(to top, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.4) 50%, rgba(0,0,0,0.1) 100%);
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      to top,
+      rgba(0, 0, 0, 0.9) 0%,
+      rgba(0, 0, 0, 0.4) 50%,
+      rgba(0, 0, 0, 0.1) 100%
+    );
     z-index: 1;
   }
 
@@ -215,8 +373,12 @@ const t = translations[lang as keyof typeof translations];
   }
 
   @media (hover: hover) {
-    .service-card:hover .service-card__bg { transform: scale(1.1); }
-    .service-card:hover .service-card__border { width: 100%; }
+    .service-card:hover .service-card__bg {
+      transform: scale(1.1);
+    }
+    .service-card:hover .service-card__border {
+      width: 100%;
+    }
   }
 
   .container-fluid {
@@ -225,5 +387,39 @@ const t = translations[lang as keyof typeof translations];
     max-width: 1600px;
   }
 
-  @media (max-width: 768px) { .services-lux__title { font-size: 1.8rem; } }
+  @media (max-width: 768px) {
+    .services-lux__title {
+      font-size: 1.8rem;
+    }
+  }
+
+  .about-lux__cta {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.75rem; /* Espacio entre el ícono y el texto */
+    background-color: #25d366; /* Verde oficial de WhatsApp */
+    color: var(--white);
+    padding: 1rem 2.5rem;
+    margin-top: 2rem; /* Separación con el párrafo de arriba */
+    border-radius: 50px; /* Forma de píldora elegante */
+    font-size: 0.9rem;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-decoration: none;
+    box-shadow: 0 4px 15px rgba(37, 211, 102, 0.3);
+    transition: all 0.3s ease;
+  }
+
+  .about-lux__cta:hover {
+    background-color: #1ebd57; /* Verde un poco más oscuro */
+    transform: translateY(-3px); /* Se levanta un poco */
+    box-shadow: 0 8px 20px rgba(37, 211, 102, 0.4); /* Sombra más pronunciada */
+    color: var(--white);
+  }
+
+  /* Aseguramos que el ícono esté bien alineado */
+  .about-lux__cta [data-icon] {
+    display: block;
+  }
 </style>

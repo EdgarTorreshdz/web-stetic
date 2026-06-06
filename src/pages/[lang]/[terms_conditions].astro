@@ -1,0 +1,142 @@
+---
+// src/pages/[lang]/terms-conditions.astro
+import { routes } from "../../i18n/ui";
+import Layout from "../../layouts/Layout.astro";
+
+export function getStaticPaths() {
+  return [
+    { params: { lang: 'en', terms_conditions: routes.en.terms_conditions } },
+    { params: { lang: 'es', terms_conditions: routes.es.terms_conditions } },
+  ];
+}
+
+const { lang } = Astro.params as { lang: 'en' | 'es' };
+const enPath = `/en/${routes.en.terms_conditions}`;
+const esPath = `/es/${routes.es.terms_conditions}`;
+
+const pageContent = {
+  en: {
+    seoTitle: "Terms and Conditions",
+    title: "TERMS AND CONDITIONS",
+    sections: {
+      summary: "SUMMARY",
+      general: "GENERAL CONDITIONS",
+      accuracy: "ACCURACY, COMPLETENESS AND TIMELINESS OF INFORMATION (WEBSITE CONTENT)",
+      personal: "PERSONAL INFORMATION",
+      prohibited: "PROHIBITED USES",
+      useRestrictions: "USE AND RESTRICTIONS",
+      updateDate: "Last updated 06/04/2025"
+    },
+    paragraphs: {
+      summaryText: "This website with domain <strong>www.steticdental.com.mx</strong> is operated by <strong>Stetic Dental Clinic</strong>. Throughout this TERMS OF SERVICE statement, 'we', 'us' and 'our' refer to the Stetic Dental Clinic brand, which offers this website, including all information, tools and services available to the user, conditioned upon acceptance of all terms, conditions, policies and notices stated here.",
+      servicesText: "By visiting our site, the 'USER' engages in our 'SERVICE' and agrees to be bound by our 'TERMS OF SERVICE', including additional terms and conditions and policies accessible via hyperlinks within our website. These TERMS OF SERVICE apply to all users of the site, including without limitation, browsers, vendors, suppliers, customers, merchants and/or content contributors.",
+      reviewText: "Please review this information carefully before browsing our website. By accessing or using any part of our website, the user agrees to be bound by the TERMS OF SERVICE. If you do not agree to these terms and conditions, you must refrain from accessing or using the site.",
+      featuresText: "Any new features or tools added to the website shall also be subject to the TERMS OF SERVICE. The user may review the updated version on this page at any time. We reserve the right to update, change or replace any part of our terms, conditions or policies by posting updates and/or changes to our website. It is the user's responsibility to check this page periodically for changes. Continued use of or access to the website following the posting of any changes constitutes acceptance of them.",
+      refuseText: "We reserve the right to refuse service to anyone for any reason at any time.",
+      reproduceText: "The user agrees not to reproduce, duplicate, copy, sell, resell or exploit any part, product, contact or access to our service without our express written permission.",
+      headersText: "The headings used in this agreement are included for convenience only and will not limit or otherwise affect these terms.",
+      accuracyText: "We are not responsible if information made available on this website is not accurate, complete or current. The material on this site is provided for general information purposes only. We reserve the right to modify the contents of this site at any time. The user agrees that it is their responsibility to monitor any changes to our site.",
+      personalText: "The user's personal information is collected, stored, used and disclosed by us following the highest security standards. The data provided by the user is governed by our PRIVACY NOTICE, which is available on our website for consultation.",
+      prohibitedText: "In addition to other prohibitions set forth in the TERMS OF SERVICE, you are prohibited from using the site or its content: (a) for any unlawful purpose; (b) to solicit others to perform or participate in unlawful acts; (c) to violate any international, federal, provincial or state regulations, rules or local laws; (d) to infringe upon or violate our intellectual property rights or the intellectual property rights of others; (e) to harass, abuse, insult, harm, defame, slander, disparage, intimidate, or discriminate based on gender, sexual orientation, religion, ethnicity, race, age, national origin, or disability; (f) to submit false or misleading information; (g) to upload or transmit viruses or any other type of malicious code; (h) to collect or track the personal information of others; (i) to spam, phish, or engage in any other electronic irregularity and/or fraud; (j) for any obscene or immoral purpose; (k) to interfere with or circumvent the security features of the Service. We reserve the right to terminate your use of the service for violating any of the prohibited uses.",
+      restrictionsText: "Access to or use of the Site expresses the User's full adherence to these Terms and Conditions. Through the Site, the User may access, contract and/or use various services and content (the 'Services and Content') provided by the Company. The Company reserves the right to deny, restrict or condition the User's access to the Site, in whole or in part, at its sole discretion, as well as to modify the Services and Content of the Site at any time and without prior notice."
+    }
+  },
+  es: {
+    seoTitle: "Términos y Condiciones",
+    title: "TÉRMINOS Y CONDICIONES",
+    sections: {
+      summary: "RESUMEN",
+      general: "CONDICIONES GENERALES",
+      accuracy: "EXACTITUD, INTEGRIDAD Y ACTUALIZACIÓN DE LA INFORMACIÓN (CONTENIDOS DEL SITIO WEB)",
+      personal: "INFORMACIÓN PERSONAL",
+      prohibited: "USOS PROHIBIDOS",
+      useRestrictions: "USO Y RESTRICCIONES",
+      updateDate: "Fecha de Actualización 04/06/2025"
+    },
+    paragraphs: {
+      summaryText: "Este sitio web con dominio <strong>www.steticdental.com.mx</strong> es operado por <strong>Stetic Dental Clinic</strong>. A lo largo de la presente declaración de TÉRMINOS DEL SERVICIO se mencionará 'nosotros' y 'nuestro' refiriéndose a la marca Stetic Dental Clinic, quien ofrece este sitio web, incluyendo toda la información, herramientas y servicios disponibles para el usuario, condicionando la aceptación de todos los términos, condiciones, políticas y avisos aquí establecidos.",
+      servicesText: "Al visitar nuestro sitio, el “USUARIO” participa en nuestro 'SERVICIO' y acepta estar sujeto a nuestros “TÉRMINOS DEL SERVICIO”, incluidos términos y condiciones adicionales y políticas accesibles mediante hipervínculos dentro de nuestro sitio web. Estos TÉRMINOS DEL SERVICIO se aplican a todos los usuarios del sitio, incluidos sin limitación, navegadores, vendedores, proveedores, clientes, comerciantes y/o contribuidores de contenido.",
+      reviewText: "Por favor, revise cuidadosamente la presente información antes de navegar en nuestro sitio web. Al acceder o utilizar cualquier parte de nuestro sitio web, el usuario acepta estar sujeto a los TÉRMINOS DEL SERVICIO. Si no está de acuerdo con los presentes términos y condiciones, deberá abstenerse de acceder o utilizar el sitio.",
+      featuresText: "Las nuevas características o herramientas que se agreguen al sitio web también estarán sujetas a los TÉRMINOS DEL SERVICIO. Siempre que el usuario lo desee, podrá revisar la versión actualizada en esta página. Nos reservamos el derecho de actualizar, cambiar o reemplazar cualquier parte de nuestros términos, condiciones o políticas mediante la publicación de actualizaciones y/o cambios en nuestro sitio web. Es responsabilidad del usuario revisar esta página periódicamente para verificar si hay cambios. El uso continuo o acceso al sitio web después de la publicación de cualquier cambio constituye la aceptación de estos.",
+      refuseText: "Nos reservamos el derecho de rechazar el servicio a cualquier persona, por cualquier motivo, en cualquier momento.",
+      reproduceText: "El usuario se compromete a no reproducir, duplicar, copiar, vender, revender o explotar ninguna parte, producto, contacto o acceso a nuestro servicio, sin el permiso expreso por escrito de parte de nosotros.",
+      headersText: "Los encabezados utilizados en este acuerdo se incluyen sólo por conveniencia y no limitarán ni afectarán de ninguna otra manera estos términos.",
+      accuracyText: "No somos responsables si la información disponible en nuestro sitio web no es exacta, completa o actualizada. El material de este sitio se proporciona únicamente para fines informativos generales. Nos reservamos el derecho de modificar el contenido de este sitio en cualquier momento. El usuario acepta que es su responsabilidad supervisar cualquier cambio que se realice en nuestro sitio.",
+      personalText: "La información personal del usuario es recopilada, almacenada, utilizada y divulgada por nosotros siguiendo los más altos estándares de seguridad. Los datos proporcionados por el usuario se rigen por nuestro AVISO DE PRIVACIDAD, el cual está disponible en nuestro sitio web para su consulta.",
+      prohibitedText: "Además de otras prohibiciones establecidas en los TÉRMINOS DEL SERVICIO, está prohibido utilizar el sitio o su contenido: (a) para cualquier propósito ilícito; (b) solicitar a otros que realicen o participen en actos ilícitos; (c) violar cualquier reglamento o ley local, internacional, federal o estatal; (d) infringir o violar nuestros derechos de propiedad intelectual o los derechos de propiedad intelectual de terceros; (e) acosar, abusar, insultar, dañar, difamar, calumniar, desacreditar, intimidar o discriminar por motivos de género, orientación sexual, religión, origen étnico, raza, edad, nacionalidad o discapacidad; (f) presentar información falsa o engañosa; (g) cargar o transmitir virus o cualquier otro código de tipo malicioso; (h) recopilar o rastrear la información personal de otros; (i) realizar spam, phishing o cualquier otra irregularidad y/o fraude electrónico; (j) para cualquier propósito obsceno o inmoral; (k) interferir o eludir las características de seguridad del Servicio. Nos reservamos el derecho de terminar el uso del servicio a cualquier usuario que viole los usos prohibidos.",
+      restrictionsText: "El acceso o utilización del Sitio expresan la plena adhesión del Usuario a los presentes Términos y Condiciones. A través del Sitio, el Usuario podrá acceder, contratar y/o utilizar diversos servicios y contenidos (los “Servicios y Contenidos”), proporcionados por la Empresa. La Empresa se reserva el derecho a negar, restringir o condicionar al Usuario el acceso al Sitio, total o parcialmente, a su entera discreción, así como a modificar los Servicios y Contenidos del Sitio en cualquier momento y sin necesidad de previo aviso."
+    }
+  }
+};
+
+const t = pageContent[lang];
+---
+
+<Layout title={t.seoTitle} lang={lang} enPath={enPath} esPath={esPath}>
+  <section class="terminos">
+    <div class="terminos__container">
+      <h1 class="terminos__title">{t.title}</h1>
+
+      <p><strong>{t.sections.summary}</strong></p>
+      <p set:html={t.paragraphs.summaryText} />
+      <p set:html={t.paragraphs.servicesText} />
+      <p set:html={t.paragraphs.reviewText} />
+      <p set:html={t.paragraphs.featuresText} />
+
+      <p><strong>{t.sections.general}</strong></p>
+      <p set:html={t.paragraphs.refuseText} />
+      <p set:html={t.paragraphs.reproduceText} />
+      <p set:html={t.paragraphs.headersText} />
+
+      <p><strong>{t.sections.accuracy}</strong></p>
+      <p set:html={t.paragraphs.accuracyText} />
+
+      <p><strong>{t.sections.personal}</strong></p>
+      <p set:html={t.paragraphs.personalText} />
+
+      <p><strong>{t.sections.prohibited}</strong></p>
+      <p set:html={t.paragraphs.prohibitedText} />
+
+      <p><strong>{t.sections.useRestrictions}</strong></p>
+      <p set:html={t.paragraphs.restrictionsText} />
+
+      <p><strong>{t.sections.updateDate}</strong></p>
+    </div>
+  </section>
+</Layout>
+
+<style>
+  .terminos {
+    background: #fafafa;
+    padding: 2rem 1rem;
+    font-family: "Montserrat", sans-serif;
+    color: #333;
+    line-height: 1.6;
+  }
+
+  .terminos__container {
+    max-width: 880px;
+    margin: 0 auto;
+  }
+
+  .terminos__title {
+    font-size: 1.75rem;
+    margin-bottom: 1rem;
+    color: #0e4675;
+    text-align: center;
+  }
+
+  .terminos p {
+    margin-bottom: 1rem;
+  }
+
+  @media (min-width: 768px) {
+    .terminos {
+      padding: 3rem 2rem;
+    }
+    .terminos__title {
+      font-size: 2.25rem;
+      text-align: left;
+    }
+  }
+</style>

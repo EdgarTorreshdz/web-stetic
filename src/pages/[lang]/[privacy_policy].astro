@@ -1,0 +1,261 @@
+---
+// src/pages/[lang]/aviso-de-privacidad.astro
+
+export function getStaticPaths() {
+  return [
+    { 
+      params: { 
+        lang: 'en', 
+        privacy_policy: 'privacy-policy' 
+      } 
+    },
+    { 
+      params: { 
+        lang: 'es', 
+        privacy_policy: 'aviso-de-privacidad' 
+      } 
+    },
+  ];
+}
+const { lang } = Astro.params as { lang: 'en' | 'es' };
+const enPath = "/en/privacy-policy/";
+const esPath = "/es/aviso-de-privacidad/";
+import Layout from "../../layouts/Layout.astro";
+
+const pageContent = {
+  en: {
+    seoTitle: "Dentist in Veracruz & Playa del Carmen | Stetic Dental Clinic",
+    title: "Comprehensive Privacy Notice",
+    intro: [
+      "This document constitutes the <strong>\"Privacy Notice\"</strong> which establishes the terms under which your information will be handled by <strong>Stetic Dental Clinic</strong> acting as the owner of the Stetic Dental Clinic brand website, in accordance with the provisions of Articles 15 and 16 of the Federal Law on Protection of Personal Data Held by Private Parties.",
+      "This notice describes the purpose for which your information has been collected, as well as the type of data being processed and the options available to limit its use. Furthermore, it details the procedure to exercise your data protection rights, in compliance with the principles of Lawfulness, Consent, Information Quality, Purpose, Loyalty, Proportionality, and Accountability established by said law.",
+      "<strong>Stetic Dental Clinic</strong> recognizes and respects your right to privacy and protection of personal data, including sensitive personal data, such as financial or patrimonial data, which are protected by Law. The responsibility for the database containing your information lies with Stetic Dental Clinic, located at Avenida 10 Nte, Calle 38 Nte Con, Zazil-ha, Playa del Carmen, Q.R., zip code 77720.",
+      "Furthermore, we guarantee that your information is properly safeguarded, complying with the administrative, technical, and physical security provisions established in the applicable Law. This is done in order to protect it from possible damage, loss, alteration, or unauthorized access.",
+      "The information owner acknowledges and accepts that by providing their Data through this \"Privacy Notice\", or through any electronic means, such as the email steticdentalplaya@gmail.com, they grant their express consent for <strong>Stetic Dental Clinic</strong> to carry out the processing of their Data, in accordance with the provisions of this Privacy Notice."
+    ],
+    sections: [
+      {
+        subtitle: "Personal Data",
+        paragraphs: ["The personal data we will collect will be those you have included in your profile, and will be processed and safeguarded based on the principles established in the Law and its Regulations. To fulfill the purposes mentioned in this Notice, we require you to provide us with the following data: full name, telephone number, email, city, and state of residence."]
+      },
+      {
+        subtitle: "Sensitive Data",
+        paragraphs: ["The Information Owner acknowledges and accepts that, due to their relationship with Stetic Dental Clinic, they have not provided, nor will they have to provide \"sensitive personal data\", that is, intimate personal data or data whose due or improper use may give rise to discrimination or entail a serious risk for them. In the event that the Information Owner provides sensitive data, they must agree to provide them beforehand and shall release Stetic Dental Clinic from any respective complaint or claim."]
+      },
+      {
+        subtitle: "Means to exercise the Rights of Access, Rectification, Cancellation or Opposition.",
+        paragraphs: ["You have the constitutional right to Access and know the personal data we possess and the details of their treatment and use, as well as to Rectify and correct them if they are inaccurate or incomplete; Cancel and delete them when you consider that they are not required for any of the purposes indicated in this privacy notice, or that they are being used for purposes not authorized by you or the legal or service relationship has ended, or, Oppose their treatment for specific purposes, by sending a request to Stetic Dental Clinic through the sites www.steticdental.com.mx or to the email steticdentalplaya@gmail.com indicating at least your name and full address or any other data or document that allows your identification, as well as the purpose of your request and/or procedure to be carried out. The above must be done based on the Law and its Regulations."]
+      },
+      {
+        subtitle: "Purpose",
+        paragraphs: [
+          "Your personal data and customer history will be used by Stetic Dental Clinic or any of its subsidiaries and/or affiliates, and will be recorded in our database, as well as any other personal, sensitive, or other information, provided that the provisions of the Law and its Regulations regarding each type of information are complied with. This information may be used by Stetic Dental Clinic for internal control, commercial purposes, advertising and marketing notices.",
+          "This information may be used, including but not limited to: (1) offering you products and services, whether physically, by phone, electronically or by any other technology or means available to Stetic Dental Clinic; (2) informing you of new products or services that may be of interest in relation to the contracted service; (3) making billed charges automatically for your convenience; (4) issuing purchase orders or work requests, as applicable; and/or (5) any other action necessary to fulfill the interests of Stetic Dental Clinic regarding the agreement reached with the Information Owner."
+        ]
+      },
+      {
+        subtitle: "Transfer",
+        paragraphs: [
+          "The Information Owner understands and accepts that Stetic Dental Clinic and/or any of its subsidiaries and/or affiliates may transfer your personal data to third parties who have been hired by Stetic Dental Clinic to carry out on its behalf and representation certain tasks related to the commercial and promotional activities of its products and/or services. These third parties may process the data in compliance with the instructions of Stetic Dental Clinic, or make decisions about them as part of the provision of their services. In either case, Stetic Dental Clinic will select providers that it considers reliable and that commit, through a contract or other applicable legal means, to implement the necessary security measures to guarantee an adequate level of protection for your personal data. Derived from the above, Stetic Dental Clinic will require its providers to comply with security measures that guarantee the same levels of protection that Stetic Dental Clinic implements during the processing of your data as a client of Stetic Dental Clinic. These selected third parties will have access to your information for the purpose of carrying out the tasks specified in the applicable service contract signed with Stetic Dental Clinic.",
+          "If Stetic Dental Clinic determines that a provider is not complying with the agreed obligations, it will immediately take the appropriate actions.",
+          "If the owner does not accept the transmission of their personal data in accordance with the provisions of the preceding paragraph, they may contact Stetic Dental Clinic through any of the means established in this Privacy Notice."
+        ]
+      },
+      {
+        subtitle: "Exceptions",
+        paragraphs: ["Additionally and in accordance with the provisions of Articles 10, 37 and other related provisions of the Law and its Regulations, Stetic Dental Clinic shall be exempt from the obligations regarding consent for the Treatment and Transfer of your Data, when:"],
+        list: [
+          "I. It is provided for in a Law;",
+          "II. The data appears in publicly accessible sources;",
+          "III. The personal data is subject to a prior dissociation procedure;",
+          "IV. It is intended to fulfill obligations derived from a legal relationship between the owner and the responsible party;",
+          "V. There is an emergency situation that could potentially harm an individual in their person or property;",
+          "VI. They are indispensable for medical care, prevention, diagnosis, the provision of healthcare, medical treatments or the management of healthcare services;",
+          "VII. A resolution from a competent authority is issued;",
+          "VIII. When the transfer is necessary for the recognition, exercise or defense of a right in a judicial process, and",
+          "IX. When the transfer is necessary for the maintenance or compliance of a legal relationship between the responsible party and the owner."
+        ]
+      },
+      {
+        subtitle: "Modifications",
+        paragraphs: ["In the event that any modification to the provisions of this Privacy Notice is required, Stetic Dental Clinic undertakes to make known the changes that may be required, by any means, including electronic ones, with prior notice given to you so that you may state what is in your best interest, since if no express written refusal is received from you, or any response, it will be understood that you agree to the changes made."]
+      },
+      {
+        subtitle: "Owner's Consent",
+        paragraphs: [
+          "The Information Owner acknowledges and accepts that in the event that this \"Privacy Notice\" is available through an electronic page (website, Internet page or similar) or any other electronic device, by clicking \"accept\" or otherwise continuing to browse the site, or by providing their Data through it or through any electronic means (email, etc.), constitutes a manifestation of their consent for Stetic Dental Clinic to process their Data, in accordance with this Privacy Notice.",
+          "Likewise, they also state that in the event that this \"Privacy Notice\" is available in writing, their signature, rubric, name or fingerprint, or by providing their Data, constitutes a manifestation of their consent for Stetic Dental Clinic to process their data, in accordance with this \"Privacy Notice\"."
+        ]
+      },
+      {
+        subtitle: "Notification of changes to the notice",
+        paragraphs: [
+          "If Stetic Dental Clinic changes this privacy notice, such changes will appear on the websites www.steticdental.com.mx",
+          "If you have any questions or wish to exercise any rights related to this privacy statement, please contact Stetic Dental Clinic and/or its affiliated companies at the following address: steticdentalplaya@gmail.com",
+          "This privacy notice has been created based on the rules issued by the Federal Law on Protection of Personal Data Held by Private Parties based on Articles 16, 17 and 36 of the Law and corresponding regulations."
+        ]
+      }
+    ],
+    date: "Date of Update 04/06/2025"
+  },
+  es: {
+    seoTitle: "Dentista en Veracruz & Playa del Carmen | Stetic Dental Clinic",
+    title: "Aviso de Privacidad Integral",
+    intro: [
+      "El presente documento constituye el <strong>\"Aviso de Privacidad\"</strong> el cual establece los términos bajo los que se manejará su información por parte de <strong>Stetic Dental Clinic</strong> quien funge como titular de la página de la marca Stetic Dental Clinic, de conformidad con lo dispuesto en los artículos 15 y 16 de la Ley Federal de Protección de Datos Personales en Posesión de los Particulares.",
+      "Este aviso describe la finalidad para la cual se ha recabado su información, así como el tipo de datos que se están tratando y las opciones disponibles para limitar su uso. Además, se detalla el procedimiento para ejercer sus derechos en materia de protección de datos, en cumplimiento de los principios de Licitud, Consentimiento, Calidad, Información, Finalidad, Lealtad, Proporcionalidad y Responsabilidad que establece la citada ley.",
+      "<strong>Stetic Dental Clinic</strong>, reconoce y respeta su derecho a la privacidad y protección de datos personales, incluidos los datos personales sensibles, como los datos financieros o patrimoniales, los cuales están protegidos por la Ley. La responsabilidad sobre la base de datos que contiene su información recae en Stetic Dental Clinic, cuyo domicilio es el ubicado en Avenida 10 Nte, Calle 38 Nte Con, Zazil-ha, Playa del Carmen, Q.R., código postal 77720.",
+      "Además, se garantiza que su información se encuentra debidamente resguardada, cumpliendo con las disposiciones de seguridad administrativa, técnica y física establecidas en la Ley de la materia. Esto se realiza con el fin de protegerla de posibles daños, pérdidas, alteraciones o accesos no autorizado.",
+      "El titular de la información reconoce y acepta que al proporcionar sus Datos a través de este \"Aviso de Privacidad\", o mediante cualquier medio electrónico, como lo es el correo electrónico steticdentalplaya@gmail.com otorga su consentimiento expreso para que <strong>Stetic Dental Clinic</strong> lleve a cabo el tratamiento de sus Datos, de conformidad con lo establecido en este Aviso de Privacidad."
+    ],
+    sections: [
+      {
+        subtitle: "Datos Personales",
+        paragraphs: ["Los datos personales que recabaremos serán aquellos que usted haya incluido en su perfil, y serán tratados y resguardados con base en los principios establecidos en la Ley y su Reglamento. Para cumplir con las finalidades que se mencionan en el presente Aviso, requerimos que nos proporcione los siguientes datos: nombre completo, número telefónico, correo electrónico, ciudad y estado de residencia."]
+      },
+      {
+        subtitle: "Datos Sensibles",
+        paragraphs: ["El Titular de la Información reconoce y acepta que, debido a su relación con Stetic Dental Clinic, no ha proporcionado, ni tendrá que proporcionar “datos personales sensibles”, es decir, aquellos datos personales íntimos o cuya realización debida o indebida pueda dar origen a discriminación o conlleve un riesgo grave para éste. En el supuesto de que el Titular de la Información proporcione datos del tipo de los llamados sensibles, deberá estar de acuerdo en proporcionarlos previamente y dejará a Stetic Dental Clinic libre de cualquier queja o reclamación respectiva."]
+      },
+      {
+        subtitle: "Medios para ejercer los Derechos de Acceso, Rectificación, Cancelación u Oposición.",
+        paragraphs: ["Usted tiene derecho constitucional de Acceder y conocer los datos personales que poseemos y a los detalles del tratamiento y uso de los mismos, así como a Rectificarlos y corregirlos en caso de ser inexactos o incompletos; Cancelarlos y eliminarlos cuando considere que no se requieren para alguna de las finalidades señalados en el presente aviso de privacidad, o que estén siendo utilizados para finalidades no autorizadas por usted o haya finalizado la relación jurídica o de servicio, o bien, Oponerse al tratamiento de los mismos para fines específicos, enviando una solicitud a Stetic Dental Clinic a través de los sitios www.steticdental.com.mx o al correo electrónico steticdentalplaya@gmail.com indicando por lo menos su nombre y domicilio completo o cualquier otro dato o documento que permita su identificación, así como el objeto de su solicitud y/o trámite a efectuar. Lo anterior se deberá realizar en base a la Ley y su Reglamento."]
+      },
+      {
+        subtitle: "Finalidad",
+        paragraphs: [
+          "Sus datos personales e historial como cliente serán utilizados por Stetic Dental Clinic o por cualquiera de sus subsidiaras y/o filiales, y quedarán registrados en nuestra base de datos, así como cualquier otra información personal, sensible o de cualquier otra índole, siempre que se cumpla con lo establecido en la Ley y su Reglamento respecto a cada tipo de información. Esta información puede ser utilizada por Stetic Dental Clinic para control interno, finalidad comercial, avisos publicitarios y de mercadotecnia.",
+          "Esta información podrá usarse de manera enunciativa mas no limitativa para: (1) ofrecerle productos y servicios, ya sea de manera física, telefónica, electrónica o por cualquier otra tecnología o medio que esté al alcance de Stetic Dental Clinic; (2) hacer de su conocimiento nuevos productos o servicios que puedan ser de interés en relación con el servicio contratado; (3) realizar para su comodidad los cargos facturados de manera automática; (4) emitir órdenes de compra o solicitudes de trabajo, según corresponda; y/o (5) cualquier otra acción que sea necesaria para cumplir con los intereses de Stetic Dental Clinic respecto al acuerdo que haya llegado con el Titular de la Información."
+        ]
+      },
+      {
+        subtitle: "Transferencia",
+        paragraphs: [
+          "El Titular de la Información entiende y acepta que Stetic Dental Clinic y/o cualquiera de sus subsidiarias y/o filiales, podrá transferir sus datos personales a terceros que han sido contratados por Stetic Dental Clinic para que realicen en su nombre y representación ciertas tareas relacionadas con las actividades comerciales y de promoción de sus productos y/o servicios. Estas terceras partes pueden tratar los datos en cumplimiento de las instrucciones de Stetic Dental Clinic, o tomar decisiones sobre ellos como parte de la prestación de sus servicios. En cualquiera de los dos casos, Stetic Dental Clinic seleccionará proveedores que considere confiables y que se comprometan, mediante un contrato u otros medios legales aplicables, a implementar las medidas de seguridad necesarias para garantizar un nivel de protección adecuado a sus datos personales. Derivado de lo anterior, Stetic Dental Clinic exigirá a sus proveedores que cumplan con medidas de seguridad que garanticen los mismos niveles de protección que Stetic Dental Clinic implementa durante el tratamiento de sus datos como cliente de Stetic Dental Clinic. Estas terceras partes seleccionadas tendrán acceso a su información con la finalidad de realizar las tareas especificadas en el contrato de servicios aplicable que haya suscrito con Stetic Dental Clinic.",
+          "Si Stetic Dental Clinic determina que un proveedor no está cumpliendo con las obligaciones pactadas, tomará inmediatamente las acciones pertinentes.",
+          "Si el titular, no acepta la transmisión de sus datos personales de conformidad con lo estipulado en el párrafo anterior, puede ponerse en contacto con Stetic Dental Clinic, por cualquiera de los medios establecidos en el presente Aviso de Privacidad."
+        ]
+      },
+      {
+        subtitle: "Excepciones",
+        paragraphs: ["Adicionalmente y de conformidad con lo estipulado en los Artículos 10, 37 y demás relativos de la Ley y su Reglamento, Stetic Dental Clinic quedará exceptuado de las obligaciones referentes al consentimiento para el Tratamiento y Transferencia de sus Datos, cuando:"],
+        list: [
+          "I. Esté previsto en una Ley;",
+          "II. Los datos figuren en fuentes de acceso público;",
+          "III. Los datos personales se sometan a un procedimiento previo de disociación;",
+          "IV. Tenga el propósito de cumplir obligaciones derivadas de una relación jurídica entre el titular y el responsable;",
+          "V. Exista una situación de emergencia que potencialmente pueda dañar a un individuo en su persona o en sus bienes;",
+          "VI. Sean indispensables para la atención médica, la prevención, diagnóstico, la prestación de asistencia sanitaria, tratamientos médicos o la gestión de servicios sanitarios;",
+          "VII. Se dicte resolución de autoridad competente;",
+          "VIII. Cuando la transferencia sea precisa para el reconocimiento, ejercicio o defensa de un derecho en un proceso judicial, y",
+          "IX. Cuando la transferencia sea precisa para el mantenimiento o cumplimiento de una relación jurídica entre el responsable y el titular."
+        ]
+      },
+      {
+        subtitle: "Modificaciones",
+        paragraphs: ["En caso de que se requiera alguna modificación a lo estipulado en el presente Aviso de Privacidad, Stetic Dental Clinic se obliga a hacer del conocimiento los cambios que en su caso se requieran, por cualquier medio, incluidos los electrónicos, previo aviso que se le dé a usted para que se manifieste por su parte, lo que a su derecho convenga, ya que de no recibir negativa expresa y por escrito de su parte, o bien, respuesta alguna, se entenderá que usted acepta de conformidad los cambios realizados."]
+      },
+      {
+        subtitle: "Consentimiento del Titular",
+        paragraphs: [
+          "El Titular de la Información reconoce y acepta que en caso de que este “Aviso de Privacidad” esté disponible a través de una página electrónica (sitio web, página de Internet o similar) o algún otro dispositivo electrónico, al hacer clic en “aceptar” o de cualquier otra forma seguir navegando en el sitio, o bien al proporcionar sus Datos a través del mismo o a través de cualquier medio electrónico (correo electrónico, etc.), constituye una manifestación de su consentimiento para que Stetic Dental Clinic realice el tratamiento de sus Datos, de conformidad con este Aviso de Privacidad.",
+          "Asimismo, de igual manera manifiesta que en caso de que este “Aviso de Privacidad” esté disponible por escrito, su firma, rúbrica, nombre o huella o bien al proporcionar sus Datos, constituye una manifestación de su consentimiento para que Stetic Dental Clinic realice el tratamiento de sus datos, de conformidad con este “Aviso de Privacidad”."
+        ]
+      },
+      {
+        subtitle: "Notificación de cambios del aviso",
+        paragraphs: [
+          "Si Stetic Dental Clinic cambia este aviso de privacidad, dichos cambios aparecerán en los sitios web www.steticdental.com.mx",
+          "Si usted tiene alguna pregunta o desea ejercer algún derecho relacionada con esta declaración de privacidad, por favor comuníquese con Stetic Dental Clinic y/o sus empresas filiales a la siguiente dirección: steticdentalplaya@gmail.com",
+          "Este aviso de privacidad ha sido creado en base a las reglas expedidas por la Ley Federal de Protección de Datos Personales en Posesión de los Particulares con fundamento en los artículos 16, 17 y 36 de la Ley y corresponsales de su Reglamento."
+        ]
+      }
+    ],
+    date: "Fecha de Actualización 04/06/2025"
+  }
+};
+
+const t = pageContent[lang];
+---
+
+<Layout title={t.seoTitle} lang={lang} enPath={enPath} esPath={esPath}>
+  <section class="aviso">
+    <div class="aviso__container">
+      <h1 class="aviso__title">{t.title}</h1>
+
+      {/* Renderizamos la introducción */}
+      {t.intro.map((paragraph) => (
+        <p set:html={paragraph}></p>
+      ))}
+
+      {/* Renderizamos dinámicamente las demás secciones */}
+      {t.sections.map((section) => (
+        <>
+          <p><strong>{section.subtitle}</strong></p>
+          
+          {section.paragraphs.map((p) => (
+            <p set:html={p}></p>
+          ))}
+
+          {/* Renderiza la lista si la sección la contiene (como en "Excepciones") */}
+          {section.list && (
+            <ol class="aviso__list">
+              {section.list.map((item) => (
+                <li>{item}</li>
+              ))}
+            </ol>
+          )}
+        </>
+      ))}
+
+      <p><strong>{t.date}</strong></p>
+    </div>
+  </section>
+</Layout>
+
+<style>
+  .aviso {
+    background: #fafafa;
+    padding: 2rem 1rem;
+    font-family: "Montserrat", sans-serif;
+    color: #333;
+    line-height: 1.6;
+  }
+
+  .aviso__container {
+    max-width: 880px;
+    margin: 0 auto;
+  }
+
+  .aviso__title {
+    font-size: 1.75rem;
+    margin-bottom: 1rem;
+    color: #0e4675;
+    text-align: center;
+  }
+
+  .aviso p {
+    margin-bottom: 1rem;
+  }
+
+  .aviso__list {
+    margin: 0 0 1.25rem 1.25rem;
+    padding: 0;
+  }
+
+  .aviso__list li {
+    margin-bottom: 0.5rem;
+    list-style-type: decimal;
+  }
+
+  @media (min-width: 768px) {
+    .aviso {
+      padding: 3rem 2rem;
+    }
+
+    .aviso__title {
+      font-size: 2.25rem;
+      text-align: left;
+    }
+  }
+</style>

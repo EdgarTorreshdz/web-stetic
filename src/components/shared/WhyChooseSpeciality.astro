@@ -3,7 +3,7 @@ import { Icon } from "astro-icon/components";
 
 interface Props {
   title: string;
-  description?: string; // Agregamos description como opcional
+  description?: string;
   items: string[];
   footerText?: string;
   reelId: string;
@@ -39,30 +39,25 @@ const { title, description, items, footerText, reelId } = Astro.props;
       </div>
 
       <div class="why-choose__video-container">
-        <div class="video-card">
-          <div class="video-card__inner">
-            <iframe 
-              src={`https://www.instagram.com/p/${reelId}/embed/captioned`} 
-              class="instagram-iframe"
-              scrolling="no" 
-              allowtransparency="true" 
-              frameborder="0">
-            </iframe>
-            <div class="video-card__overlay">
-              <div class="video-card__badge">
-                <Icon name="star" size={14} />
-                <span>Premium Care</span>
-              </div>
-            </div>
+        <div class="video-clean">
+          <div class="video-clean__badge">
+            <Icon name="star" size={14} />
+            <span>Premium Care</span>
           </div>
-          <div class="video-card__shadow"></div>
+
+          <iframe 
+            src={`https://www.instagram.com/p/${reelId}/embed`} 
+            class="instagram-iframe-clean"
+            scrolling="no" 
+            allowtransparency="true" 
+            frameborder="0">
+          </iframe>
         </div>
       </div>
 
     </div>
   </div>
 </section>
-
 
 <style>
   :root {
@@ -123,7 +118,6 @@ const { title, description, items, footerText, reelId } = Astro.props;
     margin-bottom: 35px;
   }
 
-  /* Estilos de la lista de beneficios */
   .why-choose__list {
     list-style: none;
     padding: 0;
@@ -160,7 +154,7 @@ const { title, description, items, footerText, reelId } = Astro.props;
     margin: 0;
   }
 
-  /* Video Card Logic */
+  /* --- Contenedor Principal del Video --- */
   .why-choose__video-container {
     flex: 0.8;
     width: 100%;
@@ -168,65 +162,42 @@ const { title, description, items, footerText, reelId } = Astro.props;
     justify-content: center;
   }
 
-  .video-card {
+  /* --- Estilo Limpio del Iframe (Copiado de Tourism) --- */
+  .video-clean {
     position: relative;
     width: 100%;
     max-width: 320px; 
-    z-index: 2;
   }
 
-  .video-card__inner {
-    position: relative;
-    aspect-ratio: 9 / 16;
-    background-color: var(--black);
-    border-radius: 20px;
-    overflow: hidden;
-    box-shadow: 0 20px 40px rgba(0,0,0,0.2);
-    border: 4px solid var(--black);
-  }
-
-  .instagram-iframe {
+  .instagram-iframe-clean {
     width: 100%;
-    height: 115%;
-    transform: translateY(-5%);
+    aspect-ratio: 9 / 16; 
+    border-radius: 8px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
     border: none;
   }
 
-  .video-card__overlay {
+  .video-clean__badge {
     position: absolute;
-    top: 1.5rem;
-    left: 1.5rem;
-    z-index: 10;
-    pointer-events: none;
-  }
-
-  .video-card__badge {
+    top: 15px;
+    left: 15px;
+    z-index: 5;
     background: var(--gold);
     color: white;
-    padding: 0.4rem 0.8rem;
-    border-radius: 50px;
+    padding: 6px 12px;
     font-size: 0.7rem;
     font-weight: 700;
     display: flex;
     align-items: center;
-    gap: 0.4rem;
+    gap: 6px;
     text-transform: uppercase;
-  }
-
-  .video-card__shadow {
-    position: absolute;
-    top: 20px;
-    right: -20px;
-    width: 100%;
-    height: 100%;
-    background-color: var(--gold);
-    border-radius: 20px;
-    z-index: -1;
+    letter-spacing: 1px;
+    pointer-events: none;
+    border-radius: 2px;
   }
 
   @media (max-width: 768px) {
     .why-choose__title { font-size: 1.8rem; }
-    .video-card { max-width: 280px; }
-    .video-card__shadow { right: -10px; top: 10px; }
+    .video-clean { max-width: 280px; }
   }
 </style>

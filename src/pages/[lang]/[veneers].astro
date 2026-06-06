@@ -1,18 +1,20 @@
 ---
 // src/pages/[lang]/[veneers].astro
+import { routes } from "../../i18n/ui";
+import Layout from "../../layouts/Layout.astro";
 
 export async function getStaticPaths() {
   return [
     { 
       params: { 
         lang: 'en', 
-        veneers: 'porcelain-veneers-playa-del-carmen' 
+        veneers: routes.en.veneers 
       } 
     },
     { 
       params: { 
         lang: 'es', 
-        veneers: 'carillas-dentales' 
+        veneers: routes.es.veneers 
       } 
     },
   ];
@@ -20,12 +22,11 @@ export async function getStaticPaths() {
 
 const { lang } = Astro.params as { lang: 'en' | 'es' };
 
-const enPath = "/en/porcelain-veneers-playa-del-carmen/";
-const esPath = "/es/carillas-dentales/";
-const imgPath = "/veneers/";
+const enPath = `/en/${routes.en.veneers}/`;
+const esPath = `/es/${routes.es.veneers}/`;
+const imgPath = `/veneers/`;
 const ogImage = "/dental_implants/Dental-implants-IMG-1.webp"; // Mantenemos la imagen que pediste en el meta
 
-import Layout from "../../layouts/Layout.astro";
 import HeaderSpeciality from "../../components/shared/HeaderSpeciality.astro";
 import AboutSpeciality from "../../components/shared/AboutSpeciality.astro";
 import WhatIsSpeciality from "../../components/shared/WhatIsSpeciality.astro";

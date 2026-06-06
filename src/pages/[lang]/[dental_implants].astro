@@ -1,36 +1,38 @@
 ---
 // src/pages/[lang]/[dental_implants].astro
+import { routes } from "../../i18n/ui";
 
 export async function getStaticPaths() {
   return [
-    { 
-      params: { 
-        lang: 'en', 
-        dental_implants: 'dental-implants-playa-del-carmen' 
-      } 
+    {
+      params: {
+        lang: "en",
+        dental_implants: routes.en.dental_implants,
+      },
     },
-    { 
-      params: { 
-        lang: 'es', 
-        dental_implants: 'implantes-dentales' 
-      } 
+    {
+      params: {
+        lang: "es",
+        dental_implants: routes.es.dental_implants,
+      },
     },
   ];
 }
 
-const { lang } = Astro.params as { lang: 'en' | 'es' };
+const { lang } = Astro.params as { lang: "en" | "es" };
 
 // Definición de rutas con slash final para evitar redirecciones
-const enPath = "/en/dental-implants-playa-del-carmen/";
-const esPath = "/es/implantes-dentales/";
-const imgPath = '/dental_implants/';
+const enPath = `/en/${routes.en.dental_implants}/`;
+const esPath = `/es/${routes.es.dental_implants}/`;
+const imgPath = "/dental_implants/";
 const ogImage = `${imgPath}Dental-implants-IMG-1.webp`;
 
-import Layout from "../../layouts/Layout.astro"
+import Layout from "../../layouts/Layout.astro";
 import HeaderSpeciality from "../../components/shared/HeaderSpeciality.astro";
 import AboutSpeciality from "../../components/shared/AboutSpeciality.astro";
 import WhatIsSpeciality from "../../components/shared/WhatIsSpeciality.astro";
 import OptionsSpeciality from "../../components/shared/OptionsSpeciality.astro";
+import OptionsSpecialityImgs from "../../components/shared/OptionsSpecialityImgs.astro";
 import WhyChooseSpeciality from "../../components/shared/WhyChooseSpeciality.astro";
 import CostSpeciality from "../../components/shared/CostSpeciality.astro";
 import ProcessSpeciality from "../../components/shared/ProcessSpeciality.astro";
@@ -38,6 +40,7 @@ import LocationSpeciality from "../../components/shared/LocationSpeciality.astro
 import FaqSpeciality from "../../components/shared/FaqSpeciality.astro";
 import CtaSpeciality from "../../components/shared/CtaSpeciality.astro";
 import BenefitsTextSpeciality from "../../components/shared/BenefitsTextSpeciality.astro";
+import CompareTable from "../../components/shared/CompareTable.astro";
 
 const pageContent = {
   en: {
@@ -47,97 +50,156 @@ const pageContent = {
         {
           "@type": "Dentist",
           "@id": `https://www.steticdental.com.mx${enPath}#dentist`,
-          "name": "Stetic dental clinic",
-          "url": `https://www.steticdental.com.mx${enPath}`,
-          "image": `https://www.steticdental.com.mx${ogImage}`,
-          "telephone": "+52 984 188 0338",
-          "address": {
+          name: "Stetic dental clinic",
+          url: `https://www.steticdental.com.mx${enPath}`,
+          image: `https://www.steticdental.com.mx${ogImage}`,
+          telephone: "+52 984 188 0338",
+          address: {
             "@type": "PostalAddress",
-            "streetAddress": "Avenida 10 Nte, Calle 38 Nte Con, Zazil-ha",
-            "addressLocality": "Playa del Carmen",
-            "addressRegion": "Quintana Roo",
-            "addressCountry": "MX"
+            streetAddress: "Avenida 10 Nte, Calle 38 Nte Con, Zazil-ha",
+            addressLocality: "Playa del Carmen",
+            addressRegion: "Quintana Roo",
+            addressCountry: "MX",
           },
-          "openingHoursSpecification": [
-            { "@type": "OpeningHoursSpecification", "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday"], "opens": "10:00", "closes": "18:00" },
-            { "@type": "OpeningHoursSpecification", "dayOfWeek": "Friday", "opens": "10:00", "closes": "17:00" },
-            { "@type": "OpeningHoursSpecification", "dayOfWeek": "Saturday", "opens": "10:00", "closes": "14:00" }
+          openingHoursSpecification: [
+            {
+              "@type": "OpeningHoursSpecification",
+              dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday"],
+              opens: "10:00",
+              closes: "18:00",
+            },
+            {
+              "@type": "OpeningHoursSpecification",
+              dayOfWeek: "Friday",
+              opens: "10:00",
+              closes: "17:00",
+            },
+            {
+              "@type": "OpeningHoursSpecification",
+              dayOfWeek: "Saturday",
+              opens: "10:00",
+              closes: "14:00",
+            },
           ],
-          "sameAs": [
+          sameAs: [
             "https://www.facebook.com/steticdentalplaya",
-            "https://www.instagram.com/steticdentalplaya"
+            "https://www.instagram.com/steticdentalplaya",
           ],
-          "areaServed": [
-            { "@type": "City", "name": "Playa del Carmen" },
-            { "@type": "Country", "name": "Mexico" }
-          ]
+          areaServed: [
+            { "@type": "City", name: "Playa del Carmen" },
+            { "@type": "Country", name: "Mexico" },
+          ],
         },
         {
           "@type": "Service",
           "@id": `https://www.steticdental.com.mx${enPath}#service`,
-          "name": "Dental Implants in Playa del Carmen",
-          "serviceType": "Dental implant treatment",
-          "description": "Dental implant treatment in Playa del Carmen for international patients seeking safe, modern, and long-lasting tooth replacement solutions.",
-          "url": `https://www.steticdental.com.mx${enPath}`,
-          "image": `https://www.steticdental.com.mx${ogImage}`,
-          "provider": { "@id": `https://www.steticdental.com.mx${enPath}#dentist` },
-          "areaServed": [
-            { "@type": "City", "name": "Playa del Carmen" },
-            { "@type": "Country", "name": "Mexico" }
+          name: "Dental Implants in Playa del Carmen",
+          serviceType: "Dental implant treatment",
+          description:
+            "Dental implant treatment in Playa del Carmen for international patients seeking safe, modern, and long-lasting tooth replacement solutions.",
+          url: `https://www.steticdental.com.mx${enPath}`,
+          image: `https://www.steticdental.com.mx${ogImage}`,
+          provider: {
+            "@id": `https://www.steticdental.com.mx${enPath}#dentist`,
+          },
+          areaServed: [
+            { "@type": "City", name: "Playa del Carmen" },
+            { "@type": "Country", name: "Mexico" },
           ],
-          "availableChannel": {
+          availableChannel: {
             "@type": "ServiceChannel",
-            "serviceUrl": `https://www.steticdental.com.mx${enPath}`
-          }
-        }
-      ]
+            serviceUrl: `https://www.steticdental.com.mx${enPath}`,
+          },
+        },
+      ],
     },
     seo: {
-      title: "Dental Implants Playa del Carmen | Affordable & Safe Treatment in Mexico",
-      description: "Get dental implants in Playa del Carmen with experienced specialists. Save up to 70% vs USA & Canada. Safe, modern treatment. Request your quote today."
+      title:
+        "Dental Implants Playa del Carmen | Affordable & Safe Treatment in Mexico",
+      description:
+        "Get dental implants in Playa del Carmen with experienced specialists. Save up to 70% vs USA & Canada. Safe, modern treatment. Request your quote today.",
     },
     header: {
-      title: "Replace missing teeth with permanent dental implants in Playa del Carmen, designed to look, feel, and function like natural teeth.",
-      subheadline: "Safe, modern and affordable dental implant solutions for American and international patients.",
+      title: "Dental implants in Playa del carmen",
+      subheadline: `Safe, modern and affordable dental implant solutions for American and international patients.
+
+        Replace missing teeth with permanent dental implants, designed to look, feel, and function like natural teeth.
+      `,
       features: [
         "Experienced dental implant specialists with international standards",
         "Natural-looking, long-lasting results",
         "Advanced implant technology and high-quality materials",
         "Save up to 70% compared to U.S. and Canada prices",
       ],
-      button: "Get Your Dental Implants Quote",
+      button: "Schedule you free video consultation",
       imageSrc: ogImage,
-      imageAlt: "Dental implants treatment in Mexico"
+      imageAlt: "Dental implants treatment in Mexico",
     },
     about: {
       title: "Looking for Dental Implants in Playa del Carmen You Can Trust?",
-      text1: "Choosing dental implants abroad is a big decision, especially when you want long-lasting, natural-looking results. Finding the right clinic is essential to ensure your treatment is safe, predictable, and worth your investment.",
-      text2: "Our team specializes in dental implant treatment in Playa del Carmen, providing advanced solutions for patients looking to restore one or multiple missing teeth. From single implants to full mouth dental implants, we use high-quality materials and modern technology to deliver reliable results. We focus on personalized care, clear communication, and treatment plans designed specifically for international patients. This allows you to feel confident throughout the entire process, from your first consultation to your final results.",
+      text1:
+        "Choosing dental implants abroad is a big decision, especially when you want long-lasting, natural-looking results. Finding the right clinic is essential to ensure your treatment is safe, predictable, and worth your investment.",
+      text2:
+        "Our team specializes in dental implant treatment in Playa del Carmen, providing advanced solutions for patients looking to restore one or multiple missing teeth. From single implants to full mouth dental implants, we use high-quality materials and modern technology to deliver reliable results. We focus on personalized care, clear communication, and treatment plans designed specifically for international patients. This allows you to feel confident throughout the entire process, from your first consultation to your final results.",
       imageSrc: imgPath + "Dental-implants-IMG-2.webp",
-      imgAlt: "Professional dental implant consultation"
+      imgAlt: "Professional dental implant consultation",
     },
     whatIs: {
       title: "WHAT ARE DENTAL IMPLANTS AND HOW DO THEY WORK?",
-      text1: "Dental implants are one of the best dental implant solutions for replacing missing teeth. They consist of a titanium post that is surgically placed into the jawbone, acting as a strong and stable foundation for a crown, bridge, or full mouth dental implants restoration.",
-      text2: "Unlike temporary options, dental implant treatment is designed to provide a permanent and natural-looking solution. Implants look, feel, and function like real teeth, helping restore chewing ability, speech, and overall confidence. With proper care, dental implants can last for many years, making them one of the most reliable and long-lasting treatments available in modern dentistry.",
+      text1:
+        "Dental implants are one of the best dental implant solutions for replacing missing teeth. They consist of a titanium post that is surgically placed into the jawbone, acting as a strong and stable foundation for a crown, bridge, or full mouth dental implants restoration.",
+      text2:
+        "Unlike temporary options, dental implant treatment is designed to provide a permanent and natural-looking solution. Implants look, feel, and function like real teeth, helping restore chewing ability, speech, and overall confidence. With proper care, dental implants can last for many years, making them one of the most reliable and long-lasting treatments available in modern dentistry.",
     },
-    options: {
+    optionsImgs: {
       title: "TYPES OF DENTAL IMPLANTS IN PLAYA DEL CARMEN",
       items: [
-        { title: "SINGLE TOOTH DENTAL IMPLANTS", description: "Ideal for replacing a single missing tooth without affecting surrounding teeth. A single dental implant provides a natural look and long-term durability.", subtext: "Best for: patients looking for a simple and effective dental implant treatment." },
-        { title: "MULTIPLE DENTAL IMPLANTS", description: "Designed to replace several missing teeth using implant-supported bridges for improved stability and function.", subtext: "Best for: patients who need a stronger alternative to traditional bridges." },
-        { title: "FULL MOUTH DENTAL IMPLANTS", description: "A comprehensive solution for patients who have lost most or all of their teeth. Full mouth dental implants restore both function and aesthetics.", subtext: "Best for: complete smile restoration with long-term results." },
-        { title: "ALL-ON-4 DENTAL IMPLANTS", description: "An advanced technique that restores a full arch of teeth using only four implants. This approach reduces treatment time and cost.", subtext: "Best for: patients seeking a faster and more affordable full mouth dental implants solution." }
-      ]
+        {
+          title: "SINGLE TOOTH DENTAL IMPLANTS",
+          description:
+            "Ideal for replacing a single missing tooth without affecting surrounding teeth. A single dental implant provides a natural look and long-term durability.",
+          subtext:
+            "Best for: patients looking for a simple and effective dental implant treatment.",
+            imgSrc: imgPath + "Dental-implants-IMG-5.webp",
+        },
+        {
+          title: "MULTIPLE DENTAL IMPLANTS",
+          description:
+            "Designed to replace several missing teeth using implant-supported bridges for improved stability and function.",
+          subtext:
+            "Best for: patients who need a stronger alternative to traditional bridges.",
+            imgSrc: imgPath + "Dental-implants-IMG-6.webp",
+        },
+        {
+          title: "FULL MOUTH DENTAL IMPLANTS",
+          description:
+            "A comprehensive solution for patients who have lost most or all of their teeth. Full mouth dental implants restore both function and aesthetics.",
+          subtext:
+            "Best for: complete smile restoration with long-term results.",
+            imgSrc: imgPath + "Dental-implants-IMG-7.webp",
+        },
+        {
+          title: "ALL-ON-4 DENTAL IMPLANTS",
+          description:
+            "An advanced technique that restores a full arch of teeth using only four implants. This approach reduces treatment time and cost.",
+          subtext:
+            "Best for: patients seeking a faster and more affordable full mouth dental implants solution.",
+            imgSrc: imgPath + "Dental-implants-IMG-8.webp",
+        },
+      ],
     },
     benefitsText: {
       title: "Why Get Dental Implants in Mexico?",
-      text1: "Many international patients choose dental implants in Mexico because they can receive high-quality care at a significantly lower cost than in the United States and Canada. For many people, this makes Mexico one of the most attractive options for safe, affordable, and reliable implant treatment.",
-      text2: "Beyond cost savings, patients also benefit from modern facilities, experienced implant specialists, advanced technology, and a comfortable recovery environment. Choosing dental implants in Playa del Carmen allows you to combine expert care with a convenient and well-supported treatment experience."
+      text1:
+        "Many international patients choose dental implants in Mexico because they can receive high-quality care at a significantly lower cost than in the United States and Canada. For many people, this makes Mexico one of the most attractive options for safe, affordable, and reliable implant treatment.",
+      text2:
+        "Beyond cost savings, patients also benefit from modern facilities, experienced implant specialists, advanced technology, and a comfortable recovery environment. Choosing dental implants in Playa del Carmen allows you to combine expert care with a convenient and well-supported treatment experience.",
     },
     whyChoose: {
-      title: "Why Choose Our Dental Clinic for ImplantsWHY CHOOSE OUR DENTAL CLINIC FOR IMPLANTS IN PLAYA DEL CARMEN",
-      description: "Our clinic combines advanced technology, experienced implant specialists, and a patient-centered approach to deliver safe, precise, and long-lasting dental implant results in Playa del Carmen.",
+      title:
+        "Why Choose Our Dental Clinic for ImplantsWHY CHOOSE OUR DENTAL CLINIC FOR IMPLANTS IN PLAYA DEL CARMEN",
+      description:
+        "Our clinic combines advanced technology, experienced implant specialists, and a patient-centered approach to deliver safe, precise, and long-lasting dental implant results in Playa del Carmen.",
       items: [
         "Certified implant specialists with international training and experience",
         "High-quality implant systems used worldwide",
@@ -145,47 +207,77 @@ const pageContent = {
         "Clear communication in English throughout your treatment",
         "Personalized treatment plans tailored for international patients",
       ],
-      footerText: "👉 We focus on delivering predictable results while making the entire process simple and stress-free for patients traveling from the United States and Canada.",
-      reelId: "DTao-4kjuTb", 
+      footerText:
+        "👉 We focus on delivering predictable results while making the entire process simple and stress-free for patients traveling from the United States and Canada.",
+      reelId: "DTao-4kjuTb",
     },
     cost: {
       title: "DENTAL IMPLANTS COST IN PLAYA DEL CARMEN, MEXICO",
-      text1: "Dental implants cost in Playa del Carmen is significantly lower than in the United States and Canada, allowing patients to save up to 50%–70% without compromising quality. This is one of the main reasons why international patients choose Mexico for dental implant treatment.",
-      text2: "In the U.S., a single dental implant can cost between $3,000 and $5,000, while in Mexico, the same procedure is often available at a fraction of the price with experienced specialists and modern technology. Final costs depend on the number of implants needed, the type of restoration, and your specific case. We provide detailed treatment plans and transparent pricing after an initial evaluation.",
+      text1:
+        "Dental implants cost in Playa del Carmen is significantly lower than in the United States and Canada, allowing patients to save up to  50% to 70% compared to international prices without compromising quality. This is one of the main reasons why international patients choose Mexico for dental implant treatment.",
+      text2:
+        "In the U.S., a single dental implant can cost between $3,000 and $5,000, while in Mexico, the same procedure is often available at a fraction of the price with experienced specialists and modern technology. Final costs depend on the number of implants needed, the type of restoration, and your specific case. We provide detailed treatment plans and transparent pricing after an initial evaluation.",
     },
     process: {
       title: "Dental Implants Process for American Patients",
-      footer: "Our team guides you through each step to ensure a smooth and stress-free experience.",
+      footer:
+        "Our team guides you through each step to ensure a smooth and stress-free experience.",
       steps: [
-        { title: "Online consultation and dental evaluation" },
-        { title: "Personalized treatment plan and timeline" },
-        { title: "Travel planning assistance" },
-        { title: "Implant procedure performed by specialists" },
-        { title: "Follow-up and post-treatment support" }
-      ]
+        { title: "Free video consultation" },
+        { title: "Review of X-Rays and Photos" },
+        { title: "Personalized Treatment Plan" },
+        { title: "Travel to Playa del Carmen" },
+        { title: "Implant Procedure performed by specialists" },
+      ],
     },
     location: {
       title: "Dental Implants in Playa del Carmen, Mexico",
-      text1: "Our dental clinic is located in Playa del Carmen, a safe and accessible destination for dental tourism. The area offers convenient travel options, nearby accommodations, and a comfortable environment for recovery after dental implant treatment.",
-      mapUrl: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3762.5141916224283!2d-87.0736590249982!3d20.629444986253736!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8f4c2996f6f5e1b7%3A0x6d3f5c4e4e4e4e4e!2sStetic%20Dental%20Clinic!5e0!3m2!1sen!2smx!4v1695761234567!5m2!1sen!2smx",
+      text1: `Our dental clinic in Playa del Carmen is conveniently located...`,
+      mapUrl: "https://maps.google.com/maps?q=Stetic%20Dental%20Clinic,%20Playa%20del%20Carmen&t=&z=16&ie=UTF8&iwloc=&output=embed",
     },
     faq: {
-      title: "FREQUENTLY ASKED QUESTIONS ABOUT DENTAL IMPLANTS IN PLAYA DEL CARMEN",
+      title:
+        "FREQUENTLY ASKED QUESTIONS ABOUT DENTAL IMPLANTS IN PLAYA DEL CARMEN",
       items: [
-        { question: "Are dental implants safe in Mexico?", answer: "Yes. Dental implants in Mexico are safe when performed by certified specialists using modern technology and international protocols. Our clinic follows strict standards to ensure safe and predictable dental implant procedures for international patients." },
-        { question: "How many visits are required for dental implants?", answer: "The number of visits depends on your specific case. Some treatments can be completed in a few days, while others may require two visits to allow proper healing. We provide a clear timeline before you travel so you can plan your stay in Playa del Carmen." },
-        { question: "How long do dental implants last?", answer: "With proper care, dental implants can last 15 to 25 years or more. They are considered one of the most durable and long-lasting solutions for replacing missing teeth." },
-        { question: "Do you work with international patients?", answer: "Yes. We specialize in treating international patients and provide full support throughout the entire process, including consultation, travel coordination, and post-treatment guidance." },
-        { question: "How much do dental implants cost in Playa del Carmen?", answer: "The cost of dental implants in Playa del Carmen is significantly lower than in the United States and Canada. Prices vary depending on your case, but patients can often save between 50% and 70% compared to U.S. prices." },
-        { question: " Is it painful to get dental implants?", answer: "The procedure is performed under local anesthesia, ensuring minimal discomfort. Most patients report mild soreness after treatment, which can be managed with medication and typically resolves within a few days." }
-      ]
+        {
+          question: "Are dental implants safe in Mexico?",
+          answer:
+            "Yes. Dental implants in Mexico are safe when performed by certified specialists using modern technology and international protocols. Our clinic follows strict standards to ensure safe and predictable dental implant procedures for international patients.",
+        },
+        {
+          question: "How many visits are required for dental implants?",
+          answer:
+            "The number of visits depends on your specific case. Some treatments can be completed in a few days, while others may require two visits to allow proper healing. We provide a clear timeline before you travel so you can plan your stay in Playa del Carmen.",
+        },
+        {
+          question: "How long do dental implants last?",
+          answer:
+            "With proper care, dental implants can last 15 to 25 years or more. They are considered one of the most durable and long-lasting solutions for replacing missing teeth.",
+        },
+        {
+          question: "Do you work with international patients?",
+          answer:
+            "Yes. We specialize in treating international patients and provide full support throughout the entire process, including consultation, travel coordination, and post-treatment guidance.",
+        },
+        {
+          question: "How much do dental implants cost in Playa del Carmen?",
+          answer:
+            "The cost of dental implants in Playa del Carmen is significantly lower than in the United States and Canada. Prices vary depending on your case, but patients can often save between 50% and 70% compared to U.S. prices.",
+        },
+        {
+          question: " Is it painful to get dental implants?",
+          answer:
+            "The procedure is performed under local anesthesia, ensuring minimal discomfort. Most patients report mild soreness after treatment, which can be managed with medication and typically resolves within a few days.",
+        },
+      ],
     },
     cta: {
       title: "Book Your Dental Implants Evaluation",
-      description: "If you are considering dental implants in Playa del Carmen, our team is ready to help. Contact us today to receive expert implant care in Mexico.",
+      description:
+        "If you are considering dental implants in Playa del Carmen, our team is ready to help. Contact us today to receive expert implant care in Mexico.",
       button: "Book Your Appointment Now",
-      note: "Expert care for international patients"
-    }
+      note: "Expert care for international patients",
+    },
   },
   es: {
     schema: {
@@ -194,219 +286,287 @@ const pageContent = {
         {
           "@type": "Dentist",
           "@id": `https://www.steticdental.com.mx${esPath}#dentist`,
-          "name": "Clínica Stetic Dental",
-          "url": `https://www.steticdental.com.mx${esPath}`,
-          "image": `https://www.steticdental.com.mx${ogImage}`,
-          "telephone": "+52 984 188 0338",
-          "address": {
+          name: "Clínica Stetic Dental",
+          url: `https://www.steticdental.com.mx${esPath}`,
+          image: `https://www.steticdental.com.mx${ogImage}`,
+          telephone: "+52 984 188 0338",
+          address: {
             "@type": "PostalAddress",
-            "streetAddress": "Avenida 10 Nte, Calle 38 Nte Con, Zazil-ha",
-            "addressLocality": "Playa del Carmen",
-            "addressRegion": "Quintana Roo",
-            "addressCountry": "MX"
+            streetAddress: "Avenida 10 Nte, Calle 38 Nte Con, Zazil-ha",
+            addressLocality: "Playa del Carmen",
+            addressRegion: "Quintana Roo",
+            addressCountry: "MX",
           },
-          "openingHoursSpecification": [
-            { "@type": "OpeningHoursSpecification", "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday"], "opens": "10:00", "closes": "18:00" },
-            { "@type": "OpeningHoursSpecification", "dayOfWeek": "Friday", "opens": "10:00", "closes": "17:00" },
-            { "@type": "OpeningHoursSpecification", "dayOfWeek": "Saturday", "opens": "10:00", "closes": "14:00" }
+          openingHoursSpecification: [
+            {
+              "@type": "OpeningHoursSpecification",
+              dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday"],
+              opens: "10:00",
+              closes: "18:00",
+            },
+            {
+              "@type": "OpeningHoursSpecification",
+              dayOfWeek: "Friday",
+              opens: "10:00",
+              closes: "17:00",
+            },
+            {
+              "@type": "OpeningHoursSpecification",
+              dayOfWeek: "Saturday",
+              opens: "10:00",
+              closes: "14:00",
+            },
           ],
-          "sameAs": [
+          sameAs: [
             "https://www.facebook.com/steticdentalplaya",
-            "https://www.instagram.com/steticdentalplaya"
+            "https://www.instagram.com/steticdentalplaya",
           ],
-          "areaServed": [
-            { "@type": "City", "name": "Playa del Carmen" },
-            { "@type": "Country", "name": "Mexico" }
-          ]
+          areaServed: [
+            { "@type": "City", name: "Playa del Carmen" },
+            { "@type": "Country", name: "Mexico" },
+          ],
         },
         {
           "@type": "Service",
           "@id": `https://www.steticdental.com.mx${esPath}#service`,
-          "name": "Implantes Dentales en Playa del Carmen",
-          "serviceType": "Tratamiento de implantes dentales",
-          "description": "Tratamiento de implantes dentales en Playa del Carmen para pacientes que buscan soluciones de reemplazo dental seguras y duraderas.",
-          "url": `https://www.steticdental.com.mx${esPath}`,
-          "image": `https://www.steticdental.com.mx${ogImage}`,
-          "provider": { "@id": `https://www.steticdental.com.mx${esPath}#dentist` },
-          "areaServed": [
-            { "@type": "City", "name": "Playa del Carmen" },
-            { "@type": "Country", "name": "Mexico" }
+          name: "Implantes Dentales en Playa del Carmen",
+          serviceType: "Tratamiento de implantes dentales",
+          description:
+            "Tratamiento de implantes dentales en Playa del Carmen para pacientes que buscan soluciones de reemplazo dental seguras y duraderas.",
+          url: `https://www.steticdental.com.mx${esPath}`,
+          image: `https://www.steticdental.com.mx${ogImage}`,
+          provider: {
+            "@id": `https://www.steticdental.com.mx${esPath}#dentist`,
+          },
+          areaServed: [
+            { "@type": "City", name: "Playa del Carmen" },
+            { "@type": "Country", name: "Mexico" },
           ],
-          "availableChannel": {
+          availableChannel: {
             "@type": "ServiceChannel",
-            "serviceUrl": `https://www.steticdental.com.mx${esPath}`
-          }
-        }
-      ]
+            serviceUrl: `https://www.steticdental.com.mx${esPath}`,
+          },
+        },
+      ],
     },
     seo: {
-      title: "Implantes Dentales en Playa del Carmen | Cuidado Seguro y Asequible",
-      description: "Obtén implantes dentales en Playa del Carmen con especialistas certificados. Soluciones de implantes seguras y modernas en México para pacientes internacionales."
+      title:
+        "Implantes Dentales en Playa del Carmen | Cuidado Seguro y Asequible",
+      description:
+        "Obtén implantes dentales en Playa del Carmen con especialistas certificados. Soluciones de implantes seguras y modernas en México para pacientes internacionales.",
     },
     header: {
       title: "Implantes Dentales en Playa del Carmen, México",
-      subheadline: "Soluciones de implantes dentales seguras, modernas y accesibles para pacientes internacionales.",
+      subheadline:
+        "Soluciones de implantes dentales seguras, modernas y accesibles para pacientes internacionales.",
       features: [
         "Especialistas certificados en implantes dentales",
         "Tecnología y materiales avanzados",
         "Equipo dental bilingüe",
-        "Ahorros significativos en costos dentales"
+        "Ahorros significativos en costos dentales",
       ],
       button: "Obtén una Cotización de Implantes",
       imageSrc: ogImage,
-      imageAlt: "Tratamiento de implantes dentales en México"
+      imageAlt: "Tratamiento de implantes dentales en México",
     },
     about: {
       title: "¿Buscas Implantes Dentales de Confianza en Playa del Carmen?",
-      text1: "Elegir implantes dentales es una decisión importante. Nuestra clínica se especializa en brindar implantes dentales en Playa del Carmen para pacientes que buscan procedimientos seguros y planes transparentes.",
-      text2: "Combinamos materiales de calidad internacional y tecnología moderna para ofrecer soluciones confiables.",
+      text1:
+        "Elegir implantes dentales es una decisión importante. Nuestra clínica se especializa en brindar implantes dentales en Playa del Carmen para pacientes que buscan procedimientos seguros y planes transparentes.",
+      text2:
+        "Combinamos materiales de calidad internacional y tecnología moderna para ofrecer soluciones confiables.",
       imageSrc: imgPath + "Dental-implants-IMG-2.webp",
-      imgAlt: "Consulta de implantes dentales en México"
+      imgAlt: "Consulta de implantes dentales en México",
     },
     whatIs: {
       title: "¿Qué son los Implantes Dentales?",
-      text1: "Los implantes dentales son una solución permanente para reemplazar dientes perdidos. Consisten en un poste de titanio que se coloca en el hueso maxilar, actuando como raíz para una corona o puente.",
-      text2: "Se ven, se sienten y funcionan como dientes naturales, restaurando la capacidad de masticar, el habla y la confianza.",
+      text1:
+        "Los implantes dentales son una solución permanente para reemplazar dientes perdidos. Consisten en un poste de titanio que se coloca en el hueso maxilar, actuando como raíz para una corona o puente.",
+      text2:
+        "Se ven, se sienten y funcionan como dientes naturales, restaurando la capacidad de masticar, el habla y la confianza.",
     },
-    options: {
+    optionsImgs: {
       title: "Tipos de Implantes que Ofrecemos",
       items: [
-        { title: "Implante de un Solo Diente", description: "Ideal para reemplazar una pieza faltante sin afectar los dientes vecinos.", subtext: "Aspecto natural." },
-        { title: "Múltiples Implantes", description: "Diseñados para soportar puentes o reemplazar varios dientes de forma segura.", subtext: "Estable y duradero." },
-        { title: "Implantes de Boca Completa", description: "Solución integral para pacientes que han perdido la mayoría o todos sus dientes.", subtext: "Restauración completa." },
-        { title: "Implantes All-on-4", description: "Técnica avanzada que restaura un arco completo con un número mínimo de implantes.", subtext: "Rápido y eficiente." }
-      ]
+        {
+          title: "Implante de un Solo Diente",
+          description:
+            "Ideal para reemplazar una pieza faltante sin afectar los dientes vecinos.",
+          subtext: "Aspecto natural.",
+          imgSrc: imgPath + "Dental-implants-IMG-5.webp",
+        },
+        {
+          title: "Múltiples Implantes",
+          description:
+            "Diseñados para soportar puentes o reemplazar varios dientes de forma segura.",
+          subtext: "Estable y duradero.",
+          imgSrc: imgPath + "Dental-implants-IMG-6.webp",
+        },
+        {
+          title: "Implantes de Boca Completa",
+          description:
+            "Solución integral para pacientes que han perdido la mayoría o todos sus dientes.",
+          subtext: "Restauración completa.",
+          imgSrc: imgPath + "Dental-implants-IMG-7.webp",
+        },
+        {
+          title: "Implantes All-on-4",
+          description:
+            "Técnica avanzada que restaura un arco completo con un número mínimo de implantes.",
+          subtext: "Rápido y eficiente.",
+          imgSrc: imgPath + "Dental-implants-IMG-8.webp",
+        },
+      ],
     },
     benefitsText: {
       title: "¿Por qué Hacerse Implantes en México?",
-      text1: "Muchos pacientes eligen implantes dentales en México porque reciben la misma calidad de atención que en los Estados Unidos a un costo significativamente menor...",
-      text2: "Además del ahorro, los pacientes se benefician de instalaciones modernas, especialistas experimentados y un ambiente cómodo para la recuperación."
+      text1:
+        "Muchos pacientes eligen implantes dentales en México porque reciben la misma calidad de atención que en los Estados Unidos a un costo significativamente menor...",
+      text2:
+        "Además del ahorro, los pacientes se benefician de instalaciones modernas, especialistas experimentados y un ambiente cómodo para la recuperación.",
     },
     whyChoose: {
       title: "¿Por qué elegir nuestra clínica para implantes dentales?",
-      description: "Nuestra clínica cuenta con la última tecnología y un equipo altamente especializado para asegurar que su procedimiento de implantes sea preciso, cómodo y duradero.",
+      description:
+        "Nuestra clínica cuenta con la última tecnología y un equipo altamente especializado para asegurar que su procedimiento de implantes sea preciso, cómodo y duradero.",
       items: [
         "Especialistas en implantes certificados con formación internacional",
         "Sistemas y materiales de implantes de alta calidad",
         "Tecnología avanzada de diagnóstico y cirugía",
         "Comunicación clara en inglés",
-        "Planes de tratamiento personalizados para pacientes internacionales"
+        "Planes de tratamiento personalizados para pacientes internacionales",
       ],
-      footerText: "Nuestro enfoque es proporcionar resultados de implantes seguros y predecibles, facilitando el proceso para los pacientes que viajan desde el extranjero.",
+      footerText:
+        "Nuestro enfoque es proporcionar resultados de implantes seguros y predecibles, facilitando el proceso para los pacientes que viajan desde el extranjero.",
       reelId: "DPCjErMDkTc",
     },
     cost: {
       title: "Costo de Implantes en Playa del Carmen",
-      text1: "El costo es significativamente más bajo que en los Estados Unidos, permitiendo ahorros de hasta el 70%.",
-      text2: "Los costos finales dependen del número de implantes y el tipo de restauración. Proporcionamos planes detallados y precios transparentes tras la evaluación inicial.",
+      text1:
+        "El costo es significativamente más bajo que en los Estados Unidos, permitiendo ahorros de hasta el 70%.",
+      text2:
+        "Los costos finales dependen del número de implantes y el tipo de restauración. Proporcionamos planes detallados y precios transparentes tras la evaluación inicial.",
     },
     process: {
       title: "Proceso de Implantes Dentales para Pacientes Estadounidenses",
-      footer: "Nuestro equipo lo guía a través de cada paso para garantizar una experiencia fluida y sin estrés.",
+      footer:
+        "Nuestro equipo lo guía a través de cada paso para garantizar una experiencia fluida y sin estrés.",
       steps: [
         { title: "Consulta en línea y evaluación dental" },
         { title: "Plan de tratamiento personalizado y cronograma" },
         { title: "Asistencia en la planificación del viaje" },
         { title: "Procedimiento de implante realizado por especialistas" },
-        { title: "Seguimiento y soporte post-tratamiento" }
-      ]
+        { title: "Seguimiento y soporte post-tratamiento" },
+      ],
     },
     location: {
       title: "Implantes Dentales en Playa del Carmen, México",
-      text1: "Nuestra clínica dental está ubicada en Playa del Carmen, un destino seguro y accesible para el turismo dental. La zona ofrece opciones de viaje convenientes, alojamientos cercanos y un ambiente cómodo para la recuperación después del tratamiento de implantes dentales.",
-      mapUrl: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3762.5141916224283!2d-87.0736590249982!3d20.629444986253736!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8f4c2996f6f5e1b7%3A0x6d3f5c4e4e4e4e4e!2sStetic%20Dental%20Clinic!5e0!3m2!1sen!2smx!4v1695761234567!5m2!1sen!2smx",
+      text1: "Nuestra clínica dental está ubicada en Playa del Carmen, un destino seguro...",
+      mapUrl: "https://maps.google.com/maps?q=Stetic%20Dental%20Clinic,%20Playa%20del%20Carmen&t=&z=16&ie=UTF8&iwloc=&output=embed",
     },
     faq: {
       title: "Preguntas Frecuentes sobre Implantes Dentales",
       items: [
-        { question: "¿Son seguros los implantes dentales en México?", answer: "Sí. Los implantes dentales en México son seguros cuando son realizados por especialistas certificados que utilizan tecnología moderna y protocolos internacionales." },
-        { question: "¿Cuánto duran los implantes dentales?", answer: "Con el cuidado adecuado, los implantes dentales pueden durar muchos años y, a menudo, toda la vida." },
-        { question: "¿Cuántas visitas se requieren?", answer: "Los plazos del tratamiento varían según el procedimiento y el proceso de curación. Esto se discute durante su consulta." },
-        { question: "¿Trabajan con pacientes estadounidenses?", answer: "Sí. Nos especializamos en la atención a pacientes estadounidenses y brindamos apoyo total durante todo el proceso." }
-      ]
+        {
+          question: "¿Son seguros los implantes dentales en México?",
+          answer:
+            "Sí. Los implantes dentales en México son seguros cuando son realizados por especialistas certificados que utilizan tecnología moderna y protocolos internacionales.",
+        },
+        {
+          question: "¿Cuánto duran los implantes dentales?",
+          answer:
+            "Con el cuidado adecuado, los implantes dentales pueden durar muchos años y, a menudo, toda la vida.",
+        },
+        {
+          question: "¿Cuántas visitas se requieren?",
+          answer:
+            "Los plazos del tratamiento varían según el procedimiento y el proceso de curación. Esto se discute durante su consulta.",
+        },
+        {
+          question: "¿Trabajan con pacientes estadounidenses?",
+          answer:
+            "Sí. Nos especializamos en la atención a pacientes estadounidenses y brindamos apoyo total durante todo el proceso.",
+        },
+      ],
     },
     cta: {
       title: "Reserva tu Evaluación de Implantes",
-      description: "Si estás considerando implantes dentales en Playa del Carmen, nuestro equipo está listo para ayudarte.",
+      description:
+        "Si estás considerando implantes dentales en Playa del Carmen, nuestro equipo está listo para ayudarte.",
       button: "Reserva tu Cita Ahora",
-      note: "Atención experta para pacientes internacionales"
-    }
-  }
+      note: "Atención experta para pacientes internacionales",
+    },
+  },
 };
 
 const t = pageContent[lang];
 ---
 
-<Layout 
-  title={t.seo.title} 
-  description={t.seo.description} 
+<Layout
+  title={t.seo.title}
+  description={t.seo.description}
   lang={lang}
   enPath={enPath}
   esPath={esPath}
   schema={t.schema}
   ogImage={ogImage}
 >
-  <HeaderSpeciality 
-      lang={lang}
-      title={t.header.title}
-      subheadline={t.header.subheadline}
-      features={t.header.features}
-      buttonText={t.header.button}
-      imageSrc={t.header.imageSrc} 
-      imageAlt={t.header.imageAlt}
-    />
-  <AboutSpeciality 
-      title={t.about.title}
-      text1={t.about.text1}
-      text2={t.about.text2}
-      imageSrc={t.about.imageSrc}
-      imageAlt={t.about.imgAlt}
-    />
-  <WhatIsSpeciality 
-      title={t.whatIs.title}
-      text1={t.whatIs.text1}
-      text2={t.whatIs.text2}
-    />
-  <OptionsSpeciality 
-      title={t.options.title}
-      options={t.options.items}
-    />
-  <BenefitsTextSpeciality 
+  <HeaderSpeciality
+    lang={lang}
+    title={t.header.title}
+    subheadline={t.header.subheadline}
+    features={t.header.features}
+    buttonText={t.header.button}
+    imageSrc={t.header.imageSrc}
+    imageAlt={t.header.imageAlt}
+  />
+  <AboutSpeciality
+    title={t.about.title}
+    text1={t.about.text1}
+    text2={t.about.text2}
+    imageSrc={t.about.imageSrc}
+    imageAlt={t.about.imgAlt}
+  />
+  <WhatIsSpeciality
+    title={t.whatIs.title}
+    text1={t.whatIs.text1}
+    text2={t.whatIs.text2}
+  />
+  <OptionsSpecialityImgs title={t.optionsImgs.title} options={t.optionsImgs.items} />
+  <BenefitsTextSpeciality
     title={t.benefitsText.title}
     text1={t.benefitsText.text1}
     text2={t.benefitsText.text2}
   />
-  <WhyChooseSpeciality 
+  <WhyChooseSpeciality
     title={t.whyChoose.title}
     description={t.whyChoose.description}
     items={t.whyChoose.items}
     footerText={t.whyChoose.footerText}
     reelId={t.whyChoose.reelId}
   />
-  <CostSpeciality 
-      title={t.cost.title}
-      text1={t.cost.text1}
-      text2={t.cost.text2}
-    />
-  <ProcessSpeciality 
-      title={t.process.title}
-      footer={t.process.footer}
-      steps={t.process.steps}
-    />
-  <LocationSpeciality 
-      title={t.location.title}
-      text1={t.location.text1}
-      mapUrl={t.location.mapUrl}
-    />
-  <FaqSpeciality 
-      title={t.faq.title}
-      faqs={t.faq.items}
-    />
-  <CtaSpeciality 
-      lang={lang}
-      title={t.cta.title}
-      description={t.cta.description}
-      buttonText={t.cta.button}
-      note={t.cta.note}
-    />
+  <CostSpeciality
+    title={t.cost.title}
+    text1={t.cost.text1}
+    text2={t.cost.text2}
+  />
+  <CompareTable></CompareTable>
+  <ProcessSpeciality
+    title={t.process.title}
+    footer={t.process.footer}
+    steps={t.process.steps}
+  />
+  <LocationSpeciality
+    title={t.location.title}
+    text1={t.location.text1}
+    mapUrl={t.location.mapUrl}
+  />
+  <FaqSpeciality title={t.faq.title} faqs={t.faq.items} />
+  <CtaSpeciality
+    lang={lang}
+    title={t.cta.title}
+    description={t.cta.description}
+    buttonText={t.cta.button}
+    note={t.cta.note}
+  />
 </Layout>

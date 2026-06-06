@@ -5,59 +5,44 @@ interface Props {
 
 const { lang } = Astro.params as { lang: 'en' | 'es' } || Astro.props;
 
-const formData = {
+const content = {
   en: {
     title: "Book Your Dental Appointment in Playa del Carmen",
-    id: "inline-2tYqHhtdE1tG0rLJonF4",
-    src: "https://api.leadconnectorhq.com/widget/form/2tYqHhtdE1tG0rLJonF4",
-    formId: "2tYqHhtdE1tG0rLJonF4",
-    name: "Formulario website - ENG",
-    height: "100%"
   },
   es: {
     title: "Reserva tu Cita Dental en Playa del Carmen",
-    id: "inline-gXE4nbJldN7n7pbF9zzd",
-    src: "https://api.leadconnectorhq.com/widget/form/gXE4nbJldN7n7pbF9zzd",
-    formId: "gXE4nbJldN7n7pbF9zzd",
-    name: "Formulario website - ESP",
-    height: "995"
   }
 };
 
-const currentForm = formData[lang] || formData.en;
+const t = content[lang] || content.en;
 ---
 
 <section id="contact" class="contact-section">
   <div class="container">
     
     <h2 class="contact-title">
-      {currentForm.title}
+      {t.title}
     </h2>
 
     <div class="form-wrapper">
-      <iframe
-        src={currentForm.src}
-        style="width:100%; height:100%; border:none;"
-        id={currentForm.id}
-        data-layout="{'id':'INLINE'}"
-        data-trigger-type="alwaysShow"
-        data-trigger-value=""
-        data-activation-type="alwaysActivated"
-        data-activation-value=""
-        data-deactivation-type="neverDeactivate"
-        data-deactivation-value=""
-        data-form-name={currentForm.name}
-        data-height={currentForm.height}
-        data-layout-iframe-id={currentForm.id}
-        data-form-id={currentForm.formId}
-        title={currentForm.name}
-      >
-      </iframe>
+      {lang === 'es' ? (
+        <!-- Formulario en Español -->
+        <>
+          <script is:inline>!function(a,m,o,c,r,m){a[o+c]=a[o+c]||{setMeta:function(p){this.params=(this.params||[]).concat([p])}},a[o+r]=a[o+r]||function(f){a[o+r].f=(a[o+r].f||[]).concat([f])},a[o+r]({id:"1709255",hash:"01fdfc2c60cbd7d1c84b4c9b78d98764",locale:"en"}),a[o+m]=a[o+m]||function(f,k){a[o+m].f=(a[o+m].f||[]).concat([[f,k]])}}(window,0,"amo_forms_","params","load","loaded");</script>
+          <script is:inline id="amoforms_script_1709255" async="async" charset="utf-8" src="https://forms.kommo.com/forms/assets/js/amoforms.js?1779135956"></script>
+        </>
+      ) : (
+        <!-- Formulario en Inglés -->
+        
+        <>
+          <script is:inline>!function(a,m,o,c,r,m){a[o+c]=a[o+c]||{setMeta:function(p){this.params=(this.params||[]).concat([p])}},a[o+r]=a[o+r]||function(f){a[o+r].f=(a[o+r].f||[]).concat([f])},a[o+r]({id:"1709251",hash:"4f406440ca446a52d808204e83cd315a",locale:"es"}),a[o+m]=a[o+m]||function(f,k){a[o+m].f=(a[o+m].f||[]).concat([[f,k]])}}(window,0,"amo_forms_","params","load","loaded");</script>
+          <script is:inline id="amoforms_script_1709251" async="async" charset="utf-8" src="https://forms.kommo.com/forms/assets/js/amoforms.js?1779135166"></script>
+        </>
+      )}
     </div>
+
   </div>
 </section>
-
-<script is:inline src="https://link.msgsndr.com/js/form_embed.js"></script>
 
 <style>
   :root {
@@ -76,7 +61,7 @@ const currentForm = formData[lang] || formData.en;
 
   .container {
     width: 90%;
-    max-width: 900px; /* Un poco más estrecho para que el form luzca más estilizado */
+    max-width: 900px; 
     margin: 0 auto;
   }
 
@@ -93,13 +78,13 @@ const currentForm = formData[lang] || formData.en;
 
   .form-wrapper {
     width: 100%;
-    /* Ajustamos la altura mínima para evitar saltos visuales mientras carga */
+    /* Mantenemos un alto mínimo para evitar brincos bruscos en el diseño mientras carga el script de Kommo */
     min-height: 700px;
     height: auto;
-    background-color: transparent; /* Eliminamos el fondo gris/blanco */
-    padding: 0; /* Eliminamos el marco interno */
-    border: none; /* Eliminamos cualquier borde o marco */
-    box-shadow: none; /* Eliminamos sombras para que se integre al fondo negro */
+    background-color: transparent; 
+    padding: 0; 
+    border: none; 
+    box-shadow: none; 
     overflow: hidden;
   }
 
