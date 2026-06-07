@@ -1,0 +1,337 @@
+---
+// Definimos la estructura para cada fila de la tabla
+interface TableRow {
+  treatment: string;
+  intlPrice: string;
+  mxPrice: string;
+  time: string;
+  durability: string;
+}
+
+interface Props {
+  title: string;
+  text1: string;
+  text2: string;
+  text3?: string;
+  highlight1?: string;
+  text4?: string;
+  listItems?: string[];
+  highlight2?: string;
+  tableTitle?: string;
+  tableSubtitle?: string;
+  tableRows?: TableRow[];
+  disclaimer?: string;
+}
+
+const { 
+  title, 
+  text1, 
+  text2, 
+  text3, 
+  highlight1, 
+  text4, 
+  listItems = [], 
+  highlight2, 
+  tableTitle, 
+  tableSubtitle,
+  tableRows = [],
+  disclaimer 
+} = Astro.props;
+---
+
+<section class="cost-section">
+  <div class="container">
+    <div class="cost__content">
+      <h2 class="cost__title">{title}</h2>
+      <div class="cost__accent-line"></div>
+      
+      <p class="cost__text cost__text--highlight">{text1}</p>
+      <p class="cost__text">{text2}</p>
+      {text3 && <p class="cost__text">{text3}</p>}
+
+      {highlight1 && (
+        <div class="cost__highlight-box">
+          <p>{highlight1}</p>
+        </div>
+      )}
+
+      {text4 && <p class="cost__text">{text4}</p>}
+
+      {listItems && listItems.length > 0 && (
+        <ul class="cost__list">
+          {listItems.map((item) => (
+            <li>{item}</li>
+          ))}
+        </ul>
+      )}
+
+      {highlight2 && (
+        <div class="cost__highlight-box cost__highlight-box--secondary">
+          <p>{highlight2}</p>
+        </div>
+      )}
+
+      {/* --- SECCIÓN DE LA TABLA COMPARATIVA --- */}
+      {tableTitle && (
+        <div class="cost__table-container">
+          <h3 class="cost__table-title">{tableTitle}</h3>
+          {tableSubtitle && <p class="cost__table-subtitle">{tableSubtitle}</p>}
+          
+          <div class="smile-table-wrapper">
+            <table class="smile-table">
+              <thead>
+                <tr>
+                  <th class="align-left">Treatment</th>
+                  <th>Typical International Price</th>
+                  <th class="highlight-col">Estimated Mexico Cost</th>
+                  <th>Treatment Time</th>
+                  <th>Durability</th>
+                </tr>
+              </thead>
+              <tbody>
+                {tableRows.map((row) => (
+                  <tr>
+                    <td class="align-left fw-bold text-gold">{row.treatment}</td>
+                    <td>{row.intlPrice}</td>
+                    <td class="highlight-col fw-bold">{row.mxPrice}</td>
+                    <td>{row.time}</td>
+                    <td>{row.durability}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+
+          {disclaimer && (
+            <p class="smile-note">{disclaimer}</p>
+          )}
+        </div>
+      )}
+      
+    </div>
+  </div>
+</section>
+
+<style>
+  :root {
+    --gold: #A58E55;
+    --black: #000000;
+    --white: #ffffff;
+    --gray-light: #f9f9f9;
+    --gray-dark: #333333;
+  }
+
+  .cost-section {
+    padding: 100px 0;
+    background-color: var(--gray-light); /* Fondo muy sutil para resaltar la tabla oscura */
+    color: var(--black);
+  }
+
+  .container {
+    margin: 0 auto;
+    width: 85%;
+    max-width: 900px; /* Reducimos un poco el ancho para líneas de texto más cómodas de leer */
+  }
+
+  .cost__content {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .cost__title {
+    font-size: 2rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    line-height: 1.2;
+    margin-bottom: 20px;
+    color: var(--black);
+  }
+
+  .cost__accent-line {
+    width: 60px;
+    height: 3px;
+    background-color: var(--gold);
+    margin-bottom: 40px;
+  }
+
+  .cost__text {
+    font-size: 1.1rem;
+    line-height: 1.8;
+    margin-bottom: 20px;
+    color: var(--gray-dark);
+    max-width: 800px;
+  }
+
+  .cost__text--highlight {
+    font-size: 1.3rem;
+    font-weight: 600;
+    color: var(--black);
+    margin-bottom: 30px;
+  }
+
+  /* --- CAJAS DESTACADAS (Mejoradas) --- */
+  .cost__highlight-box {
+    background-color: var(--white);
+    border-left: 4px solid var(--gold);
+    padding: 25px 35px;
+    border-radius: 0 12px 12px 0;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+    margin: 30px 0;
+    max-width: 800px;
+    width: 100%;
+  }
+
+  .cost__highlight-box p {
+    font-size: 1.15rem;
+    font-weight: 600;
+    color: var(--black);
+    margin: 0;
+    line-height: 1.6;
+  }
+
+  .cost__highlight-box--secondary {
+    background-color: rgba(165, 142, 85, 0.05);
+    border-left: none;
+    border-radius: 12px;
+    border: 1px solid rgba(165, 142, 85, 0.2);
+  }
+
+  /* --- LISTA --- */
+  .cost__list {
+    list-style: none;
+    padding: 0;
+    margin: 10px 0 30px 0;
+    display: inline-block;
+    text-align: left;
+    background-color: var(--white);
+    padding: 30px 40px;
+    border-radius: 12px;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.03);
+  }
+
+  .cost__list li {
+    font-size: 1.1rem;
+    line-height: 1.8;
+    color: var(--gray-dark);
+    position: relative;
+    padding-left: 25px;
+    margin-bottom: 15px;
+    font-weight: 500;
+  }
+
+  .cost__list li:last-child {
+    margin-bottom: 0;
+  }
+
+  .cost__list li::before {
+    content: "✓"; /* Cambiamos a un check mark para que se vea más como beneficio/inclusión */
+    color: var(--gold);
+    font-size: 1.2rem;
+    font-weight: bold;
+    position: absolute;
+    left: 0;
+    top: 0;
+  }
+
+  /* --- SECCIÓN DE LA TABLA COMPARATIVA (Mejorada) --- */
+  .cost__table-container {
+    width: 100%;
+    margin-top: 70px;
+  }
+
+  .cost__table-title {
+    font-size: 1.8rem;
+    font-weight: 800;
+    color: var(--black);
+    margin-bottom: 15px;
+  }
+
+  .cost__table-subtitle {
+    font-size: 1.1rem;
+    color: #666;
+    margin-bottom: 40px;
+    max-width: 700px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .smile-table-wrapper {
+    overflow-x: auto;
+    margin: 0 0 25px 0;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+    border-radius: 12px; /* Esquinas redondeadas en el contenedor */
+    background-color: #0b0b0b;
+  }
+
+  .smile-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+    color: #e0e0e0;
+    min-width: 750px; /* Asegura que no se rompa en móviles */
+  }
+
+  .smile-table th {
+    background-color: #050505;
+    color: #ffffff;
+    font-weight: 700;
+    text-transform: uppercase;
+    font-size: 12px;
+    letter-spacing: 1px;
+    padding: 20px 15px;
+    border-bottom: 2px solid var(--gold);
+    text-align: center; /* Centramos los headers por defecto */
+  }
+
+  .smile-table td {
+    padding: 18px 15px;
+    font-size: 15px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    text-align: center; /* Centramos los datos por defecto para los precios/tiempos */
+    transition: background-color 0.3s ease;
+  }
+
+  .smile-table tbody tr:last-child td {
+    border-bottom: none; /* Quitamos la línea final para que el radio del borde se vea limpio */
+  }
+
+  .smile-table tr:hover td {
+    background-color: rgba(165, 142, 85, 0.08);
+  }
+
+  /* Clases de utilidad para la tabla */
+  .align-left {
+    text-align: left !important;
+  }
+
+  .fw-bold {
+    font-weight: 600;
+  }
+
+  .text-gold {
+    color: var(--gold);
+  }
+
+  /* Columna resaltada para los precios de México */
+  .highlight-col {
+    background-color: rgba(165, 142, 85, 0.05);
+    color: var(--gold);
+  }
+
+  .smile-note {
+    margin-top: 20px;
+    font-size: 0.95rem;
+    color: #888;
+    text-align: center;
+    font-style: italic;
+  }
+
+  @media (min-width: 768px) {
+    .cost__title { font-size: 2.5rem; }
+    .cost__text { font-size: 1.15rem; }
+    .cost__text--highlight { font-size: 1.4rem; }
+  }
+</style>

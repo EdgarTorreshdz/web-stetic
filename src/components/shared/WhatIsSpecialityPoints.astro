@@ -1,0 +1,158 @@
+---
+interface items {
+  text?: string;
+}
+interface Props {
+  title: string;
+  text1: string;
+  text2: string;
+  listItems: items[];
+  conclusion: string;
+}
+
+const { title, text1, text2, listItems, conclusion } = Astro.props;
+---
+
+<section class="what-is-section">
+  <div class="container">
+    <div class="what-is__card">
+      <h2 class="what-is__title">{title}</h2>
+      <div class="what-is__accent-line"></div>
+      
+      <p class="what-is__text what-is__text--highlight">
+        {text1}
+      </p>
+      
+      <p class="what-is__text">
+        {text2}
+      </p>
+
+      {listItems && listItems.length > 0 && (
+        <ul class="what-is__list">
+          {listItems.map((item) => (
+            <li class="what-is__list-item">{item.text}</li>
+          ))}
+        </ul>
+      )}
+
+      <div class="what-is__conclusion-box">
+        <p class="what-is__conclusion">{conclusion}</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  :root {
+    --gold: #A58E55;
+    --black: #000000;
+    --white: #ffffff;
+    --bg-light: #f9f9f9;
+  }
+
+  .what-is-section {
+    padding: 100px 0;
+    background-color: var(--bg-light);
+  }
+
+  .container {
+    margin: 0 auto;
+    width: 85%;
+    max-width: 900px; /* Ancho optimizado para legibilidad */
+  }
+
+  /* Tarjeta principal */
+  .what-is__card {
+    background: var(--white);
+    padding: 60px 40px;
+    border-radius: 20px;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.05);
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .what-is__title {
+    font-size: 2rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 20px;
+    color: var(--black);
+  }
+
+  .what-is__accent-line {
+    width: 60px;
+    height: 3px;
+    background-color: var(--gold);
+    margin-bottom: 40px;
+  }
+
+  .what-is__text {
+    font-size: 1.1rem;
+    line-height: 1.8;
+    margin-bottom: 25px;
+    color: #444;
+    max-width: 750px;
+  }
+
+  .what-is__text--highlight {
+    font-size: 1.3rem;
+    font-weight: 600;
+    color: var(--black);
+    margin-bottom: 30px;
+  }
+
+  /* Lista premium */
+  .what-is__list {
+    list-style: none;
+    padding: 0;
+    margin: 10px 0 40px 0;
+    width: 100%;
+    max-width: 700px;
+  }
+
+  .what-is__list-item {
+    background: var(--bg-light);
+    padding: 15px 20px;
+    margin-bottom: 12px;
+    border-radius: 8px;
+    text-align: left;
+    font-weight: 500;
+    position: relative;
+    padding-left: 45px;
+    transition: transform 0.2s ease;
+  }
+
+  .what-is__list-item::before {
+    content: "✓";
+    position: absolute;
+    left: 20px;
+    color: var(--gold);
+    font-weight: bold;
+  }
+
+  /* Bloque de conclusión */
+  .what-is__conclusion-box {
+    background: rgba(165, 142, 85, 0.05);
+    padding: 25px;
+    border-radius: 12px;
+    border-left: 4px solid var(--gold);
+    margin-top: 20px;
+  }
+
+  .what-is__conclusion {
+    font-style: italic;
+    font-size: 1.1rem;
+    color: var(--black);
+    margin: 0;
+    font-weight: 500;
+  }
+
+  @media (max-width: 768px) {
+    .what-is__card { padding: 40px 20px; }
+    .what-is__title { font-size: 1.6rem; }
+    .what-is__text--highlight { font-size: 1.1rem; }
+  }
+</style>

@@ -1,0 +1,259 @@
+---
+import { Icon } from "astro-icon/components";
+interface ListItem {
+  text: string;
+}
+
+interface Props {
+  title: string;
+  text1: string;
+  text2: string;
+  text3: string;
+  items: ListItem[];
+  buttonText?: string;
+  buttonLink?: string;
+  footerText?: string;
+  reelId: string;
+}
+
+const { 
+  title, 
+  text1, 
+  text2, 
+  text3, 
+  items, 
+  buttonText, 
+  buttonLink = "#", 
+  footerText, 
+  reelId 
+} = Astro.props;
+---
+
+<section class="why-choose-section">
+  <div class="container">
+    <div class="why-choose__grid">
+      
+      <div class="why-choose__content">
+        <h2 class="why-choose__title">{title}</h2>
+        <div class="why-choose__accent-line"></div>
+        
+        <p class="why-choose__description">{text1}</p>
+        <p class="why-choose__description">{text2}</p>
+        <p class="why-choose__description why-choose__description--intro">{text3}</p>
+        
+        <ul class="why-choose__list">
+          {items.map((item) => (
+            <li class="why-choose__item">
+              <Icon name="star" size={18} class="text-gold" />
+              <span>{item.text}</span>
+            </li>
+          ))}
+        </ul>
+
+        {/* Nuevo bloque para el botón */}
+        {buttonText && (
+          <div class="why-choose__btn-wrapper">
+            <a href={buttonLink} class="why-choose__btn">{buttonText}</a>
+          </div>
+        )}
+
+        {footerText && (
+          <div class="why-choose__footer-box">
+            <p class="why-choose__footer-text">
+              {footerText}
+            </p>
+          </div>
+        )}
+      </div>
+
+      <div class="why-choose__video-container">
+        <div class="video-clean">
+          <div class="video-clean__badge">
+            <Icon name="star" size={14} />
+            <span>Premium Care</span>
+          </div>
+
+          <iframe 
+            src={`https://www.instagram.com/p/${reelId}/embed`} 
+            class="instagram-iframe-clean"
+            scrolling="no" 
+            allowtransparency="true" 
+            frameborder="0">
+          </iframe>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<style>
+  :root {
+    --gold: #A58E55;
+    --black: #000000;
+    --white: #ffffff;
+  }
+
+  .why-choose-section {
+    padding: 100px 0;
+    background-color: var(--white);
+    color: var(--black);
+  }
+  
+  .why-choose__description {
+    font-size: 1.1rem;
+    line-height: 1.6;
+    color: #444;
+    margin-bottom: 20px;
+  }
+
+  .why-choose__description--intro {
+    font-weight: 600;
+    margin-bottom: 25px;
+  }
+
+  .container { 
+    margin: 0 auto; 
+    width: 85%; 
+  }
+
+  .why-choose__grid {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 50px;
+  }
+
+  @media (min-width: 992px) {
+    .why-choose__grid {
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+      gap: 80px;
+    }
+  }
+
+  .why-choose__content {
+    flex: 1.2;
+  }
+
+  .why-choose__title {
+    font-size: 2.2rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    line-height: 1.2;
+    margin-bottom: 20px;
+    color: var(--gold);
+  }
+
+  .why-choose__accent-line {
+    width: 80px;
+    height: 3px;
+    background-color: var(--gold);
+    margin-bottom: 35px;
+  }
+
+  .why-choose__list {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 35px 0;
+  }
+
+  .why-choose__item {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    font-size: 1.1rem;
+    font-weight: 500;
+    margin-bottom: 12px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+    color: #333;
+  }
+
+  .text-gold {
+    color: var(--gold);
+  }
+
+  /* --- Estilos del Botón --- */
+  .why-choose__btn-wrapper {
+    margin-bottom: 35px;
+  }
+
+  .why-choose__btn {
+    display: inline-block;
+    background-color: var(--gold);
+    color: var(--white);
+    padding: 15px 30px;
+    text-transform: uppercase;
+    font-weight: 700;
+    font-size: 0.95rem;
+    text-decoration: none;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+  }
+
+  .why-choose__btn:hover {
+    background-color: #c4ab6c;
+    transform: translateY(-2px);
+  }
+
+  .why-choose__footer-box {
+    padding: 20px;
+    background-color: rgba(165, 142, 85, 0.05);
+    border-left: 4px solid var(--gold);
+  }
+
+  .why-choose__footer-text {
+    font-size: 1.1rem;
+    line-height: 1.6;
+    color: #444;
+    font-style: italic;
+    margin: 0;
+  }
+
+  /* --- Contenedor Principal del Video --- */
+  .why-choose__video-container {
+    flex: 0.8;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+  }
+
+  .video-clean {
+    position: relative;
+    width: 100%;
+    max-width: 320px; 
+  }
+
+  .instagram-iframe-clean {
+    width: 100%;
+    aspect-ratio: 9 / 16; 
+    border-radius: 8px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    border: none;
+  }
+
+  .video-clean__badge {
+    position: absolute;
+    top: 15px;
+    left: 15px;
+    z-index: 5;
+    background: var(--gold);
+    color: white;
+    padding: 6px 12px;
+    font-size: 0.7rem;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    pointer-events: none;
+    border-radius: 2px;
+  }
+
+  @media (max-width: 768px) {
+    .why-choose__title { font-size: 1.8rem; }
+    .video-clean { max-width: 280px; }
+  }
+</style>

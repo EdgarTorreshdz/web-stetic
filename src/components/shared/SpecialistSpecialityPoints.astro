@@ -1,0 +1,247 @@
+---
+interface ListItem {
+  text: string;
+}
+
+interface Props {
+  title: string;
+  text1: string;
+  text2: string;
+  listItems?: ListItem[];
+  buttonText?: string;
+  buttonLink?: string;
+  conclusion?: string;
+  imageSrc: string;
+  imageAlt: string;
+  text3?: string; // Propiedad añadida
+}
+
+const { 
+  title, 
+  text1, 
+  text2, 
+  listItems = [], 
+  buttonText, 
+  buttonLink = "#", 
+  conclusion, 
+  imageSrc, 
+  imageAlt,
+  text3 // <-- ¡Añadido aquí para poder usarlo!
+} = Astro.props;
+---
+
+<section class="specialist-section">
+  <div class="container">
+    <div class="specialist__grid">
+      
+      <div class="specialist__content">
+        <h2 class="specialist__title">{title}</h2>
+        <div class="specialist__accent-line"></div>
+        
+        <p class="specialist__text specialist__text--highlight">
+          {text1}
+        </p>
+        
+        <p class="specialist__text">
+          {text2}
+        </p>
+
+        {listItems && listItems.length > 0 && (
+          <ul class="specialist__list">
+            {listItems.map((item) => (
+              <li>{item.text}</li>
+            ))}
+          </ul>
+        )}
+
+        {/* Renderizamos text3 justo antes del botón */}
+        {text3 && (
+          <p class="specialist__text">
+            {text3}
+          </p>
+        )}
+
+        {buttonText && (
+          <div class="specialist__btn-wrapper">
+            <a href={buttonLink} class="specialist__btn">{buttonText}</a>
+          </div>
+        )}
+
+        {conclusion && (
+          <p class="specialist__text specialist__conclusion">
+            {conclusion}
+          </p>
+        )}
+      </div>
+
+      <div class="specialist__image-container">
+        <div class="specialist__img-wrapper">
+            <img src={imageSrc} alt={imageAlt} class="specialist__img" />
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<style>
+  :root {
+    --gold: #A58E55;
+    --black: #000000;
+    --white: #ffffff;
+  }
+
+  .specialist-section {
+    padding: 100px 0;
+    background-color: var(--black);
+    color: var(--white);
+  }
+
+  .container {
+    margin: 0 auto;
+    width: 85%;
+  }
+
+  .specialist__grid {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 40px;
+  }
+
+  @media (min-width: 992px) {
+    .specialist__grid {
+      flex-direction: row;
+      justify-content: space-between;
+      gap: 60px;
+    }
+  }
+
+  .specialist__content {
+    flex: 1.2;
+    text-align: left;
+  }
+
+  .specialist__title {
+    font-size: 1.8rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    line-height: 1.2;
+    margin-bottom: 20px;
+    color: var(--white);
+  }
+
+  @media (min-width: 768px) {
+    .specialist__title { font-size: 2.5rem; }
+  }
+
+  .specialist__accent-line {
+    width: 80px;
+    height: 3px;
+    background-color: var(--gold);
+    margin-bottom: 30px;
+  }
+
+  .specialist__text {
+    font-size: 1rem;
+    line-height: 1.7;
+    margin-bottom: 20px;
+    color: #cccccc;
+  }
+
+  .specialist__text--highlight {
+    font-size: 1.15rem;
+    font-weight: 600;
+    color: var(--white);
+    border-left: 4px solid var(--gold);
+    padding-left: 20px;
+  }
+
+  .specialist__list {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 30px 0;
+  }
+
+  .specialist__list li {
+    font-size: 1rem;
+    line-height: 1.7;
+    color: #cccccc;
+    position: relative;
+    padding-left: 20px;
+    margin-bottom: 10px;
+  }
+
+  .specialist__list li::before {
+    content: "•";
+    color: var(--gold);
+    font-size: 1.5rem;
+    position: absolute;
+    left: 0;
+    top: -5px;
+  }
+
+  .specialist__btn-wrapper {
+    margin: 30px 0;
+  }
+
+  .specialist__btn {
+    display: inline-block;
+    background-color: var(--gold);
+    color: var(--white);
+    padding: 15px 30px;
+    text-transform: uppercase;
+    font-weight: 700;
+    font-size: 0.95rem;
+    text-decoration: none;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+  }
+
+  .specialist__btn:hover {
+    background-color: #c4ab6c;
+    transform: translateY(-2px);
+  }
+
+  .specialist__conclusion {
+    font-weight: 500;
+    color: var(--white);
+  }
+
+  @media (min-width: 768px) {
+    .specialist__text { font-size: 1.1rem; }
+    .specialist__text--highlight { font-size: 1.3rem; }
+    .specialist__list li { font-size: 1.1rem; }
+  }
+
+  .specialist__image-container {
+    flex: 1;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+  }
+
+  .specialist__img-wrapper {
+    position: relative;
+    border: 1px solid var(--gold);
+    padding: 10px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+  }
+
+  .specialist__img {
+    width: 100%;
+    height: auto;
+    display: block;
+    object-fit: cover;
+    box-shadow: 0 15px 35px rgba(0,0,0,0.8);
+  }
+
+  @media (min-width: 992px) {
+    .specialist__img {
+      max-height: 450px;
+      width: auto;
+      min-width: 100%;
+    }
+  }
+</style>
