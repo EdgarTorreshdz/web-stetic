@@ -1,0 +1,210 @@
+---
+import ButtonCTA from "./ButtonCTA.astro";
+
+interface TableRow {
+  treatment: string;
+  time: string;
+  durability: string;
+  cost: string;
+}
+
+const title = "Porcelain Veneers Treatment Overview";
+const btnText = "Schedule your free video consultation";
+const phoneNumber = "5219844922549";
+const whatsappUrl = `https://wa.me/${phoneNumber}/?text=${encodeURIComponent("Hello! I was checking the *Porcelain Veneers* section on your website and I'm interested in scheduling my *free video consultation*. Could you let me know the available times? Thank you!")}`;
+const tableData: TableRow[] = [
+  {
+    treatment: "Single Porcelain Veneer",
+    time: "5–7 days",
+    durability: "10–15+ years",
+    cost: "Varies by case"
+  },
+  {
+    treatment: "Multiple Veneers",
+    time: "5–7 days",
+    durability: "10–15+ years",
+    cost: "Varies by case"
+  },
+  {
+    treatment: "Full Set of Porcelain Veneers",
+    time: "5–7 days",
+    durability: "10–15+ years",
+    cost: "Varies by case"
+  },
+  {
+    treatment: "Smile Design with Veneers",
+    time: "5–7 days",
+    durability: "10–15+ years",
+    cost: "Varies by case"
+  }
+];
+---
+
+<section class="compare-section">
+  <div class="container">
+    <h2 class="compare__title">{title}</h2>
+    <div class="compare__accent-line"></div>
+
+    <div class="table-wrapper">
+      <table class="compare-table">
+        <thead>
+          <tr>
+            <th>Treatment</th>
+            <th>Treatment Time</th>
+            <th>Durability</th>
+            <th>Estimated Cost</th>
+          </tr>
+        </thead>
+        <tbody>
+          {tableData.map((row) => (
+            <tr>
+              <td class="fw-bold">{row.treatment}</td>
+              <td>{row.time}</td>
+              <td>{row.durability}</td>
+              <td class="text-gold fw-bold">{row.cost}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+
+    <div class="compare__footer-text">
+      <p>
+        International patients often choose porcelain veneers in Playa del Carmen because treatment costs are typically much lower than in their home countries, without compromising aesthetics or quality
+      </p>
+      {btnText && <ButtonCTA text={btnText} href={whatsappUrl} openInNewTab={true} />}
+    </div>
+  </div>
+</section>
+
+<style>
+  :root {
+    --gold: #A58E55;
+    --black: #000000;
+    --white: #ffffff;
+    --text-gray: #444444;
+    --light-gray: #f9f9f9;
+    --border-color: #eaeaea;
+  }
+
+  .compare-section {
+    padding: 80px 0;
+    background-color: var(--white);
+  }
+
+  .container {
+    margin: 0 auto;
+    width: 90%;
+    max-width: 1200px;
+  }
+
+  .compare__title {
+    font-size: 2rem;
+    font-weight: 800;
+    color: var(--black);
+    text-transform: uppercase;
+    text-align: center;
+    margin-bottom: 15px;
+  }
+
+  .compare__accent-line {
+    width: 60px;
+    height: 3px;
+    background-color: var(--gold);
+    margin: 0 auto 40px auto;
+  }
+
+  /* --- Contenedor Responsivo --- */
+  .table-wrapper {
+    width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+    border-radius: 12px;
+    background-color: var(--white);
+    margin-bottom: 2rem; /* Espacio para el texto inferior */
+  }
+
+  /* --- Estilos de la Tabla --- */
+  .compare-table {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: left;
+    min-width: 700px; /* Reducido ligeramente ya que son menos columnas */
+  }
+
+  .compare-table th,
+  .compare-table td {
+    padding: 20px;
+    border-bottom: 1px solid var(--border-color);
+  }
+
+  .compare-table thead {
+    background-color: var(--black);
+    color: var(--white);
+  }
+
+  .compare-table th {
+    font-weight: 600;
+    font-size: 1.1rem;
+    letter-spacing: 0.5px;
+    white-space: nowrap;
+  }
+
+  .compare-table tbody tr {
+    transition: background-color 0.3s ease;
+  }
+
+  .compare-table tbody tr:hover {
+    background-color: var(--light-gray);
+  }
+
+  .compare-table td {
+    color: var(--text-gray);
+    font-size: 1.05rem;
+    line-height: 1.5;
+  }
+
+  /* --- Estilo de los Textos Inferiores --- */
+  .compare__footer-text {
+    text-align: center;
+    font-size: 1rem;
+    color: var(--text-gray);
+    max-width: 800px;
+    margin: 0 auto;
+    line-height: 1.6;
+  }
+
+  .compare__footer-text p {
+    margin-bottom: 15px;
+  }
+
+  /* --- Utilidades de Texto --- */
+  .fw-bold {
+    font-weight: 700;
+    color: var(--black);
+  }
+
+  .text-gold {
+    color: var(--gold) !important;
+  }
+
+  /* --- Responsive --- */
+  @media (max-width: 768px) {
+    .compare-section {
+      padding: 60px 0;
+    }
+    .compare__title {
+      font-size: 1.6rem;
+    }
+    .compare-table th, 
+    .compare-table td {
+      padding: 15px;
+      font-size: 0.95rem;
+    }
+    .compare__footer-text {
+      font-size: 0.9rem;
+      padding: 0 10px;
+    }
+  }
+</style>

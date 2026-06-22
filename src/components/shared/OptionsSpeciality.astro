@@ -9,9 +9,15 @@ interface Props {
   title: string;
   description?: string;
   options: Option[];
+  buttonText?: string;
+  buttonMessage?: string;
 }
+import ButtonCTA from './ButtonCTA.astro';
 
-const { title, description, options } = Astro.props;
+const { title, description, options, buttonText, buttonMessage} = Astro.props;
+const phoneNumber = "5219844922549";
+const whatsappUrl = `https://wa.me/${phoneNumber}/?text=${encodeURIComponent(buttonMessage || "Hello! I'm interested in learning more about your services.")}`;
+
 ---
 
 <section class="options-section">
@@ -31,6 +37,8 @@ const { title, description, options } = Astro.props;
         </div>
       ))}
     </div>
+      {buttonText && <ButtonCTA text={buttonText} href={whatsappUrl} openInNewTab={true} align="center"/>}
+
   </div>
 </section>
 

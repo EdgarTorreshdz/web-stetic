@@ -1,15 +1,16 @@
 ---
 import { Icon } from "astro-icon/components";
-
+import ButtonCTA from './ButtonCTA.astro';
 // 1. Definimos la interfaz de lo que el componente puede recibir
 interface Props {
   lang: 'en' | 'es';
   title: string;
   subheadline: string;
   features: string[];
-  buttonText: string;
+  buttonText?: string;
   imageSrc: string;
   imageAlt: string;
+  buttonMessage?: string;
 }
 
 // 2. Extraemos las propiedades
@@ -20,8 +21,11 @@ const {
   features, 
   buttonText, 
   imageSrc, 
-  imageAlt 
+  imageAlt,
+  buttonMessage
 } = Astro.props;
+const phoneNumber = "5219844922549";
+const whatsappUrl = `https://wa.me/${phoneNumber}/?text=${encodeURIComponent(buttonMessage || "Hello! I'm interested in learning more about your services.")}`;
 ---
 
 <header class="header">
@@ -43,10 +47,7 @@ const {
       </ul>
 
       <div class="header__actions">
-        <a class="header__btn" href="#contact">
-          {buttonText}
-          <Icon name="arrow-down" color="white" class="arrow-down" size={20} />
-        </a>
+        <ButtonCTA text={buttonText} href={whatsappUrl} openInNewTab={true}/>
       </div>
     </div>
 

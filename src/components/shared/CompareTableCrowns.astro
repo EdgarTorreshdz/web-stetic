@@ -1,0 +1,201 @@
+---
+interface ComparisonRow {
+  factor: string;
+  playa: string;
+  home: string;
+}
+
+interface Props {
+  title?: string;
+}
+
+const { title = "Why Choose Playa del Carmen?" } = Astro.props;
+
+const tableData: ComparisonRow[] = [
+  {
+    factor: "Cost",
+    playa: "Significantly lower — save up to 70%",
+    home: "High treatment costs"
+  },
+  {
+    factor: "Quality of Care",
+    playa: "Premium materials & experienced specialists",
+    home: "High-quality care"
+  },
+  {
+    factor: "Wait Time",
+    playa: "Short waits & flexible scheduling",
+    home: "Longer wait times"
+  },
+  {
+    factor: "Accessibility",
+    playa: "No insurance needed — direct access",
+    home: "Often insurance-dependent"
+  }
+];
+---
+
+<section class="location-compare-section">
+  <div class="container">
+    {title && (
+      <>
+        <h2 class="compare__title">{title}</h2>
+        <div class="compare__accent-line"></div>
+      </>
+    )}
+
+    <div class="table-wrapper">
+      <table class="location-table">
+        <thead>
+          <tr>
+            <th>Factor</th>
+            <th class="highlight-header">Playa del Carmen</th>
+            <th>Back Home</th>
+          </tr>
+        </thead>
+        <tbody>
+          {tableData.map((row) => (
+            <tr>
+              <td class="fw-bold factor-col">{row.factor}</td>
+              <td class="highlight-col fw-bold">{row.playa}</td>
+              <td class="home-col">{row.home}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<style>
+  :root {
+    --gold: #A58E55;
+    --black: #000000;
+    --white: #ffffff;
+    --text-gray: #444444;
+    --light-gray: #f9f9f9;
+    --border-color: #eaeaea;
+    --highlight-bg: rgba(165, 142, 85, 0.05); /* Un fondo dorado súper sutil */
+  }
+
+  .location-compare-section {
+    padding: 60px 0;
+    background-color: var(--white);
+  }
+
+  .container {
+    margin: 0 auto;
+    width: 90%;
+    max-width: 1000px; /* Un poco más estrecho que la tabla anterior para que se vea mejor */
+  }
+
+  .compare__title {
+    font-size: 2rem;
+    font-weight: 800;
+    color: var(--black);
+    text-transform: uppercase;
+    text-align: center;
+    margin-bottom: 15px;
+  }
+
+  .compare__accent-line {
+    width: 60px;
+    height: 3px;
+    background-color: var(--gold);
+    margin: 0 auto 40px auto;
+  }
+
+  /* --- Contenedor Responsivo --- */
+  .table-wrapper {
+    width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+    border-radius: 12px;
+    background-color: var(--white);
+    border: 1px solid var(--border-color);
+  }
+
+  /* --- Estilos de la Tabla --- */
+  .location-table {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: left;
+    min-width: 650px;
+  }
+
+  .location-table th,
+  .location-table td {
+    padding: 20px;
+    border-bottom: 1px solid var(--border-color);
+  }
+
+  .location-table tbody tr:last-child td {
+    border-bottom: none;
+  }
+
+  .location-table thead {
+    background-color: var(--black);
+    color: var(--white);
+  }
+
+  .location-table th {
+    font-weight: 600;
+    font-size: 1.1rem;
+    letter-spacing: 0.5px;
+  }
+
+  .highlight-header {
+    color: var(--gold);
+  }
+
+  .location-table tbody tr {
+    transition: background-color 0.3s ease;
+  }
+
+  .location-table tbody tr:hover {
+    background-color: var(--light-gray);
+  }
+
+  .location-table td {
+    font-size: 1.05rem;
+    line-height: 1.5;
+  }
+
+  /* --- Estilos Específicos por Columna --- */
+  .factor-col {
+    color: var(--black);
+    width: 25%;
+  }
+
+  .highlight-col {
+    color: var(--gold);
+    background-color: var(--highlight-bg);
+    width: 45%;
+  }
+
+  .home-col {
+    color: var(--text-gray);
+    width: 30%;
+  }
+
+  /* --- Utilidades de Texto --- */
+  .fw-bold {
+    font-weight: 700;
+  }
+
+  /* --- Responsive --- */
+  @media (max-width: 768px) {
+    .location-compare-section {
+      padding: 40px 0;
+    }
+    .compare__title {
+      font-size: 1.6rem;
+    }
+    .location-table th, 
+    .location-table td {
+      padding: 15px;
+      font-size: 0.95rem;
+    }
+  }
+</style>

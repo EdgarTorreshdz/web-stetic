@@ -3,9 +3,10 @@ interface Props {
   title: string;
   text1: string;
   text2: string;
+  textSmall?: string;
 }
 
-const { title, text1, text2 } = Astro.props;
+const { title, text1, text2, textSmall } = Astro.props;
 ---
 
 <section class="what-is-section">
@@ -19,6 +20,11 @@ const { title, text1, text2 } = Astro.props;
       <p class="what-is__text">
         {text2}
       </p>
+      {textSmall && (
+        <p class="what-is__text what-is__text--small">
+          {textSmall}
+        </p>
+      )}
     </div>
   </div>
 </section>
@@ -60,6 +66,12 @@ const { title, text1, text2 } = Astro.props;
     line-height: 1.2;
     margin-bottom: 20px;
     color: var(--black);
+  }
+
+  .what-is__text--small {
+    font-size: 0.5rem;
+    color: #666;
+    margin-top: 15px;
   }
 
   @media (min-width: 768px) {

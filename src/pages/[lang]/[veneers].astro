@@ -40,6 +40,7 @@ import DesignIntegrationSpeciality from "../../components/shared/DesignIntegrati
 import LocationSpeciality from "../../components/shared/LocationSpeciality.astro";
 import FaqSpeciality from "../../components/shared/FaqSpeciality.astro";
 import CtaSpeciality from "../../components/shared/CtaSpeciality.astro";
+import CompareTableVeneers from "../../components/shared/CompareTableVeneers.astro";
 
 const pageContent = {
   en: {
@@ -86,11 +87,12 @@ const pageContent = {
         "Experienced cosmetic dentists focused on aesthetics",
         "English-speaking dental team",
         "High-quality porcelain materials",
-        "Significant savings compared to U.S. veneer costs"
+        "Major cost savings for international patients"
       ],
-      button: "Schedule Your Veneers Consultation",
+      buttonText: "Schedule Your Veneers Consultation",
       imageSrc: imgPath + "Veneers-IMG-1.webp",
-      imageAlt: "Porcelain veneers smile result Playa del Carmen"
+      imageAlt: "Porcelain veneers smile result Playa del Carmen",
+      buttonMessage: "Hello! I was checking the *Porcelain Veneers* section on your website and I'm interested in scheduling my *free video consultation*. Could you let me know the available times? Thank you!"
     },
     about: {
       title: "LOOKING FOR PORCELAIN VENEERS IN PLAYA DEL CARMEN YOU CAN TRUST?",
@@ -102,7 +104,8 @@ const pageContent = {
     whatIs: {
       title: "WHAT ARE PORCELAIN VENEERS?",
       text1: "Porcelain veneers are thin, custom-made shells designed to cover the front surface of teeth and improve overall smile aesthetics.",
-      text2: "hey are commonly used to correct discoloration, chips, gaps, and minor alignment issues while maintaining a natural, uniform appearance.",
+      text2: "They are commonly used to correct discoloration, chips, gaps, and minor alignment issues while maintaining a natural, uniform appearance.",
+      textSmall: "Porcelain veneers are one of the most popular cosmetic dental treatments worldwide due to their natural look and durability."
     },
     benefits: {
       title: "BENEFITS OF PORCELAIN VENEERS",
@@ -115,7 +118,8 @@ const pageContent = {
       ],
       footer: "Porcelain veneers are an ideal solution for patients seeking a balanced, natural-looking smile without undergoing complex dental procedures. They are one of the most popular cosmetic dentistry treatments for international patients visiting Playa del Carmen.",
       imageSrc: imgPath + "Veneers-IMG-3.webp",
-      imgAlt: "Porcelain veneers close up teeth natural cosmetic dental results Playa del Carmen"
+      imgAlt: "Porcelain veneers close up teeth natural cosmetic dental results Playa del Carmen",
+      buttonText: "Schedule you free video consultation"
     },
     candidate: {
       title: "WHO IS A GOOD CANDIDATE FOR PORCELAIN VENEERS?",
@@ -134,7 +138,7 @@ const pageContent = {
     cost: {
       title: "PORCELAIN VENEERS COST IN PLAYA DEL CARMEN",
       text1: "The cost of porcelain veneers in Playa del Carmen varies depending on the number of veneers, materials used, and the complexity of the treatment.",
-      text2: "However, most patients from the United States and Canada can save between 50% and 70% compared to cosmetic dentistry prices in their home country.",
+      text2: "However, most international patients can save between 50% and 70% compared to cosmetic dentistry prices in their home country.",
     },
     whyChoose: {
       title: "WHY CHOOSE OUR CLINIC FOR PORCELAIN VENEERS",
@@ -146,13 +150,14 @@ const pageContent = {
         "✔ Extensive experience with international patients"
       ],
       footerText: "Our clinic is dedicated to delivering predictable, natural-looking porcelain veneers results for international patients seeking high-quality cosmetic dental care in Mexico.",
-      reelId: "DWAa5QyBTpa" 
+      reelId: "DWAa5QyBTpa",
+      buttonText: "Schedule you free video consultation"
     },
     process: {
       title: "PORCELAIN VENEERS TREATMENT PROCESS IN PLAYA DEL CARMEN",
       footer: "Most treatments are completed within 5 to 7 days, making it ideal for patients visiting Playa del Carmen.",
       steps: [
-        { title: "ONLINE CONSULTATION AND INITIAL SMILE EVALUATION" },
+        { title: "FREE VIDEO CONSULTATION AND INITIAL SMILE EVALUATION" },
         { title: "PERSONALIZED VENEER DESIGN AND PLANNING" },
         { title: "TOOTH PREPARATION AND DIGITAL IMPRESSIONS" },
         { title: "VENEER PLACEMENT AND FINAL ADJUSTMENTS" },
@@ -163,7 +168,8 @@ const pageContent = {
       title: "PORCELAIN VENEERS BEFORE AND AFTER RESULTS",
       text1: "Viewing real porcelain veneers before and after results helps you understand what is possible. Our clinic showcases real cases from international patients who chose porcelain veneers in Playa del Carmen to transform their smiles with natural-looking results.",
       beforeLabel: "Before",
-      afterLabel: "After"
+      afterLabel: "After",
+      text2: "Results may vary depending on each patient’s case and smile goals."
     },
     designIntegration: {
       title: "PORCELAIN VENEERS AS PART OF A COMPLETE SMILE DESIGN",
@@ -173,7 +179,7 @@ const pageContent = {
     location: {
       title: "PORCELAIN VENEERS IN PLAYA DEL CARMEN, MEXICO",
       text1: "Our dental clinic is located in Playa del Carmen, one of the most popular destinations for dental tourism in Mexico. International patients choose this location for its easy travel access, modern infrastructure, nearby accommodations, and a comfortable environment for recovery after porcelain veneers treatment.",
-      mapUrl: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3762.8236434869563!2d-87.0736590249982!3d20.629600986253736!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8f4c299c6e6f3d5b%3A0x6d5a7b4e4f4e4b6a!2sLux%20Dental%20Clinic!5e0!3m2!1ses!2smx!4v1696548765432!5m2!1ses!2smx",
+      mapUrl: "https://maps.google.com/maps?q=Stetic%20Dental%20Clinic,%20Playa%20del%20Carmen&t=&z=16&ie=UTF8&iwloc=&output=embed",
       whatsappUrl: "https://wa.me/9844922549"    
     },
     faq: {
@@ -254,7 +260,8 @@ const pageContent = {
         "Equipo bilingüe",
         "Ahorros significativos comparado con EE. UU."
       ],
-      button: "Agenda tu Consulta de Carillas",
+      buttonText: "Agenda tu Consulta de Carillas",
+      buttonMessage: "Hola! Estaba revisando la sección de *Carillas de Porcelana* en su sitio web y estoy interesado en agendar mi *consulta de video gratuita*. ¿Podrían informarme sobre los horarios disponibles? ¡Gracias!",
       imageSrc: imgPath + "Veneers-IMG-1.webp",
       imageAlt: "Tratamiento de carillas de porcelana"
     },
@@ -269,6 +276,7 @@ const pageContent = {
       title: "¿Qué son las Carillas de Porcelana?",
       text1: "Son láminas delgadas hechas a medida para cubrir la superficie frontal de los dientes. Se usan para corregir decoloración y desalineaciones menores.",
       text2: "Este tratamiento es mínimamente invasivo y ofrece resultados duraderos cuando es realizado por expertos.",
+      textSmall: "Las carillas de porcelana son uno de los tratamientos dentales cosméticos más populares en todo el mundo debido a su apariencia natural y durabilidad."
     },
     benefits: {
       title: "Beneficios de las Carillas de Porcelana",
@@ -281,7 +289,8 @@ const pageContent = {
       ],
       footer: "Las carillas de porcelana son ideales para pacientes que buscan una sonrisa refinada.",
       imageSrc: imgPath + "Veneers-IMG-3.webp",
-      imgAlt: "Sonrisa con carillas"
+      imgAlt: "Sonrisa con carillas",
+      buttonText: "Agenda tu video consulta gratuita"
     },
     candidate: {
       title: "¿Quién es un buen candidato?",
@@ -312,7 +321,8 @@ const pageContent = {
         "Amplia experiencia con pacientes internacionales"
       ],
       footerText: "Nos dedicamos a ofrecer resultados predecibles y de aspecto natural.",
-      reelId: "DPCjErMDkTc"
+      reelId: "DPCjErMDkTc",
+      buttonText: "Agenda tu video consulta gratuita"
     },
     designIntegration: {
       title: "Carillas como Parte de un Diseño de Sonrisa",
@@ -334,12 +344,13 @@ const pageContent = {
       title: "Resultados Antes y Después",
       text1: "Mostramos resultados reales de pacientes que eligieron nuestras carillas para mejorar su sonrisa.",
       beforeLabel: "Antes",
-      afterLabel: "Después"
+      afterLabel: "Después",
+      text2: "Los resultados pueden variar según el caso de cada paciente y sus objetivos de sonrisa."
     },
     location: {
       title: "Carillas en Playa del Carmen, México",
       text1: "Ubicados en un destino seguro y popular. Los pacientes disfrutan de un ambiente relajante durante su tratamiento.",
-      mapUrl: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3762.8236434869563!2d-87.0736590249982!3d20.629600986253736!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8f4c299c6e6f3d5b%3A0x6d5a7b4e4f4e4b6a!2sLux%20Dental%20Clinic!5e0!3m2!1ses!2smx!4v1696548765432!5m2!1ses!2smx",
+      mapUrl: "https://maps.google.com/maps?q=Stetic%20Dental%20Clinic,%20Playa%20del%20Carmen&t=&z=16&ie=UTF8&iwloc=&output=embed",
       whatsappUrl: "https://wa.me/9844922549"    
     },
     faq: {
@@ -377,7 +388,8 @@ const t = pageContent[lang];
       title={t.header.title}
       subheadline={t.header.subheadline}
       features={t.header.features}
-      buttonText={t.header.button}
+      buttonText={t.header.buttonText}
+      buttonMessage={t.header.buttonMessage}
       imageSrc={t.header.imageSrc} 
       imageAlt={t.header.imageAlt}
     />
@@ -394,6 +406,7 @@ const t = pageContent[lang];
       title={t.whatIs.title}
       text1={t.whatIs.text1}
       text2={t.whatIs.text2}
+      textSmall={t.whatIs.textSmall}
     />
 
   <BenefitsSpeciality 
@@ -419,11 +432,14 @@ const t = pageContent[lang];
       text2={t.cost.text2}
     />
 
+    <CompareTableVeneers />
+
   <WhyChooseSpeciality 
       title={t.whyChoose.title}
       items={t.whyChoose.items}
       footerText={t.whyChoose.footerText}
       reelId={t.whyChoose.reelId}
+      buttonText={t.whyChoose.buttonText}
     />
 
   <ProcessSpeciality 
@@ -439,6 +455,7 @@ const t = pageContent[lang];
       afterImage={imgPath + "Veneers-IMG-6.webp"}
       beforeLabel={t.results.beforeLabel}
       afterLabel={t.results.afterLabel}
+      text2={t.results.text2}
     />
 
   <DesignIntegrationSpeciality 

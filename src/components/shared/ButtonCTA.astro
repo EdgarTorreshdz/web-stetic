@@ -1,0 +1,65 @@
+---
+// ButtonCTA.astro
+
+interface Props {
+  text?: string;
+  href: string;
+  openInNewTab?: boolean;
+  align?: 'left' | 'center' | 'right';
+}
+
+const { 
+  text = "Schedule your free video consultation", 
+  href,
+  openInNewTab = false,
+  align = 'left'
+} = Astro.props;
+
+const targetAttr = openInNewTab ? "_blank" : undefined;
+const relAttr = openInNewTab ? "noopener noreferrer" : undefined;
+---
+
+<div class={`cta-btn-wrapper align-${align}`}>
+  <a 
+    href={href} 
+    class="cta-btn"
+    target={targetAttr}
+    rel={relAttr}
+  >
+    {text}
+  </a>
+</div>
+
+<style>
+  :root {
+    --gold: #A58E55;
+    --white: #ffffff;
+  }
+
+  .cta-btn-wrapper {
+    margin: 30px 0;
+    width: 100%;
+  }
+
+  /* Clases para controlar la alineación del botón */
+  .cta-btn-wrapper.align-left { text-align: left; }
+  .cta-btn-wrapper.align-center { text-align: center; }
+  .cta-btn-wrapper.align-right { text-align: right; }
+
+  .cta-btn {
+    display: inline-block;
+    background-color: var(--gold);
+    color: var(--white);
+    padding: 15px 30px;
+    text-transform: uppercase;
+    font-weight: 700;
+    font-size: 0.95rem;
+    text-decoration: none;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+  }
+
+  .cta-btn:hover {
+    background-color: #c4ab6c;
+    transform: translateY(-2px);
+  }
+</style>

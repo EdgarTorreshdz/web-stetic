@@ -1,15 +1,16 @@
 ---
 import { Icon } from "astro-icon/components";
-
+import ButtonCTA from './ButtonCTA.astro';
 interface Props {
   title: string;
   description?: string;
   items: string[];
   footerText?: string;
   reelId: string;
+  buttonText?: string;
 }
 
-const { title, description, items, footerText, reelId } = Astro.props;
+const { title, description, items, footerText, reelId, buttonText } = Astro.props;
 ---
 
 <section class="why-choose-section">
@@ -36,6 +37,7 @@ const { title, description, items, footerText, reelId } = Astro.props;
             {footerText}
           </p>
         </div>
+        {buttonText && <ButtonCTA text={buttonText} href="#contact" />}
       </div>
 
       <div class="why-choose__video-container">

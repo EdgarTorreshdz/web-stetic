@@ -1,15 +1,16 @@
 ---
 import { Icon } from "astro-icon/components";
-
+import ButtonCTA from './ButtonCTA.astro';
 interface Props {
   title: string;
   benefits: string[];
   footerText: string;
   imageSrc: string;
   imageAlt: string;
+  buttonText?: string;
 }
 
-const { title, benefits, footerText, imageSrc, imageAlt } = Astro.props;
+const { title, benefits, footerText, imageSrc, imageAlt, buttonText } = Astro.props;
 ---
 
 <section class="benefits-section">
@@ -39,6 +40,7 @@ const { title, benefits, footerText, imageSrc, imageAlt } = Astro.props;
         <div class="benefits__footer">
           <p>{footerText}</p>
         </div>
+        <ButtonCTA text={buttonText} href="#contact" />
       </div>
     </div>
   </div>

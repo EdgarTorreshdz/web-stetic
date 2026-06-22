@@ -6,6 +6,7 @@ interface Props {
   afterImage: string;
   beforeLabel?: string;
   afterLabel?: string;
+  text2?: string;
 }
 
 const { 
@@ -14,7 +15,8 @@ const {
   beforeImage, 
   afterImage, 
   beforeLabel = "Before", 
-  afterLabel = "After" 
+  afterLabel = "After", 
+  text2 
 } = Astro.props;
 ---
 
@@ -40,6 +42,10 @@ const {
           <span class="ba__label ba__label--gold">{afterLabel}</span>
         </div>
       </div>
+      
+    </div>
+    <div class="ba__text2">
+      {text2 && <p>{text2}</p>}
     </div>
   </div>
 </section>
@@ -72,6 +78,13 @@ const {
     text-transform: uppercase;
     margin-bottom: 15px;
     color: var(--black);
+  }
+
+  .ba__text2 {
+    margin-top: 30px;
+    text-align: center;
+    font-size: 1rem;
+    color: #555;
   }
 
   @media (min-width: 768px) {
