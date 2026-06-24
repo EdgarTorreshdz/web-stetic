@@ -1,4 +1,6 @@
 ---
+import ButtonCTA from "./ButtonCTA.astro";
+
 // Definimos la estructura para cada fila de la tabla
 interface TableRow {
   treatment: string;
@@ -11,7 +13,7 @@ interface TableRow {
 interface Props {
   title: string;
   text1: string;
-  text2: string;
+  text2?: string;
   text3?: string;
   highlight1?: string;
   text4?: string;
@@ -21,21 +23,25 @@ interface Props {
   tableSubtitle?: string;
   tableRows?: TableRow[];
   disclaimer?: string;
+  buttonText?: string;
+  buttonLink?: string;
 }
 
-const { 
-  title, 
-  text1, 
-  text2, 
-  text3, 
-  highlight1, 
-  text4, 
-  listItems = [], 
-  highlight2, 
-  tableTitle, 
+const {
+  title,
+  text1,
+  text2,
+  text3,
+  highlight1,
+  text4,
+  listItems = [],
+  highlight2,
+  tableTitle,
   tableSubtitle,
   tableRows = [],
-  disclaimer 
+  disclaimer,
+  buttonText,
+  buttonLink,
 } = Astro.props;
 ---
 
@@ -44,77 +50,98 @@ const {
     <div class="cost__content">
       <h2 class="cost__title">{title}</h2>
       <div class="cost__accent-line"></div>
-      
+
       <p class="cost__text cost__text--highlight">{text1}</p>
       <p class="cost__text">{text2}</p>
       {text3 && <p class="cost__text">{text3}</p>}
 
-      {highlight1 && (
-        <div class="cost__highlight-box">
-          <p>{highlight1}</p>
-        </div>
-      )}
+      {
+        highlight1 && (
+          <div class="cost__highlight-box">
+            <p>{highlight1}</p>
+          </div>
+        )
+      }
 
       {text4 && <p class="cost__text">{text4}</p>}
 
-      {listItems && listItems.length > 0 && (
-        <ul class="cost__list">
-          {listItems.map((item) => (
-            <li>{item}</li>
-          ))}
-        </ul>
-      )}
+      {
+        listItems && listItems.length > 0 && (
+          <ul class="cost__list">
+            {listItems.map((item) => (
+              <li>{item}</li>
+            ))}
+          </ul>
+        )
+      }
 
-      {highlight2 && (
-        <div class="cost__highlight-box cost__highlight-box--secondary">
-          <p>{highlight2}</p>
-        </div>
-      )}
+      {
+        highlight2 && (
+          <div class="cost__highlight-box cost__highlight-box--secondary">
+            <p>{highlight2}</p>
+          </div>
+        )
+      }
 
       {/* --- SECCIÓN DE LA TABLA COMPARATIVA --- */}
-      {tableTitle && (
-        <div class="cost__table-container">
-          <h3 class="cost__table-title">{tableTitle}</h3>
-          {tableSubtitle && <p class="cost__table-subtitle">{tableSubtitle}</p>}
-          
-          <div class="smile-table-wrapper">
-            <table class="smile-table">
-              <thead>
-                <tr>
-                  <th class="align-left">Treatment</th>
-                  <th>Typical International Price</th>
-                  <th class="highlight-col">Estimated Mexico Cost</th>
-                  <th>Treatment Time</th>
-                  <th>Durability</th>
-                </tr>
-              </thead>
-              <tbody>
-                {tableRows.map((row) => (
-                  <tr>
-                    <td class="align-left fw-bold text-gold">{row.treatment}</td>
-                    <td>{row.intlPrice}</td>
-                    <td class="highlight-col fw-bold">{row.mxPrice}</td>
-                    <td>{row.time}</td>
-                    <td>{row.durability}</td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
+      {
+        tableTitle && (
+          <div class="cost__table-container">
+            <h3 class="cost__table-title">{tableTitle}</h3>
+            {tableSubtitle && (
+              <p class="cost__table-subtitle">{tableSubtitle}</p>
+            )}
 
-          {disclaimer && (
-            <p class="smile-note">{disclaimer}</p>
-          )}
-        </div>
-      )}
-      
+            <div class="smile-table-wrapper">
+              <table class="smile-table">
+                <thead>
+                  <tr>
+                    <th class="align-left">Treatment</th>
+                    <th>Typical International Price</th>
+                    <th class="highlight-col">Estimated Mexico Cost</th>
+                    <th>Treatment Time</th>
+                    <th>Durability</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {tableRows.map((row) => (
+                    <tr>
+                      <td class="align-left fw-bold text-gold">
+                        {row.treatment}
+                      </td>
+                      <td>{row.intlPrice}</td>
+                      <td class="highlight-col fw-bold">{row.mxPrice}</td>
+                      <td>{row.time}</td>
+                      <td>{row.durability}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+
+            {disclaimer && <p class="smile-note">{disclaimer}</p>}
+          </div>
+        )
+      }
     </div>
+    {
+      buttonText && buttonLink && (
+        <div style="margin-top: 40px;">
+          <ButtonCTA
+            text={buttonText}
+            href={buttonLink}
+            openInNewTab={true}
+            align="center"
+          />
+        </div>
+      )
+    }
   </div>
 </section>
 
 <style>
   :root {
-    --gold: #A58E55;
+    --gold: #a58e55;
     --black: #000000;
     --white: #ffffff;
     --gray-light: #f9f9f9;
@@ -123,14 +150,15 @@ const {
 
   .cost-section {
     padding: 100px 0;
-    background-color: var(--gray-light); /* Fondo muy sutil para resaltar la tabla oscura */
+    background-color: var(
+      --gray-light
+    ); /* Fondo muy sutil para resaltar la tabla oscura */
     color: var(--black);
   }
 
   .container {
     margin: 0 auto;
     width: 85%;
-    max-width: 900px; /* Reducimos un poco el ancho para líneas de texto más cómodas de leer */
   }
 
   .cost__content {
@@ -209,7 +237,7 @@ const {
     background-color: var(--white);
     padding: 30px 40px;
     border-radius: 12px;
-    box-shadow: 0 5px 20px rgba(0,0,0,0.03);
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.03);
   }
 
   .cost__list li {
@@ -261,7 +289,7 @@ const {
   .smile-table-wrapper {
     overflow-x: auto;
     margin: 0 0 25px 0;
-    box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
     border-radius: 12px; /* Esquinas redondeadas en el contenedor */
     background-color: #0b0b0b;
   }
@@ -269,7 +297,7 @@ const {
   .smile-table {
     width: 100%;
     border-collapse: collapse;
-    font-family: 'Helvetica Neue', Arial, sans-serif;
+    font-family: "Helvetica Neue", Arial, sans-serif;
     color: #e0e0e0;
     min-width: 750px; /* Asegura que no se rompa en móviles */
   }
@@ -330,8 +358,14 @@ const {
   }
 
   @media (min-width: 768px) {
-    .cost__title { font-size: 2.5rem; }
-    .cost__text { font-size: 1.15rem; }
-    .cost__text--highlight { font-size: 1.4rem; }
+    .cost__title {
+      font-size: 2.5rem;
+    }
+    .cost__text {
+      font-size: 1.15rem;
+    }
+    .cost__text--highlight {
+      font-size: 1.4rem;
+    }
   }
 </style>

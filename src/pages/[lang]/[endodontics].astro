@@ -5,22 +5,22 @@ import Layout from "../../layouts/Layout.astro";
 
 export async function getStaticPaths() {
   return [
-    { 
-      params: { 
-        lang: 'en', 
-        endodontics: routes.en.endodontics 
-      } 
+    {
+      params: {
+        lang: "en",
+        endodontics: routes.en.endodontics,
+      },
     },
-    { 
-      params: { 
-        lang: 'es', 
-        endodontics: routes.es.endodontics 
-      } 
+    {
+      params: {
+        lang: "es",
+        endodontics: routes.es.endodontics,
+      },
     },
   ];
 }
 
-const { lang } = Astro.params as { lang: 'en' | 'es' };
+const { lang } = Astro.params as { lang: "en" | "es" };
 
 const enPath = `/en/${routes.en.endodontics}/`;
 const esPath = `/es/${routes.es.endodontics}/`;
@@ -40,6 +40,11 @@ import AmericansSpeciality from "../../components/shared/AmericansSpeciality.ast
 import LocationSpeciality from "../../components/shared/LocationSpeciality.astro";
 import FaqSpeciality from "../../components/shared/FaqSpeciality.astro";
 import CtaSpeciality from "../../components/shared/CtaSpeciality.astro";
+import SpecialistSpecialityPoints from "../../components/shared/SpecialistSpecialityPoints.astro";
+import BenefitsTextSpecialityPoints from "../../components/shared/BenefitsTextSpecialityPoints.astro";
+import CostSpecialityPoints from "../../components/shared/CostSpecialityPoints.astro";
+import AfterSpecialityPoints from "../../components/shared/AfterSpecialityPoints.astro";
+import AmericansSpecialityReel from "../../components/shared/AmericansSpecialityReel.astro";
 
 const pageContent = {
   en: {
@@ -49,140 +54,240 @@ const pageContent = {
         {
           "@type": "Dentist",
           "@id": `https://www.steticdental.com.mx${enPath}#dentist`,
-          "name": "Stetic Dental Clinic",
-          "url": `https://www.steticdental.com.mx${enPath}`,
-          "telephone": "+52 984 188 0338",
-          "address": {
+          name: "Stetic Dental Clinic",
+          url: `https://www.steticdental.com.mx${enPath}`,
+          telephone: "+52 984 188 0338",
+          address: {
             "@type": "PostalAddress",
-            "streetAddress": "Avenida 10 Nte, Calle 38 Nte Con, Zazil-ha",
-            "addressLocality": "Playa del Carmen",
-            "addressRegion": "Quintana Roo",
-            "addressCountry": "MX"
-          }
+            streetAddress: "Avenida 10 Nte, Calle 38 Nte Con, Zazil-ha",
+            addressLocality: "Playa del Carmen",
+            addressRegion: "Quintana Roo",
+            addressCountry: "MX",
+          },
         },
         {
           "@type": "Service",
           "@id": `https://www.steticdental.com.mx${enPath}#service`,
-          "name": "Root Canal in Mexico",
-          "serviceType": "Endodontic treatment",
-          "description": "Root canal treatment in Playa del Carmen, Mexico focused on relieving pain, eliminating infection, and preserving the natural tooth.",
-          "url": `https://www.steticdental.com.mx${enPath}`,
-          "provider": { "@id": `https://www.steticdental.com.mx${enPath}#dentist` },
-          "areaServed": [
-            { "@type": "City", "name": "Playa del Carmen" },
-            { "@type": "Country", "name": "Mexico" }
-          ]
-        }
-      ]
+          name: "Root Canal in Mexico",
+          serviceType: "Endodontic treatment",
+          description:
+            "Root canal treatment in Playa del Carmen, Mexico focused on relieving pain, eliminating infection, and preserving the natural tooth.",
+          url: `https://www.steticdental.com.mx${enPath}`,
+          provider: {
+            "@id": `https://www.steticdental.com.mx${enPath}#dentist`,
+          },
+          areaServed: [
+            { "@type": "City", name: "Playa del Carmen" },
+            { "@type": "Country", name: "Mexico" },
+          ],
+        },
+      ],
     },
     seo: {
-      title: "Root Canal in Playa del Carmen – Pain Relief Treatment",
-      description: "Get a root canal in Mexico with expert care in Playa del Carmen. Safe, effective endodontic treatment focused on fast pain relief."
+      title: "Root Canal in Playa del Carmen, Mexico | Fast Pain Relief",
+      description:
+        "Root canal treatment in Playa del Carmen by experienced endodontists. Fast pain relief, English-speaking team & significant savings back home.",
     },
     header: {
       title: "Root Canal Treatment in Playa del Carmen, Mexico",
-      subheadline: "Pain-relief focused root canal treatment performed by experienced endodontists for international patients.",
+      subheadline:
+        "Experiencing tooth pain while traveling? Our experienced endodontists provide fast, effective root canal treatment — so you can get back to feeling your best.",
       features: [
-        "Experienced root canal dentist",
-        "Endodontist in Playa del Carmen",
-        "Modern pain-control techniques",
-        "English-speaking dental team"
+        "Experienced endodontists — specialists in root canal treatment",
+        "Modern pain-control techniques for a comfortable procedure",
+        "Fast appointments available for urgent cases",
+        "English-speaking team — clear communication throughout",
       ],
       button: "Schedule Your Root Canal Appointment",
       imageSrc: imgPath + "Root-canal-IMG-1.webp",
-      imageAlt: "Modern dental clinic for root canal treatment"
+      imageAlt: "Modern dental clinic for root canal treatment",
     },
     about: {
       title: "Need a Root Canal in Playa del Carmen? We’re Ready to Help",
-      text1: "Tooth pain or infection can be overwhelming—especially while traveling. Our clinic provides professional root canal treatment for American patients seeking fast, safe, and effective dental care in Mexico.",
-      text2: "If you are searching for a root canal near me while visiting Playa del Carmen, our team is prepared to diagnose and relieve pain as quickly as possible.",
+      text1:
+        "Tooth pain or infection can be overwhelming — especially while traveling. Our clinic provides professional root canal treatment for international patients seeking fast, safe, and effective dental care in Mexico.",
+      text2:
+        "If you're experiencing tooth pain while visiting Playa del Carmen, our team is ready to diagnose and relieve your discomfort as quickly as possible.",
       imageSrc: imgPath + "Root-canal-IMG-2.webp",
-      imgAlt: "Root Canal Specialist examining a patient"
+      imgAlt: "Root Canal Specialist examining a patient",
+      footerText:
+        "👉 Early treatment can prevent tooth loss and more expensive treatments later.",
     },
     whatIs: {
       title: "What Is Root Canal Treatment?",
-      text1: "Root canal treatment, also known as endodontic treatment, removes infected or damaged tissue from inside the tooth. The goal is to eliminate pain, stop infection, and preserve the natural tooth.",
-      text2: "This treatment allows patients to avoid tooth extraction while restoring comfort and oral health.",
+      text1:
+        "With root canal treatment, you can avoid tooth extraction and get back to full comfort and oral health.",
+      text2:
+        "This treatment allows patients to avoid tooth extraction while restoring comfort and oral health.",
+      footerText:
+        "👉 The procedure is designed to relieve pain quickly and protect your long-term oral health.",
     },
     indications: {
       title: "When Is a Root Canal Needed?",
-      subtitle: "You may need a root canal treatment if you experience:",
+      subtitle:
+        "You may need a root canal if you're experiencing any of the following symptoms. Ignoring these signs can allow the infection to worsen and increase the risk of losing the tooth.",
       features: [
-        "Persistent tooth pain",
-        "Sensitivity to hot or cold",
-        "Swelling or infection",
-        "Pain when chewing",
-        "A cracked or deeply decayed tooth"
+        "Persistent or throbbing tooth pain",
+        "Sensitivity to hot or cold that lingers",
+        "Swelling, tenderness, or signs of infection",
+        "Pain or discomfort when chewing",
+        "A cracked, broken, or deeply decayed tooth",
       ],
-      footerText: "An evaluation by a root canal dentist is essential to determine the correct treatment."
+      footerText:
+        "Not sure if you need a root canal? Our team can evaluate your symptoms and recommend the right treatment — quickly and without pressure.",
     },
     specialist: {
-      title: "Root Canal Treatment by an Endodontist",
-      text1: "Procedures are performed by a trained endodontist in Playa del Carmen. Working with a root canal specialist ensures precision, comfort, and long-term success.",
-      text2: "Our clinic uses modern techniques and equipment to deliver safe and predictable endodontic care.",
+      title: "Endodontic Treatment in Playa del Carmen by Specialists",
+      text1:
+        "Your root canal will be performed by a trained endodontist — a specialist with advanced expertise in this specific procedure. This means greater precision, a more comfortable experience, and better long-term results.",
+      text2: "Working with a specialist ensures:",
+      listItems: [
+        { text: "Higher precision and success rates" },
+        { text: "Reduced discomfort during the procedure" },
+        { text: "Better long-term outcomes" },
+      ],
+      conclusion:
+        "Our clinic uses up-to-date techniques and equipment, following internationally recognized protocols to ensure every procedure is safe, comfortable, and effective.",
+
       imageSrc: imgPath + "Root-canal-IMG-3.webp",
-      imgAlt: "Endodontist specialist working in Playa del Carmen clinic"
+      imgAlt: "Endodontist specialist working in Playa del Carmen clinic",
     },
     benefits: {
-      title: "Benefits of Root Canal Treatment",
-      items: [
-        "Relieves dental pain",
-        "Stops infection from spreading",
-        "Saves the natural tooth",
-        "Prevents tooth extraction",
-        "Restores normal chewing function"
+      title: "Benefits of getting a root canal in Mexico",
+      text1:
+        "Choosing a root canal treatment in Mexico offers both medical and financial advantages:",
+
+      listItems: [
+        "Relieves tooth pain — often from the very first visit",
+        "Stops the infection from spreading further",
+        "Saves your natural tooth — no extraction needed",
+        "Restores full chewing function and comfort",
+        "Protects your overall oral health long-term",
       ],
-      footer: "Root canal treatment dentist-led care focuses on comfort and long-term oral health.",
-      imageSrc: ogImage,
-      imgAlt: "Healthy smile after successful root canal treatment"
+      conclusion:
+        "👉 For international patients, it also means high-quality care at a significantly lower cost compared to their country",
     },
     cost: {
-      title: "Root Canal Cost in Mexico",
-      text1: "Root canal cost in Mexico is typically much lower than in the USA while maintaining professional standards. The price depends on the tooth involved and the severity of infection.",
-      text2: "After evaluation, we provide clear information about treatment options and cost with no hidden fees.",
+      title: "Root canal cost in Mexico",
+      text1:
+        "Root canal treatment in Mexico is typically 50–70% lower than back home — without compromising on quality or safety.",
+      text2: "Pricing depends on:",
+      listItems: [
+        "The tooth involved (front teeth tend to be simpler than molars)",
+        "The severity of the infection",
+        "Whether a dental crown is needed to protect the tooth afterward",
+      ],
+      highlight2:
+        "After evaluation, we provide a clear treatment plan with transparent pricing and no hidden fees.",
     },
     process: {
       title: "Root Canal Treatment Process",
-      footer: "The procedure is designed to relieve pain and stabilize the tooth efficiently.",
+      footer:
+        "👉 Most patients experience significant pain relief shortly after treatment.",
       steps: [
-        { title: "Dental examination and X-rays" },
-        { title: "Removal of infected tissue" },
-        { title: "Cleaning and sealing of the canal" },
-        { title: "Temporary or permanent restoration" }
-      ]
+        { title: "Examination & Digital X-Rays" },
+        { title: "Removal of Infected Tissue" },
+        { title: "Cleaning & Sealing of the Canal" },
+        { title: "Temporary or Permanent Restoration" },
+      ],
     },
     after: {
-      title: "After Root Canal Treatment: What to Expect",
-      text1: "After treatment, most patients experience significant pain relief. In many cases, a dental crown is recommended to protect the treated tooth.",
-      text2: "Our team will guide you through recovery and follow-up care.",
+      title:
+        "Why International Patients Choose Mexico for Root Canal Treatment",
+      text1:
+        "Most patients experience significant pain relief immediately after treatment. In many cases, a dental crown is recommended to protect the treated tooth and restore full function.",
+      footerText: `Our team will guide you through:
+      • Recovery instructions — including what to expect in the first 24–48 hours
+      • Follow-up care — so your tooth heals properly
+      • Long-term maintenance — to protect your results once you're back home`,
       imageSrc: imgPath + "Root-canal-IMG-3.webp",
-      imgAlt: "Patient recovery and dental care after root canal"
+      imgAlt: "Patient recovery and dental care after root canal",
     },
     americans: {
       title: "Root Canal Treatment for Americans in Mexico",
-      text1: "Many patients choose Mexico because they receive professional care, English-speaking support, and significant savings (often 50% to 70%).",
+      text1:
+        "Many patients choose Mexico because they receive professional care, English-speaking support, and significant savings (often 50% to 70%).",
+      reelId: "DUmKfSWDrWf",
     },
     location: {
-      title: "Root Canal Treatment in Playa del Carmen, Mexico",
-      text1: "Our clinic is conveniently located, making it easy for travelers to access immediate care. We prioritize urgent cases.",
-      mapUrl: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3762.8236434869563!2d-87.0736590249982!3d20.629600986253736!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8f4c299c6e6f3d5b%3A0x6d5a7b4e4f4e4b6a!2sLux%20Dental%20Clinic!5e0!3m2!1sen!2smx!4v1696548765432!5m2!1sen!2smx",
-      whatsappUrl: "https://wa.me/9844922549"    
+      title: "Root Canal in Playa del Carmen – Convenient Location",
+      text1: `Our dental clinic is conveniently located in Playa del Carmen, making it easy for travelers and residents to access fast and reliable endodontic care.
+
+        We prioritize urgent cases and provide timely treatment when dental pain cannot wait, helping you get relief as quickly as possible.
+        `,
+      mapUrl: "https://maps.google.com/maps?q=Stetic%20Dental%20Clinic,%20Playa%20del%20Carmen&t=&z=16&ie=UTF8&iwloc=&output=embed",
+      whatsappUrl: "https://wa.me/9844922549",
     },
     faq: {
       title: "Root Canal FAQ",
       items: [
-        { question: "Is root canal treatment painful?", answer: "Modern techniques allow the procedure to be performed with minimal discomfort." },
-        { question: "How much does a root canal cost in Mexico?", answer: "It is generally more affordable than in the USA, representing significant savings." },
-        { question: "Is it safe in Mexico?", answer: "Yes, when performed by experienced specialists using modern protocols." },
-        { question: "How long does it take?", answer: "Most procedures are completed in one or two visits." }
-      ]
+        {
+          question: "Is root canal treatment painful?",
+          answer: `Modern root canal treatment is designed to be as comfortable as possible. With advanced anesthesia and pain-control techniques, most patients experience little to no discomfort during the procedure.
+
+            In fact, the treatment is intended to relieve the pain caused by infection.
+            `,
+        },
+        {
+          question: " Is root canal treatment safe in Mexico?",
+          answer: `Yes. Root canal treatment in Mexico is safe when performed by qualified endodontists using modern equipment and strict sterilization protocols.
+
+          Many international patients choose Mexico for dental care because of the high standards and experienced professionals.
+          `,
+        },
+        {
+          question: "How much does a root canal cost in Mexico?",
+          answer: `The cost of a root canal in Mexico depends on the tooth, complexity, and whether additional restoration is required.
+
+          In general, treatment is more affordable compared to other countries, while maintaining high-quality standards and modern techniques.
+          `,
+        },
+        {
+          question: "How long does a root canal procedure take?",
+          answer: `Most root canal treatments are completed in one or two visits.
+
+          Each appointment typically lasts between 60 to 90 minutes, depending on the severity of the infection and the tooth being treated.
+          `,
+        },
+        {
+          question: "Do I need a crown after a root canal?",
+          answer: `In many cases, a dental crown is recommended after a root canal to protect the tooth and restore full function.
+
+            Your dentist will evaluate your specific case and recommend the best option.
+          `,
+        },
+        {
+          question: "Can I travel after a root canal treatment?",
+          answer: `Yes, most patients can continue their travel plans after treatment.
+
+            You may experience mild sensitivity, but this usually subsides within a few days. Our team will provide aftercare instructions to ensure a smooth recovery.
+          `,
+        },
+        {
+          question: "What happens if I delay a root canal?",
+          answer: `Delaying treatment can allow the infection to worsen, potentially leading to severe pain, abscess, or tooth loss.
+
+          Early treatment helps preserve your natural tooth and prevent more complex procedures.
+        `,
+        },
+        {
+          question: "How do I know if I need a root canal in Playa del Carmen?",
+          answer: `Common signs include persistent tooth pain, sensitivity to hot or cold, swelling, or discomfort when chewing.
+
+          If you experience any of these symptoms, it is important to get evaluated as soon as possible.
+        `,
+        },
+      ],
     },
     cta: {
       title: "Schedule Your Root Canal Treatment",
-      description: "If you are experiencing pain and need immediate care, our team is ready to help.",
+      description:
+        "If you are experiencing pain and need immediate care, our team is ready to help.",
       button: "Book Your Root Canal Appointment Now",
-      note: "Personalized care for every patient"
-    }
+      note: "Personalized care for every patient",
+    },
+    buttonText: "Book Your Appointment — Fast & Easy → ",
+    whatsappUrl: `https://wa.me/5219844922549/?text=${encodeURIComponent("Hello! I was checking the Root Canal section on your website and I'm interested in scheduling an appointment. Could you let me know the available times? Thank you!")}`,
   },
   es: {
     schema: {
@@ -191,60 +296,74 @@ const pageContent = {
         {
           "@type": "Dentist",
           "@id": `https://www.steticdental.com.mx${esPath}#dentist`,
-          "name": "Clínica Stetic Dental",
-          "url": `https://www.steticdental.com.mx${esPath}`,
-          "telephone": "+52 984 188 0338",
-          "address": {
+          name: "Clínica Stetic Dental",
+          url: `https://www.steticdental.com.mx${esPath}`,
+          telephone: "+52 984 188 0338",
+          address: {
             "@type": "PostalAddress",
-            "streetAddress": "Avenida 10 Nte, Calle 38 Nte Con, Zazil-ha",
-            "addressLocality": "Playa del Carmen",
-            "addressRegion": "Quintana Roo",
-            "addressCountry": "MX"
-          }
+            streetAddress: "Avenida 10 Nte, Calle 38 Nte Con, Zazil-ha",
+            addressLocality: "Playa del Carmen",
+            addressRegion: "Quintana Roo",
+            addressCountry: "MX",
+          },
         },
         {
           "@type": "Service",
           "@id": `https://www.steticdental.com.mx${esPath}#service`,
-          "name": "Endodoncia en Playa del Carmen",
-          "serviceType": "Tratamiento de conducto",
-          "description": "Tratamiento de endodoncia en Playa del Carmen enfocado en el alivio del dolor y la preservación del diente natural.",
-          "url": `https://www.steticdental.com.mx${esPath}`,
-          "provider": { "@id": `https://www.steticdental.com.mx${esPath}#dentist` },
-          "areaServed": [
-            { "@type": "City", "name": "Playa del Carmen" },
-            { "@type": "Country", "name": "Mexico" }
-          ]
-        }
-      ]
+          name: "Endodoncia en Playa del Carmen",
+          serviceType: "Tratamiento de conducto",
+          description:
+            "Tratamiento de endodoncia en Playa del Carmen enfocado en el alivio del dolor y la preservación del diente natural.",
+          url: `https://www.steticdental.com.mx${esPath}`,
+          provider: {
+            "@id": `https://www.steticdental.com.mx${esPath}#dentist`,
+          },
+          areaServed: [
+            { "@type": "City", name: "Playa del Carmen" },
+            { "@type": "Country", name: "Mexico" },
+          ],
+        },
+      ],
     },
     seo: {
-      title: "Endodoncia en Playa del Carmen | Alivio del Dolor y Cuidado Experto",
-      description: "Obtén tratamiento de endodoncia enfocado en el alivio del dolor en Playa del Carmen. Cuidado dental seguro por especialistas experimentados en México."
+      title:
+        "Endodoncia en Playa del Carmen | Alivio del Dolor y Cuidado Experto",
+      description:
+        "Obtén tratamiento de endodoncia enfocado en el alivio del dolor en Playa del Carmen. Cuidado dental seguro por especialistas experimentados en México.",
     },
     header: {
       title: "Tratamiento de Endodoncia en Playa del Carmen, México",
-      subheadline: "Tratamiento de conducto enfocado en el alivio del dolor realizado por endodoncistas expertos.",
+      subheadline:
+        "Tratamiento de conducto enfocado en el alivio del dolor realizado por endodoncistas expertos.",
       features: [
         "Dentista experto en endodoncia",
         "Endodoncista en Playa del Carmen",
         "Técnicas modernas de control de dolor",
-        "Equipo dental bilingüe"
+        "Equipo dental bilingüe",
       ],
       button: "Agenda tu Cita de Endodoncia",
       imageSrc: imgPath + "Root-canal-IMG-1.webp",
-      imageAlt: "Clínica dental moderna para tratamientos de endodoncia"
+      imageAlt: "Clínica dental moderna para tratamientos de endodoncia",
     },
     about: {
       title: "¿Necesitas una Endodoncia? Estamos Listos para Ayudarte",
-      text1: "El dolor de muelas o la infección pueden ser abrumadores. Nuestra clínica ofrece endodoncia profesional para pacientes internacionales que buscan atención rápida y segura en México.",
-      text2: "Si buscas un especialista cerca de ti mientras visitas Playa del Carmen, nuestro equipo está preparado para aliviar el dolor lo antes posible.",
+      text1:
+        "El dolor de muelas o la infección pueden ser abrumadores. Nuestra clínica ofrece endodoncia profesional para pacientes internacionales que buscan atención rápida y segura en México.",
+      text2:
+        "Si buscas un especialista cerca de ti mientras visitas Playa del Carmen, nuestro equipo está preparado para aliviar el dolor lo antes posible.",
       imageSrc: imgPath + "Root-canal-IMG-2.webp",
-      imgAlt: "Especialista en Endodoncia examinando a un paciente"
+      imgAlt: "Especialista en Endodoncia examinando a un paciente",
+      footerText:
+        "El tratamiento temprano puede prevenir la pérdida de piezas dentales y tratamientos más costosos en el futuro.",
     },
     whatIs: {
       title: "¿Qué es la Endodoncia?",
-      text1: "Elimina el tejido infectado o dañado del interior del diente para detener la infección y preservar la pieza dental natural.",
-      text2: "Permite evitar la extracción dental mientras restauras tu comodidad y salud bucal.",
+      text1:
+        "Elimina el tejido infectado o dañado del interior del diente para detener la infección y preservar la pieza dental natural.",
+      text2:
+        "Permite evitar la extracción dental mientras restauras tu comodidad y salud bucal.",
+      footerText:
+        "👉 El procedimiento está diseñado para aliviar el dolor rápidamente y proteger su salud bucal a largo plazo.",
     },
     indications: {
       title: "¿Cuándo se necesita una endodoncia?",
@@ -254,181 +373,243 @@ const pageContent = {
         "Sensibilidad extrema al frío o calor",
         "Hinchazón evidente en la encía",
         "Dolor agudo al masticar",
-        "Diente agrietado o con caries profunda"
+        "Diente agrietado o con caries profunda",
       ],
-      footerText: "Una evaluación profesional es esencial para el diagnóstico correcto."
+      footerText:
+        "Una evaluación profesional es esencial para el diagnóstico correcto.",
     },
     specialist: {
-      title: "Tratamiento por Especialista",
-      text1: "Los procedimientos son realizados por un endodoncista certificado, garantizando precisión y éxito a largo plazo.",
-      text2: "Usamos tecnología moderna para una atención segura y predecible.",
+      title: "Tratamiento de Endodoncia en Playa del Carmen por Especialistas",
+      text1:
+        "Su tratamiento de conducto será realizado por un endodoncista capacitado, un especialista con experiencia avanzada en este procedimiento específico. Esto significa mayor precisión, una experiencia más cómoda y mejores resultados a largo plazo.",
+      text2: "Trabajar con un especialista garantiza:",
+      listItems: [
+        { text: "Mayor precisión y tasas de éxito" },
+        { text: "Menor incomodidad durante el procedimiento" },
+        { text: "Mejores resultados a largo plazo" },
+      ],
+      conclusion:
+        "Nuestra clínica utiliza técnicas y equipos actualizados, siguiendo protocolos reconocidos internacionalmente para asegurar que cada procedimiento sea seguro, cómodo y efectivo.",
+
       imageSrc: imgPath + "Root-canal-IMG-3.webp",
-      imgAlt: "Especialista en endodoncia trabajando en Playa del Carmen"
+      imgAlt:
+        "Endodoncista especialista trabajando en una clínica de Playa del Carmen",
     },
     benefits: {
-      title: "Beneficios de la Endodoncia",
-      items: [
-        "Alivia el dolor dental de inmediato",
+      title: "Beneficios de realizarse un tratamiento de conducto en México",
+      text1:
+        "Elegir un tratamiento de conducto en México ofrece ventajas tanto médicas como financieras:",
+
+      listItems: [
+        "Alivia el dolor dental, a menudo desde la primera visita",
         "Detiene la propagación de la infección",
-        "Salva el diente natural",
-        "Evita la necesidad de extracción",
-        "Restaura la función masticatoria"
+        "Salva su diente natural, evitando extracciones",
+        "Restaura la función masticatoria completa y la comodidad",
+        "Protege su salud bucal general a largo plazo",
       ],
-      footer: "Nuestro enfoque se centra en tu comodidad y salud bucal duradera.",
-      imageSrc: ogImage,
-      imgAlt: "Sonrisa saludable después de una endodoncia exitosa"
+      conclusion:
+        "👉 Para los pacientes internacionales, también significa atención de alta calidad a un costo significativamente menor en comparación con su país de origen",
     },
     cost: {
-      title: "Costo de Endodoncia en México",
-      text1: "El costo es mucho más accesible que en EE. UU. o Canadá. El precio final depende de la complejidad y el diente afectado.",
-      text2: "Brindamos información clara y planes de tratamiento sin cargos ocultos.",
+      title: "Root canal cost in Mexico",
+      text1:
+        "Root canal treatment in Mexico is typically 50–70% lower than back home — without compromising on quality or safety.",
+      text2: "Pricing depends on:",
+      listItems: [
+        "The tooth involved (front teeth tend to be simpler than molars)",
+        "The severity of the infection",
+        "Whether a dental crown is needed to protect the tooth afterward",
+      ],
+      highlight2:
+        "After evaluation, we provide a clear treatment plan with transparent pricing and no hidden fees.",
     },
     process: {
-      title: "Proceso del Tratamiento",
-      footer: "Diseñado para eliminar el dolor de manera eficiente.",
+      title: "Proceso del Tratamiento de Conducto",
+      footer:
+        "👉 La mayoría de los pacientes experimentan un alivio significativo del dolor poco después del tratamiento.",
       steps: [
-        { title: "Examen dental y radiografías" },
+        { title: "Examen y radiografías digitales" },
         { title: "Eliminación del tejido infectado" },
         { title: "Limpieza y sellado del conducto" },
-        { title: "Restauración de la pieza" }
-      ]
+        { title: "Restauración temporal o permanente" },
+      ],
     },
     after: {
-      title: "Después del Tratamiento",
-      text1: "La mayoría de los pacientes sienten alivio inmediato. A menudo se recomienda una corona para proteger el diente.",
-      text2: "Te guiaremos paso a paso en tu recuperación.",
-      imageSrc: "/sonrisa3.jpg",
-      imgAlt: "Recuperación del paciente"
+      title:
+        "Por qué los pacientes internacionales eligen México para su tratamiento de conducto",
+      text1:
+        "La mayoría de los pacientes experimentan un alivio significativo del dolor inmediatamente después del tratamiento. En muchos casos, se recomienda una corona dental para proteger el diente tratado y restaurar su función completa.",
+      footerText: `Nuestro equipo le guiará a través de:
+      • Instrucciones de recuperación: incluyendo qué esperar en las primeras 24 a 48 horas
+      • Cuidados de seguimiento: para que su diente sane correctamente
+      • Mantenimiento a largo plazo: para proteger sus resultados una vez que esté de regreso en casa`,
+      imageSrc: imgPath + "Root-canal-IMG-3.webp",
+      imgAlt:
+        "Recuperación del paciente y cuidado dental después de un tratamiento de conducto",
     },
     americans: {
       title: "Atención para Pacientes Internacionales",
-      text1: "Ofrecemos atención profesional con apoyo bilingüe y ahorros de hasta el 70% comparado con precios en el extranjero.",
+      text1:
+        "Ofrecemos atención profesional con apoyo bilingüe y ahorros de hasta el 70% comparado con precios en el extranjero.",
+      reelId: "DUmKfSWDrWf",
     },
     location: {
-      title: "Endodoncia en Playa del Carmen",
-      text1: "Ubicados estratégicamente para atender casos de urgencia de manera oportuna.",
-      mapUrl: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3762.8236434869563!2d-87.0736590249982!3d20.629600986253736!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8f4c299c6e6f3d5b%3A0x6d5a7b4e4f4e4b6a!2sLux%20Dental%20Clinic!5e0!3m2!1ses!2smx!4v1696548765432!5m2!1ses!2smx",
-      whatsappUrl: "https://wa.me/9844922549"
+      title:
+        "Tratamiento de conducto en Playa del Carmen – Ubicación conveniente",
+      text1: `Nuestra clínica dental está ubicada convenientemente en Playa del Carmen, lo que facilita a los viajeros y residentes el acceso a una atención endodóntica rápida y confiable.
+
+    Damos prioridad a los casos urgentes y proporcionamos tratamiento oportuno cuando el dolor dental no puede esperar, ayudándole a obtener alivio lo más rápido posible.
+    `,
+      mapUrl: "https://maps.google.com/maps?q=Stetic%20Dental%20Clinic,%20Playa%20del%20Carmen&t=&z=16&ie=UTF8&iwloc=&output=embed",
+      whatsappUrl: "https://wa.me/9844922549",
     },
     faq: {
       title: "Preguntas Frecuentes",
       items: [
-        { question: "¿Duele la endodoncia?", answer: "Con anestesia local y técnicas modernas, el procedimiento es prácticamente indoloro." },
-        { question: "¿Cuánto cuesta en México?", answer: "Es significativamente más barato que en el extranjero, con ahorros de más de la mitad." },
-        { question: "¿Es seguro?", answer: "Totalmente seguro con especialistas certificados y tecnología avanzada." },
-        { question: "¿Cuántas sesiones son?", answer: "Generalmente una o dos visitas son suficientes." }
-      ]
+        {
+          question: "¿Duele la endodoncia?",
+          answer:
+            "Con anestesia local y técnicas modernas, el procedimiento es prácticamente indoloro.",
+        },
+        {
+          question: "¿Cuánto cuesta en México?",
+          answer:
+            "Es significativamente más barato que en el extranjero, con ahorros de más de la mitad.",
+        },
+        {
+          question: "¿Es seguro?",
+          answer:
+            "Totalmente seguro con especialistas certificados y tecnología avanzada.",
+        },
+        {
+          question: "¿Cuántas sesiones son?",
+          answer: "Generalmente una o dos visitas son suficientes.",
+        },
+      ],
     },
     cta: {
       title: "Reserva tu Tratamiento",
-      description: "Si tienes dolor dental, no esperes más. Nuestro equipo está listo para ayudarte.",
+      description:
+        "Si tienes dolor dental, no esperes más. Nuestro equipo está listo para ayudarte.",
       button: "Reserva tu Cita Ahora",
-      note: "Atención personalizada de emergencia"
-    }
-  }
+      note: "Atención personalizada de emergencia",
+    },
+    buttonText: "Agenda tu cita — Fácil y Rapido → ",
+    whatsappUrl: `https://wa.me/5219844922549/?text=${encodeURIComponent("¡Hola! Estuve revisando la sección de Tratamiento de Conducto (Endodoncia) en su sitio web y estoy interesado en programar una cita. ¿Podrían informarme sobre los horarios disponibles? ¡Gracias!")}`,
+  },
 };
 
 const t = pageContent[lang];
 ---
 
-<Layout 
-  title={t.seo.title} 
-  description={t.seo.description} 
+<Layout
+  title={t.seo.title}
+  description={t.seo.description}
   lang={lang}
   enPath={enPath}
   esPath={esPath}
   schema={t.schema}
   ogImage={ogImage}
 >
-    <HeaderSpeciality 
-      lang={lang}
-      title={t.header.title}
-      subheadline={t.header.subheadline}
-      features={t.header.features}
-      buttonText={t.header.button}
-      imageSrc={t.header.imageSrc} 
-      imageAlt={t.header.imageAlt}
-    />
+  <HeaderSpeciality
+    lang={lang}
+    title={t.header.title}
+    subheadline={t.header.subheadline}
+    features={t.header.features}
+    buttonText={t.buttonText}
+    buttonLink={t.whatsappUrl}
+    imageSrc={t.header.imageSrc}
+    imageAlt={t.header.imageAlt}
+  />
 
-    <AboutSpeciality 
-      title={t.about.title}
-      text1={t.about.text1}
-      text2={t.about.text2}
-      imageSrc={t.about.imageSrc}
-      imageAlt={t.about.imgAlt}
-    />
+  <AboutSpeciality
+    title={t.about.title}
+    text1={t.about.text1}
+    text2={t.about.text2}
+    imageSrc={t.about.imageSrc}
+    imageAlt={t.about.imgAlt}
+    footerText={t.about.footerText}
+  />
 
-    <WhatIsSpeciality 
-      title={t.whatIs.title}
-      text1={t.whatIs.text1}
-      text2={t.whatIs.text2}
-    />
+  <WhatIsSpeciality
+    title={t.whatIs.title}
+    text1={t.whatIs.text1}
+    text2={t.whatIs.text2}
+    textSmall={t.whatIs.footerText}
+  />
 
-    <IndicationsSpeciality 
-      title={t.indications.title}
-      subtitle={t.indications.subtitle}
-      features={t.indications.features}
-      footerText={t.indications.footerText}
-    />    
+  <IndicationsSpeciality
+    title={t.indications.title}
+    subtitle={t.indications.subtitle}
+    features={t.indications.features}
+    footerText={t.indications.footerText}
+    buttonText={t.buttonText}
+    buttonLink={t.whatsappUrl}
+  />
 
-    <SpecialistSpeciality 
-      title={t.specialist.title}
-      text1={t.specialist.text1}
-      text2={t.specialist.text2}
-      imageSrc={t.specialist.imageSrc}
-      imageAlt={t.specialist.imgAlt}
-    />
+  <SpecialistSpecialityPoints
+    title={t.specialist.title}
+    text1={t.specialist.text1}
+    text2={t.specialist.text2}
+    listItems={t.specialist.listItems}
+    buttonText={t.buttonText}
+    buttonLink={t.whatsappUrl}
+    conclusion={t.specialist.conclusion}
+    imageSrc={t.specialist.imageSrc}
+    imageAlt={t.specialist.imgAlt}
+  />
 
-    <BenefitsSpeciality 
-      title={t.benefits.title}
-      benefits={t.benefits.items}
-      footerText={t.benefits.footer}
-      imageSrc={t.benefits.imageSrc}
-      imageAlt={t.benefits.imgAlt}
-    />
+  <BenefitsTextSpecialityPoints
+    title={t.benefits.title}
+    text1={t.benefits.text1}
+    listItems={t.benefits.listItems}
+    conclusion={t.benefits.conclusion}
+  />
 
-    <CostSpeciality 
-      title={t.cost.title}
-      text1={t.cost.text1}
-      text2={t.cost.text2}
-    />
+  <CostSpecialityPoints
+    title={t.cost.title}
+    text1={t.cost.text1}
+    text2={t.cost.text2}
+    listItems={t.cost.listItems}
+    highlight2={t.cost.highlight2}
+    buttonText={t.buttonText}
+    buttonLink={t.whatsappUrl}
+  />
 
-    <ProcessSpeciality 
-      title={t.process.title}
-      footer={t.process.footer}
-      steps={t.process.steps}
-    />
+  <ProcessSpeciality
+    title={t.process.title}
+    footer={t.process.footer}
+    steps={t.process.steps}
+  />
 
-    <AfterSpeciality 
-      title={t.after.title}
-      text1={t.after.text1}
-      text2={t.after.text2}
-      imageSrc={t.after.imageSrc}
-      imageAlt={t.after.imgAlt}
-    />
+  <AfterSpecialityPoints
+    title={t.after.title}
+    text1={t.after.text1}
+    footerText={t.after.footerText}
+    imageSrc={t.after.imageSrc}
+    imageAlt={t.after.imgAlt}
+  />
 
-    <AmericansSpeciality 
-      title={t.americans.title}
-      text1={t.americans.text1}
-    />
+  <AmericansSpecialityReel
+    title={t.americans.title}
+    text1={t.americans.text1}
+    reelId={t.americans.reelId}
+  />
 
-    <LocationSpeciality 
-      title={t.location.title}
-      text1={t.location.text1}
-      mapUrl={t.location.mapUrl}
-      whatsappUrl={t.location.whatsappUrl}
-    />
+  <LocationSpeciality
+    title={t.location.title}
+    text1={t.location.text1}
+    mapUrl={t.location.mapUrl}
+    whatsappUrl={t.location.whatsappUrl}
+  />
 
-    <FaqSpeciality 
-      title={t.faq.title}
-      faqs={t.faq.items}
-    />
+  <FaqSpeciality title={t.faq.title} faqs={t.faq.items} />
 
-    <CtaSpeciality 
-      lang={lang}
-      title={t.cta.title}
-      description={t.cta.description}
-      buttonText={t.cta.button}
-      note={t.cta.note}
-    />
+  <CtaSpeciality
+    lang={lang}
+    title={t.cta.title}
+    description={t.cta.description}
+    buttonText={t.cta.button}
+    note={t.cta.note}
+  />
 </Layout>

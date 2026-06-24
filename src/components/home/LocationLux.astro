@@ -60,7 +60,7 @@ const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(t.wh
  * He usado la URL de inserción (embed) con las coordenadas de Stetic Dental
  * para que el Pin rojo aparezca correctamente sobre la clínica.
  */
-const mapEmbedUrl = "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3733.308235284379!2d-87.06584282386472!3d20.63665328091535!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8f4e43383a8f170f%3A0xc3f8373b7501e544!2sStetic%20Dental!5e0!3m2!1ses-419!2smx!4v1711200000000!5m2!1ses-419!2smx";
+const mapEmbedUrl = "https://maps.google.com/maps?q=Stetic%20Dental%20Clinic,%20Playa%20del%20Carmen&t=&z=16&ie=UTF8&iwloc=&output=embed";
 ---
 
 <section class="location-lux">
@@ -139,12 +139,10 @@ const mapEmbedUrl = "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3733.
   .container {
     margin: 0 auto;
     width: 90%;
-    max-width: 1200px;
   }
 
   .location-lux__header {
     margin-bottom: 4rem;
-    max-width: 900px;
   }
 
   .location-lux__title {
@@ -154,6 +152,7 @@ const mapEmbedUrl = "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3733.
     margin-bottom: 2rem;
     line-height: 1.2;
     text-transform: uppercase;
+    text-align: center;
   }
 
   .location-lux__intro p {
@@ -161,6 +160,7 @@ const mapEmbedUrl = "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3733.
     color: var(--gray-text);
     line-height: 1.6;
     margin-bottom: 1rem;
+    text-align: center;
   }
 
   .location-lux__grid {

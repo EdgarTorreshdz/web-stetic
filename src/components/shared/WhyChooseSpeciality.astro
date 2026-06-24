@@ -1,6 +1,6 @@
 ---
 import { Icon } from "astro-icon/components";
-import ButtonCTA from './ButtonCTA.astro';
+import ButtonCTA from "./ButtonCTA.astro";
 interface Props {
   title: string;
   description?: string;
@@ -8,28 +8,31 @@ interface Props {
   footerText?: string;
   reelId: string;
   buttonText?: string;
+  buttonLink?:string;
 }
 
-const { title, description, items, footerText, reelId, buttonText } = Astro.props;
+const { title, description, items, footerText, reelId, buttonText,buttonLink } =
+  Astro.props;
 ---
 
 <section class="why-choose-section">
   <div class="container">
     <div class="why-choose__grid">
-      
       <div class="why-choose__content">
         <h2 class="why-choose__title">{title}</h2>
         <div class="why-choose__accent-line"></div>
-        
+
         {description && <p class="why-choose__description">{description}</p>}
-        
+
         <ul class="why-choose__list">
-          {items.map((item) => (
-            <li class="why-choose__item">
-              <Icon name="star" size={18} class="text-gold" />
-              <span>{item}</span>
-            </li>
-          ))}
+          {
+            items.map((item) => (
+              <li class="why-choose__item">
+                <Icon name="star" size={18} class="text-gold" />
+                <span>{item}</span>
+              </li>
+            ))
+          }
         </ul>
 
         <div class="why-choose__footer-box">
@@ -37,7 +40,18 @@ const { title, description, items, footerText, reelId, buttonText } = Astro.prop
             {footerText}
           </p>
         </div>
-        {buttonText && <ButtonCTA text={buttonText} href="#contact" />}
+        {
+          buttonText && buttonLink && (
+            <div style="margin-top: 40px;">
+              <ButtonCTA
+                text={buttonText}
+                href={buttonLink}
+                openInNewTab={true}
+                align="center"
+              />
+            </div>
+          )
+        }
       </div>
 
       <div class="why-choose__video-container">
@@ -47,23 +61,23 @@ const { title, description, items, footerText, reelId, buttonText } = Astro.prop
             <span>Premium Care</span>
           </div>
 
-          <iframe 
-            src={`https://www.instagram.com/p/${reelId}/embed`} 
+          <iframe
+            src={`https://www.instagram.com/p/${reelId}/embed`}
             class="instagram-iframe-clean"
-            scrolling="no" 
-            allowtransparency="true" 
-            frameborder="0">
+            scrolling="no"
+            allowtransparency="true"
+            frameborder="0"
+          >
           </iframe>
         </div>
       </div>
-
     </div>
   </div>
 </section>
 
 <style>
   :root {
-    --gold: #A58E55;
+    --gold: #a58e55;
     --black: #000000;
     --white: #ffffff;
   }
@@ -79,9 +93,9 @@ const { title, description, items, footerText, reelId, buttonText } = Astro.prop
     color: #444;
     margin-bottom: 25px;
   }
-  .container { 
-    margin: 0 auto; 
-    width: 85%; 
+  .container {
+    margin: 0 auto;
+    width: 85%;
   }
 
   .why-choose__grid {
@@ -168,14 +182,14 @@ const { title, description, items, footerText, reelId, buttonText } = Astro.prop
   .video-clean {
     position: relative;
     width: 100%;
-    max-width: 320px; 
+    max-width: 320px;
   }
 
   .instagram-iframe-clean {
     width: 100%;
-    aspect-ratio: 9 / 16; 
+    aspect-ratio: 9 / 16;
     border-radius: 8px;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
     border: none;
   }
 
@@ -199,7 +213,11 @@ const { title, description, items, footerText, reelId, buttonText } = Astro.prop
   }
 
   @media (max-width: 768px) {
-    .why-choose__title { font-size: 1.8rem; }
-    .video-clean { max-width: 280px; }
+    .why-choose__title {
+      font-size: 1.8rem;
+    }
+    .video-clean {
+      max-width: 280px;
+    }
   }
 </style>

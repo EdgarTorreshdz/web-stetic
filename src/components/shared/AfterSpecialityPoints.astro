@@ -16,11 +16,11 @@ const {
   title,
   text1,
   text2,
+  footerText,
   imageSrc,
   imageAlt,
   buttonText,
   buttonLink,
-  footerText,
 } = Astro.props;
 ---
 
@@ -28,7 +28,9 @@ const {
   <div class="container">
     <div class="about__grid">
       <div class="about__image-container">
-        <img src={imageSrc} alt={imageAlt} class="about__img" />
+        <div class="about__img-frame">
+          <img src={imageSrc} alt={imageAlt} class="about__img" />
+        </div>
       </div>
 
       <div class="about__content">
@@ -40,9 +42,17 @@ const {
         <p class="about__text">
           {text2}
         </p>
-        {footerText && <p class="about__footer-text">{footerText}</p>}
       </div>
     </div>
+
+    {
+      footerText && (
+        <div class="about__footer">
+          <p class="about__footer-text">{footerText}</p>
+        </div>
+      )
+    }
+
     {
       buttonText && buttonLink && (
         <div style="margin-top: 40px;">
@@ -66,7 +76,7 @@ const {
   }
 
   .about-section {
-    padding: 80px 0;
+    padding: 100px 0;
     background-color: var(--black);
     color: var(--white);
   }
@@ -88,26 +98,6 @@ const {
       flex-direction: row;
       justify-content: space-between;
       gap: 60px;
-    }
-  }
-
-  .about__image-container {
-    flex: 1;
-    width: 100%;
-  }
-
-  .about__img {
-    width: 100%;
-    height: auto;
-    border-radius: 4px;
-    border: 1px solid var(--gold);
-    object-fit: cover;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
-  }
-
-  @media (min-width: 992px) {
-    .about__img {
-      max-height: 450px; /* Manteniendo tu regla de 450px */
     }
   }
 
@@ -143,13 +133,14 @@ const {
     line-height: 1.7;
     margin-bottom: 20px;
     color: #e0e0e0;
-    white-space: pre-line;
   }
 
   .about__text--highlight {
     font-size: 1.15rem;
     font-weight: 600;
-    color: var(--gold);
+    color: var(--white);
+    border-left: 4px solid var(--gold);
+    padding-left: 20px;
   }
 
   @media (min-width: 768px) {
@@ -160,12 +151,53 @@ const {
       font-size: 1.3rem;
     }
   }
+
+  .about__image-container {
+    flex: 1;
+    width: 100%;
+  }
+
+  .about__img-frame {
+    position: relative;
+    border: 1px solid rgba(165, 142, 85, 0.4);
+    padding: 10px;
+  }
+
+  .about__img-frame::before {
+    content: "";
+    position: absolute;
+    top: -5px;
+    left: -5px;
+    width: 40px;
+    height: 40px;
+    border-top: 3px solid var(--gold);
+    border-left: 3px solid var(--gold);
+  }
+
+  .about__img {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    display: block;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+  }
+
+  @media (min-width: 992px) {
+    .about__img {
+      max-height: 450px;
+    }
+  }
+
+  .about__footer {
+    margin-top: 40px;
+    padding-top: 20px;
+    border-top: 1px solid var(--gold);
+  }
+
   .about__footer-text {
-    margin-top: 30px;
-    text-align: center;
-    font-size: 0.9rem;
-    color: var(--gold);
-    font-style: italic;
-    opacity: 0.8;
+    font-size: 1rem;
+    line-height: 1.6;
+    color: #ffffff;
+    white-space: pre-line;
   }
 </style>

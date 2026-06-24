@@ -1,0 +1,151 @@
+---
+import { Icon } from "astro-icon/components";
+
+interface Props {
+  title: string;
+  text1: string;
+  reelId: string;
+}
+
+const { title, text1, reelId } = Astro.props;
+---
+
+<section class="americans-section">
+  <div class="container">
+    <div class="americans__grid">
+      <!-- Contenido de Texto -->
+      <div class="americans__content">
+        <h2 class="americans__title">{title}</h2>
+        <div class="americans__accent-line"></div>
+        <p class="americans__text">{text1}</p>
+      </div>
+
+      <!-- Contenedor del Reel -->
+      <div class="americans__video-container">
+        <div class="video-clean">
+          <div class="video-clean__badge">
+            <Icon name="star" size={14} />
+            <span>Premium Care</span>
+          </div>
+          <iframe
+            src={`https://www.instagram.com/p/${reelId}/embed`}
+            class="instagram-iframe-clean"
+            scrolling="no"
+            allowtransparency="true"
+            frameborder="0"
+          ></iframe>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  :root {
+    --gold: #A58E55;
+    --black: #000000;
+    --white: #ffffff;
+  }
+
+  .americans-section {
+    padding: 100px 0;
+    background-color: var(--black);
+    color: var(--white);
+  }
+
+  .container {
+    margin: 0 auto;
+    width: 85%;
+  }
+
+  .americans__grid {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 50px;
+  }
+
+  @media (min-width: 992px) {
+    .americans__grid {
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+      gap: 80px;
+    }
+  }
+
+  .americans__content {
+    flex: 1;
+    text-align: left;
+  }
+
+  .americans__title {
+    font-size: 2rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    line-height: 1.2;
+    margin-bottom: 20px;
+    color: var(--gold);
+  }
+
+  @media (min-width: 768px) {
+    .americans__title { font-size: 3rem; }
+  }
+
+  .americans__accent-line {
+    width: 80px;
+    height: 3px;
+    background-color: var(--gold);
+    margin-bottom: 35px;
+  }
+
+  .americans__text {
+    font-size: 1.15rem;
+    line-height: 1.8;
+    color: var(--white);
+  }
+
+  @media (min-width: 768px) {
+    .americans__text { font-size: 1.35rem; }
+  }
+
+  /* --- Estilos del Video --- */
+  .americans__video-container {
+    flex: 0 0 320px;
+    display: flex;
+    justify-content: center;
+  }
+
+  .video-clean {
+    position: relative;
+    width: 100%;
+    max-width: 320px;
+  }
+
+  .instagram-iframe-clean {
+    width: 100%;
+    aspect-ratio: 9 / 16;
+    border-radius: 8px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    border: none;
+    background-color: #1a1a1a;
+  }
+
+  .video-clean__badge {
+    position: absolute;
+    top: 15px;
+    left: 15px;
+    z-index: 5;
+    background: var(--gold);
+    color: white;
+    padding: 6px 12px;
+    font-size: 0.7rem;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    border-radius: 2px;
+  }
+</style>

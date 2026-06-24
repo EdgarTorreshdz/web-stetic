@@ -17,26 +17,26 @@ const tableData: TableRow[] = [
     treatment: "Single Porcelain Veneer",
     time: "5–7 days",
     durability: "10–15+ years",
-    cost: "Varies by case"
+    cost: "Varies by case",
   },
   {
     treatment: "Multiple Veneers",
     time: "5–7 days",
     durability: "10–15+ years",
-    cost: "Varies by case"
+    cost: "Varies by case",
   },
   {
     treatment: "Full Set of Porcelain Veneers",
     time: "5–7 days",
     durability: "10–15+ years",
-    cost: "Varies by case"
+    cost: "Varies by case",
   },
   {
     treatment: "Smile Design with Veneers",
     time: "5–7 days",
     durability: "10–15+ years",
-    cost: "Varies by case"
-  }
+    cost: "Varies by case",
+  },
 ];
 ---
 
@@ -56,30 +56,38 @@ const tableData: TableRow[] = [
           </tr>
         </thead>
         <tbody>
-          {tableData.map((row) => (
-            <tr>
-              <td class="fw-bold">{row.treatment}</td>
-              <td>{row.time}</td>
-              <td>{row.durability}</td>
-              <td class="text-gold fw-bold">{row.cost}</td>
-            </tr>
-          ))}
+          {
+            tableData.map((row) => (
+              <tr>
+                <td class="fw-bold">{row.treatment}</td>
+                <td>{row.time}</td>
+                <td>{row.durability}</td>
+                <td class="text-gold fw-bold">{row.cost}</td>
+              </tr>
+            ))
+          }
         </tbody>
       </table>
     </div>
 
     <div class="compare__footer-text">
       <p>
-        International patients often choose porcelain veneers in Playa del Carmen because treatment costs are typically much lower than in their home countries, without compromising aesthetics or quality
+        International patients often choose porcelain veneers in Playa del
+        Carmen because treatment costs are typically much lower than in their
+        home countries, without compromising aesthetics or quality
       </p>
-      {btnText && <ButtonCTA text={btnText} href={whatsappUrl} openInNewTab={true} />}
+      {
+        btnText && (
+          <ButtonCTA text={btnText} href={whatsappUrl} openInNewTab={true} />
+        )
+      }
     </div>
   </div>
 </section>
 
 <style>
   :root {
-    --gold: #A58E55;
+    --gold: #a58e55;
     --black: #000000;
     --white: #ffffff;
     --text-gray: #444444;
@@ -95,7 +103,6 @@ const tableData: TableRow[] = [
   .container {
     margin: 0 auto;
     width: 90%;
-    max-width: 1200px;
   }
 
   .compare__title {
@@ -197,7 +204,7 @@ const tableData: TableRow[] = [
     .compare__title {
       font-size: 1.6rem;
     }
-    .compare-table th, 
+    .compare-table th,
     .compare-table td {
       padding: 15px;
       font-size: 0.95rem;

@@ -14,6 +14,7 @@ interface Props {
   buttonLink?: string;
   footerText?: string;
   reelId: string;
+  buttonMessage?: string;
 }
 
 const { 
@@ -25,8 +26,11 @@ const {
   buttonText, 
   buttonLink = "#", 
   footerText, 
-  reelId 
+  reelId,
+  buttonMessage
 } = Astro.props;
+
+
 ---
 
 <section class="why-choose-section">

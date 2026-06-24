@@ -1,8 +1,9 @@
 ---
 import { Icon } from "astro-icon/components";
+import ButtonCTA from "../shared/ButtonCTA.astro";
 
 interface Props {
-  lang?: 'en' | 'es';
+  lang?: "en" | "es";
 }
 
 const { lang = "en" } = Astro.props;
@@ -10,87 +11,90 @@ const { lang = "en" } = Astro.props;
 const translations = {
   en: {
     h1: "DENTIST IN PLAYA DEL CARMEN, MEXICO YOU CAN TRUST",
-    subheadline: "High-quality dental care in Playa del Carmen for international patients seeking safe, affordable treatments such as dental implants, veneers and smile design.",
+    subheadline:
+      "High-quality dental care in Playa del Carmen for international patients seeking safe, affordable treatments such as dental implants, veneers and smile design.",
     benefits: [
       "ENGLISH-SPEAKING DENTAL TEAM",
       "CERTIFIED COSMETIC DENTAL SPECIALISTS",
       "MODERN DENTAL CLINIC IN PLAYA DEL CARMEN",
-      "AFFORDABLE DENTAL CARE COMPARED TO THE USA & CANADA"
+      "AFFORDABLE DENTAL CARE COMPARED TO THE USA & CANADA",
     ],
-    cta: "Book Your Consultation"
+    cta: "Book your consultation on Whatsapp",
   },
   es: {
     h1: "Dentista de Confianza en Playa del Carmen, México",
-    subheadline: "Atención dental de alta calidad para pacientes internacionales que buscan un tratamiento seguro y asequible en México.",
+    subheadline:
+      "Atención dental de alta calidad para pacientes internacionales que buscan un tratamiento seguro y asequible en México.",
     benefits: [
       "Dentistas bilingües",
       "Especialistas certificados",
       "Clínica dental moderna",
-      "Precios asequibles vs USA/Canadá"
+      "Precios asequibles vs USA/Canadá",
     ],
-    cta: "Agenda tu Consulta"
-  }
+    cta: "Agenda tu Consulta en Whatsapp",
+  },
 };
 
 const t = translations[lang];
+const phoneNumber = "5219844922549";
+const whatsappUrl = `https://wa.me/${phoneNumber}/?text=${encodeURIComponent("Hello! I'm interested in learning more about your services.")}`;
 ---
 
 <header class="header">
   <div class="header__video-container">
-    <video 
-      autoplay 
-      muted 
-      loop 
-      playsinline 
-      class="header__video"
-    >
-      <source src="/home/Slide-Home-Mobile.mp4" type="video/mp4" media="(max-width: 768px)" />
+    <video autoplay muted loop playsinline class="header__video">
+      <source
+        src="/home/Slide-Home-Mobile.mp4"
+        type="video/mp4"
+        media="(max-width: 768px)"
+      />
       <source src="/home/Slide-Home-1.mp4" type="video/mp4" />
     </video>
-    
+
     <div class="header__overlay"></div>
-    
+
     <div class="header__content container">
       <h1 class="header__title">
         {t.h1}
       </h1>
-      
+
       <p class="header__subheadline">
         {t.subheadline}
       </p>
 
       <ul class="header__benefits">
-        {t.benefits.map((benefit) => (
-          <li class="header__benefit-item">
-            <Icon name="asterik" class="text-gold" size={14} />
-            <span>{benefit}</span>
-          </li>
-        ))}
+        {
+          t.benefits.map((benefit) => (
+            <li class="header__benefit-item">
+              <Icon name="asterik" class="text-gold" size={14} />
+              <span>{benefit}</span>
+            </li>
+          ))
+        }
       </ul>
-      
-      <div class="header__actions">
-        <a class="header__btn" href="#contact">
-          {t.cta}
-          <Icon name="arrow-down" color="white" class="arrow-down" size={20} />
-        </a>
-      </div>
+
+      {
+        t.cta && (
+          <ButtonCTA text={t.cta} href={whatsappUrl} openInNewTab={true} />
+        )
+      }
     </div>
   </div>
 </header>
 
 <style>
   :root {
-    --gold: #A58E55;
+    --gold: #a58e55;
     --black: #000000;
     --white: #ffffff;
   }
 
-  .header { 
-    position: relative; 
-    width: 100%; 
-    height: 90dvh; 
-    min-height: 550px; 
-    overflow: hidden; 
+  .header {
+    position: relative;
+    width: 100%;
+    height: 90dvh;
+    min-height: 550px;
+    overflow: hidden;
     background-color: var(--black);
   }
 
@@ -124,52 +128,52 @@ const t = translations[lang];
     }
   }
 
-  .header__overlay { 
-    position: absolute; 
-    top: 0; 
-    left: 0; 
-    width: 100%; 
-    height: 100%; 
-    z-index: 1; 
+  .header__overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
     background: linear-gradient(
-      90deg, 
-      rgba(0, 0, 0, 0.85) 0%, 
-      rgba(0, 0, 0, 0.4) 60%, 
+      90deg,
+      rgba(0, 0, 0, 0.85) 0%,
+      rgba(0, 0, 0, 0.4) 60%,
       rgba(0, 0, 0, 0.2) 100%
-    ); 
+    );
   }
 
   /* Gradiente más oscuro para móvil para asegurar legibilidad */
   @media (max-width: 768px) {
     .header__overlay {
       background: linear-gradient(
-        0deg, 
-        rgba(0, 0, 0, 0.9) 0%, 
-        rgba(0, 0, 0, 0.5) 50%, 
+        0deg,
+        rgba(0, 0, 0, 0.9) 0%,
+        rgba(0, 0, 0, 0.5) 50%,
         rgba(0, 0, 0, 0.7) 100%
       );
     }
   }
 
-  .header__content { 
-    position: relative; 
-    color: var(--white); 
-    text-align: left; 
-    z-index: 2; 
-    display: flex; 
-    flex-direction: column; 
-    justify-content: center; 
-    align-items: flex-start; 
-    height: 100%; 
+  .header__content {
+    position: relative;
+    color: var(--white);
+    text-align: left;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    height: 100%;
     padding: 0 1rem;
   }
 
-  .header__title { 
-    font-size: 2.2rem; 
-    font-weight: 800; 
-    margin: 0.5rem 0; 
-    text-transform: uppercase; 
-    letter-spacing: -1px; 
+  .header__title {
+    font-size: 2.2rem;
+    font-weight: 800;
+    margin: 0.5rem 0;
+    text-transform: uppercase;
+    letter-spacing: -1px;
     line-height: 1.1;
     max-width: 750px;
     color: var(--white);
@@ -203,10 +207,16 @@ const t = translations[lang];
     letter-spacing: 1px;
   }
 
-  @media (min-width: 768px) { 
-    .header__title { font-size: 4rem; } 
-    .header__subheadline { font-size: 1.3rem; }
-    .header__content { padding: 0 2rem; }
+  @media (min-width: 768px) {
+    .header__title {
+      font-size: 4rem;
+    }
+    .header__subheadline {
+      font-size: 1.3rem;
+    }
+    .header__content {
+      padding: 0 2rem;
+    }
   }
 
   .text-gold {
@@ -219,40 +229,50 @@ const t = translations[lang];
     justify-content: flex-start;
   }
 
-  .header__btn { 
-    background-color: var(--gold); 
-    color: var(--white); 
-    display: inline-flex; 
-    align-items: center; 
-    padding: 1.2rem 2.8rem; 
-    text-decoration: none; 
-    font-weight: 700; 
-    font-size: 0.9rem; 
-    text-transform: uppercase; 
+  .header__btn {
+    background-color: var(--gold);
+    color: var(--white);
+    display: inline-flex;
+    align-items: center;
+    padding: 1.2rem 2.8rem;
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 0.9rem;
+    text-transform: uppercase;
     letter-spacing: 2px;
-    transition: all 0.3s ease; 
+    transition: all 0.3s ease;
     border: 2px solid var(--gold);
   }
 
-  .header__btn:hover { 
-    background-color: transparent; 
+  .header__btn:hover {
+    background-color: transparent;
     color: var(--gold);
     transform: scale(1.05);
   }
 
-  .container { 
-    margin: 0 auto; 
-    width: 90%; 
+  .container {
+    margin: 0 auto;
+    width: 90%;
   }
 
-  .arrow-down { 
-    margin-left: 12px; 
-    animation: bounce 2s infinite; 
+  .arrow-down {
+    margin-left: 12px;
+    animation: bounce 2s infinite;
   }
 
-  @keyframes bounce { 
-    0%, 20%, 50%, 80%, 100% {transform: translateY(0);} 
-    40% {transform: translateY(8px);} 
-    60% {transform: translateY(4px);} 
+  @keyframes bounce {
+    0%,
+    20%,
+    50%,
+    80%,
+    100% {
+      transform: translateY(0);
+    }
+    40% {
+      transform: translateY(8px);
+    }
+    60% {
+      transform: translateY(4px);
+    }
   }
 </style>

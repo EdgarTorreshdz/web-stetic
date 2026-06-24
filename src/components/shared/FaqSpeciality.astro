@@ -1,5 +1,5 @@
 ---
-import ButtonCTA from './ButtonCTA.astro';
+import ButtonCTA from "./ButtonCTA.astro";
 
 interface FAQ {
   question: string;
@@ -8,46 +8,51 @@ interface FAQ {
 
 interface Props {
   title: string;
-  faqs: FAQ[];
-  buttonText?: string;
   text2?: string;
-  includeSchema?: boolean; 
+  faqs: FAQ[];
+  includeSchema?: boolean;
+  buttonText?: string;
+  buttonLink?: string;
 }
 
-const { 
-  title, 
-  faqs, 
-  buttonText, 
-  text2,
-  includeSchema = false // Por defecto es false para que solo lo uses cuando quieras
+const {
+  title,
+  faqs,
+  buttonText,
+  buttonLink,
+  includeSchema = false,
 } = Astro.props;
 
 // Lógica para dividir las FAQs en dos columnas
 const midIndex = Math.ceil(faqs.length / 2);
 const leftColumn = faqs.slice(0, midIndex);
 const rightColumn = faqs.slice(midIndex);
-const phoneNumber = "5219844922549";
-const whatsappUrl = `https://wa.me/${phoneNumber}/?text=${encodeURIComponent("Hello! I'm interested in learning more about your services.")}`;
 
 // Lógica para construir el Schema SEO automáticamente
-const schemaData = includeSchema ? {
-  "@context": "https://schema.org",
-  "@type": "FAQPage",
-  "mainEntity": faqs.map(faq => ({
-    "@type": "Question",
-    "name": faq.question,
-    "acceptedAnswer": {
-      "@type": "Answer",
-      "text": faq.answer
+const schemaData = includeSchema
+  ? {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      mainEntity: faqs.map((faq) => ({
+        "@type": "Question",
+        name: faq.question,
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: faq.answer,
+        },
+      })),
     }
-  }))
-} : null;
+  : null;
 ---
 
-{/* Si includeSchema es verdadero, inyectamos el script JSON-LD de forma segura */}
-{includeSchema && schemaData && (
-  <script type="application/ld+json" set:html={JSON.stringify(schemaData)} />
-)}
+{
+  /* Si includeSchema es verdadero, inyectamos el script JSON-LD de forma segura */
+}
+{
+  includeSchema && schemaData && (
+    <script type="application/ld+json" set:html={JSON.stringify(schemaData)} />
+  )
+}
 
 <section class="faq-section">
   <div class="container">
@@ -56,41 +61,56 @@ const schemaData = includeSchema ? {
 
     <div class="faq__grid">
       <div class="faq__col">
-        {leftColumn.map((faq) => (
-          <details class="faq__item">
-            <summary class="faq__question">
-              {faq.question}
-              <span class="faq__icon">+</span>
-            </summary>
-            <div class="faq__answer">
-              <p>{faq.answer}</p>
-            </div>
-          </details>
-        ))}
+        {
+          leftColumn.map((faq) => (
+            <details class="faq__item">
+              <summary class="faq__question">
+                {faq.question}
+                <span class="faq__icon">+</span>
+              </summary>
+              <div class="faq__answer">
+                <p>{faq.answer}</p>
+              </div>
+            </details>
+          ))
+        }
       </div>
 
       <div class="faq__col">
-        {rightColumn.map((faq) => (
-          <details class="faq__item">
-            <summary class="faq__question">
-              {faq.question}
-              <span class="faq__icon">+</span>
-            </summary>
-            <div class="faq__answer">
-              <p>{faq.answer}</p>
-            </div>
-          </details>
-        ))}
+        {
+          rightColumn.map((faq) => (
+            <details class="faq__item">
+              <summary class="faq__question">
+                {faq.question}
+                <span class="faq__icon">+</span>
+              </summary>
+              <div class="faq__answer">
+                <p>{faq.answer}</p>
+              </div>
+            </details>
+          ))
+        }
       </div>
     </div>
-    
-    <ButtonCTA text={buttonText} href={whatsappUrl} openInNewTab={true} align='center'/>
+
+    {
+      buttonText && buttonLink && (
+        <div style="margin-top: 40px;">
+          <ButtonCTA
+            text={buttonText}
+            href={buttonLink}
+            openInNewTab={true}
+            align="center"
+          />
+        </div>
+      )
+    }
   </div>
 </section>
 
 <style>
   :root {
-    --gold: #A58E55;
+    --gold: #a58e55;
     --black: #000000;
     --white: #ffffff;
     --grey-border: #e5e5e5;
@@ -180,14 +200,23 @@ const schemaData = includeSchema ? {
     line-height: 1.7;
     color: #444;
     animation: fadeIn 0.4s ease;
+    white-space: pre-line;
   }
 
   @keyframes fadeIn {
-    from { opacity: 0; transform: translateY(-10px); }
-    to { opacity: 1; transform: translateY(0); }
+    from {
+      opacity: 0;
+      transform: translateY(-10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
   }
 
   @media (min-width: 768px) {
-    .faq__question { font-size: 1.2rem; }
+    .faq__question {
+      font-size: 1.2rem;
+    }
   }
 </style>

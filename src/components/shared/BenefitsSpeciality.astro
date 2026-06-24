@@ -8,9 +8,10 @@ interface Props {
   imageSrc: string;
   imageAlt: string;
   buttonText?: string;
+  buttonLink?: string;
 }
 
-const { title, benefits, footerText, imageSrc, imageAlt, buttonText } = Astro.props;
+const { title, benefits, footerText, imageSrc, imageAlt, buttonText, buttonLink } = Astro.props;
 ---
 
 <section class="benefits-section">
@@ -40,7 +41,11 @@ const { title, benefits, footerText, imageSrc, imageAlt, buttonText } = Astro.pr
         <div class="benefits__footer">
           <p>{footerText}</p>
         </div>
-        <ButtonCTA text={buttonText} href="#contact" />
+        {buttonText && buttonLink && (
+          <div style="margin-top: 40px;">
+            <ButtonCTA text={buttonText} href={buttonLink} openInNewTab={true} align="center" />
+          </div>
+        )}
       </div>
     </div>
   </div>

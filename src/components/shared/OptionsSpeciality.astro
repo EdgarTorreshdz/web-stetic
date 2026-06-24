@@ -12,12 +12,11 @@ interface Props {
   buttonText?: string;
   buttonMessage?: string;
 }
-import ButtonCTA from './ButtonCTA.astro';
+import ButtonCTA from "./ButtonCTA.astro";
 
-const { title, description, options, buttonText, buttonMessage} = Astro.props;
+const { title, description, options, buttonText, buttonMessage } = Astro.props;
 const phoneNumber = "5219844922549";
 const whatsappUrl = `https://wa.me/${phoneNumber}/?text=${encodeURIComponent(buttonMessage || "Hello! I'm interested in learning more about your services.")}`;
-
 ---
 
 <section class="options-section">
@@ -29,22 +28,34 @@ const whatsappUrl = `https://wa.me/${phoneNumber}/?text=${encodeURIComponent(but
     </div>
 
     <div class="options__grid">
-      {options.map((option) => (
-        <div class="options__item">
-          <h3 class="options__item-title">{option.title}</h3>
-          <p class="options__item-description">{option.description}</p>
-          {option.subtext && <p class="options__item-subtext">{option.subtext}</p>}
-        </div>
-      ))}
+      {
+        options.map((option) => (
+          <div class="options__item">
+            <h3 class="options__item-title">{option.title}</h3>
+            <p class="options__item-description">{option.description}</p>
+            {option.subtext && (
+              <p class="options__item-subtext">{option.subtext}</p>
+            )}
+          </div>
+        ))
+      }
     </div>
-      {buttonText && <ButtonCTA text={buttonText} href={whatsappUrl} openInNewTab={true} align="center"/>}
-
+    {
+      buttonText && (
+        <ButtonCTA
+          text={buttonText}
+          href={whatsappUrl}
+          openInNewTab={true}
+          align="center"
+        />
+      )
+    }
   </div>
 </section>
 
 <style>
   :root {
-    --gold: #A58E55;
+    --gold: #a58e55;
     --black: #000000;
     --white: #ffffff;
     --soft-grey: #f9f9f9;
@@ -56,7 +67,10 @@ const whatsappUrl = `https://wa.me/${phoneNumber}/?text=${encodeURIComponent(but
     color: var(--black);
   }
 
-  .container { margin: 0 auto; width: 85%; }
+  .container {
+    margin: 0 auto;
+    width: 85%;
+  }
   .options__header {
     text-align: center;
     max-width: 800px;
@@ -72,7 +86,9 @@ const whatsappUrl = `https://wa.me/${phoneNumber}/?text=${encodeURIComponent(but
   }
 
   @media (min-width: 768px) {
-    .options__title { font-size: 3rem; }
+    .options__title {
+      font-size: 3rem;
+    }
   }
 
   .options__accent-line {
@@ -104,7 +120,7 @@ const whatsappUrl = `https://wa.me/${phoneNumber}/?text=${encodeURIComponent(but
     padding: 40px;
     background-color: var(--soft-grey);
     border-top: 4px solid var(--gold);
-    box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
     transition: transform 0.3s ease;
   }
 

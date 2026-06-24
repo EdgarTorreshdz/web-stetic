@@ -1,4 +1,6 @@
 ---
+import ButtonCTA from './ButtonCTA.astro';
+
 interface FAQ {
   question: string;
   answer: string;
@@ -76,12 +78,10 @@ const schema = {
     {(ctaText || buttonText) && (
       <div class="faq__cta">
         {ctaText && <p class="faq__cta-text">{ctaText}</p>}
-        {buttonText && (
-          <a href={buttonLink} target="_blank" rel="noopener noreferrer" class="btn-whatsapp">
-            {buttonText}
-          </a>
-        )}
+        
       </div>
+        <ButtonCTA text={buttonText} href={buttonLink} openInNewTab={true} align='center'/>
+
     )}
   </div>
 </section>
@@ -106,7 +106,7 @@ const schema = {
   .container {
     margin: 0 auto;
     width: 85%;
-    max-width: 1200px;
+    
   }
 
   .faq__title {

@@ -1,14 +1,17 @@
 ---
 import { Icon } from "astro-icon/components";
+import ButtonCTA from "./ButtonCTA.astro";
 
 interface Props {
   title: string;
   subtitle: string;
   features: string[];
   footerText: string;
+  buttonText?: string;
+  buttonLink?: string;
 }
 
-const { title, subtitle, features, footerText } = Astro.props;
+const { title, subtitle, features, footerText, buttonText, buttonLink} = Astro.props;
 ---
 
 <section class="indications-section">
@@ -34,6 +37,8 @@ const { title, subtitle, features, footerText } = Astro.props;
         {footerText}
       </p>
     </div>
+    <ButtonCTA text={buttonText} href={buttonLink} openInNewTab={true} align="center"/>
+
   </div>
 </section>
 

@@ -1,6 +1,7 @@
 ---
 import { Icon } from "astro-icon/components";
 import { routes } from "../../i18n/ui"; // Importamos las rutas oficiales
+import ButtonCTA from "../shared/ButtonCTA.astro";
 
 interface Props {
   lang?: "en" | "es";
@@ -101,7 +102,8 @@ const translations = {
       },
     ],
     btnText: "Book your consultation on Whatsapp",
-    whatsappMsg: "Hello! I'm interested in a free quote for my dental treatment."
+    whatsappMsg:
+      "Hello! I'm interested in a free quote for my dental treatment.",
   },
   es: {
     title: "Nuestros Servicios Dentales en Playa del Carmen",
@@ -181,8 +183,8 @@ const translations = {
       },
     ],
     btnText: "OBTÉN UNA COTIZACIÓN GRATIS",
-    whatsappMsg: "¡Hola! Me gustaría una cotización sin compromiso para mi tratamiento dental."
-
+    whatsappMsg:
+      "¡Hola! Me gustaría una cotización sin compromiso para mi tratamiento dental.",
   },
 };
 
@@ -196,12 +198,12 @@ const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(t.wh
     <div class="services-lux__header">
       <h2 class="services-lux__title">{t.title}</h2>
       <p class="services-lux__intro">{t.description}</p>
-      <a href={whatsappUrl} target="_blank" rel="noopener noreferrer" class="about-lux__cta">
-        <Icon name="whatsapp" size={24} />
-        <span>{t.btnText}</span>
-      </a>
+      {
+        t.btnText && (
+          <ButtonCTA text={t.btnText} href={whatsappUrl} openInNewTab={true} />
+        )
+      }
     </div>
-    
 
     <div class="services-lux__grid">
       {

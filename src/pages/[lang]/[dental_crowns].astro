@@ -193,7 +193,10 @@ const pageContent = {
       description: "If you need dental crowns in Playa del Carmen, our team is ready to help restore your tooth’s strength and function.",
       button: "Book Your Dental Crown Consultation",
       note: "Restore your smile with professional care"
-    }
+    },
+    buttonText: "Schedule you free video consultation",
+    whatsappUrl: `https://wa.me/5219844922549/?text=${encodeURIComponent("Hello! I was checking the dental crowns section on your website and I'm interested in scheduling a free video consultation. Could you let me know the available times? Thank you!")}`,
+
   },
   es: {
     schema: {
@@ -379,7 +382,9 @@ const pageContent = {
       description: "Si necesitas restaurar la fuerza y función de tus dientes, nuestro equipo está listo para ayudarte.",
       button: "Reserva tu Consulta Ahora",
       note: "Restaura tu sonrisa con cuidado profesional"
-    }
+    },
+    buttonText: "Agende su consulta gratuita por video",
+    whatsappUrl: `https://wa.me/5219844922549/?text=${encodeURIComponent("¡Hola! Estuve revisando la sección de coronas dentales en su sitio web y estoy interesado en programar una consulta gratuita por video. ¿Podrían informarme sobre los horarios disponibles? ¡Gracias!")}`,
   }
 };
 
@@ -434,6 +439,8 @@ const t = pageContent[lang];
       footerText={t.benefits.footer}
       imageSrc={t.benefits.imageSrc}
       imageAlt={t.benefits.imgAlt}
+      buttonText={t.buttonText}
+      buttonLink={t.whatsappUrl}
     />
 
   <CostSpeciality 
@@ -466,7 +473,8 @@ const t = pageContent[lang];
       title={t.faq.title}
       faqs={t.faq.items}
       text2={t.faq.text2}
-      buttonText={t.faq.buttonText}
+      buttonText={t.buttonText}
+      buttonLink={t.whatsappUrl}
       includeSchema={true}
     />
 

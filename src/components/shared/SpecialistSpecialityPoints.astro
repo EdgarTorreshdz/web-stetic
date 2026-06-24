@@ -1,4 +1,6 @@
 ---
+import ButtonCTA from "./ButtonCTA.astro";
+
 interface ListItem {
   text: string;
 }
@@ -10,83 +12,88 @@ interface Props {
   listItems?: ListItem[];
   buttonText?: string;
   buttonLink?: string;
+  buttonMessage?: string;
   conclusion?: string;
   imageSrc: string;
   imageAlt: string;
   text3?: string; // Propiedad añadida
 }
 
-const { 
-  title, 
-  text1, 
-  text2, 
-  listItems = [], 
-  buttonText, 
-  buttonLink = "#", 
-  conclusion, 
-  imageSrc, 
+const {
+  title,
+  text1,
+  text2,
+  listItems = [],
+  buttonText,
+  buttonLink = "#",
+  buttonMessage,
+  conclusion,
+  imageSrc,
   imageAlt,
-  text3 // <-- ¡Añadido aquí para poder usarlo!
+  text3, // <-- ¡Añadido aquí para poder usarlo!
 } = Astro.props;
 ---
 
 <section class="specialist-section">
   <div class="container">
     <div class="specialist__grid">
-      
       <div class="specialist__content">
         <h2 class="specialist__title">{title}</h2>
         <div class="specialist__accent-line"></div>
-        
+
         <p class="specialist__text specialist__text--highlight">
           {text1}
         </p>
-        
+
         <p class="specialist__text">
           {text2}
         </p>
 
-        {listItems && listItems.length > 0 && (
-          <ul class="specialist__list">
-            {listItems.map((item) => (
-              <li>{item.text}</li>
-            ))}
-          </ul>
-        )}
+        {
+          listItems && listItems.length > 0 && (
+            <ul class="specialist__list">
+              {listItems.map((item) => (
+                <li>{item.text}</li>
+              ))}
+            </ul>
+          )
+        }
 
         {/* Renderizamos text3 justo antes del botón */}
-        {text3 && (
-          <p class="specialist__text">
-            {text3}
-          </p>
-        )}
+        {text3 && <p class="specialist__text">{text3}</p>}
 
-        {buttonText && (
-          <div class="specialist__btn-wrapper">
-            <a href={buttonLink} class="specialist__btn">{buttonText}</a>
-          </div>
-        )}
+        {
+          buttonText && buttonLink && (
+            <div style="margin-top: 40px;">
+              <ButtonCTA
+                text={buttonText}
+                href={buttonLink}
+                openInNewTab={true}
+                align="center"
+              />
+            </div>
+          )
+        }
 
-        {conclusion && (
-          <p class="specialist__text specialist__conclusion">
-            {conclusion}
-          </p>
-        )}
+        {
+          conclusion && (
+            <p class="specialist__text specialist__conclusion">{conclusion}</p>
+          )
+        }
       </div>
 
       <div class="specialist__image-container">
         <div class="specialist__img-wrapper">
-            <img src={imageSrc} alt={imageAlt} class="specialist__img" />
+          <img src={imageSrc} alt={imageAlt} class="specialist__img" />
         </div>
       </div>
-
     </div>
   </div>
 </section>
 
 <style>
   :root {
-    --gold: #A58E55;
+    --gold: #a58e55;
     --black: #000000;
     --white: #ffffff;
   }
@@ -132,7 +139,9 @@ const {
   }
 
   @media (min-width: 768px) {
-    .specialist__title { font-size: 2.5rem; }
+    .specialist__title {
+      font-size: 2.5rem;
+    }
   }
 
   .specialist__accent-line {
@@ -194,7 +203,9 @@ const {
     font-weight: 700;
     font-size: 0.95rem;
     text-decoration: none;
-    transition: background-color 0.3s ease, transform 0.2s ease;
+    transition:
+      background-color 0.3s ease,
+      transform 0.2s ease;
   }
 
   .specialist__btn:hover {
@@ -208,9 +219,15 @@ const {
   }
 
   @media (min-width: 768px) {
-    .specialist__text { font-size: 1.1rem; }
-    .specialist__text--highlight { font-size: 1.3rem; }
-    .specialist__list li { font-size: 1.1rem; }
+    .specialist__text {
+      font-size: 1.1rem;
+    }
+    .specialist__text--highlight {
+      font-size: 1.3rem;
+    }
+    .specialist__list li {
+      font-size: 1.1rem;
+    }
   }
 
   .specialist__image-container {
@@ -234,7 +251,7 @@ const {
     height: auto;
     display: block;
     object-fit: cover;
-    box-shadow: 0 15px 35px rgba(0,0,0,0.8);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.8);
   }
 
   @media (min-width: 992px) {

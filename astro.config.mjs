@@ -14,6 +14,8 @@ export default defineConfig({
     }
   },
   redirects: {
+    '/playadelcarmen': '/en/playadelcarmen-dentist/',
+    '/playadelcarmen/': '/en/playadelcarmen-dentist/',
     '/wp-json': '/404',
     '/wp-json/v2': '/404', 
   }
