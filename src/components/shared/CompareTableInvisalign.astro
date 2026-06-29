@@ -1,0 +1,216 @@
+---
+interface ComparisonRow {
+  feature: string;
+  aligners: string;
+  braces: string;
+}
+
+interface Props {
+  title?: string;
+  description?: string;
+  footer?: string;
+}
+
+const { 
+  title = "Invisalign vs Braces Comparison",
+  description,
+  footer
+} = Astro.props;
+
+const tableData: ComparisonRow[] = [
+  { feature: "Appearance", aligners: "Virtually invisible", braces: "Visible metal or ceramic brackets" },
+  { feature: "Comfort", aligners: "More comfortable, no wires", braces: "May cause discomfort from brackets and wires" },
+  { feature: "Removable", aligners: "Yes", braces: "No" },
+  { feature: "Oral Hygiene", aligners: "Easy to brush and floss", braces: "More difficult to clean around brackets" },
+  { feature: "Food Restrictions", aligners: "Minimal, aligners are removed to eat", braces: "Several food restrictions" },
+  { feature: "Treatment Time", aligners: "Depends on the case", braces: "Depends on the case" },
+  { feature: "Aesthetics", aligners: "High", braces: "Moderate" },
+  { feature: "Best For", aligners: "Adults seeking a discreet solution", braces: "More complex orthodontic cases" }
+];
+---
+
+<section class="comparison-section">
+  <div class="container">
+    {title && (
+      <>
+        <h2 class="compare__title">{title}</h2>
+        <div class="compare__accent-line"></div>
+      </>
+    )}
+
+    {description && (
+      <p class="compare__description">{description}</p>
+    )}
+
+    <div class="table-wrapper">
+      <table class="comparison-table">
+        <thead>
+          <tr>
+            <th>Feature</th>
+            <th class="highlight-header">Invisalign / Clear Aligners</th>
+            <th>Traditional Braces</th>
+          </tr>
+        </thead>
+        <tbody>
+          {tableData.map((row) => (
+            <tr>
+              <td class="fw-bold feature-col">{row.feature}</td>
+              <td class="highlight-col fw-bold">{row.aligners}</td>
+              <td class="braces-col">{row.braces}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+
+    {footer && (
+      <p class="compare__footer">{footer}</p>
+    )}
+  </div>
+</section>
+
+<style>
+  :root {
+    --gold: #A58E55;
+    --black: #000000;
+    --white: #ffffff;
+    --text-gray: #444444;
+    --light-gray: #f9f9f9;
+    --border-color: #eaeaea;
+    --highlight-bg: rgba(165, 142, 85, 0.05);
+  }
+
+  .comparison-section {
+    padding: 60px 0;
+    background-color: var(--white);
+  }
+
+  .container {
+    margin: 0 auto;
+    width: 90%;
+    max-width: 1000px;
+  }
+
+  .compare__title {
+    font-size: 2rem;
+    font-weight: 800;
+    color: var(--black);
+    text-transform: uppercase;
+    text-align: center;
+    margin-bottom: 15px;
+  }
+
+  .compare__accent-line {
+    width: 60px;
+    height: 3px;
+    background-color: var(--gold);
+    margin: 0 auto 25px auto;
+  }
+
+  .compare__description {
+    text-align: center;
+    max-width: 700px;
+    margin: 0 auto 40px auto;
+    color: var(--text-gray);
+    font-size: 1.1rem;
+    line-height: 1.6;
+  }
+
+  .table-wrapper {
+    width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+    border-radius: 12px;
+    background-color: var(--white);
+    border: 1px solid var(--border-color);
+  }
+
+  .comparison-table {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: left;
+    min-width: 650px;
+  }
+
+  .comparison-table th,
+  .comparison-table td {
+    padding: 20px;
+    border-bottom: 1px solid var(--border-color);
+  }
+
+  .comparison-table tbody tr:last-child td {
+    border-bottom: none;
+  }
+
+  .comparison-table thead {
+    background-color: var(--black);
+    color: var(--white);
+  }
+
+  .comparison-table th {
+    font-weight: 600;
+    font-size: 1.1rem;
+    letter-spacing: 0.5px;
+  }
+
+  .highlight-header {
+    color: var(--gold);
+  }
+
+  .comparison-table tbody tr {
+    transition: background-color 0.3s ease;
+  }
+
+  .comparison-table tbody tr:hover {
+    background-color: var(--light-gray);
+  }
+
+  .comparison-table td {
+    font-size: 1.05rem;
+    line-height: 1.5;
+  }
+
+  .feature-col {
+    color: var(--black);
+    width: 25%;
+  }
+
+  .highlight-col {
+    color: var(--gold);
+    background-color: var(--highlight-bg);
+    width: 40%;
+  }
+
+  .braces-col {
+    color: var(--text-gray);
+    width: 35%;
+  }
+
+  .fw-bold {
+    font-weight: 700;
+  }
+
+  .compare__footer {
+    text-align: center;
+    margin-top: 35px;
+    font-style: italic;
+    color: var(--text-gray);
+    font-size: 1.05rem;
+    line-height: 1.6;
+  }
+
+  @media (max-width: 768px) {
+    .comparison-section {
+      padding: 40px 0;
+    }
+    .compare__title {
+      font-size: 1.6rem;
+    }
+    .comparison-table th, 
+    .comparison-table td {
+      padding: 15px;
+      font-size: 0.95rem;
+    }
+  }
+</style>

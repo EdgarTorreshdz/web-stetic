@@ -9,14 +9,22 @@ interface Props {
   title: string;
   description?: string;
   options: Option[];
+  footerTitle?: string;
+  footerDescription?: string;
   buttonText?: string;
-  buttonMessage?: string;
+  buttonLink?: string;
 }
 import ButtonCTA from "./ButtonCTA.astro";
 
-const { title, description, options, buttonText, buttonMessage } = Astro.props;
-const phoneNumber = "5219844922549";
-const whatsappUrl = `https://wa.me/${phoneNumber}/?text=${encodeURIComponent(buttonMessage || "Hello! I'm interested in learning more about your services.")}`;
+const { 
+  title, 
+  description, 
+  options, 
+  footerTitle, 
+  footerDescription, 
+  buttonText, 
+  buttonLink 
+} = Astro.props;
 ---
 
 <section class="options-section">
@@ -24,7 +32,7 @@ const whatsappUrl = `https://wa.me/${phoneNumber}/?text=${encodeURIComponent(but
     <div class="options__header">
       <h2 class="options__title">{title}</h2>
       <div class="options__accent-line"></div>
-      <p class="options__description">{description}</p>
+      {description && <p class="options__description">{description}</p>}
     </div>
 
     <div class="options__grid">
@@ -40,14 +48,26 @@ const whatsappUrl = `https://wa.me/${phoneNumber}/?text=${encodeURIComponent(but
         ))
       }
     </div>
+
+    {
+      (footerTitle || footerDescription) && (
+        <div class="options__footer">
+          {footerTitle && <h2 class="options__footer-title">{footerTitle}</h2>}
+          {footerDescription && <p class="options__footer-description">{footerDescription}</p>}
+        </div>
+      )
+    }
+
     {
       buttonText && (
-        <ButtonCTA
-          text={buttonText}
-          href={whatsappUrl}
-          openInNewTab={true}
-          align="center"
-        />
+        <div class="options__button-wrapper">
+          <ButtonCTA
+            text={buttonText}
+            href={buttonLink}
+            openInNewTab={true}
+            align="center"
+          />
+        </div>
       )
     }
   </div>
@@ -71,6 +91,7 @@ const whatsappUrl = `https://wa.me/${phoneNumber}/?text=${encodeURIComponent(but
     margin: 0 auto;
     width: 85%;
   }
+  
   .options__header {
     text-align: center;
     max-width: 800px;
@@ -150,5 +171,30 @@ const whatsappUrl = `https://wa.me/${phoneNumber}/?text=${encodeURIComponent(but
     font-style: italic;
     border-top: 1px solid #ddd;
     padding-top: 15px;
+  }
+
+  /* Nuevos estilos para el bloque inferior (Footer) */
+  .options__footer {
+    text-align: center;
+    max-width: 800px;
+    margin: 60px auto 30px auto;
+  }
+
+  .options__footer-title {
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: var(--black);
+    margin-bottom: 15px;
+  }
+
+  .options__footer-description {
+    font-size: 1.1rem;
+    line-height: 1.6;
+    color: #444;
+    white-space: pre-line; /* Fundamental para que el \n funcione */
+  }
+
+  .options__button-wrapper {
+    margin-top: 20px;
   }
 </style>

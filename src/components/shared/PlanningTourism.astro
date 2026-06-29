@@ -36,7 +36,7 @@ const { title, description, highlightText } = Astro.props;
 
   .planning-section {
     padding: 80px 0;
-    background-color: #fcfcfc; /* Un gris casi blanco muy sutil para diferenciar secciones */
+    background-color: #fcfcfc;
     color: var(--black);
   }
 
@@ -77,19 +77,21 @@ const { title, description, highlightText } = Astro.props;
     line-height: 1.8;
     color: #444;
     margin-bottom: 40px;
+    white-space: pre-line; /* Fundamental para los saltos de línea (\n) */
+    text-align: left; /* Alineación a la izquierda para que la lista se vea ordenada */
+    width: 100%;
   }
 
   .planning__highlight-box {
     padding: 30px;
     background-color: var(--white);
     border: 1px solid rgba(165, 142, 85, 0.2);
-    border-radius: 15px; /* Consistencia con bordes redondeados */
+    border-radius: 15px;
     box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
     position: relative;
     max-width: 800px;
   }
 
-  /* Pequeño detalle decorativo */
   .planning__highlight-box::before {
     content: "";
     position: absolute;

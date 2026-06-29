@@ -5,12 +5,12 @@ import Layout from "../../layouts/Layout.astro";
 
 export async function getStaticPaths() {
   return [
-    { params: { lang: 'en', orthodontics: routes.en.orthodontics } },
-    { params: { lang: 'es', orthodontics: routes.es.orthodontics } },
+    { params: { lang: "en", orthodontics: routes.en.orthodontics } },
+    { params: { lang: "es", orthodontics: routes.es.orthodontics } },
   ];
 }
 
-const { lang } = Astro.params as { lang: 'en' | 'es' };
+const { lang } = Astro.params as { lang: "en" | "es" };
 
 // Rutas base con trailing slash
 const enPath = `/en/${routes.en.orthodontics}/`;
@@ -39,136 +39,203 @@ const orthoContent = {
         {
           "@type": "Dentist",
           "@id": `https://www.steticdental.com.mx${enPath}#dentist`,
-          "name": "Stetic Dental Clinic",
-          "url": `https://www.steticdental.com.mx${enPath}`,
-          "telephone": "+52 984 188 0338",
-          "address": {
+          name: "Stetic Dental Clinic",
+          url: `https://www.steticdental.com.mx${enPath}`,
+          telephone: "+52 984 188 0338",
+          address: {
             "@type": "PostalAddress",
-            "streetAddress": "Avenida 10 Nte, Calle 38 Nte Con, Zazil-ha",
-            "addressLocality": "Playa del Carmen",
-            "addressRegion": "Quintana Roo",
-            "addressCountry": "MX"
-          }
+            streetAddress: "Avenida 10 Nte, Calle 38 Nte Con, Zazil-ha",
+            addressLocality: "Playa del Carmen",
+            addressRegion: "Quintana Roo",
+            addressCountry: "MX",
+          },
         },
         {
           "@type": "Service",
           "@id": `https://www.steticdental.com.mx${enPath}#service`,
-          "name": "Orthodontist in Playa del Carmen",
-          "serviceType": "Braces and orthodontic treatment",
-          "description": "Orthodontic treatment in Playa del Carmen, Mexico focused on braces, bite correction, and tooth alignment for adults.",
-          "url": `https://www.steticdental.com.mx${enPath}`,
-          "provider": { "@id": `https://www.steticdental.com.mx${enPath}#dentist` },
-          "areaServed": [
-            { "@type": "City", "name": "Playa del Carmen" },
-            { "@type": "Country", "name": "Mexico" }
-          ]
-        }
-      ]
+          name: "Orthodontist in Playa del Carmen",
+          serviceType: "Braces and orthodontic treatment",
+          description:
+            "Orthodontic treatment in Playa del Carmen, Mexico focused on braces, bite correction, and tooth alignment for adults.",
+          url: `https://www.steticdental.com.mx${enPath}`,
+          provider: {
+            "@id": `https://www.steticdental.com.mx${enPath}#dentist`,
+          },
+          areaServed: [
+            { "@type": "City", name: "Playa del Carmen" },
+            { "@type": "Country", name: "Mexico" },
+          ],
+        },
+      ],
     },
     seoTitle: "Orthodontist in Playa del Carmen | Affordable Braces in Mexico",
-    seoDescription: "Looking for an orthodontist in Playa del Carmen? Get braces in Mexico with expert care, affordable pricing, and treatment for adults.",
+    seoDescription:
+      "Looking for an orthodontist in Playa del Carmen? Get braces in Mexico with expert care, affordable pricing, and treatment for adults.",
     header: {
-      title: "Orthodontist in Playa del Carmen, Mexico",
-      subheadline: "Experienced orthodontic care for adults and international patients seeking braces or clear aligners in Mexico.",
+      title: "Ortodoncista en Playa del Carmen, México",
+      subheadline:
+        "Atención de ortodoncia experimentada para adultos y pacientes internacionales que buscan brackets o alineadores transparentes en México.\n\nOfrecemos planes de tratamiento personalizados, comunicación clara en inglés y opciones de seguimiento estructuradas, diseñadas para pacientes que viajan o viven en el extranjero.",
       features: [
-        "Certified orthodontist",
-        "Orthodontist for adults",
-        "Experience with American patients",
-        "English-speaking dental team"
+        "✔ Ortodoncista certificado con formación especializada",
+        "✔ Brackets y alineadores transparentes en Playa del Carmen",
+        "✔ Planes de tratamiento flexibles para pacientes internacionales",
+        "✔ Equipo dental que habla inglés",
       ],
-      button: "Schedule an Orthodontic Consultation",
       imageSrc: ogImage,
-      imgAlt: "Orthodontist in Playa del Carmen"
+      imgAlt: "Ortodoncista en Playa del Carmen",
     },
     about: {
-      title: "Looking for a Trusted Orthodontist in Playa del Carmen?",
-      text1: "Choosing the right orthodontist is essential for achieving safe, effective, and long-lasting results. Our clinic offers professional orthodontic treatment for adults and international patients who want expert care.",
-      text2: "If you are searching for an orthodontist with experience treating American patients, our team provides personalized treatment plans designed to fit your timeline.",
+      title: "Looking for a trusted orthodontist in Playa del Carmen?",
+      text1:
+        "Choosing the right orthodontist is essential for achieving safe, effective, and long-lasting results. Our clinic offers professional orthodontic treatment in Playa del Carmen focused on braces, using modern techniques to ensure precise tooth movement and proper bite alignment.",
+      text2: `We specialize in treating adults and international patients seeking braces in Mexico, providing personalized treatment plans tailored to your needs, lifestyle, and treatment timeline.
+
+Our approach focuses on predictable results, clear communication, and continuous monitoring throughout your orthodontic treatment to ensure optimal outcomes.
+`,
       imageSrc: imgPath + "Orthodontist-IMG-2.webp",
-      imgAlt: "Trusted orthodontist in Playa del Carmen"
+      imgAlt: "Trusted orthodontist in Playa del Carmen",
     },
     whatIs: {
-      title: "What Does an Orthodontist Do?",
-      text1: "An orthodontist is a dental specialist trained to diagnose, prevent, and treat misalignment of the teeth and jaw. Unlike a general dentist, an orthodontist focuses on correcting bite issues and spacing.",
-      text2: "Seeing an orthodontist ensures that your treatment is planned and monitored by a professional with advanced training.",
+      title: "WHAT DOES AN ORTHODONTIST DO?",
+      text1:
+        "An orthodontist is a dental specialist trained to diagnose, prevent, and treat misalignment of the teeth and jaw. Orthodontic treatment focuses on correcting bite issues, spacing, crowding, and alignment using advanced techniques such as braces.",
+      text2: `Unlike a general dentist, an orthodontist has specialized training in controlling tooth movement and bite correction, ensuring precise, safe, and long-lasting results.
+
+Professional orthodontic care includes detailed treatment planning, continuous monitoring, and controlled adjustments to guide your teeth into proper alignment over time.
+`,
     },
     options: {
-      title: "Orthodontic Treatment Options",
-      description: "Every patient has different orthodontic needs. A professional orthodontist will recommend the most appropriate treatment based on your goals.",
+      title: "Orthodontic Treatment Options in Playa del Carmen",
+      description:
+        "Every patient has different orthodontic needs. A professional orthodontist will recommend the most appropriate treatment based on your goals.",
       items: [
         {
           title: "Braces in Playa del Carmen",
-          description: "Traditional dental braces remain a reliable and effective option for correcting a wide range of issues.",
-          subtext: "Our orthodontist provides braces care using modern techniques to ensure comfort."
+          description:
+            "Traditional dental braces are a reliable and effective solution for correcting complex alignment and bite issues.",
+          subtext: `✔ Precise tooth movement
+✔ Ideal for moderate to severe cases
+✔ Long-term stability
+`,
         },
         {
-          title: "Clear Aligners and Invisalign",
-          description: "Clear aligners offer a discreet alternative to traditional braces. Many adult patients prefer them because they are removable.",
-          subtext: "Invisalign treatment is available for eligible cases, with a dedicated planning process."
-        }
-      ]
+          title: "Clear Aligners (Invisalign)",
+          description:
+            "Clear aligners offer a discreet alternative to braces, especially for adult patients.",
+          subtext: `✔ Nearly invisible
+✔ Removable and comfortable
+✔ Ideal for mild to moderate cases
+`,
+        },
+      ],
+      footerDescription:
+        "👉 A professional evaluation is required to determine the best option for your case.",
     },
     adults: {
-      title: "Orthodontist for Adults",
-      text1: "Orthodontic treatment is no longer just for teenagers. An increasing number of adults seek care to improve their smile and oral health.",
-      text2: "As an orthodontist for adults, our clinic focuses on discreet, comfortable treatment options that fit professional lifestyles.",
+      title: "Orthodontic treatment is no longer limited to teenagers.",
+      text1:
+        "Many adults choose orthodontic treatment in Mexico to improve their smile, bite, and overall oral health.",
+      text2: `We focus on discreet, comfortable options such as clear aligners and modern braces designed to fit professional and personal lifestyles.
+
+👉 It’s never too late to improve your smile
+`,
       imgSrc: imgPath + "Orthodontist-IMG-3.webp",
-      imgAlt: "Orthodontist for adults in Mexico"
+      imgAlt: "Orthodontist for adults in Mexico",
     },
     whyChoose: {
       title: "Why Choose Orthodontic Treatment in Mexico?",
-      description: "Many patients choose Mexico because they receive professional care at a more affordable cost than in the USA.",
+      description:
+        "Many patients choose orthodontic treatment in Mexico because they receive high-quality dental care, advanced technology, and personalized attention in a welcoming environment.",
       items: [
-        "Certified orthodontist",
-        "Orthodontia for adults",
-        "Experience with American patients",
-        "English-speaking dental team",
-        "Braces follow international standards"
+        "Certified orthodontic specialists",
+        "Modern diagnostic technology",
+        "Personalized treatment planning",
+        "Experience with international patients",
       ],
-      footerText: "Treatments are performed under the same standards expected by international patients.",
+      footerText:
+        "👉 We provide professional orthodontic care focused on safety, comfort, and long-term results for patients from around the world.",
       reelId: "DPCjErMDkTc",
     },
     cost: {
       title: "Orthodontic Treatment Cost",
-      text1: "The cost varies depending on the type of treatment and duration. Braces and clear aligners each have different cost factors.",
-      text2: "After evaluation, we provide clear information about treatment options and costs so you can make an informed decision.",
+      text1:
+        "The cost of orthodontic treatment in Mexico varies depending on the type of treatment, case complexity, and duration.",
+      text2: `Braces and clear aligners have different pricing structures, and treatment may require periodic adjustments.
+
+For international patients, we provide clear treatment plans, estimated timelines, and guidance on how to manage follow-up visits efficiently.
+`,
     },
     process: {
       title: "Orthodontic Treatment Process",
-      footer: "This structured process ensures accurate tooth movement and long-term stability.",
       steps: [
         { title: "Orthodontic evaluation and diagnosis" },
         { title: "Digital scans and treatment planning" },
         { title: "Personalized orthodontic treatment plan" },
         { title: "Active treatment with braces or aligners" },
-        { title: "Monitoring and follow-up appointments" }
-      ]
+        { title: "Monitoring and follow-up" },
+      ],
+      footer:
+        "👉 This structured process ensures accurate tooth movement, long-term stability, and coordinated follow-up for international patients.",
     },
     americans: {
-      title: "Orthodontist for Americans in Mexico",
-      text1: "Our clinic has extensive experience working with American patients. We offer clear communication in English and care designed for international schedules.",
+      title: "Orthodontist for International Patients",
+      text1:
+        "Our clinic has extensive experience working with patients from the United States and Canada.\n\nWe provide:\n• Clear communication in English\n• Structured treatment planning\n• Follow-up strategies adapted to international patients\n\nDepending on your case, we can organize treatment phases and monitoring to fit your travel schedule.\n\n👉 Orthodontic treatment is possible—even if you don’t live in Mexico.",
     },
     location: {
       title: "Orthodontist in Playa del Carmen, Mexico",
-      text1: "Located in Playa del Carmen, our clinic is easily accessible. Treatment can be planned efficiently, making it convenient for dental travel.",
-      mapUrl: "https://maps.google.com/maps?q=Stetic%20Dental%20Clinic,%20Playa%20del%20Carmen&t=&z=16&ie=UTF8&iwloc=&output=embed",
-      whatsappUrl: "https://wa.me/9844922549"    
+      text1:
+        "Located in Playa del Carmen, our clinic is easily accessible. Treatment can be planned efficiently, making it convenient for dental travel.",
+      mapUrl:
+        "https://maps.google.com/maps?q=Stetic%20Dental%20Clinic,%20Playa%20del%20Carmen&t=&z=16&ie=UTF8&iwloc=&output=embed",
+      whatsappUrl: "https://wa.me/9844922549",
     },
     faq: {
       title: "Orthodontist FAQ",
       items: [
-        { question: "What is the difference between an orthodontist and a dentist?", answer: "An orthodontist is a specialist in alignment, while a dentist provides general dental care." },
-        { question: "Is it safe to see an orthodontist in Mexico?", answer: "Yes. It is safe when provided by qualified specialists following proper protocols." },
-        { question: "Are braces or aligners better for adults?", answer: "Both are effective. The choice depends on alignment needs and lifestyle." },
-        { question: "How long does treatment take?", answer: "Most treatments last several months to a few years." }
-      ]
+        {
+          question:
+            "What is the difference between an orthodontist and a dentist?",
+          answer: `An orthodontist is a dental specialist trained specifically in diagnosing and correcting tooth and jaw alignment problems. 
+
+A general dentist focuses on overall oral health, while an orthodontist plans treatments such as braces and clear aligners to improve bite function, alignment, and long-term stability.`,
+        },
+        {
+          question: "Are braces or aligners better for adults?",
+          answer: `Both braces and clear aligners can be effective for adults, but the best option depends on your case complexity, bite issues, lifestyle, and treatment goals. 
+
+Clear aligners are often preferred for their discreet appearance, while braces may offer better control in more complex orthodontic cases.`,
+        },
+        {
+          question: "How long does orthodontic treatment take?",
+          answer: `Treatment time varies depending on the severity of misalignment and the type of treatment selected. 
+
+Mild cases may take several months, while more complex cases can take 12 to 24 months or longer. A full orthodontic evaluation is needed to estimate your timeline accurately.`,
+        },
+        {
+          question:
+            "How does orthodontic follow-up work for international patients?",
+          answer: `For international patients, orthodontic treatment is planned in phases whenever possible. 
+
+Depending on the case, follow-up visits and monitoring can be coordinated around travel schedules, and some aligner cases may allow more flexible supervision. Your orthodontist will explain the best follow-up strategy during your consultation.`,
+        },
+        {
+          question: "Is it safe to see an orthodontist in Mexico?",
+          answer: `Yes, orthodontic treatment in Mexico is safe when provided by qualified specialists using proper diagnostic planning, modern technology, and established clinical protocols. 
+
+At our clinic, treatment is carefully planned to ensure safe tooth movement, functional results, and long-term stability.`,
+        },
+      ],
     },
     cta: {
       title: "Schedule Your Orthodontic Consultation",
-      description: "If you are looking for a trusted orthodontist, our team is ready to help you achieve a properly aligned smile.",
+      description:
+        "If you are looking for a trusted orthodontist, our team is ready to help you achieve a properly aligned smile.",
       buttonText: "Book an Appointment Now",
-      note: "Expert care for international patients"
-    }
+      note: "Expert care for international patients",
+    },
+    buttonText: "Schedule your teeth cleaning appointment →",
+    whatsappUrl: `https://wa.me/5219844922549/?text=${encodeURIComponent("Hello! I was checking the orthodontic  section on your website and I'm interested in scheduling an appointment. Could you let me know the available times? Thank you!")}`,
   },
   es: {
     schema: {
@@ -177,190 +244,257 @@ const orthoContent = {
         {
           "@type": "Dentist",
           "@id": `https://www.steticdental.com.mx${esPath}#dentist`,
-          "name": "Clínica Stetic Dental",
-          "url": `https://www.steticdental.com.mx${esPath}`,
-          "telephone": "+52 984 188 0338",
-          "address": {
+          name: "Clínica Stetic Dental",
+          url: `https://www.steticdental.com.mx${esPath}`,
+          telephone: "+52 984 188 0338",
+          address: {
             "@type": "PostalAddress",
-            "streetAddress": "Avenida 10 Nte, Calle 38 Nte Con, Zazil-ha",
-            "addressLocality": "Playa del Carmen",
-            "addressRegion": "Quintana Roo",
-            "addressCountry": "MX"
-          }
+            streetAddress: "Avenida 10 Nte, Calle 38 Nte Con, Zazil-ha",
+            addressLocality: "Playa del Carmen",
+            addressRegion: "Quintana Roo",
+            addressCountry: "MX",
+          },
         },
         {
           "@type": "Service",
           "@id": `https://www.steticdental.com.mx${esPath}#service`,
-          "name": "Ortodoncista en Playa del Carmen",
-          "serviceType": "Brackets y tratamiento ortodóncico",
-          "description": "Tratamiento de ortodoncia en Playa del Carmen enfocado en brackets y alineación dental para adultos.",
-          "url": `https://www.steticdental.com.mx${esPath}`,
-          "provider": { "@id": `https://www.steticdental.com.mx${esPath}#dentist` },
-          "areaServed": [
-            { "@type": "City", "name": "Playa del Carmen" },
-            { "@type": "Country", "name": "Mexico" }
-          ]
-        }
-      ]
+          name: "Ortodoncista en Playa del Carmen",
+          serviceType: "Brackets y tratamiento ortodóncico",
+          description:
+            "Tratamiento de ortodoncia en Playa del Carmen enfocado en brackets y alineación dental para adultos.",
+          url: `https://www.steticdental.com.mx${esPath}`,
+          provider: {
+            "@id": `https://www.steticdental.com.mx${esPath}#dentist`,
+          },
+          areaServed: [
+            { "@type": "City", name: "Playa del Carmen" },
+            { "@type": "Country", name: "Mexico" },
+          ],
+        },
+      ],
     },
-    seoTitle: "Ortodoncista en Playa del Carmen | Brackets Asequibles en México",
-    seoDescription: "¿Buscas un ortodoncista en Playa del Carmen? Obten brackets en México con atención experta, precios asequibles y tratamientos para adultos.",
+    seoTitle:
+      "Ortodoncista en Playa del Carmen | Brackets Asequibles en México",
+    seoDescription:
+      "¿Buscas un ortodoncista en Playa del Carmen? Obten brackets en México con atención experta, precios asequibles y tratamientos para adultos.",
     header: {
       title: "Ortodoncista en Playa del Carmen, México",
-      subheadline: "Atención ortodóncica experta para adultos y pacientes internacionales que buscan brackets o alineadores invisibles.",
+      subheadline:
+        "Atención ortodóncica experta para adultos y pacientes internacionales que buscan brackets o alineadores invisibles.",
       features: [
         "Ortodoncista certificado",
         "Ortodoncia para adultos",
         "Experiencia con extranjeros",
-        "Equipo dental bilingüe"
+        "Equipo dental bilingüe",
       ],
       button: "Agendar Consulta de Ortodoncia",
       imageSrc: ogImage,
-      imgAlt: "Ortodoncista en Playa del Carmen"
+      imgAlt: "Ortodoncista en Playa del Carmen",
     },
     about: {
-      title: "¿Buscas un Ortodoncista de Confianza en Playa del Carmen?",
-      text1: "Elegir al ortodoncista adecuado es esencial para lograr resultados seguros. Nuestra clínica ofrece tratamiento profesional para adultos que buscan atención experta y resultados predecibles.",
-      text2: "Ofrecemos planes de tratamiento personalizados diseñados para adaptarse a tus necesidades y estilo de vida.",
-      imageSrc: imgPath + "Orthodontist-IMG-2.webp",
-      imgAlt: "Cuidado de ortodoncia profesional en México"
+      title: "¿Busca un ortodoncista de confianza en Playa del Carmen?",
+      text1:
+        "Elegir al ortodoncista adecuado es fundamental para lograr resultados seguros, eficaces y duraderos. Nuestra clínica ofrece tratamiento de ortodoncia profesional en Playa del Carmen enfocado en brackets, utilizando técnicas modernas para asegurar un movimiento dental preciso y una alineación correcta de la mordida.",
+      text2:
+        "Nos especializamos en tratar a adultos y pacientes internacionales que buscan brackets en México, proporcionando planes de tratamiento personalizados adaptados a sus necesidades, estilo de vida y tiempo de tratamiento.\n\nNuestro enfoque se centra en resultados predecibles, comunicación clara y un seguimiento continuo durante todo su tratamiento de ortodoncia para garantizar resultados óptimos.",
+      imageSrc: "imgPath + 'Orthodontist-IMG-2.webp'",
+      imgAlt: "Ortodoncista de confianza en Playa del Carmen",
     },
     whatIs: {
-      title: "¿Qué hace un Ortodoncista?",
-      text1: "Es un especialista capacitado para diagnosticar y tratar la desalineación de los dientes y mandíbula. Se enfoca en corregir problemas de mordida y espacio.",
-      text2: "Garantiza que su tratamiento sea planificado y supervisado por un profesional con formación avanzada.",
+      title: "¿QUÉ HACE UN ORTODONCISTA?",
+      text1:
+        "Un ortodoncista es un especialista dental capacitado para diagnosticar, prevenir y tratar la mala alineación de los dientes y la mandíbula. El tratamiento de ortodoncia se centra en corregir problemas de mordida, espacios, apiñamiento y alineación mediante técnicas avanzadas como los brackets.",
+      text2: `A diferencia de un dentista general, un ortodoncista cuenta con formación especializada en el control del movimiento dental y la corrección de la mordida, asegurando resultados precisos, seguros y duraderos.
+
+La atención de ortodoncia profesional incluye una planificación detallada del tratamiento, un seguimiento continuo y ajustes controlados para guiar sus dientes hacia una alineación correcta con el paso del tiempo.`,
     },
+
     options: {
-      title: "Opciones de Tratamiento",
-      description: "Cada paciente tiene necesidades diferentes. Recomendaremos el tratamiento más adecuado según tus objetivos estéticos.",
+      title: "Opciones de tratamiento de ortodoncia en Playa del Carmen",
+      description:
+        "Cada paciente tiene necesidades de ortodoncia diferentes. Un ortodoncista profesional recomendará el tratamiento más adecuado según sus objetivos.",
       items: [
         {
           title: "Brackets en Playa del Carmen",
-          description: "Los brackets tradicionales siguen siendo una opción eficaz para corregir una amplia gama de problemas.",
-          subtext: "Atención con técnicas modernas para garantizar comodidad."
+          description:
+            "Los brackets dentales tradicionales son una solución confiable y eficaz para corregir problemas complejos de alineación y mordida.",
+          subtext:
+            "✔ Movimiento dental preciso ✔ Ideal para casos de moderados a severos ✔ Estabilidad a largo plazo ",
         },
         {
-          title: "Alineadores e Invisalign",
-          description: "Ofrecen una alternativa discreta. Muchos pacientes los prefieren por ser removibles y casi invisibles.",
-          subtext: "Tratamiento Invisalign disponible para casos aptos con planificación digital."
-        }
-      ]
+          title: "Alineadores transparentes (Invisalign)",
+          description:
+            "Los alineadores transparentes ofrecen una alternativa discreta a los brackets, especialmente para pacientes adultos.",
+          subtext:
+            "✔ Casi invisibles ✔ Removibles y cómodos ✔ Ideal para casos de leves a moderados ",
+        },
+      ],
+      footerDescription:
+        "👉 Se requiere una evaluación profesional para determinar la mejor opción para su caso.",
     },
     adults: {
-      title: "Ortodoncia para Adultos",
-      text1: "Un número cada vez mayor de adultos busca atención ortodóntica para mejorar su sonrisa y salud bucal.",
-      text2: "Nos enfocamos en opciones discretas y cómodas que se adaptan a tu vida profesional.",
+      title: "El tratamiento de ortodoncia ya no se limita a los adolescentes.",
+      text1:
+        "Muchos adultos eligen el tratamiento de ortodoncia en México para mejorar su sonrisa, su mordida y su salud bucal en general.",
+      text2: `Nos enfocamos en opciones discretas y cómodas, como alineadores transparentes y brackets modernos, diseñados para adaptarse a estilos de vida personales y profesionales.
+
+👉 Nunca es tarde para mejorar tu sonrisa
+`,
       imgSrc: imgPath + "Orthodontist-IMG-3.webp",
-      imgAlt: "Ortodoncista para adultos en México"
+      imgAlt: "Ortodoncista para adultos en México",
     },
     whyChoose: {
-      title: "¿Por qué elegir ortodoncia en México?",
-      description: "Recibe atención profesional de alta calidad a un costo mucho más accesible que en el extranjero.",
+      title: "¿Por qué elegir un tratamiento de ortodoncia en México?",
+      description:
+        "Muchos pacientes eligen el tratamiento de ortodoncia en México porque reciben atención dental de alta calidad, tecnología avanzada y atención personalizada en un ambiente acogedor.",
       items: [
-        "Ortodoncista certificado",
-        "Atención para adultos",
+        "Especialistas en ortodoncia certificados",
+        "Tecnología de diagnóstico moderna",
+        "Planificación de tratamiento personalizada",
         "Experiencia con pacientes internacionales",
-        "Equipo dental bilingüe",
-        "Estándares internacionales de calidad"
       ],
-      footerText: "Tratamientos realizados bajo altos estándares de calidad internacional.",
+      footerText:
+        "👉 Brindamos atención de ortodoncia profesional enfocada en la seguridad, comodidad y resultados a largo plazo para pacientes de todo el mundo.",
       reelId: "DPCjErMDkTc",
     },
     cost: {
-      title: "Costo del Tratamiento",
-      text1: "El costo varía según el tipo de tratamiento y complejidad. Los brackets y alineadores tienen diferentes factores de precio.",
-      text2: "Tras una evaluación, brindamos información clara sobre opciones y costos sin cargos ocultos.",
+      title: "Costo del tratamiento de ortodoncia",
+      text1:
+        "El costo del tratamiento de ortodoncia en México varía según el tipo de tratamiento, la complejidad del caso y la duración.",
+      text2: `Los brackets y los alineadores transparentes tienen diferentes estructuras de precios, y el tratamiento puede requerir ajustes periódicos.
+
+Para pacientes internacionales, ofrecemos planes de tratamiento claros, tiempos estimados y orientación sobre cómo gestionar las visitas de seguimiento de manera eficiente.
+`,
     },
     process: {
-      title: "Proceso de Tratamiento",
-      footer: "Garantizamos un movimiento dental preciso y estabilidad a largo plazo.",
+      title: "Proceso de tratamiento de ortodoncia",
       steps: [
-        { title: "Evaluación y diagnóstico" },
-        { title: "Escaneos y planificación digital" },
-        { title: "Plan de tratamiento personalizado" },
-        { title: "Tratamiento activo" },
-        { title: "Citas de seguimiento" }
-      ]
+        { title: "Evaluación y diagnóstico de ortodoncia" },
+        { title: "Escaneos digitales y planificación del tratamiento" },
+        { title: "Plan de tratamiento de ortodoncia personalizado" },
+        { title: "Tratamiento activo con brackets o alineadores" },
+        { title: "Monitoreo y seguimiento" },
+      ],
+      footer:
+        "👉 Este proceso estructurado asegura un movimiento dental preciso, estabilidad a largo plazo y un seguimiento coordinado para pacientes internacionales.",
     },
     americans: {
-      title: "Atención para Pacientes Internacionales",
-      text1: "Amplia experiencia trabajando con pacientes que viajan desde el extranjero. Ofrecemos comunicación en inglés y atención coordinada.",
+      title: "Ortodoncista para pacientes internacionales",
+      text1:
+        "Nuestra clínica tiene una amplia experiencia trabajando con pacientes de Estados Unidos y Canadá.\n\nOfrecemos:\n• Comunicación clara en inglés\n• Planificación de tratamiento estructurada\n• Estrategias de seguimiento adaptadas a pacientes internacionales\n\nDependiendo de su caso, podemos organizar las fases del tratamiento y el monitoreo para que se ajusten a su itinerario de viaje.\n\n👉 El tratamiento de ortodoncia es posible, incluso si no vive en México.",
     },
     location: {
       title: "Ubicación en Playa del Carmen",
-      text1: "Nuestra clínica es fácilmente accesible para visitantes. Las consultas se pueden planificar de manera eficiente durante su estancia.",
-      mapUrl: "https://maps.google.com/maps?q=Stetic%20Dental%20Clinic,%20Playa%20del%20Carmen&t=&z=16&ie=UTF8&iwloc=&output=embed",
-      whatsappUrl: "https://wa.me/9844922549"
+      text1:
+        "Nuestra clínica es fácilmente accesible para visitantes. Las consultas se pueden planificar de manera eficiente durante su estancia.",
+      mapUrl:
+        "https://maps.google.com/maps?q=Stetic%20Dental%20Clinic,%20Playa%20del%20Carmen&t=&z=16&ie=UTF8&iwloc=&output=embed",
+      whatsappUrl: "https://wa.me/9844922549",
     },
     faq: {
-      title: "Preguntas Frecuentes",
+      title: "Preguntas frecuentes sobre ortodoncia",
       items: [
-        { question: "¿Ortodoncista o dentista?", answer: "El ortodoncista es el especialista en alineación, el dentista en salud general." },
-        { question: "¿Es seguro en México?", answer: "Totalmente seguro con especialistas certificados y protocolos estrictos." },
-        { question: "¿Brackets o alineadores?", answer: "Ambos son eficaces; la elección depende de tu caso y estilo de vida." },
-        { question: "¿Cuánto dura?", answer: "Desde varios meses hasta un par de años, dependiendo de la complejidad." }
-      ]
+        {
+          question:
+            "¿Cuál es la diferencia entre un ortodoncista y un dentista?",
+          answer: `Un ortodoncista es un especialista dental capacitado específicamente en el diagnóstico y corrección de problemas de alineación dental y maxilar. 
+
+Un dentista general se enfoca en la salud bucal integral, mientras que un ortodoncista planifica tratamientos como brackets y alineadores transparentes para mejorar la función de la mordida, la alineación y la estabilidad a largo plazo.`,
+        },
+        {
+          question: "¿Qué es mejor para adultos: brackets o alineadores?",
+          answer: `Tanto los brackets como los alineadores transparentes pueden ser efectivos para adultos, pero la mejor opción depende de la complejidad de su caso, los problemas de mordida, su estilo de vida y sus objetivos de tratamiento. 
+
+Los alineadores transparentes suelen preferirse por su apariencia discreta, mientras que los brackets pueden ofrecer un mejor control en casos de ortodoncia más complejos.`,
+        },
+        {
+          question: "¿Cuánto dura el tratamiento de ortodoncia?",
+          answer: `El tiempo de tratamiento varía según la gravedad de la desalineación y el tipo de tratamiento seleccionado. 
+
+Los casos leves pueden tardar varios meses, mientras que los casos más complejos pueden durar de 12 a 24 meses o más. Se requiere una evaluación de ortodoncia completa para estimar su cronograma con precisión.`,
+        },
+        {
+          question:
+            "¿Cómo funciona el seguimiento de ortodoncia para pacientes internacionales?",
+          answer: `Para los pacientes internacionales, el tratamiento de ortodoncia se planifica por fases siempre que sea posible. 
+
+Dependiendo del caso, las visitas de seguimiento y el monitoreo pueden coordinarse según los itinerarios de viaje, y algunos casos con alineadores pueden permitir una supervisión más flexible. Su ortodoncista le explicará la mejor estrategia de seguimiento durante su consulta.`,
+        },
+        {
+          question: "¿Es seguro visitar a un ortodoncista en México?",
+          answer: `Sí, el tratamiento de ortodoncia en México es seguro cuando es realizado por especialistas calificados que utilizan una planificación diagnóstica adecuada, tecnología moderna y protocolos clínicos establecidos. 
+
+En nuestra clínica, el tratamiento se planifica cuidadosamente para garantizar un movimiento dental seguro, resultados funcionales y estabilidad a largo plazo.`,
+        },
+      ],
     },
     cta: {
       title: "Agenda tu Consulta de Ortodoncia",
-      description: "Si buscas un ortodoncista de confianza, nuestro equipo está listo para ayudarte a lograr una sonrisa alineada.",
+      description:
+        "Si buscas un ortodoncista de confianza, nuestro equipo está listo para ayudarte a lograr una sonrisa alineada.",
       buttonText: "Reserva tu Cita Ahora",
-      note: "Atención experta personalizada"
-    }
-  }
+      note: "Atención experta personalizada",
+    },
+    buttonText: "Programe su cita de limpieza dental →",
+    whatsappUrl: `https://wa.me/5219844922549/?text=${encodeURIComponent("¡Hola! Estaba revisando la sección de ortodoncia en su sitio web y estoy interesado en programar una cita. ¿Podrían informarme sobre los horarios disponibles? ¡Gracias!")}`,
+  },
 };
 
 const t = orthoContent[lang];
 ---
 
-<Layout 
-  title={t.seoTitle} 
-  description={t.seoDescription} 
+<Layout
+  title={t.seoTitle}
+  description={t.seoDescription}
   lang={lang}
   enPath={enPath}
   esPath={esPath}
   schema={t.schema}
   ogImage={ogImage}
 >
-  <HeaderSpeciality 
-      lang={lang}
-      title={t.header.title}
-      subheadline={t.header.subheadline}
-      features={t.header.features}
-      buttonText={t.header.button}
-      imageSrc={t.header.imageSrc} 
-      imageAlt={t.header.imgAlt}
-    />
+  <HeaderSpeciality
+    lang={lang}
+    title={t.header.title}
+    subheadline={t.header.subheadline}
+    features={t.header.features}
+    imageSrc={t.header.imageSrc}
+    imageAlt={t.header.imgAlt}
+    buttonText={t.buttonText}
+    buttonLink={t.whatsappUrl}
+  />
 
-  <AboutSpeciality 
-      title={t.about.title}
-      text1={t.about.text1}
-      text2={t.about.text2}
-      imageSrc={t.about.imageSrc}  
-      imageAlt={t.about.imgAlt}
-    />
+  <AboutSpeciality
+    title={t.about.title}
+    text1={t.about.text1}
+    text2={t.about.text2}
+    imageSrc={t.about.imageSrc}
+    imageAlt={t.about.imgAlt}
+  />
 
-  <WhatIsSpeciality 
-      title={t.whatIs.title}
-      text1={t.whatIs.text1}
-      text2={t.whatIs.text2}
-    />
+  <WhatIsSpeciality
+    title={t.whatIs.title}
+    text1={t.whatIs.text1}
+    text2={t.whatIs.text2}
+  />
 
-    <OptionsSpeciality 
-      title={t.options.title}
-      description={t.options.description}
-      options={t.options.items}
-    />
+  <OptionsSpeciality
+    title={t.options.title}
+    description={t.options.description}
+    options={t.options.items}
+    footerDescription={t.options.footerDescription}
+  />
 
-    <AdultsSpeciality 
-      title={t.adults.title}
-      text1={t.adults.text1}
-      text2={t.adults.text2}
-      imageSrc={t.adults.imgSrc} 
-      imageAlt={t.adults.imgAlt}
-    />
+  <AdultsSpeciality
+    title={t.adults.title}
+    text1={t.adults.text1}
+    text2={t.adults.text2}
+    imageSrc={t.adults.imgSrc}
+    imageAlt={t.adults.imgAlt}
+    buttonText={t.buttonText}
+    buttonLink={t.whatsappUrl}
+  />
 
-    <WhyChooseSpeciality 
+  <WhyChooseSpeciality
     title={t.whyChoose.title}
     description={t.whyChoose.description}
     items={t.whyChoose.items}
@@ -368,40 +502,34 @@ const t = orthoContent[lang];
     reelId={t.whyChoose.reelId}
   />
 
-  <CostSpeciality 
-      title={t.cost.title}
-      text1={t.cost.text1}
-      text2={t.cost.text2}
-    />
+  <CostSpeciality
+    title={t.cost.title}
+    text1={t.cost.text1}
+    text2={t.cost.text2}
+  />
 
-    <ProcessSpeciality 
-      title={t.process.title}
-      footer={t.process.footer}
-      steps={t.process.steps}
-    />
+  <ProcessSpeciality
+    title={t.process.title}
+    footer={t.process.footer}
+    steps={t.process.steps}
+  />
 
-    <AmericansSpeciality 
-      title={t.americans.title}
-      text1={t.americans.text1}
-    />
+  <AmericansSpeciality title={t.americans.title} text1={t.americans.text1} />
 
-    <LocationSpeciality 
-      title={t.location.title}
-      text1={t.location.text1}
-      mapUrl={t.location.mapUrl}
-      whatsappUrl={t.location.whatsappUrl}
-    />
+  <LocationSpeciality
+    title={t.location.title}
+    text1={t.location.text1}
+    mapUrl={t.location.mapUrl}
+    whatsappUrl={t.location.whatsappUrl}
+  />
 
-    <FaqSpeciality 
-      title={t.faq.title}
-      faqs={t.faq.items}
-    />
+  <FaqSpeciality title={t.faq.title} faqs={t.faq.items} />
 
-    <CtaSpeciality 
-      lang={lang}
-      title={t.cta.title}
-      description={t.cta.description}
-      buttonText={t.cta.buttonText}
-      note={t.cta.note}
-    />
+  <CtaSpeciality
+    lang={lang}
+    title={t.cta.title}
+    description={t.cta.description}
+    buttonText={t.cta.buttonText}
+    note={t.cta.note}
+  />
 </Layout>

@@ -23,6 +23,7 @@ import ReviewsLux from "../../components/home/ReviewsLux.astro";
 import LocationLux from "../../components/home/LocationLux.astro";
 import FAQ from "../../components/home/FAQ.astro";
 import ContactForm from "../../components/shared/ContactForm.astro";
+import TeamComponent from "../../components/shared/TeamComponent.astro";
 
 const seoData = {
   en: {
@@ -37,6 +38,61 @@ const seoData = {
 
 const currentSeo = seoData[lang];
 
+// 1. EXTRAEMOS LA INFORMACIÓN DEL EQUIPO DENTAL
+const teamData = {
+  en: {
+    title: "Trusted Dental Specialists for International Patients",
+    description: "Choosing the right dental team is one of the most important decisions when planning treatment abroad. Our specialists provide personalized care, clear communication in English, and modern dental solutions designed to help patients travel confidently to Playa del Carmen for their treatment.",
+    specialists: [
+      {
+        name: "Dr. Ana Sofía Martínez",
+        specialty: "Orthodontics & Invisalign Specialist",
+        image: "/images/team/dra-ana-sofia.jpg",
+        bio: "Certified Invisalign provider with over 10 years of experience designing perfect smiles for international patients."
+      },
+      {
+        name: "Dr. Carlos Rivera",
+        specialty: "Implantology & Oral Surgery",
+        image: "/images/team/dr-carlos-rivera.jpg",
+        bio: "Expert in complex dental implant procedures and full-mouth restorations, ensuring functional and aesthetic results."
+      },
+      {
+        name: "Dr. Elena Gómez",
+        specialty: "Cosmetic Dentistry",
+        image: "/images/team/dra-elena-gomez.jpg",
+        bio: "Specializes in porcelain veneers and smile makeovers, combining art and science to create stunning, natural looks."
+      }
+    ]
+  },
+  es: {
+    title: "Especialistas Dentales de Confianza para Pacientes Internacionales",
+    description: "Elegir el equipo dental adecuado es una de las decisiones más importantes al planificar un tratamiento en el extranjero. Nuestros especialistas brindan atención personalizada, comunicación clara y soluciones dentales modernas para ayudar a los pacientes a viajar con confianza a Playa del Carmen.",
+    specialists: [
+      {
+        name: "Dra. Ana Sofía Martínez",
+        specialty: "Especialista en Ortodoncia e Invisalign",
+        image: "/images/team/dra-ana-sofia.jpg",
+        bio: "Proveedor certificado de Invisalign con más de 10 años de experiencia diseñando sonrisas perfectas para pacientes internacionales."
+      },
+      {
+        name: "Dr. Carlos Rivera",
+        specialty: "Implantología y Cirugía Bucal",
+        image: "/images/team/dr-carlos-rivera.jpg",
+        bio: "Experto en procedimientos complejos de implantes dentales y restauraciones de boca completa, asegurando resultados funcionales y estéticos."
+      },
+      {
+        name: "Dra. Elena Gómez",
+        specialty: "Odontología Estética",
+        image: "/images/team/dra-elena-gomez.jpg",
+        bio: "Especialista en carillas de porcelana y diseño de sonrisa, combinando arte y ciencia para crear looks impresionantes y naturales."
+      }
+    ]
+  }
+};
+
+const currentTeam = teamData[lang];
+
+// 2. LIMPIAMOS EL SCHEMA PARA QUE SEA VÁLIDO PARA SEO
 const schemas = {
   en: {
     "@context": "https://schema.org",
@@ -81,7 +137,13 @@ const currentSchema = schemas[lang];
     <AboutLux lang={lang} />
 
     <ServicesLux lang={lang} />
-
+    
+    <!-- <TeamComponent 
+      title={currentTeam.title}
+      description={currentTeam.description}
+      specialists={currentTeam.specialists} 
+    /> -->
+    
     <DentalTourism lang={lang} />
 
     <WhyChooseUs lang={lang} />

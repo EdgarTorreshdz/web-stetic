@@ -5,22 +5,22 @@ import Layout from "../../layouts/Layout.astro";
 
 export async function getStaticPaths() {
   return [
-    { 
-      params: { 
-        lang: 'en', 
-        invisalign: routes.en.invisalign 
-      } 
+    {
+      params: {
+        lang: "en",
+        invisalign: routes.en.invisalign,
+      },
     },
-    { 
-      params: { 
-        lang: 'es', 
-        invisalign: routes.es.invisalign 
-      } 
+    {
+      params: {
+        lang: "es",
+        invisalign: routes.es.invisalign,
+      },
     },
   ];
 }
 
-const { lang } = Astro.params as { lang: 'en' | 'es' };
+const { lang } = Astro.params as { lang: "en" | "es" };
 
 const enPath = `/en/${routes.en.invisalign}/`;
 const esPath = `/es/${routes.es.invisalign}/`;
@@ -39,6 +39,8 @@ import ResultSpeciality from "../../components/shared/ResultSpeciality.astro";
 import LocationSpeciality from "../../components/shared/LocationSpeciality.astro";
 import FaqSpeciality from "../../components/shared/FaqSpeciality.astro";
 import CtaSpeciality from "../../components/shared/CtaSpeciality.astro";
+import CompareTableInvisalign from "../../components/shared/CompareTableInvisalign.astro";
+import ButtonCTA from "../../components/shared/ButtonCTA.astro";
 
 const pageContent = {
   en: {
@@ -48,146 +50,236 @@ const pageContent = {
         {
           "@type": "Dentist",
           "@id": `https://www.steticdental.com.mx${enPath}#dentist`,
-          "name": "Stetic Dental Clinic",
-          "url": `https://www.steticdental.com.mx${enPath}`,
-          "telephone": "+52 984 188 0338",
-          "address": {
+          name: "Stetic Dental Clinic",
+          url: `https://www.steticdental.com.mx${enPath}`,
+          telephone: "+52 984 188 0338",
+          address: {
             "@type": "PostalAddress",
-            "streetAddress": "Avenida 10 Nte, Calle 38 Nte Con, Zazil-ha",
-            "addressLocality": "Playa del Carmen",
-            "addressRegion": "Quintana Roo",
-            "addressCountry": "MX"
+            streetAddress: "Avenida 10 Nte, Calle 38 Nte Con, Zazil-ha",
+            addressLocality: "Playa del Carmen",
+            addressRegion: "Quintana Roo",
+            addressCountry: "MX",
           },
-          "openingHoursSpecification": [
-            { "@type": "OpeningHoursSpecification", "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday"], "opens": "10:00", "closes": "18:00" },
-            { "@type": "OpeningHoursSpecification", "dayOfWeek": "Friday", "opens": "10:00", "closes": "17:00" },
-            { "@type": "OpeningHoursSpecification", "dayOfWeek": "Saturday", "opens": "10:00", "closes": "14:00" }
+          openingHoursSpecification: [
+            {
+              "@type": "OpeningHoursSpecification",
+              dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday"],
+              opens: "10:00",
+              closes: "18:00",
+            },
+            {
+              "@type": "OpeningHoursSpecification",
+              dayOfWeek: "Friday",
+              opens: "10:00",
+              closes: "17:00",
+            },
+            {
+              "@type": "OpeningHoursSpecification",
+              dayOfWeek: "Saturday",
+              opens: "10:00",
+              closes: "14:00",
+            },
           ],
-          "sameAs": [
+          sameAs: [
             "https://www.facebook.com/steticdentalplaya",
-            "https://www.instagram.com/steticdentalplaya"
-          ]
+            "https://www.instagram.com/steticdentalplaya",
+          ],
         },
         {
           "@type": "Service",
           "@id": `https://www.steticdental.com.mx${enPath}#service`,
-          "name": "Invisalign in Mexico",
-          "serviceType": "Invisalign clear aligners treatment",
-          "description": "Invisalign treatment in Mexico for adults seeking clear aligners, discreet orthodontic solutions, and cost-effective dental care in Playa del Carmen.",
-          "url": `https://www.steticdental.com.mx${enPath}`,
-          "provider": { "@id": `https://www.steticdental.com.mx${enPath}#dentist` },
-          "areaServed": [
-            { "@type": "City", "name": "Playa del Carmen" },
-            { "@type": "Country", "name": "Mexico" }
+          name: "Invisalign in Mexico",
+          serviceType: "Invisalign clear aligners treatment",
+          description:
+            "Invisalign treatment in Mexico for adults seeking clear aligners, discreet orthodontic solutions, and cost-effective dental care in Playa del Carmen.",
+          url: `https://www.steticdental.com.mx${enPath}`,
+          provider: {
+            "@id": `https://www.steticdental.com.mx${enPath}#dentist`,
+          },
+          areaServed: [
+            { "@type": "City", name: "Playa del Carmen" },
+            { "@type": "Country", name: "Mexico" },
           ],
-          "availableChannel": {
+          availableChannel: {
             "@type": "ServiceChannel",
-            "serviceUrl": `https://www.steticdental.com.mx${enPath}`
-          }
-        }
-      ]
+            serviceUrl: `https://www.steticdental.com.mx${enPath}`,
+          },
+        },
+      ],
     },
     seo: {
-      title: "Invisalign Mexico | Clear Aligners in Playa del Carmen for Adults",
-      description: "Invisalign in Mexico for adults. Save up to 70% with certified dentists in Playa del Carmen. Get your personalized treatment plan today"
+      title:
+        "Invisalign Mexico | Clear Aligners in Playa del Carmen for Adults",
+      description:
+        "Invisalign in Mexico for adults. Save up to 70% with certified dentists in Playa del Carmen. Get your personalized treatment plan today",
     },
     header: {
       title: "Invisalign in Playa del Carmen, Mexico",
-      subheadline: "Invisalign clear aligners for adults seeking a discreet, comfortable, and effective orthodontic solution in Mexico.",
+      subheadline:
+        "Achieve a straighter smile with Invisalign and clear aligners in Playa del Carmen. Discreet, comfortable orthodontic treatment designed for adults seeking results without metal braces.",
       features: [
-        "Brand-certified Invisalign dentist",
-        "Clear aligners for adults",
-        "English-speaking dental team",
-        "Affordable Invisalign cost compared to the USA"
+        "Certified Invisalign provider with advanced orthodontic expertise",
+        "Clear aligners for adults and aesthetic-focused treatments",
+        "English-speaking dental team for international patients",
+        "More affordable Invisalign treatment compared to other countries",
       ],
-      button: "Schedule Your Invisalign Consultation",
       imageSrc: ogImage,
-      imageAlt: "Invisalign clear aligners treatment"
+      imageAlt: "Invisalign clear aligners treatment",
     },
     about: {
-      title: "Looking for Invisalign in Playa del Carmen You Can Trust?",
-      text1: "Invisalign is a modern orthodontic solution designed for adults who want straighter teeth without the look of traditional braces. Our clinic offers Invisalign in Playa del Carmen for American patients looking for professional care, brand-certified treatment, and significant cost savings in Mexico.",
-      text2: "By working with an experienced Invisalign dentist, patients receive a discreet treatment tailored to their aesthetic goals.",
+      title: "Looking for Invisalign in Playa del Carmen you can trust?",
+      text1:
+        "Invisalign is a modern orthodontic solution designed for adults who want straighter teeth without the look of traditional braces. At our clinic, we offer Invisalign in Playa del Carmen along with advanced clear aligners treatments for international patients seeking high-quality care in Mexico.",
+      text2: `Our approach combines certified Invisalign expertise, digital treatment planning, and personalized care to deliver predictable, natural-looking results. Patients choose us not only for the aesthetics, but for the comfort, efficiency, and long-term stability of their smile.
+By working with an experienced Invisalign provider, you receive a discreet, comfortable, and fully customized orthodontic treatment tailored to your lifestyle and goals.
+`,
       imageSrc: imgPath + "Invisalign-IMG-2.webp",
-      imgAlt: "Orthodontic consultation in Playa del Carmen"
+      imgAlt: "Orthodontic consultation in Playa del Carmen",
     },
     whatIs: {
-      title: "What Is Invisalign?",
-      text1: "Invisalign uses a series of clear, removable aligners to gradually straighten teeth. These aligners are custom-made and designed to fit comfortably while remaining virtually invisible during daily use.",
-      text2: "This system offers a discreet alternative to metal braces and is especially popular among adults seeking orthodontic treatment without affecting their appearance.",
+      title: "What is Invisalign?",
+      text1:
+        "Invisalign is an advanced orthodontic treatment that uses a series of custom-made clear aligners to gradually straighten teeth. These aligners are removable, comfortable, and virtually invisible, making them an ideal option for adults who want to improve their smile without traditional metal braces.",
+      text2: `Often referred to as clear aligners, Invisalign treatment is designed to fit your teeth precisely and adapt to your lifestyle, allowing you to eat, brush, and maintain your daily routine with ease.
+This modern orthodontic solution is especially popular among international patients looking for discreet, effective, and predictable results while receiving treatment in Playa del Carmen.
+`,
     },
     comparison: {
       title: "Invisalign vs Braces: What’s the Difference?",
-      text1: "When comparing Invisalign vs braces, many adults choose Invisalign because it offers greater comfort and flexibility. Aligners can be removed for eating and oral hygiene.",
-      text2: "Invisalign is ideal for patients who want effective orthodontic results with minimal impact on their daily routine."
+      text1:
+        "When comparing Invisalign vs traditional braces, many adults prefer clear aligners because they offer greater comfort, flexibility, and a more discreet appearance. However, understanding the key differences can help you choose the best orthodontic treatment for your needs.",
+      text2:
+        "Invisalign is ideal for patients who want effective orthodontic results with minimal impact on their daily routine.",
+      titleTable: "Invisalign vs Braces Comparison",
+      descriptionTable:
+        "Compare clear aligners vs traditional braces to understand which orthodontic treatment is right for you.",
+      footerTable:
+        "Clear aligners like Invisalign are a preferred choice for international patients seeking a discreet, comfortable, and effective orthodontic treatment in Playa del Carmen.",
     },
     candidate: {
       title: "Who Is a Good Candidate for Invisalign?",
-      description: "You may be a good candidate for Invisalign if you:",
+      description: `Not every patient is an ideal candidate for Invisalign. The success of this treatment depends on specific dental conditions, lifestyle habits, and consistency throughout the process.
+Understanding whether Invisalign is right for you is the first step toward achieving predictable and long-lasting results.
+You may be a good candidate for Invisalign if you:
+`,
       items: [
-        "Are an adult with mild to moderate alignment issues",
-        "Prefer a discreet orthodontic solution",
-        "Want removable aligners instead of metal braces",
-        "Can follow the recommended wear schedule"
+        "Have mild to moderate alignment issues such as crowding, spacing, or minor bite problems",
+        "Prefer a discreet alternative to traditional metal braces",
+        "Want removable aligners that fit your lifestyle and daily routine",
+        "Are committed to wearing aligners for the recommended 20–22 hours per day",
+        "Are looking for a comfortable and predictable orthodontic treatment ",
       ],
-      footerText: "A consultation with an Invisalign dentist is essential to confirm eligibility.",
+      footerText: `The best way to know if Invisalign is right for you is through a personalized evaluation with a qualified Invisalign dentist.
+Our team provides detailed digital assessments for international patients, helping you understand your treatment options, timeline, and expected results before starting
+`,
       imageSrc: imgPath + "Invisalign-IMG-3.webp",
-      imageAlt: "Invisalign candidate evaluation"
+      imageAlt: "Invisalign candidate evaluation",
     },
     process: {
       title: "Invisalign Treatment Process",
-      footer: "Each Invisalign dental plan is designed to achieve gradual, predictable results.",
       steps: [
-        { title: "Invisalign consultation and evaluation" },
-        { title: "Digital scan and orthodontic planning" },
-        { title: "Personalized Invisalign dental plan" },
-        { title: "Monitoring and adjustments" }
-      ]
+        { title: "Consultation and Evaluation" },
+        { title: "Digital Scan and Treatment Planning" },
+        { title: "Personalized Invisalign Plan" },
+        { title: "Monitoring and Adjustments" },
+      ],
+      footer:
+        "Every Invisalign treatment is carefully planned to deliver gradual, predictable, and natural-looking results — with a process designed to fit your lifestyle.",
     },
     cost: {
       title: "Invisalign Cost in Mexico",
-      text1: "Invisalign cost in Mexico is typically lower than in the United States while using the same brand system and technology. The price depends on the complexity of the case.",
-      text2: "Our team provides a clear treatment plan and transparent information about the price of Invisalign.",
+      text1:
+        "The cost of Invisalign in Mexico is significantly lower than in countries like the United States, Canada, or the UK — allowing patients to achieve the same high-quality treatment while saving a substantial amount on their investment.",
+      text2: `In many cases, patients can expect to save between 50% and 70% compared to international prices, without compromising on technology, materials, or clinical standards.
+Invisalign treatment costs vary depending on the complexity of the case, the duration of treatment, and the number of aligners required. This is why every treatment plan is fully personalized.
+`,
     },
     whyChoose: {
-      title: "Why Choose Our Invisalign Dentist",
+      title: "Why Choose Our Invisalign Dentist in Mexico",
+      description:
+        "Choosing the right Invisalign dentist is essential to achieving safe, predictable, and natural-looking results. Not all providers offer the same level of experience, technology, or care — especially when it comes to treating international patients.",
       items: [
-        "Certified Invisalign dentist",
-        "Experience treating adult patients",
-        "Digital orthodontic planning",
-        "Clear communication in English",
-        "Extensive experience with international patients"
+        "Certified Invisalign provider with advanced case experience",
+        "Specialized in treating adult patients seeking aesthetic results",
+        "Digital orthodontic planning for precise and predictable outcomes",
+        "English-speaking dental team with clear communication throughout your treatment",
+        "Extensive experience working with international patients visiting Mexic",
       ],
-      footerText: "Many patients choose our clinic when looking for an experienced Invisalign dentist in Playa del Carmen.",
-      reelId: "DPCjErMDkTc"
+      footerText:
+        "We guide you through every step of your Invisalign journey, from your first consultation to your final results.",
+      reelId: "DPCjErMDkTc",
+    },
+    results: {
+      title: "Invisalign Results and Monitoring",
+      text1: `Invisalign treatment is designed to deliver gradual, precise, and predictable results through controlled tooth movement.
+
+Throughout your treatment, regular monitoring ensures that your progress stays on track and that any necessary adjustments are made at the right time. This level of control allows for consistent, high-quality outcomes.
+
+For international patients, our team provides structured follow-ups and clear communication to ensure your treatment continues smoothly — even between visits.
+
+With proper planning and expert supervision, Invisalign offers natural-looking results that align with your expectations and long-term oral health.
+`,
+      imageSrc: imgPath + "Invisalign-IMG-4.webp",
+      imgAlt: "Patient showing Invisalign progress",
     },
     location: {
       title: "Invisalign in Playa del Carmen, Mexico",
-      text1: "Our clinic is located in Playa del Carmen, a popular destination for dental tourism. Patients benefit from professional treatment while enjoying their stay in Mexico.",
-      mapUrl: "https://maps.google.com/maps?q=Stetic%20Dental%20Clinic,%20Playa%20del%20Carmen&t=&z=16&ie=UTF8&iwloc=&output=embed",
-      whatsappUrl: "https://wa.me/9844922549"    
+      text1: `Our clinic is located in Playa del Carmen, one of the most popular and accessible destinations for dental tourism in Mexico.
+Patients from around the world choose this location not only for high-quality Invisalign treatment, but also for the opportunity to combine their dental care with a relaxing and enjoyable travel experience.
+With direct international connections, modern infrastructure, and a welcoming environment, Playa del Carmen makes it easy to start your Invisalign treatment while enjoying the comfort and convenience of care in Mexico.
+`,
+      mapUrl:
+        "https://maps.google.com/maps?q=Stetic%20Dental%20Clinic,%20Playa%20del%20Carmen&t=&z=16&ie=UTF8&iwloc=&output=embed",
+      whatsappUrl: "https://wa.me/9844922549",
     },
     faq: {
       title: "Invisalign FAQ",
       items: [
-        { question: "How long does Invisalign treatment take?", answer: "Many adult treatments range from several months to over a year depending on the case." },
-        { question: "Is Invisalign safe in Mexico?", answer: "Yes. It is safe when provided by a certified Invisalign dentist." },
-        { question: "How much does Invisalign cost in Mexico?", answer: "It is generally 50-70% more affordable than in the USA." },
-        { question: "Is Invisalign better than braces for adults?", answer: "For most adults, it offers superior comfort and aesthetics." }
-      ]
+        {
+          question: "How long does Invisalign treatment take?",
+          answer: `Invisalign treatment typically takes between 6 to 18 months, depending on the complexity of your case. Some patients begin to see noticeable improvements within the first few weeks.
+
+A personalized treatment plan will provide a more accurate timeline based on your specific needs and goals.`,
+        },
+        {
+          question: "How much does Invisalign cost in Mexico?",
+          answer: `The cost of Invisalign in Mexico is significantly more affordable than in countries like the United States, Canada, or the UK, often allowing patients to save up to 50–70%.
+
+The exact price depends on your case, but you can request a personalized quote to understand your treatment cost.`,
+        },
+        {
+          question: "Is Invisalign safe in Mexico?",
+          answer: `Yes, Invisalign is safe in Mexico when performed by a certified Invisalign dentist using approved systems and digital planning technology.
+
+At our clinic, we follow international standards to ensure safe, precise, and predictable results for every patient.`,
+        },
+        {
+          question: "Is Invisalign better than braces for adults?",
+          answer: `For many adults, Invisalign is a preferred option because it offers greater comfort, flexibility, and a nearly invisible appearance.
+
+Unlike traditional braces, Invisalign aligners are removable, making it easier to maintain oral hygiene and adapt to your lifestyle.`,
+        },
+        {
+          question:
+            "Can I start Invisalign treatment if I live outside Mexico?",
+          answer: `Yes. Many international patients begin their Invisalign process remotely by sending photos or scans for evaluation. This allows you to plan your treatment before traveling.`,
+        },
+        {
+          question: "How many trips to Mexico are required for Invisalign?",
+          answer: `In many cases, only a few visits are needed. Your treatment can be planned efficiently, and follow-ups can be coordinated to fit your travel schedule or handled remotely when possible.`,
+        },
+      ],
     },
     cta: {
       title: "Schedule Your Invisalign Consultation",
-      description: "Achieve straighter teeth with a discreet solution. Our team is ready to help you.",
+      description:
+        "Achieve straighter teeth with a discreet solution. Our team is ready to help you.",
       button: "Book Your Invisalign Consultation",
-      note: "Start your Invisalign treatment in Mexico today"
+      note: "Start your Invisalign treatment in Mexico today",
     },
-    results: {
-      title: "Invisalign Results and Monitoring",
-      text1: "Invisalign offers gradual and controlled tooth movement. Regular check-ups ensure progress is on track for optimal results.",
-      imageSrc: imgPath + "Invisalign-IMG-4.webp",
-      imgAlt: "Patient showing Invisalign progress"
-    },
+
+    buttonText: "Schedule your clear aligners consultation  → ",
+    whatsappUrl: `https://wa.me/5219844922549/?text=${encodeURIComponent("Hello! I was checking the clear aligners section on your website and I'm interested in scheduling an appointment. Could you let me know the available times? Thank you!")}`,
   },
   es: {
     schema: {
@@ -196,180 +288,265 @@ const pageContent = {
         {
           "@type": "Dentist",
           "@id": `https://www.steticdental.com.mx${esPath}#dentist`,
-          "name": "Clínica Stetic Dental",
-          "url": `https://www.steticdental.com.mx${esPath}`,
-          "telephone": "+52 984 188 0338",
-          "address": {
+          name: "Clínica Stetic Dental",
+          url: `https://www.steticdental.com.mx${esPath}`,
+          telephone: "+52 984 188 0338",
+          address: {
             "@type": "PostalAddress",
-            "streetAddress": "Avenida 10 Nte, Calle 38 Nte Con, Zazil-ha",
-            "addressLocality": "Playa del Carmen",
-            "addressRegion": "Quintana Roo",
-            "addressCountry": "MX"
-          }
+            streetAddress: "Avenida 10 Nte, Calle 38 Nte Con, Zazil-ha",
+            addressLocality: "Playa del Carmen",
+            addressRegion: "Quintana Roo",
+            addressCountry: "MX",
+          },
         },
         {
           "@type": "Service",
           "@id": `https://www.steticdental.com.mx${esPath}#service`,
-          "name": "Invisalign en Playa del Carmen",
-          "serviceType": "Tratamiento de alineadores transparentes Invisalign",
-          "description": "Tratamiento de Invisalign en Playa del Carmen para adultos que buscan una ortodoncia discreta y efectiva.",
-          "url": `https://www.steticdental.com.mx${esPath}`,
-          "provider": { "@id": `https://www.steticdental.com.mx${esPath}#dentist` },
-          "areaServed": [
-            { "@type": "City", "name": "Playa del Carmen" },
-            { "@type": "Country", "name": "Mexico" }
-          ]
-        }
-      ]
+          name: "Invisalign en Playa del Carmen",
+          serviceType: "Tratamiento de alineadores transparentes Invisalign",
+          description:
+            "Tratamiento de Invisalign en Playa del Carmen para adultos que buscan una ortodoncia discreta y efectiva.",
+          url: `https://www.steticdental.com.mx${esPath}`,
+          provider: {
+            "@id": `https://www.steticdental.com.mx${esPath}#dentist`,
+          },
+          areaServed: [
+            { "@type": "City", name: "Playa del Carmen" },
+            { "@type": "Country", name: "Mexico" },
+          ],
+        },
+      ],
     },
     seo: {
       title: "Invisalign México | Alineadores Invisibles en Playa del Carmen",
-      description: "Invisalign en México para adultos. Ahorra hasta un 70% con dentistas certificados en Playa del Carmen. Obtén tu plan personalizado hoy."
+      description:
+        "Invisalign en México para adultos. Ahorra hasta un 70% con dentistas certificados en Playa del Carmen. Obtén tu plan personalizado hoy.",
     },
     header: {
       title: "Invisalign en Playa del Carmen, México",
-      subheadline: "Alineadores Invisalign para adultos que buscan una solución ortodóntica discreta, cómoda y efectiva.",
+      subheadline:
+        "Logra una sonrisa más recta con Invisalign y alineadores transparentes en Playa del Carmen. Tratamiento de ortodoncia discreto y cómodo diseñado para adultos que buscan resultados sin brackets metálicos.",
       features: [
-        "Dentista certificado en Invisalign",
-        "Alineadores transparentes para adultos",
-        "Equipo dental bilingüe",
-        "Costo de Invisalign asequible comparado con EE. UU."
+        "Proveedor certificado de Invisalign con experiencia avanzada en ortodoncia",
+        "Alineadores transparentes para adultos y tratamientos enfocados en la estética",
+        "Equipo dental bilingüe (habla inglesa) para pacientes internacionales",
+        "Tratamiento de Invisalign más asequible en comparación con otros países",
       ],
-      button: "Agenda tu Consulta de Invisalign",
       imageSrc: ogImage,
-      imageAlt: "Tratamiento de alineadores Invisalign"
+      imageAlt: "Tratamiento de alineadores transparentes Invisalign",
     },
     about: {
-      title: "¿Buscas Invisalign de Confianza en Playa del Carmen?",
-      text1: "Invisalign es la solución moderna para adultos que desean alinear sus dientes sin brackets. Nuestra clínica ofrece Invisalign en Playa del Carmen con tecnología de punta y ahorros significativos.",
-      text2: "Obtén un tratamiento discreto y predecible adaptado a tus metas estéticas.",
+      title: "¿Buscas Invisalign en Playa del Carmen en el que puedas confiar?",
+      text1:
+        "Invisalign es una solución de ortodoncia moderna diseñada para adultos que desean dientes más rectos sin la apariencia de los brackets tradicionales. En nuestra clínica, ofrecemos Invisalign en Playa del Carmen junto con tratamientos avanzados de alineadores transparentes para pacientes internacionales que buscan atención de alta calidad en México.",
+      text2: `Nuestro enfoque combina experiencia certificada en Invisalign, planificación digital de tratamientos y atención personalizada para ofrecer resultados predecibles y de aspecto natural. Los pacientes nos eligen no solo por la estética, sino por la comodidad, eficiencia y estabilidad a largo plazo de su sonrisa.
+Al trabajar con un proveedor experimentado de Invisalign, recibes un tratamiento de ortodoncia discreto, cómodo y totalmente personalizado, adaptado a tu estilo de vida y objetivos.
+`,
       imageSrc: imgPath + "Invisalign-IMG-2.webp",
-      imgAlt: "Consulta de ortodoncia en Playa del Carmen"
+      imgAlt: "Consulta de ortodoncia en Playa del Carmen",
     },
     whatIs: {
       title: "¿Qué es Invisalign?",
-      text1: "Utiliza alineadores transparentes y removibles hechos a medida para enderezar los dientes gradualmente sin afectar tu imagen diaria.",
-      text2: "Es la alternativa preferida por adultos frente a los brackets metálicos tradicionales.",
+      text1:
+        "Invisalign es un tratamiento de ortodoncia avanzado que utiliza una serie de alineadores transparentes hechos a medida para enderezar los dientes gradualmente. Estos alineadores son removibles, cómodos y prácticamente invisibles, lo que los convierte en una opción ideal para adultos que desean mejorar su sonrisa sin los brackets metálicos tradicionales.",
+      text2: `Conocido frecuentemente como alineadores transparentes, el tratamiento Invisalign está diseñado para ajustarse a tus dientes con precisión y adaptarse a tu estilo de vida, permitiéndote comer, cepillarte y mantener tu rutina diaria con facilidad.
+Esta solución de ortodoncia moderna es especialmente popular entre los pacientes internacionales que buscan resultados discretos, efectivos y predecibles mientras reciben su tratamiento en Playa del Carmen.
+`,
     },
     comparison: {
       title: "Invisalign vs Brackets: ¿Cuál es la diferencia?",
-      text1: "Invisalign ofrece mayor comodidad y flexibilidad al ser removible para comer y realizar la higiene bucal.",
-      text2: "Ideal para quienes desean resultados efectivos con un impacto mínimo en su rutina.",
+      text1:
+        "Al comparar Invisalign con los brackets tradicionales, muchos adultos prefieren los alineadores transparentes porque ofrecen mayor comodidad, flexibilidad y una apariencia más discreta. Sin embargo, entender las diferencias clave puede ayudarte a elegir el mejor tratamiento de ortodoncia para tus necesidades.",
+      text2:
+        "Invisalign es ideal para pacientes que desean resultados de ortodoncia efectivos con un impacto mínimo en su rutina diaria.",
+      titleTable: "Comparación entre Invisalign y Brackets",
+      descriptionTable:
+        "Compara los alineadores transparentes con los brackets tradicionales para entender qué tratamiento de ortodoncia es el adecuado para ti.",
+      footerTable:
+        "Los alineadores transparentes como Invisalign son la opción preferida por los pacientes internacionales que buscan un tratamiento de ortodoncia discreto, cómodo y efectivo en Playa del Carmen.",
     },
     candidate: {
       title: "¿Quién es un buen candidato para Invisalign?",
-      description: "Puedes ser candidato si:",
+      description: `No todo paciente es un candidato ideal para Invisalign. El éxito de este tratamiento depende de condiciones dentales específicas, hábitos de estilo de vida y constancia durante todo el proceso.
+Saber si Invisalign es adecuado para ti es el primer paso para lograr resultados predecibles y duraderos.
+Podrías ser un buen candidato para Invisalign si:
+`,
       items: [
-        "Eres adulto con problemas de alineación leves a moderados",
-        "Prefieres una solución estética e invisible",
-        "Deseas comodidad sin alambres metálicos",
-        "Te comprometes a seguir el tiempo de uso diario"
+        "Tienes problemas de alineación de leves a moderados, como apiñamiento, espacios o problemas menores de mordida",
+        "Prefieres una alternativa discreta a los brackets metálicos tradicionales",
+        "Quieres alineadores removibles que se adapten a tu estilo de vida y rutina diaria",
+        "Estás comprometido a usar los alineadores durante las 20–22 horas diarias recomendadas",
+        "Buscas un tratamiento de ortodoncia cómodo y predecible",
       ],
-      footerText: "Una consulta diagnóstica es el primer paso para tu nueva sonrisa.",
+      footerText: `La mejor manera de saber si Invisalign es adecuado para ti es mediante una evaluación personalizada con un dentista certificado en Invisalign.
+Nuestro equipo proporciona evaluaciones digitales detalladas para pacientes internacionales, ayudándote a comprender tus opciones de tratamiento, los tiempos y los resultados esperados antes de comenzar.
+`,
       imageSrc: imgPath + "Invisalign-IMG-3.webp",
-      imageAlt: "Evaluación de candidato para Invisalign"
+      imageAlt: "Evaluación de candidato para Invisalign",
     },
     process: {
-      title: "Proceso del Tratamiento",
-      footer: "Diseñamos tu sonrisa de forma digital y predecible.",
+      title: "Proceso de tratamiento con Invisalign",
       steps: [
-        { title: "Consulta y evaluación inicial" },
-        { title: "Escaneo digital 3D" },
-        { title: "Plan dental personalizado" },
-        { title: "Monitoreo de progreso" }
-      ]
+        { title: "Consulta y evaluación" },
+        { title: "Escaneo digital y planificación del tratamiento" },
+        { title: "Plan de Invisalign personalizado" },
+        { title: "Monitoreo y ajustes" },
+      ],
+      footer:
+        "Cada tratamiento con Invisalign es cuidadosamente planificado para ofrecer resultados graduales, predecibles y de aspecto natural, con un proceso diseñado para adaptarse a tu estilo de vida.",
     },
     cost: {
       title: "Costo de Invisalign en México",
-      text1: "El costo en México es considerablemente menor que en EE. UU., utilizando la tecnología original de la marca.",
-      text2: "Brindamos planes de tratamiento con precios transparentes tras tu evaluación.",
+      text1:
+        "El costo de Invisalign en México es significativamente menor que en países como Estados Unidos, Canadá o el Reino Unido, lo que permite a los pacientes obtener el mismo tratamiento de alta calidad mientras ahorran una cantidad sustancial en su inversión.",
+      text2: `En muchos casos, los pacientes pueden esperar ahorrar entre un 50% y un 70% en comparación con los precios internacionales, sin comprometer la tecnología, los materiales o los estándares clínicos.
+Los costos del tratamiento con Invisalign varían según la complejidad del caso, la duración del tratamiento y la cantidad de alineadores requeridos. Es por esto que cada plan de tratamiento es totalmente personalizado.
+`,
     },
     whyChoose: {
-      title: "¿Por qué elegir a nuestro dentista de Invisalign?",
+      title:
+        "¿Por qué elegir a nuestro dentista experto en Invisalign en México?",
+      description:
+        "Elegir al dentista adecuado para Invisalign es esencial para lograr resultados seguros, predecibles y de aspecto natural. No todos los proveedores ofrecen el mismo nivel de experiencia, tecnología o atención, especialmente cuando se trata de atender a pacientes internacionales.",
       items: [
-        "Certificación oficial de Invisalign",
-        "Especialistas en pacientes adultos",
-        "Tecnología de escaneo digital",
-        "Atención bilingüe personalizada",
-        "Experiencia con turismo dental"
+        "Proveedor certificado de Invisalign con experiencia avanzada en casos complejos",
+        "Especializados en el tratamiento de pacientes adultos que buscan resultados estéticos",
+        "Planificación de ortodoncia digital para resultados precisos y predecibles",
+        "Equipo dental bilingüe (habla inglesa) con comunicación clara durante todo tu tratamiento",
+        "Amplia experiencia trabajando con pacientes internacionales que visitan México",
       ],
-      footerText: "Somos referentes en ortodoncia invisible en Playa del Carmen.",
-      reelId: "DPCjErMDkTc"
+      footerText:
+        "Te guiamos en cada paso de tu camino con Invisalign, desde tu primera consulta hasta tus resultados finales.",
+      reelId: "DPCjErMDkTc",
+    },
+    results: {
+      title: "Resultados y monitoreo de Invisalign",
+      text1: `El tratamiento con Invisalign está diseñado para ofrecer resultados graduales, precisos y predecibles mediante un movimiento dental controlado.
+
+Durante todo tu tratamiento, un monitoreo constante asegura que tu progreso se mantenga según lo planeado y que cualquier ajuste necesario se realice en el momento oportuno. Este nivel de control permite obtener resultados consistentes y de alta calidad.
+
+Para pacientes internacionales, nuestro equipo proporciona seguimientos estructurados y una comunicación clara para garantizar que tu tratamiento continúe sin problemas, incluso entre visitas.
+
+Con una planificación adecuada y una supervisión experta, Invisalign ofrece resultados de apariencia natural que se alinean con tus expectativas y con tu salud bucal a largo plazo.
+`,
+      imageSrc: imgPath + "Invisalign-IMG-4.webp",
+      imgAlt: "Paciente mostrando el progreso con Invisalign",
     },
     location: {
       title: "Invisalign en Playa del Carmen, México",
-      text1: "Ubicados en el corazón de Playa del Carmen, facilitamos tu tratamiento mientras disfrutas del Caribe.",
-      mapUrl: "https://maps.google.com/maps?q=Stetic%20Dental%20Clinic,%20Playa%20del%20Carmen&t=&z=16&ie=UTF8&iwloc=&output=embed",
-      whatsappUrl: "https://wa.me/9844922549"    
-
+      text1: `Nuestra clínica se encuentra en Playa del Carmen, uno de los destinos más populares y accesibles para el turismo dental en México.
+Pacientes de todo el mundo eligen esta ubicación no solo por el tratamiento de alta calidad con Invisalign, sino también por la oportunidad de combinar su atención dental con una experiencia de viaje relajante y placentera.
+Con conexiones internacionales directas, infraestructura moderna y un ambiente acogedor, Playa del Carmen facilita comenzar tu tratamiento con Invisalign mientras disfrutas de la comodidad y conveniencia de atenderte en México.
+`,
+      mapUrl:
+        "https://maps.google.com/maps?q=Stetic%20Dental%20Clinic,%20Playa%20del%20Carmen&t=&z=16&ie=UTF8&iwloc=&output=embed",
+      whatsappUrl: "https://wa.me/9844922549",
     },
     faq: {
-      title: "Preguntas Frecuentes",
+      title: "Preguntas frecuentes sobre Invisalign",
       items: [
-        { question: "¿Cuánto dura el tratamiento?", answer: "Varía según el caso, comúnmente de 6 a 18 meses." },
-        { question: "¿Es seguro?", answer: "Totalmente, siempre que sea realizado por un dentista certificado." },
-        { question: "¿Cuánto cuesta?", answer: "Es entre un 50% y 70% más económico que en EE. UU. o Canadá." },
-        { question: "¿Duele?", answer: "Es mucho más cómodo que los brackets; solo se siente una ligera presión al cambiar de alineador." }
-      ]
+        {
+          question: "¿Cuánto tiempo dura el tratamiento con Invisalign?",
+          answer: `El tratamiento con Invisalign suele durar entre 6 y 18 meses, dependiendo de la complejidad de tu caso. Algunos pacientes comienzan a notar mejoras visibles en las primeras semanas.
+
+Un plan de tratamiento personalizado te proporcionará un cronograma más preciso basado en tus necesidades y objetivos específicos.`,
+        },
+        {
+          question: "¿Cuánto cuesta Invisalign en México?",
+          answer: `El costo de Invisalign en México es significativamente más accesible que en países como Estados Unidos, Canadá o el Reino Unido, permitiendo a los pacientes ahorrar a menudo entre un 50% y un 70%.
+
+El precio exacto depende de tu caso, pero puedes solicitar una cotización personalizada para conocer el costo de tu tratamiento.`,
+        },
+        {
+          question: "¿Es seguro Invisalign en México?",
+          answer: `Sí, Invisalign es seguro en México cuando es realizado por un dentista certificado en Invisalign que utiliza sistemas aprobados y tecnología de planificación digital.
+
+En nuestra clínica, seguimos estándares internacionales para garantizar resultados seguros, precisos y predecibles para cada paciente.`,
+        },
+        {
+          question: "¿Es Invisalign mejor que los brackets para adultos?",
+          answer: `Para muchos adultos, Invisalign es la opción preferida porque ofrece mayor comodidad, flexibilidad y una apariencia casi invisible.
+
+A diferencia de los brackets tradicionales, los alineadores Invisalign son removibles, lo que facilita el mantenimiento de la higiene bucal y la adaptación a tu estilo de vida.`,
+        },
+        {
+          question:
+            "Can I start Invisalign treatment if I live outside Mexico?",
+          answer: `Sí. Muchos pacientes internacionales comienzan su proceso de Invisalign de forma remota enviando fotos o escaneos para su evaluación. Esto te permite planificar tu tratamiento antes de viajar.`,
+        },
+        {
+          question: "¿Cuántos viajes a México se requieren para Invisalign?",
+          answer: `En muchos casos, solo se necesitan unas pocas visitas. Tu tratamiento puede planificarse de manera eficiente y los seguimientos pueden coordinarse para adaptarse a tu itinerario de viaje o manejarse de forma remota cuando sea posible.`,
+        },
+      ],
     },
     cta: {
       title: "Agenda tu Consulta de Invisalign",
-      description: "Logra la sonrisa que siempre quisiste de forma invisible. Estamos listos para ayudarte.",
+      description:
+        "Logra la sonrisa que siempre quisiste de forma invisible. Estamos listos para ayudarte.",
       button: "Reserva tu Consulta Ahora",
-      note: "Comienza tu transformación hoy"
+      note: "Comienza tu transformación hoy",
     },
-    results: {
-      title: "Resultados y Monitoreo",
-      text1: "Revisiones periódicas aseguran que tus dientes se muevan hacia la posición ideal de forma segura.",
-      imageSrc: imgPath + "Invisalign-IMG-4.webp",
-      imgAlt: "Paciente mostrando progreso de Invisalign"
-    },
-  }
+
+    buttonText: "Agenda tu consulta de alineadores transparentes → ",
+    whatsappUrl: `https://wa.me/5219844922549/?text=${encodeURIComponent("¡Hola! Estaba revisando la sección de alineadores transparentes en su sitio web y me interesa agendar una cita. ¿Podrían informarme sobre los horarios disponibles? ¡Gracias!")}`,
+  },
 };
 
 const t = pageContent[lang];
 ---
 
-<Layout 
-  title={t.seo.title} 
-  description={t.seo.description} 
+<Layout
+  title={t.seo.title}
+  description={t.seo.description}
   lang={lang}
-  enPath={enPath} 
+  enPath={enPath}
   esPath={esPath}
   schema={t.schema}
   ogImage={ogImage}
 >
-  <HeaderSpeciality 
-      lang={lang}
-      title={t.header.title}
-      subheadline={t.header.subheadline}
-      features={t.header.features}
-      buttonText={t.header.button}
-      imageSrc={t.header.imageSrc} 
-      imageAlt={t.header.imageAlt}
-    />
+  <HeaderSpeciality
+    lang={lang}
+    title={t.header.title}
+    subheadline={t.header.subheadline}
+    features={t.header.features}
+    imageSrc={t.header.imageSrc}
+    imageAlt={t.header.imageAlt}
+    buttonText={t.buttonText}
+    buttonLink={t.whatsappUrl}
+  />
 
-  <AboutSpeciality 
-      title={t.about.title}
-      text1={t.about.text1}
-      text2={t.about.text2}
-      imageSrc={t.about.imageSrc}
-      imageAlt={t.about.imgAlt}
-    />
+  <AboutSpeciality
+    title={t.about.title}
+    text1={t.about.text1}
+    text2={t.about.text2}
+    imageSrc={t.about.imageSrc}
+    imageAlt={t.about.imgAlt}
+  />
 
-  <WhatIsSpeciality 
-      title={t.whatIs.title}
-      text1={t.whatIs.text1}
-      text2={t.whatIs.text2}
-    />
+  <WhatIsSpeciality
+    title={t.whatIs.title}
+    text1={t.whatIs.text1}
+    text2={t.whatIs.text2}
+  />
 
-  <ComparisonSpeciality 
+  <ComparisonSpeciality
     title={t.comparison.title}
     text1={t.comparison.text1}
     text2={t.comparison.text2}
   />
-
-  <CandidateSpeciality 
+  <CompareTableInvisalign
+    title={t.comparison.titleTable}
+    description={t.comparison.descriptionTable}
+    footer={t.comparison.footerTable}
+  />
+  <ButtonCTA
+    text={t.buttonText}
+    href={t.whatsappUrl}
+    openInNewTab={true}
+    align="center"
+  />
+  <CandidateSpeciality
     title={t.candidate.title}
     description={t.candidate.description}
     items={t.candidate.items}
@@ -378,49 +555,47 @@ const t = pageContent[lang];
     imageAlt={t.candidate.imageAlt}
   />
 
-  <ProcessSpeciality 
-      title={t.process.title}
-      footer={t.process.footer}
-      steps={t.process.steps}
-    />
-    
-  <CostSpeciality 
-      title={t.cost.title}
-      text1={t.cost.text1}
-      text2={t.cost.text2}
-    />
+  <ProcessSpeciality
+    title={t.process.title}
+    footer={t.process.footer}
+    steps={t.process.steps}
+  />
 
-  <WhyChooseSpeciality 
-      title={t.whyChoose.title}
-      items={t.whyChoose.items}
-      footerText={t.whyChoose.footerText}
-      reelId={t.whyChoose.reelId}
-    />
+  <CostSpeciality
+    title={t.cost.title}
+    text1={t.cost.text1}
+    text2={t.cost.text2}
+  />
 
-  <ResultSpeciality 
-      title={t.results.title}
-      text1={t.results.text1}
-      imageSrc={t.results.imageSrc}
-      imageAlt={t.results.imgAlt}
-    />
-    
-  <LocationSpeciality 
-      title={t.location.title}
-      text1={t.location.text1}
-      mapUrl={t.location.mapUrl}
-      whatsappUrl={t.location.whatsappUrl}
-    />
+  <WhyChooseSpeciality
+    title={t.whyChoose.title}
+    description={t.whyChoose.description}
+    items={t.whyChoose.items}
+    footerText={t.whyChoose.footerText}
+    reelId={t.whyChoose.reelId}
+  />
 
-  <FaqSpeciality 
-      title={t.faq.title}
-      faqs={t.faq.items}
-    />
+  <ResultSpeciality
+    title={t.results.title}
+    text1={t.results.text1}
+    imageSrc={t.results.imageSrc}
+    imageAlt={t.results.imgAlt}
+  />
 
-  <CtaSpeciality 
-      lang={lang}
-      title={t.cta.title}
-      description={t.cta.description}
-      buttonText={t.cta.button}
-      note={t.cta.note}
-    />
+  <LocationSpeciality
+    title={t.location.title}
+    text1={t.location.text1}
+    mapUrl={t.location.mapUrl}
+    whatsappUrl={t.location.whatsappUrl}
+  />
+
+  <FaqSpeciality title={t.faq.title} faqs={t.faq.items} />
+
+  <CtaSpeciality
+    lang={lang}
+    title={t.cta.title}
+    description={t.cta.description}
+    buttonText={t.cta.button}
+    note={t.cta.note}
+  />
 </Layout>
